@@ -42,6 +42,13 @@ let g:tmuxline_preset = {
   \'z'    : '%r',
   \'options': { 'status-justify': 'left'}}
 
+" https://github.com/Shutnik/jshint2.vim
+
+Plugin 'Shutnik/jshint2.vim'
+
+let jshint2_read = 1
+let jshint2_save = 1
+
 " Plugin 'bling/vim-airline' vim status-line
 "Plugin 'bling/vim-airline'
 
