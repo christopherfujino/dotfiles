@@ -50,10 +50,10 @@ let jshint2_read = 1
 let jshint2_save = 1
 
 " Plugin 'bling/vim-airline' vim status-line
-"Plugin 'bling/vim-airline'
+Plugin 'bling/vim-airline'
 
-"let g:airline_powerline_fonts=1
-"set laststatus=2
+let g:airline_powerline_fonts=1
+set laststatus=2
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
