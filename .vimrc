@@ -32,15 +32,15 @@ Plugin 'VundleVim/Vundle.vim'
 
 
 "Bundle 'edkolev/tmuxline.vim'  " only necessary temporarily for sourcing /etc/tmux.conf
-Plugin 'edkolev/tmuxline.vim'
+"Plugin 'edkolev/tmuxline.vim'
 
-let g:tmuxline_preset = {
-  \'a'    : "#(ip addr | grep inet | grep -v inet6 | grep -v 127.0.0.1 | awk '{print $2}' | cut -d '/' -f 1)",
-  \'win'  : ['#I', '#W'],
-  \'cwin' : ['#I', '#F#W'],
-  \'y'    : ['%a %b %d'],
-  \'z'    : '%r',
-  \'options': { 'status-justify': 'left'}}
+"let g:tmuxline_preset = {
+"  \'a'    : "#(ip addr | grep inet | grep -v inet6 | grep -v 127.0.0.1 | awk '{print $2}' | cut -d '/' -f 1)",
+"  \'win'  : ['#I', '#W'],
+"  \'cwin' : ['#I', '#F#W'],
+"  \'y'    : ['%a %b %d'],
+"  \'z'    : '%r',
+"  \'options': { 'status-justify': 'left'}}
 
 " https://github.com/Shutnik/jshint2.vim
 
