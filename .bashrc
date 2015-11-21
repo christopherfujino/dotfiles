@@ -8,7 +8,6 @@
 export VISUAL="vim"
 
 alias ls='ls --color=auto'
-alias upd='yaourt -Syua'
 alias ll='ls -alh --color=auto'
 PS1='[\u@\h \W]\$ '
 
