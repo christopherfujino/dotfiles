@@ -19,3 +19,5 @@ function calc {
 
 export PATH="${PATH}:$HOME/scripts:$HOME/.node_modules/bin:$HOME/.gem/ruby/2.2.0/bin"
 export TERM="xterm-256color"
+export TERMINAL="mate-terminal"
+export EDITOR="vim"
