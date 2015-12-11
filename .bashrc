@@ -9,6 +9,7 @@ export VISUAL="vim"
 
 alias ls='ls --color=auto'
 alias ll='ls -alh --color=auto'
+alias upd='yaourt -Syua'
 PS1='[\u@\h \W]\$ '
 
 # calculator function
