@@ -16,6 +16,8 @@ call plug#begin()
 "  \'z'    : '%r',
 "  \'options': { 'status-justify': 'left'}}
 
+Plug 'tpope/vim-fugitive'
+
 " https://github.com/Shutnik/jshint2.vim
 
 Plug 'Shutnik/jshint2.vim'
