@@ -1,5 +1,7 @@
 [user]
-	name = Christopher Fujino
 	email = christopherfujino@gmail.com
+	name = Christopher Fujino
 [push]
-	default = simple
+  default = simple
+[alias]
+  h = !git log --graph --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
