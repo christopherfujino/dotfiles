@@ -1,5 +1,11 @@
 URxvt*scrollBar: false
-URxvt*font: 9x15
+URxvt*font: xft:DejaVu Sans Mono for Powerline
+
+! clickable URLs, from http://wiki.archlinux.org
+
+URxvt.perl-ext: default,matcher
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
 
 #define S_base03        #002b36
 #define S_base02        #073642
