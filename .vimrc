@@ -23,7 +23,7 @@ Plug 'tpope/vim-fugitive'
 
 " surround.vim
 
-Plug 'tpope/vim-surround'
+"Plug 'tpope/vim-surround'
 
 let jshint2_read = 1
 let jshint2_save = 1
@@ -35,7 +35,7 @@ Plug 'bling/vim-airline'
 Plug 'scrooloose/nerdtree'
 
 " Quicktask: a lightweight Vim task management plugin
-Plug 'aaronbieber/vim-quicktask'
+"Plug 'aaronbieber/vim-quicktask'
 
 " show indentation markers
 Plug 'yggdroot/indentLine'
