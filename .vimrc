@@ -131,7 +131,7 @@ set mouse=a         " Enable the use of the mouse.
 
 set relativenumber  " change line numbers to relative
 
-"colorscheme transparentmolokai
+colorscheme transparentmolokai
 
 filetype plugin indent on
 syntax on
