@@ -5,8 +5,7 @@ filetype off                  " required
 
 call plug#begin()
 
-"Bundle 'edkolev/tmuxline.vim'  " only necessary temporarily for sourcing /etc/tmux.conf
-"Plugin 'edkolev/tmuxline.vim'
+"Plug 'edkolev/tmuxline.vim'  " only necessary temporarily for sourcing /etc/tmux.conf
 
 "let g:tmuxline_preset = {
 "  \'a'    : "#(ip addr | grep inet | grep -v inet6 | grep -v 127.0.0.1 | awk '{print $2}' | cut -d '/' -f 1)",
