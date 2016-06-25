@@ -5,8 +5,7 @@ filetype off                  " required
 
 call plug#begin()
 
-"Bundle 'edkolev/tmuxline.vim'  " only necessary temporarily for sourcing /etc/tmux.conf
-"Plugin 'edkolev/tmuxline.vim'
+"Plug 'edkolev/tmuxline.vim'  " only necessary temporarily for sourcing /etc/tmux.conf
 
 "let g:tmuxline_preset = {
 "  \'a'    : "#(ip addr | grep inet | grep -v inet6 | grep -v 127.0.0.1 | awk '{print $2}' | cut -d '/' -f 1)",
@@ -19,14 +18,32 @@ call plug#begin()
 Plug 'tpope/vim-fugitive'
 
 " https://github.com/Shutnik/jshint2.vim
+" Plug 'Shutnik/jshint2.vim'
 
-Plug 'Shutnik/jshint2.vim'
+" surround.vim
+
+"Plug 'tpope/vim-surround'
 
 let jshint2_read = 1
 let jshint2_save = 1
 
 " Plugin 'bling/vim-airline' vim status-line
 Plug 'bling/vim-airline'
+
+" The Nerd Tree: A tree explorer plugin for vim
+Plug 'scrooloose/nerdtree'
+
+" Quicktask: a lightweight Vim task management plugin
+"Plug 'aaronbieber/vim-quicktask'
+
+" show indentation markers
+Plug 'yggdroot/indentLine'
+
+" nerdtree-git-plugin
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" Vim-gitgutter
+Plug 'airblade/vim-gitgutter'
 
 let g:airline_powerline_fonts=1
 set laststatus=2
@@ -112,7 +129,9 @@ set background=dark " When set to "dark", Vim will try to use colors that look
  
 set mouse=a         " Enable the use of the mouse.
 
-"colorscheme transparentmolokai
+set relativenumber  " change line numbers to relative
+
+colorscheme transparentmolokai
 
 filetype plugin indent on
 syntax on
