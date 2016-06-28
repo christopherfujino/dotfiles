@@ -11,6 +11,7 @@ alias ls='ls --color=auto'
 alias ll='ls -alh --color=auto'
 alias upd='timedatectl | grep Local; yaourt -Syua'
 alias emacs='emacs -nw'
+alias ..='cd ..'
 
 PS1='\u@\h \W\$ '
 
