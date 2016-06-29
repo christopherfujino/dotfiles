@@ -1,4 +1,9 @@
 " ~/.vimrc
+"
+" Christopher Fujino's .vimrc
+" For use in Vim & NeoVim
+"
+" https://github.com/junegunn/vim-plug must be installed to manage plugins
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
