@@ -139,6 +139,7 @@ set mouse=a         " Enable the use of the mouse.
 
 set relativenumber  " change line numbers to relative
 
+set t_Co=256        " Enable 256 colors
 colorscheme monokai
 
 filetype plugin indent on
