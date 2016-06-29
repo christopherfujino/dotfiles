@@ -27,8 +27,11 @@ Plug 'tpope/vim-surround'
 let jshint2_read = 1
 let jshint2_save = 1
 
-" Plugin 'bling/vim-airline' vim status-line
+" Plug 'bling/vim-airline' vim status-line
 Plug 'bling/vim-airline'
+
+" Plug 'jiangmiao/auto-pairs' auto bracket pairing plugin
+Plug 'jiangmiao/auto-pairs'
 
 " The Nerd Tree: A tree explorer plugin for vim
 Plug 'scrooloose/nerdtree'
