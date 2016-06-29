@@ -1,8 +1,0 @@
-{
-  "dotfiles" : [
-    {
-      "name" : ".bashrc",
-      "target" : "~/.bashrc"
-    }
-  ]
-}
