@@ -53,6 +53,9 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Vim-gitgutter
 Plug 'airblade/vim-gitgutter'
 
+" Control-P fuzzy finder
+Plug 'ctrlpvim/ctrlp.vim'
+
 let g:airline_powerline_fonts=1
 set laststatus=2
 
