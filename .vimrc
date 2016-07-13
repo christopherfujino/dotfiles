@@ -32,6 +32,9 @@ Plug 'tpope/vim-surround'
 let jshint2_read = 1
 let jshint2_save = 1
 
+" Autocompletion - uses vim's built-in omnicomplete
+Plug 'valloric/youcompleteme'
+
 " Tern Plugin for Vim (`npm install` must be run inside tern_for_vim directory)
 " in Arch Linux, I had to additionally install `sudo pacman -S python2-neovim
 " python-neovim` found from github installation guide to neovim
