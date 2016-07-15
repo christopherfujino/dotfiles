@@ -24,13 +24,16 @@ Plug 'tpope/vim-fugitive'
 
 " https://github.com/Shutnik/jshint2.vim
 " Plug 'Shutnik/jshint2.vim'
+" let jshint2_read = 1
+" let jshint2_save = 1
 
 " surround.vim
 
 Plug 'tpope/vim-surround'
 
-let jshint2_read = 1
-let jshint2_save = 1
+" Pug syntax highlighting
+Plug 'digitaltoad/vim-pug'
+
 
 " Autocompletion - uses vim's built-in omnicomplete
 Plug 'valloric/youcompleteme'
