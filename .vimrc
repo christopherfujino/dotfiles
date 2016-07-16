@@ -32,8 +32,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 
 " Pug syntax highlighting
-Plug 'digitaltoad/vim-pug'
-
+"Plug 'digitaltoad/vim-pug'
 
 " Autocompletion - uses vim's built-in omnicomplete
 Plug 'valloric/youcompleteme'
@@ -41,7 +40,7 @@ Plug 'valloric/youcompleteme'
 " Tern Plugin for Vim (`npm install` must be run inside tern_for_vim directory)
 " in Arch Linux, I had to additionally install `sudo pacman -S python2-neovim
 " python-neovim` found from github installation guide to neovim
-Plug 'ternjs/tern_for_vim'
+"Plug 'ternjs/tern_for_vim'
 
 " Plug 'bling/vim-airline' vim status-line
 Plug 'bling/vim-airline'
@@ -50,7 +49,7 @@ Plug 'bling/vim-airline'
 Plug 'jiangmiao/auto-pairs'
 
 " The Nerd Tree: A tree explorer plugin for vim
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
 
 " Quicktask: a lightweight Vim task management plugin
 "Plug 'aaronbieber/vim-quicktask'
@@ -59,7 +58,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'yggdroot/indentLine'
 
 " nerdtree-git-plugin
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Vim-gitgutter
 Plug 'airblade/vim-gitgutter'
