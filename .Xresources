@@ -1,8 +1,13 @@
 URxvt*scrollBar: false
 !URxvt*font: xft:DejaVu Sans Mono for Powerline
 URxvt*font: xft:Source Code Pro Light
-URxvt*boldFont: xft:Source Code Pro Semibold:style=Semibold
+!URxvt*boldFont: xft:Source Code Pro Semibold:style=Semibold
+URxvt*boldFont: xft:Source Code Pro Light:bold
+URxvt*italicFont: xft:Source Code Pro Light:italic:autohint=true
+URxvt*boldItalicFont: xft:Source Code Pro Light:bold:italic:autohint=true
+
 !URxvt*letterSpace: -1
+!URxvt*termName: rxvt-unicode-256color
 
 ! clickable URLs, from http://wiki.archlinux.org
 
@@ -10,25 +15,25 @@ URxvt.perl-ext: default,matcher
 URxvt.url-launcher: /usr/bin/xdg-open
 URxvt.matcher.button: 1
 
-! Base16 Atelier Seaside
-! Scheme: Bram de Haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/seaside/)
-!
-#define base00 #131513
-#define base01 #242924
-#define base02 #5e6e5e
-#define base03 #687d68
-#define base04 #809980
-#define base05 #8ca68c
-#define base06 #cfe8cf
-#define base07 #f0fff0
-#define base08 #e6193c
-#define base09 #87711d
-#define base0A #c3c322
-#define base0B #29a329
-#define base0C #1999b3
-#define base0D #3d62f5
-#define base0E #ad2bee
-#define base0F #e619c3
+! Base16 Monokai
+! Scheme: Wimer Hazenberg (http://www.monokai.nl)
+
+#define base00 #272822
+#define base01 #383830
+#define base02 #49483e
+#define base03 #75715e
+#define base04 #a59f85
+#define base05 #f8f8f2
+#define base06 #f5f4f1
+#define base07 #f9f8f5
+#define base08 #f92672
+#define base09 #fd971f
+#define base0A #f4bf75
+#define base0B #a6e22e
+#define base0C #a1efe4
+#define base0D #66d9ef
+#define base0E #ae81ff
+#define base0F #cc6633
 
 *.foreground:   base05
 *.background:   base00

@@ -67,6 +67,9 @@ Plug 'airblade/vim-gitgutter'
 " Control-P fuzzy finder
 Plug 'ctrlpvim/ctrlp.vim'
 
+" Chris Kempson's Base16 colorschemes
+Plug 'chriskempson/base16-vim'
+
 let g:airline_powerline_fonts=1
 set laststatus=2
 
@@ -154,7 +157,9 @@ set mouse=a         " Enable the use of the mouse.
 set relativenumber  " change line numbers to relative
 
 set t_Co=256        " Enable 256 colors
-colorscheme monokai
+
+let base16colorspace=256  " Access colors present in 256 colorspace
+colorscheme base16-monokai
 
 filetype plugin indent on
 syntax on

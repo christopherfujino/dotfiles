@@ -23,6 +23,12 @@ function calc {
 }
 
 export PATH="${PATH}:$HOME/scripts:$HOME/.node_modules/bin:$HOME/.gem/ruby/2.3.0/bin"
-export TERM="xterm-256color"
+#export TERM="xterm-256color"
+export TERM="rxvt-unicode-256color"
 export TERMINAL="mate-terminal"
 export EDITOR="vim"
+
+#Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-monokai.sh"
+[[ -s $BASE16_SHELL  ]] && source $BASE16_SHELL
+
