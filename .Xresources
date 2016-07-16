@@ -1,5 +1,7 @@
 URxvt*scrollBar: false
-URxvt*font: xft:DejaVu Sans Mono for Powerline
+!URxvt*font: xft:DejaVu Sans Mono for Powerline
+URxvt*font: xft:Source Code Pro Light
+URxvt*boldFont: xft:Source Code Pro Semibold:style=Semibold
 
 ! clickable URLs, from http://wiki.archlinux.org
 
