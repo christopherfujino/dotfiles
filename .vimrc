@@ -10,15 +10,15 @@ filetype off                  " required
 
 call plug#begin()
 
-"Plug 'edkolev/tmuxline.vim'  " only necessary temporarily for sourcing /etc/tmux.conf
+Plug 'edkolev/tmuxline.vim'  " only necessary temporarily for sourcing /etc/tmux.conf
 
-"let g:tmuxline_preset = {
-"  \'a'    : "#(ip addr | grep inet | grep -v inet6 | grep -v 127.0.0.1 | awk '{print $2}' | cut -d '/' -f 1)",
-"  \'win'  : ['#I', '#W'],
-"  \'cwin' : ['#I', '#F#W'],
-"  \'y'    : ['%a %b %d'],
-"  \'z'    : '%r',
-"  \'options': { 'status-justify': 'left'}}
+let g:tmuxline_preset = {
+  \'a'    : "#(ip addr | grep inet | grep -v inet6 | grep -v 127.0.0.1 | awk '{print $2}' | cut -d '/' -f 1)",
+  \'win'  : ['#I', '#W'],
+  \'cwin' : ['#I', '#F#W'],
+  \'y'    : ['%a %b %d'],
+  \'z'    : '%r',
+  \'options': { 'status-justify': 'left'}}
 
 "Plug 'tpope/vim-fugitive'
 
@@ -44,7 +44,9 @@ Plug 'valloric/youcompleteme'
 "Plug 'ternjs/tern_for_vim'
 
 " Plug 'bling/vim-airline' vim status-line
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+let g:airline_theme='base16_monokai'
 
 " Plug 'jiangmiao/auto-pairs' auto bracket pairing plugin
 Plug 'jiangmiao/auto-pairs'
