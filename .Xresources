@@ -2,6 +2,7 @@ URxvt*scrollBar: false
 !URxvt*font: xft:DejaVu Sans Mono for Powerline
 URxvt*font: xft:Source Code Pro Light
 URxvt*boldFont: xft:Source Code Pro Semibold:style=Semibold
+!URxvt*letterSpace: -1
 
 ! clickable URLs, from http://wiki.archlinux.org
 
@@ -10,7 +11,7 @@ URxvt.url-launcher: /usr/bin/xdg-open
 URxvt.matcher.button: 1
 
 ! Base16 Atelier Seaside
-! ! Scheme: Bram de Haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/seaside/)
+! Scheme: Bram de Haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/seaside/)
 !
 #define base00 #131513
 #define base01 #242924
