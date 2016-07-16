@@ -20,7 +20,7 @@ call plug#begin()
 "  \'z'    : '%r',
 "  \'options': { 'status-justify': 'left'}}
 
-Plug 'tpope/vim-fugitive'
+"Plug 'tpope/vim-fugitive'
 
 " https://github.com/Shutnik/jshint2.vim
 " Plug 'Shutnik/jshint2.vim'
@@ -34,7 +34,8 @@ Plug 'tpope/vim-surround'
 " Pug syntax highlighting
 "Plug 'digitaltoad/vim-pug'
 
-" Autocompletion - uses vim's built-in omnicomplete
+" Autocompletion - uses vim's built-in omnicomplete; build using
+" ~/.vim/plugged/youcompleteme/install.py --tern-completer
 Plug 'valloric/youcompleteme'
 
 " Tern Plugin for Vim (`npm install` must be run inside tern_for_vim directory)
