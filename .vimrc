@@ -10,15 +10,15 @@ filetype off                  " required
 
 call plug#begin()
 
-Plug 'edkolev/tmuxline.vim'  " only necessary temporarily for sourcing /etc/tmux.conf
+" Plug 'edkolev/tmuxline.vim'  " only necessary temporarily for sourcing /etc/tmux.conf
 
-let g:tmuxline_preset = {
-  \'a'    : "#(ip addr | grep inet | grep -v inet6 | grep -v 127.0.0.1 | awk '{print $2}' | cut -d '/' -f 1)",
-  \'win'  : ['#I', '#W'],
-  \'cwin' : ['#I', '#F#W'],
-  \'y'    : ['%a %b %d'],
-  \'z'    : '%r',
-  \'options': { 'status-justify': 'left'}}
+" let g:tmuxline_preset = {
+"   \'a'    : "#(ip addr | grep inet | grep -v inet6 | grep -v 127.0.0.1 | awk '{print $2}' | cut -d '/' -f 1)",
+"   \'win'  : ['#I', '#W'],
+"   \'cwin' : ['#I', '#F#W'],
+"   \'y'    : ['%a %b %d'],
+"   \'z'    : '%r',
+"   \'options': { 'status-justify': 'left'}}
 
 "Plug 'tpope/vim-fugitive'
 
@@ -47,6 +47,8 @@ Plug 'valloric/youcompleteme'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 let g:airline_theme='base16_monokai'
+let g:airline_powerline_fonts=1
+set laststatus=2
 
 " Plug 'jiangmiao/auto-pairs' auto bracket pairing plugin
 Plug 'jiangmiao/auto-pairs'
@@ -72,11 +74,13 @@ Plug 'ctrlpvim/ctrlp.vim'
 " Chris Kempson's Base16 colorschemes
 Plug 'chriskempson/base16-vim'
 
-let g:airline_powerline_fonts=1
-set laststatus=2
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
+
+let base16colorspace=256  " Access colors present in 256 colorspace
+colorscheme base16-monokai
+
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
@@ -159,9 +163,6 @@ set mouse=a         " Enable the use of the mouse.
 set relativenumber  " change line numbers to relative
 
 set t_Co=256        " Enable 256 colors
-
-let base16colorspace=256  " Access colors present in 256 colorspace
-colorscheme base16-monokai
 
 filetype plugin indent on
 syntax on
