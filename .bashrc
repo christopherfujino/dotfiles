@@ -27,6 +27,7 @@ export PATH="${PATH}:$HOME/scripts:$HOME/.node_modules/bin:$HOME/.gem/ruby/2.3.0
 export TERM="rxvt-unicode-256color"
 export TERMINAL="mate-terminal"
 export EDITOR="vim"
+export LIBVA_DRIVER_NAME="i965"
 
 #Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-monokai.sh"
