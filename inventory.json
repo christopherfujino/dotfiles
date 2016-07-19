@@ -1,9 +1,19 @@
 {
   "dotfiles" : [
     {
+      "name" : ".bash_profile",
+      "target" : "~/.bash_profile",
+      "platform" : "linux"
+    },
+    {
       "name" : ".bashrc",
       "target" : "~/.bashrc",
       "platform" : "linux"
+    },
+    {
+      "name" : ".gitconfig",
+      "target" : "~/.gitconfig",
+      "platform" : "any"
     },
     {
       "name" : "i3config",
@@ -16,15 +26,15 @@
       "platform" : "any"
     },
     {
+      "name" : "tern-config",
+      "target" : "~/.tern-config",
+      "platform" : "any"
+    },
+    {
       "name" : "tmux.conf",
       "target" : "/etc/tmux.conf",
       "platform" : "any",
       "owner" : "root"
-    },
-    {
-      "name" : "vim-monokai/",
-      "target" : "~/.vim/colors/vim-monokai",
-      "platform" : "any"
     },
     {
       "name" : ".vimrc",
