@@ -81,6 +81,9 @@ call plug#end()            " required
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-monokai
 
+set wildmenu " why is this not the default?!
+
+
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
@@ -164,5 +167,4 @@ set relativenumber  " change line numbers to relative
 
 set t_Co=256        " Enable 256 colors
 
-filetype plugin indent on
 syntax on
