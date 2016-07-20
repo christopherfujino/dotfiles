@@ -6,7 +6,6 @@ URxvt*italicFont: xft:Source Code Pro Light:italic:autohint=true
 URxvt*boldItalicFont: xft:Source Code Pro Light:bold:italic:autohint=true
 
 !URxvt*termName: rxvt-unicode-256color
-!URxvt*letterSpace: -1
 
 ! clickable URLs, from http://wiki.archlinux.org
 
