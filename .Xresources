@@ -6,7 +6,6 @@ URxvt*italicFont: xft:Source Code Pro Light:italic:autohint=true
 URxvt*boldItalicFont: xft:Source Code Pro Light:bold:italic:autohint=true
 
 !URxvt*termName: rxvt-unicode-256color
-!URxvt*letterSpace: -1
 
 ! clickable URLs, from http://wiki.archlinux.org
 
@@ -37,6 +36,7 @@ URxvt.matcher.button: 1
 *.foreground:   base05
 *.background:   base00
 *.cursorColor:  base05
+*.borderColor:   base00
 
 *.color0:       base00
 *.color1:       base08
