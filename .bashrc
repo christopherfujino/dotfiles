@@ -12,28 +12,22 @@ export EDITOR="vim"
 
 alias ls='ls --color=auto'
 alias ll='ls -alh --color=auto'
-alias upd='timedatectl | grep Local; yaourt -Syua'
-alias emacs='emacs -nw'
+alias emacs='emacs -nw' # default to console-based emacs
 alias ..='cd ..'
 alias g='git'
 
 # To-do: this is Linux-specific code
-export STEAM_RUNTIME=0
+alias upd='timedatectl | grep Local; yaourt -Syua'
+export STEAM_RUNTIME=0 # for Steam
+#export TERM="xterm-256color"
 export TERM="rxvt-unicode-256color"
 export LIBVA_DRIVER_NAME="i965" # for arch hardware rendering
-#export TERM="xterm-256color"
 export TERMINAL="urxvt"
 
 PS1='\u@\h \W\$ '
-
-# calculator function
-function calc {
-  echo "${1}" | bc -l;
-}
 
 export PATH="${PATH}:$HOME/scripts:$HOME/.node_modules/bin:$HOME/.gem/ruby/2.3.0/bin"
 
 #Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-monokai.sh"
 [[ -s $BASE16_SHELL  ]] && source $BASE16_SHELL
-
