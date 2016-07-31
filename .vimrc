@@ -22,11 +22,6 @@ call plug#begin()
 
 Plug 'tpope/vim-fugitive'
 
-" https://github.com/Shutnik/jshint2.vim
-" Plug 'Shutnik/jshint2.vim'
-" let jshint2_read = 1
-" let jshint2_save = 1
-
 " surround.vim
 
 Plug 'tpope/vim-surround'
@@ -65,7 +60,7 @@ Plug 'yggdroot/indentLine'
 " nerdtree-git-plugin
 " Plug 'Xuyuanp/nerdtree-git-plugin'
 
-" Vim-gitgutter
+" Vim-gitgutter: show git diff in gutter before line number
 Plug 'airblade/vim-gitgutter'
 
 " Control-P fuzzy finder
@@ -74,6 +69,10 @@ Plug 'ctrlpvim/ctrlp.vim'
 " Chris Kempson's Base16 colorschemes
 Plug 'chriskempson/base16-vim'
 
+" https://github.com/Shutnik/jshint2.vim
+" Plug 'Shutnik/jshint2.vim'
+" let jshint2_read = 1
+" let jshint2_save = 1
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
