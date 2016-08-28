@@ -9,7 +9,7 @@ fs.readFile('inventory.json', 'utf8', installer)
 
 function menu () {
   console.log('\033[2J\033c')
-  console.log(splash('Welcome To Chris\' Dotfiles Installer'))
+  console.log(splash(`Dotfiles Installer`))
   dotfiles.forEach(function (dotfile, i) {
     if (dotfile.platform === 'any' || dotfile.platform === platform()) {
       let check = ' '
