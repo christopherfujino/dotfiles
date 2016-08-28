@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 let fs = require('fs')
-let dotfiles = {}
+let config = {}
 let {exec} = require('child_process')
 let {platform} = require('os')
 
@@ -9,8 +9,8 @@ fs.readFile('inventory.json', 'utf8', installer)
 
 function menu () {
   console.log('\033[2J\033c')
-  console.log(splash(`Dotfiles Installer`))
-  dotfiles.forEach(function (dotfile, i) {
+  console.log(splash(`Installing ${inventory.owner}\'s Dotfiles`))
+  inventory.dotfiles.forEach(function (dotfile, i) {
     if (dotfile.platform === 'any' || dotfile.platform === platform()) {
       let check = ' '
       if (dotfile.checked) {check = 'x'}
@@ -22,7 +22,7 @@ function menu () {
 
 function installer (err, data) {
   if (err) throw err
-  dotfiles = JSON.parse(data).dotfiles
+  inventory = JSON.parse(data)
   menu()
 }
 
@@ -46,6 +46,6 @@ stdin.on('data', function (chunk) {
   }
   chunk = +chunk
   if (isNaN(chunk) || chunk >= dotfiles.length) return
-  dotfiles[chunk].checked = !dotfiles[chunk].checked
+  inventory.dotfiles[chunk].checked = !inventory.dotfiles[chunk].checked
   menu()
 })
