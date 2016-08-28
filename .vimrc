@@ -22,6 +22,8 @@ call plug#begin()
 
 Plug 'tpope/vim-fugitive'
 
+Plug 'scrooloose/syntastic'
+
 " https://github.com/Shutnik/jshint2.vim
 " Plug 'Shutnik/jshint2.vim'
 " let jshint2_read = 1
@@ -57,7 +59,7 @@ Plug 'jiangmiao/auto-pairs'
 " Plug 'scrooloose/nerdtree'
 
 " Quicktask: a lightweight Vim task management plugin
-"Plug 'aaronbieber/vim-quicktask'
+Plug 'aaronbieber/vim-quicktask'
 
 " show indentation markers
 Plug 'yggdroot/indentLine'
@@ -77,6 +79,17 @@ Plug 'chriskempson/base16-vim'
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
+
+"These are from the readme
+set statusline+=%#warmingmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['standard']
 
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-monokai
