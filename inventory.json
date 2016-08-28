@@ -1,4 +1,5 @@
 {
+  "owner": "Christopher Fujino",
   "dotfiles" : [
     {
       "name" : ".bash_profile",
