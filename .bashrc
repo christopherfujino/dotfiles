@@ -7,8 +7,8 @@
 
 OS=$(uname)
 
-export VISUAL="vim"
-export EDITOR="vim"
+export VISUAL="nvim"
+export EDITOR="nvim"
 
 alias ls='ls --color=auto'
 alias ll='ls -alh --color=auto'
