@@ -1,17 +1,23 @@
 #!/usr/bin/env node
 
 let fs = require('fs')
+let dotfiles = {}
 
 fs.readFile('inventory.json', 'utf8', installer)
 
-function installer (err, data) {
-  if (err) throw err
-  let dotfiles = JSON.parse(data).dotfiles
-
+function menu () {
   console.log('\n' + splash('Welcome To Chris\' Dotfiles Installer'))
   dotfiles.forEach(function (dotfile, i) {
-    console.log(`${i}. ${dotfile.name}`)
+    let check = ' '
+    if (dotfile.checked) {check = 'x'}
+    console.log(`${i}. ${dotfile.name} [${check}]`)
   })
+}
+
+function installer (err, data) {
+  if (err) throw err
+  dotfiles = JSON.parse(data).dotfiles
+  menu()
 }
 
 function splash (string) {
@@ -24,4 +30,8 @@ function splash (string) {
 
 let stdin = process.openStdin()
 stdin.on('data', function (chunk) {
+  chunk = +chunk
+  if (isNaN(chunk) || chunk >= dotfiles.length) return
+  dotfiles[chunk].checked = !dotfiles[chunk].checked
+  menu()
 })
