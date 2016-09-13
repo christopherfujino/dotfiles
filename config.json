@@ -27,7 +27,7 @@
       "platform" : "any"
     },
     {
-      "name" : "tern-config",
+      "name" : ".tern-config",
       "target" : "~/.tern-config",
       "platform" : "any"
     },
@@ -46,6 +46,20 @@
       "name" : ".Xresources",
       "target" : "~/.Xresources",
       "platform" : "linux"
+    },
+    {
+      "name" : "termite_config",
+      "target" : "~/.config/termite/config",
+      "platform": "linux"
+    },
+    {
+      "name" : "dummymacfile",
+      "target" : "~/dummymacfile",
+      "platform" : "darwin"
+    },
+    {
+      "name" : "dummycrossplatformfile",
+      "target" : "~/git/dotfiles/link"
     }
   ]
 }
