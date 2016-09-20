@@ -11,8 +11,8 @@ export VISUAL="nvim"
 export EDITOR="nvim"
 
 alias ls='ls --color=auto'
-alias ll='ls -alh --color=auto'
-alias lsa='ls -a'
+alias ll='ls -Alh --color=auto'
+alias lsa='ls -A' # -A means ignore '.' & '..'
 alias emacs='emacs -nw' # default to console-based emacs
 alias ..='cd ..'
 alias g='git'
