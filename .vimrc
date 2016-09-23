@@ -81,6 +81,9 @@ Plug 'chriskempson/base16-vim'
 " let jshint2_read = 1
 " let jshint2_save = 1
 
+" typescript syntax theme
+Plug 'leafgarland/typescript-vim'
+
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
