@@ -60,7 +60,7 @@ set laststatus=2
 Plug 'jiangmiao/auto-pairs'
 
 " The Nerd Tree: A tree explorer plugin for vim
-" Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 
 " Quicktask: a lightweight Vim task management plugin
 Plug 'aaronbieber/vim-quicktask'
@@ -69,7 +69,7 @@ Plug 'aaronbieber/vim-quicktask'
 Plug 'yggdroot/indentLine'
 
 " nerdtree-git-plugin
-" Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Vim-gitgutter: show git diff in gutter before line number
 Plug 'airblade/vim-gitgutter'
