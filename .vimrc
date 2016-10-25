@@ -47,13 +47,13 @@ let g:ycm_semantic_triggers['typescript'] = ['.']
 " Tern Plugin for Vim (`npm install` must be run inside tern_for_vim directory)
 " in Arch Linux, I had to additionally install `sudo pacman -S python2-neovim
 " python-neovim` found from github installation guide to neovim
-"Plug 'ternjs/tern_for_vim'
+Plug 'ternjs/tern_for_vim'
 
 " Plug 'bling/vim-airline' vim status-line
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 let g:airline_theme='base16_monokai'
-let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts=0
 set laststatus=2
 
 " Plug 'jiangmiao/auto-pairs' auto bracket pairing plugin
@@ -88,10 +88,13 @@ Plug 'chriskempson/base16-vim'
 " typescript syntax theme
 Plug 'leafgarland/typescript-vim'
 
+" vim-autoread
+Plug 'christopherfujino/vim-autoread'
+
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
-"These are from the readme
+"These are from the Syntastic readme
 set statusline+=%#warmingmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
