@@ -64,7 +64,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdtree'
 
 " Quicktask: a lightweight Vim task management plugin
-Plug 'aaronbieber/vim-quicktask'
+"Plug 'aaronbieber/vim-quicktask'
 
 " show indentation markers
 Plug 'yggdroot/indentLine'
