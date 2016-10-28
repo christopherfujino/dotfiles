@@ -19,6 +19,7 @@ call plug#begin()
 "   \'y'    : ['%a %b %d'],
 "   \'z'    : '%r',
 "   \'options': { 'status-justify': 'left'}}
+" let g:tmuxline_powerline_separators = 0
 
 Plug 'tpope/vim-fugitive'
 
