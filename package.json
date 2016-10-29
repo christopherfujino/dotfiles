@@ -22,6 +22,5 @@
   },
   "homepage": "https://github.com/christopherfujino/dotfiles#readme",
   "dependencies": {
-    "dotfiles": "file:///home/christopher/git/cdri"
   }
 }
