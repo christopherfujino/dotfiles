@@ -19,6 +19,7 @@ call plug#begin()
 "   \'y'    : ['%a %b %d'],
 "   \'z'    : '%r',
 "   \'options': { 'status-justify': 'left'}}
+" let g:tmuxline_powerline_separators = 0
 
 Plug 'tpope/vim-fugitive'
 
@@ -39,24 +40,28 @@ Plug 'tpope/vim-surround'
 " Autocompletion - uses vim's built-in omnicomplete; build using
 " ~/.vim/plugged/youcompleteme/install.py --tern-completer
 Plug 'valloric/youcompleteme'
+if !exists("g:ycm_semantic_triggers")
+  let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers['typescript'] = ['.']
 
 " Tern Plugin for Vim (`npm install` must be run inside tern_for_vim directory)
 " in Arch Linux, I had to additionally install `sudo pacman -S python2-neovim
 " python-neovim` found from github installation guide to neovim
-"Plug 'ternjs/tern_for_vim'
+Plug 'ternjs/tern_for_vim'
 
 " Plug 'bling/vim-airline' vim status-line
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 let g:airline_theme='base16_monokai'
-let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts=0
 set laststatus=2
 
 " Plug 'jiangmiao/auto-pairs' auto bracket pairing plugin
 Plug 'jiangmiao/auto-pairs'
 
 " The Nerd Tree: A tree explorer plugin for vim
-" Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 
 " Quicktask: a lightweight Vim task management plugin
 Plug 'aaronbieber/vim-quicktask'
@@ -65,7 +70,7 @@ Plug 'aaronbieber/vim-quicktask'
 Plug 'yggdroot/indentLine'
 
 " nerdtree-git-plugin
-" Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Vim-gitgutter: show git diff in gutter before line number
 Plug 'airblade/vim-gitgutter'
@@ -81,10 +86,16 @@ Plug 'chriskempson/base16-vim'
 " let jshint2_read = 1
 " let jshint2_save = 1
 
+" typescript syntax theme
+Plug 'leafgarland/typescript-vim'
+
+" vim-autoread
+Plug 'christopherfujino/vim-autoread'
+
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
-"These are from the readme
+"These are from the Syntastic readme
 set statusline+=%#warmingmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*

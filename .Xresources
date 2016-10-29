@@ -1,17 +1,32 @@
 URxvt*scrollBar: false
-!URxvt*font: xft:DejaVu Sans Mono for Powerline
-URxvt*font: xft:Source Code Pro Light
-URxvt*boldFont: xft:Source Code Pro Light:bold
-URxvt*italicFont: xft:Source Code Pro Light:italic:autohint=true
-URxvt*boldItalicFont: xft:Source Code Pro Light:bold:italic:autohint=true
+
+URxvt*font: xft:Source Code Pro:style=Regular:size=12
+URxvt*boldFont: xft:Source Code Pro:style=Bold:size=12
+URxvt*italicFont: xft:Source Code Pro:style=Italic:size=12
+URxvt*boldItalicFont: xft:Source Code Pro:style=Bold Italic:size=12
+
+! These are powerline fonts
+!URxvt*font: xft:Source Code Pro Light:size=12
+!URxvt*boldFont: xft:Source Code Pro Semibold:size=12
+!URxvt*italicFont: xft:Source Code Pro Light:italic:autohint=true:size=12
+!URxvt*boldItalicFont: xft:Source Code Pro Light:bold:italic:autohint=true:size=12
 
 !URxvt*termName: rxvt-unicode-256color
 
 ! clickable URLs, from http://wiki.archlinux.org
 
-URxvt.perl-ext: default,matcher
+URxvt.perl-ext: default,matcher,resize-font
 URxvt.url-launcher: /usr/bin/xdg-open
 URxvt.matcher.button: 1
+
+! changing font size on the fly, from aur package urxvt-resize-font-git
+!URxvt.perl-ext-common: resize-font
+
+URxvt.resize-font.smaller: C-Down
+URxvt.resize-font.bigger: C-Up
+
+URxvt.iso14755: false
+URxvt.iso14755_52: false
 
 ! Base16 Monokai
 ! Scheme: Wimer Hazenberg (http://www.monokai.nl)
