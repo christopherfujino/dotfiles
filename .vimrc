@@ -35,7 +35,7 @@ Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-surround'
 
 " Pug syntax highlighting
-"Plug 'digitaltoad/vim-pug'
+Plug 'digitaltoad/vim-pug'
 
 " Autocompletion - uses vim's built-in omnicomplete; build using
 " ~/.vim/plugged/youcompleteme/install.py --tern-completer
