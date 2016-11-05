@@ -4,6 +4,10 @@
 set nocompatible
 filetype off
 
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+
 " https://github.com/junegunn/vim-plug must be installed to manage plugins
 call plug#begin()
 
@@ -102,15 +106,10 @@ call plug#end()            " required
 "let g:syntastic_check_on_wq = 0
 "let g:syntastic_javascript_checkers = ['standard']
 
-let base16colorspace=256  " Access colors present in 256 colorspace
-colorscheme base16-monokai
-
 set wildmenu " why is this not the default?!
 
-
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
+let base16colorspace=256  " Access colors present in 256 colorspace
+colorscheme base16-monokai
 
 " .vimrc
 " See: http://vimdoc.sourceforge.net/htmldoc/options.html for details
