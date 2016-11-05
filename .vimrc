@@ -1,13 +1,10 @@
-" ~/.vimrc
-"
 " Christopher Fujino's .vimrc
-" For use in Vim & NeoVim
-"
+"   For use in Vim & NeoVim
+
+set nocompatible
+filetype off
+
 " https://github.com/junegunn/vim-plug must be installed to manage plugins
-
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
 call plug#begin()
 
 " Plug 'edkolev/tmuxline.vim'  " only necessary temporarily for sourcing /etc/tmux.conf
@@ -23,7 +20,7 @@ call plug#begin()
 
 Plug 'tpope/vim-fugitive'
 
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
 
 " https://github.com/Shutnik/jshint2.vim
 " Plug 'Shutnik/jshint2.vim'
@@ -39,11 +36,11 @@ Plug 'digitaltoad/vim-pug'
 
 " Autocompletion - uses vim's built-in omnicomplete; build using
 " ~/.vim/plugged/youcompleteme/install.py --tern-completer
-Plug 'valloric/youcompleteme'
-if !exists("g:ycm_semantic_triggers")
-  let g:ycm_semantic_triggers = {}
-endif
-let g:ycm_semantic_triggers['typescript'] = ['.']
+"Plug 'valloric/youcompleteme'
+"if !exists("g:ycm_semantic_triggers")
+"  let g:ycm_semantic_triggers = {}
+"endif
+"let g:ycm_semantic_triggers['typescript'] = ['.']
 
 " Tern Plugin for Vim (`npm install` must be run inside tern_for_vim directory)
 " in Arch Linux, I had to additionally install `sudo pacman -S python2-neovim
@@ -96,15 +93,14 @@ Plug 'christopherfujino/vim-autoread'
 call plug#end()            " required
 
 "These are from the Syntastic readme
-set statusline+=%#warmingmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['standard']
+"set statusline+=%#warmingmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_javascript_checkers = ['standard']
 
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-monokai
