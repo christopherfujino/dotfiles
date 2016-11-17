@@ -35,9 +35,6 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'tpope/vim-surround'
 
-" Pug syntax highlighting
-Plug 'digitaltoad/vim-pug'
-
 " Autocompletion - uses vim's built-in omnicomplete; build using
 " ~/.vim/plugged/youcompleteme/install.py --tern-completer
 "Plug 'valloric/youcompleteme'
@@ -87,11 +84,17 @@ Plug 'chriskempson/base16-vim'
 " let jshint2_read = 1
 " let jshint2_save = 1
 
+" vim-autoread
+Plug 'christopherfujino/vim-autoread'
+
+" Pug syntax highlighting
+Plug 'digitaltoad/vim-pug'
+
 " typescript syntax theme
 Plug 'leafgarland/typescript-vim'
 
-" vim-autoread
-Plug 'christopherfujino/vim-autoread'
+" Vue syntax theme
+Plug 'posva/vim-vue'
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
