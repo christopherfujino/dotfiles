@@ -25,12 +25,12 @@ if [ $OS = "Linux" ]; then
   export TERM="rxvt-unicode-256color"
   export LIBVA_DRIVER_NAME="i965" # for arch hardware rendering
   export TERMINAL="urxvt"
+
+  #Base16 Shell
+  BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-monokai.sh"
+  [[ -s $BASE16_SHELL  ]] && source $BASE16_SHELL
 fi
 
 PS1='\u@\h \W\$ '
 
 export PATH="${PATH}:$HOME/scripts:$HOME/.node_modules/bin:$HOME/.gem/ruby/2.3.0/bin"
-
-#Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-monokai.sh"
-[[ -s $BASE16_SHELL  ]] && source $BASE16_SHELL
