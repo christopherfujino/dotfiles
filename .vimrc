@@ -37,11 +37,11 @@ Plug 'tpope/vim-surround'
 
 " Autocompletion - uses vim's built-in omnicomplete; build using
 " ~/.vim/plugged/youcompleteme/install.py --tern-completer
-"Plug 'valloric/youcompleteme'
-"if !exists("g:ycm_semantic_triggers")
-"  let g:ycm_semantic_triggers = {}
-"endif
-"let g:ycm_semantic_triggers['typescript'] = ['.']
+Plug 'valloric/youcompleteme'
+if !exists("g:ycm_semantic_triggers")
+  let g:ycm_semantic_triggers = {}
+  let g:ycm_semantic_triggers['typescript'] = ['.']
+endif
 
 " Tern Plugin for Vim (`npm install` must be run inside tern_for_vim directory)
 " in Arch Linux, I had to additionally install `sudo pacman -S python2-neovim
@@ -138,7 +138,7 @@ set showcmd         " Show (partial) command in status line.
 
 set number          " Show line numbers.
 
-"set showmatch       " When a bracket is inserted, briefly jump to the matching
+set showmatch       " When a bracket is inserted, briefly jump to the matching
                     " one. The jump is only done if the match can be seen on the
                     " screen. The time to show the match can be set with
                     " 'matchtime'.
