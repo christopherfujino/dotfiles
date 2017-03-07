@@ -53,6 +53,11 @@
       "platform": "linux"
     },
     {
+      "name": "mpd.conf",
+      "target": "~/.config/mpd/mpd.conf",
+      "platform": "any"
+    },
+    {
       "name" : "dummymacfile",
       "target" : "~/dummymacfile",
       "platform" : "darwin"

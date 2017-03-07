@@ -13,14 +13,20 @@ export EDITOR="nvim"
 alias ls='ls --color=auto'
 alias ll='ls -Alh --color=auto'
 alias lsa='ls -A' # -A means ignore '.' & '..'
-alias dfh='df -h /dev/sda1'
 alias emacs='emacs -nw' # default to console-based emacs
 alias ..='cd ..'
 alias g='git'
 
-# This is Linux-specific code
-if [ $OS = "Linux" ]; then
+#if [ $OS = "Linux" ]; then
+## This is Linux-specific code
+#fi
+
+if [ $HOSTNAME = "ac" ]; then
+  # This is specific for my chromebook
+  export PATH="${PATH}:$HOME/scripts:$HOME/.node_modules/bin:$HOME/.gem/ruby/2.3.0/bin"
   alias upd='timedatectl | grep Local; yaourt -Syua'
+  alias yaourt-stats='yaourt --stats'
+  alias dfh='df -h /dev/sda1'
   export STEAM_RUNTIME=0 # for Steam
   #export TERM="xterm-256color"
   export TERM="rxvt-unicode-256color"
@@ -34,4 +40,3 @@ fi
 
 PS1='\u@\h \W\$ '
 
-export PATH="${PATH}:$HOME/scripts:$HOME/.node_modules/bin:$HOME/.gem/ruby/2.3.0/bin"
