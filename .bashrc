@@ -38,5 +38,9 @@ if [ $HOSTNAME = "ac" ]; then
   [[ -s $BASE16_SHELL  ]] && source $BASE16_SHELL
 fi
 
+if [ $OS = "Darwin" ]; then
+  alias dfh='df -h /dev/disk0s2'
+fi
+
 PS1='\u@\h \W\$ '
 
