@@ -13,7 +13,6 @@ export EDITOR="nvim"
 alias ls='ls --color=auto'
 alias ll='ls -Alh --color=auto'
 alias lsa='ls -A' # -A means ignore '.' & '..'
-alias dfh='df -h /dev/sda1'
 alias emacs='emacs -nw' # default to console-based emacs
 alias ..='cd ..'
 alias g='git'
@@ -21,6 +20,7 @@ alias g='git'
 # This is Linux-specific code
 if [ $OS = "Linux" ]; then
   alias upd='timedatectl | grep Local; yaourt -Syua'
+  alias dfh='df -h /dev/sda1'
   export STEAM_RUNTIME=0 # for Steam
   #export TERM="xterm-256color"
   export TERM="rxvt-unicode-256color"
