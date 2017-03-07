@@ -32,6 +32,10 @@ if [ $OS = "Linux" ]; then
   [[ -s $BASE16_SHELL  ]] && source $BASE16_SHELL
 fi
 
+if [ $OS = "Darwin" ]; then
+  alias dfh='df -h /dev/disk0s2'
+fi
+
 PS1='\u@\h \W\$ '
 
 export PATH="${PATH}:$HOME/scripts:$HOME/.node_modules/bin:$HOME/.gem/ruby/2.3.0/bin"
