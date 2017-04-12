@@ -37,7 +37,7 @@ if [ $HOSTNAME = "ac" ]; then
   BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-monokai.sh"
   [[ -s $BASE16_SHELL  ]] && source $BASE16_SHELL
 elif [ $HOSTNAME = "macmini" ]; then
-  export PATH="${PATH}":$HOME/scripts:$HOME/.node_modules/bin"
+  export PATH="${PATH}:$HOME/scripts:$HOME/.node_modules/bin"
   #Base16 Shell
   BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-monokai.sh"
   [[ -s $BASE16_SHELL  ]] && source $BASE16_SHELL
