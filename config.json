@@ -63,6 +63,11 @@
       "platform" : "darwin"
     },
     {
+      "name" : "ncmpcpp.config",
+      "target" : "~/.ncmpcpp/config",
+      "platform" : "linux"
+    },
+    {
       "name" : "dummycrossplatformfile",
       "target" : "~/git/dotfiles/link"
     }
