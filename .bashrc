@@ -16,6 +16,7 @@ alias lsa='ls -A' # -A means ignore '.' & '..'
 alias emacs='emacs -nw' # default to console-based emacs
 alias ..='cd ..'
 alias g='git'
+alias dfh='df -h /dev/sda1'
 
 #if [ $OS = "Linux" ]; then
 ## This is Linux-specific code
@@ -26,13 +27,17 @@ if [ $HOSTNAME = "ac" ]; then
   export PATH="${PATH}:$HOME/scripts:$HOME/.node_modules/bin:$HOME/.gem/ruby/2.3.0/bin"
   alias upd='timedatectl | grep Local; yaourt -Syua'
   alias yaourt-stats='yaourt --stats'
-  alias dfh='df -h /dev/sda1'
   export STEAM_RUNTIME=0 # for Steam
   #export TERM="xterm-256color"
   export TERM="rxvt-unicode-256color"
   export LIBVA_DRIVER_NAME="i965" # for arch hardware rendering
   export TERMINAL="urxvt"
 
+  #Base16 Shell
+  BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-monokai.sh"
+  [[ -s $BASE16_SHELL  ]] && source $BASE16_SHELL
+elif [ $HOSTNAME = "macmini" ]; then
+  export PATH="${PATH}:$HOME/scripts:$HOME/.node_modules/bin"
   #Base16 Shell
   BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-monokai.sh"
   [[ -s $BASE16_SHELL  ]] && source $BASE16_SHELL
