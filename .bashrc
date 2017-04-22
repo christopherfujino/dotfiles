@@ -50,6 +50,8 @@ if [ $OS = "Darwin" ]; then
   alias lsa='ls -A' # -A means ignore '.' & '..'
   alias dfh='df -h /dev/disk0s2'
   export PATH="${PATH}:$HOME/scripts:$HOME/.node_modules/bin"
+  BASE16_SHELL=$HOME/.config/base16-shell/
+  [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 fi
 
 PS1='\u@\h \W\$ '
