@@ -10,13 +10,10 @@ OS=$(uname)
 export VISUAL="nvim"
 export EDITOR="nvim"
 
-alias ls='ls --color=auto'
-alias ll='ls -Alh --color=auto'
-alias lsa='ls -A' # -A means ignore '.' & '..'
+#alias ls='ls --color=auto' #this is os-dependent
 alias emacs='emacs -nw' # default to console-based emacs
 alias ..='cd ..'
 alias g='git'
-alias dfh='df -h /dev/sda1'
 
 #if [ $OS = "Linux" ]; then
 ## This is Linux-specific code
@@ -32,6 +29,10 @@ if [ $HOSTNAME = "ac" ]; then
   export TERM="rxvt-unicode-256color"
   export LIBVA_DRIVER_NAME="i965" # for arch hardware rendering
   export TERMINAL="urxvt"
+  alias dfh='df -h /dev/sda1'
+  alias ls='ls --color=auto'
+  alias ll='ls -Alh --color=auto'
+  alias lsa='ls -A' # -A means ignore '.' & '..'
 
   #Base16 Shell
   BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-monokai.sh"
@@ -44,7 +45,11 @@ elif [ $HOSTNAME = "macmini" ]; then
 fi
 
 if [ $OS = "Darwin" ]; then
+  alias ls='ls -G'
+  alias ll='ls -AlhG'
+  alias lsa='ls -A' # -A means ignore '.' & '..'
   alias dfh='df -h /dev/disk0s2'
+  export PATH="${PATH}:$HOME/scripts:$HOME/.node_modules/bin"
 fi
 
 PS1='\u@\h \W\$ '
