@@ -68,6 +68,11 @@
       "platform" : "linux"
     },
     {
+      "name" : ".mpdasrc",
+      "target" : "~/.mpdasrc",
+      "platform" : "any"
+    },
+    {
       "name" : "dummycrossplatformfile",
       "target" : "~/git/dotfiles/link"
     }
