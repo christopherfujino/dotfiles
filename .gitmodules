@@ -1,0 +1,3 @@
+[submodule "installer"]
+	path = cdri
+	url = git@github.com:christopherfujino/cdri.git
