@@ -33,9 +33,8 @@
     },
     {
       "name" : "tmux.conf",
-      "target" : "/etc/tmux.conf",
-      "platform" : "any",
-      "owner" : "root"
+      "target" : "~/.tmux.conf",
+      "platform" : "any"
     },
     {
       "name" : ".vimrc",
@@ -58,23 +57,14 @@
       "platform": "any"
     },
     {
-      "name" : "dummymacfile",
-      "target" : "~/dummymacfile",
-      "platform" : "darwin"
-    },
-    {
       "name" : "ncmpcpp.config",
       "target" : "~/.ncmpcpp/config",
-      "platform" : "linux"
+      "platform" : "any"
     },
     {
       "name" : ".mpdasrc",
       "target" : "~/.mpdasrc",
       "platform" : "any"
-    },
-    {
-      "name" : "dummycrossplatformfile",
-      "target" : "~/git/dotfiles/link"
     }
   ]
 }
