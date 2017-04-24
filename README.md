@@ -32,5 +32,5 @@
   * git clone my dotfiles: `$ git clone git@github.com:christopherfujino/dotfiles.git`
   * npm install: `$ npm i`
   * run cdri: `$ ./install`
-* Symlink user directories
 * Configure ownCloud
+* Symlink user directories
