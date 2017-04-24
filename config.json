@@ -54,7 +54,12 @@
     {
       "name": "mpd.conf",
       "target": "~/.config/mpd/mpd.conf",
-      "platform": "any"
+      "platform": "linux"
+    },
+    {
+      "name": "mpd.mac.conf",
+      "target": "~/.mpdconf",
+      "platform": "darwin"
     },
     {
       "name" : "ncmpcpp.config",
