@@ -37,11 +37,6 @@ if [ $HOSTNAME = "ac" ]; then
   #Base16 Shell
   BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-monokai.sh"
   [[ -s $BASE16_SHELL  ]] && source $BASE16_SHELL
-elif [ $HOSTNAME = "macmini" ]; then
-  export PATH="${PATH}:$HOME/scripts:$HOME/.node_modules/bin"
-  #Base16 Shell
-  BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-monokai.sh"
-  [[ -s $BASE16_SHELL  ]] && source $BASE16_SHELL
 fi
 
 if [ $OS = "Darwin" ]; then
@@ -49,7 +44,7 @@ if [ $OS = "Darwin" ]; then
   alias ll='ls -AlhG'
   alias lsa='ls -A' # -A means ignore '.' & '..'
   alias dfh='df -h /dev/disk0s2'
-  export PATH="${PATH}:$HOME/scripts:$HOME/.node_modules/bin"
+  export PATH="${PATH}:$HOME/scripts:$HOME/.node_modules/bin:$HOME/scripts"
   BASE16_SHELL=$HOME/.config/base16-shell/
   [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 fi
