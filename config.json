@@ -52,7 +52,7 @@
       "platform": "linux"
     },
     {
-      "name": "mpd.conf",
+      "name": "mpd.linux.conf",
       "target": "~/.config/mpd/mpd.conf",
       "platform": "linux"
     },
@@ -69,6 +69,11 @@
     {
       "name" : ".mpdasrc",
       "target" : "~/.mpdasrc",
+      "platform" : "any"
+    },
+    {
+      "name" : "scripts",
+      "target" : "~/scripts",
       "platform" : "any"
     }
   ]
