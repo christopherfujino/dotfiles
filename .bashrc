@@ -30,16 +30,18 @@ if [ $HOSTNAME = "ac" ]; then
   export LIBVA_DRIVER_NAME="i965" # for arch hardware rendering
   export TERMINAL="urxvt"
   alias dfh='df -h /dev/sda1'
+fi
+
+if [ $OS = "Linux" ]; then
+  export PATH="${PATH}:$HOME/scripts:$HOME/.node_modules/bin"
   alias ls='ls --color=auto'
   alias ll='ls -Alh --color=auto'
   alias lsa='ls -A' # -A means ignore '.' & '..'
 
   #Base16 Shell
-  BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-monokai.sh"
-  [[ -s $BASE16_SHELL  ]] && source $BASE16_SHELL
-fi
-
-if [ $OS = "Darwin" ]; then
+  BASE16_SHELL=$HOME/.config/base16-shell/
+  [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+elif [ $OS = "Darwin" ]; then
   alias ls='ls -G'
   alias ll='ls -AlhG'
   alias lsa='ls -A' # -A means ignore '.' & '..'
