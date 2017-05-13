@@ -1,9 +1,9 @@
 URxvt*scrollBar: false
 
-URxvt*font: xft:Source Code Pro:style=Regular:size=12
-URxvt*boldFont: xft:Source Code Pro:style=Bold:size=12
-URxvt*italicFont: xft:Source Code Pro:style=Italic:size=12
-URxvt*boldItalicFont: xft:Source Code Pro:style=Bold Italic:size=12
+URxvt*font: xft:Source Code Pro:style=Regular:size=11
+URxvt*boldFont: xft:Source Code Pro:style=Bold:size=11
+URxvt*italicFont: xft:Source Code Pro:style=Italic:size=11
+URxvt*boldItalicFont: xft:Source Code Pro:style=Bold Italic:size=11
 
 ! These are powerline fonts
 !URxvt*font: xft:Source Code Pro Light:size=12
