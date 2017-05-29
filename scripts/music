@@ -10,5 +10,6 @@ if pgrep "ncmpcpp" >/dev/null; then
   echo "ncmpcpp already running."
 else
   echo "ncmpcpp not currently running, so executing now..."
+  sleep 2
   ncmpcpp
 fi
