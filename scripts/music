@@ -1,0 +1,14 @@
+#!/bin/bash
+if pgrep "mpdas" >/dev/null; then
+  echo "mpdas already running."
+else
+  echo "mpdas not yet running, so executing now..."
+  mpdas -c ~/.mpdasrc -d
+fi
+
+if pgrep "ncmpcpp" >/dev/null; then
+  echo "ncmpcpp already running."
+else
+  echo "ncmpcpp not currently running, so executing now..."
+  ncmpcpp
+fi
