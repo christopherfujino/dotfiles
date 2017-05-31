@@ -59,7 +59,10 @@ set laststatus=2
 Plug 'jiangmiao/auto-pairs'
 
 " The Nerd Tree: A tree explorer plugin for vim
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on': 'NerdTree' }
+
+" nerdtree-git-plugin
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NerdTree' }
 
 " Quicktask: a lightweight Vim task management plugin
 "Plug 'aaronbieber/vim-quicktask'
@@ -67,14 +70,11 @@ Plug 'scrooloose/nerdtree'
 " show indentation markers
 Plug 'yggdroot/indentLine'
 
-" nerdtree-git-plugin
-Plug 'Xuyuanp/nerdtree-git-plugin'
-
 " Vim-gitgutter: show git diff in gutter before line number
 Plug 'airblade/vim-gitgutter'
 
 " Control-P fuzzy finder
-Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
 
 " Chris Kempson's Base16 colorschemes
 Plug 'chriskempson/base16-vim'
