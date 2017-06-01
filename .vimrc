@@ -46,7 +46,7 @@ endif
 " Tern Plugin for Vim (`npm install` must be run inside tern_for_vim directory)
 " in Arch Linux, I had to additionally install `sudo pacman -S python2-neovim
 " python-neovim` found from github installation guide to neovim
-Plug 'ternjs/tern_for_vim'
+"Plug 'ternjs/tern_for_vim'
 
 " Plug 'bling/vim-airline' vim status-line
 Plug 'vim-airline/vim-airline'
