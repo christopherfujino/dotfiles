@@ -30,6 +30,8 @@ if [ $HOSTNAME = "ac" ]; then
   export LIBVA_DRIVER_NAME="i965" # for arch hardware rendering
   export TERMINAL="urxvt"
   alias dfh='df -h /dev/sda1'
+elif [ $HOSTNAME = "x270" ]; then
+  export TERM="xterm-256color"
 fi
 
 if [ $OS = "Linux" ]; then
