@@ -19,7 +19,7 @@ pidof "ncmpcpp" >/dev/null
 if [[ $? == 0 ]]; then
   echo "ncmpcpp is already running"
 else
-  echo "ncmpcpp is not running, executing now..."
-  sleep 2
+  echo "ncmpcpp is not running. Hit any key to execute it..."
+  read -n 1 -s
   ncmpcpp
 fi
