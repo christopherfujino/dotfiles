@@ -59,10 +59,10 @@ set laststatus=2
 Plug 'jiangmiao/auto-pairs'
 
 " The Nerd Tree: A tree explorer plugin for vim
-Plug 'scrooloose/nerdtree', { 'on': 'NerdTree' }
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
 
 " nerdtree-git-plugin
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NerdTree' }
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTree' }
 
 " Quicktask: a lightweight Vim task management plugin
 "Plug 'aaronbieber/vim-quicktask'
