@@ -15,11 +15,11 @@ else
   mpdas -c ~/.mpdasrc -d
 fi
 
-pgrep ^ncmpcpp$ >/dev/null
+pgrep ^vimpc$ >/dev/null
 if [[ $? == 0 ]]; then
-  echo "ncmpcpp is already running"
+  echo "vimpc is already running"
 else
-  echo "ncmpcpp is not running. Hit any key to execute it..."
+  echo "vimpc is not running. Hit any key to execute it..."
   read -n 1 -s
-  ncmpcpp
+  vimpc
 fi
