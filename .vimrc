@@ -64,6 +64,9 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
 " nerdtree-git-plugin
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTree' }
 
+" distraction free writing
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
+
 " Quicktask: a lightweight Vim task management plugin
 "Plug 'aaronbieber/vim-quicktask'
 
