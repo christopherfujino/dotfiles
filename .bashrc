@@ -62,7 +62,5 @@ fi
 
 export PATH
 
-echo $PATH
-
 PS1='\u@\h \W\$ '
 
