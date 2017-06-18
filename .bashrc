@@ -6,6 +6,7 @@
 [[ $- != *i* ]] && return
 
 OS=$(uname)
+PATH=$PATH
 
 export VISUAL="nvim"
 export EDITOR="nvim"
@@ -14,10 +15,6 @@ export EDITOR="nvim"
 alias emacs='emacs -nw' # default to console-based emacs
 alias ..='cd ..'
 alias g='git'
-
-#if [ $OS = "Linux" ]; then
-## This is Linux-specific code
-#fi
 
 if [ $HOSTNAME = "ac" ]; then
   # This is specific for my chromebook
@@ -35,7 +32,6 @@ elif [ $HOSTNAME = "x270" ]; then
 fi
 
 if [ $OS = "Linux" ]; then
-  export PATH="${PATH}:$HOME/scripts:$HOME/.node_modules/bin"
   alias ls='ls --color=auto'
   alias ll='ls -Alh --color=auto'
   alias lsa='ls -A' # -A means ignore '.' & '..'
@@ -48,10 +44,25 @@ elif [ $OS = "Darwin" ]; then
   alias ll='ls -AlhG'
   alias lsa='ls -A' # -A means ignore '.' & '..'
   alias dfh='df -h /dev/disk0s2'
-  export PATH="${PATH}:$HOME/scripts:$HOME/.node_modules/bin:$HOME/scripts"
   BASE16_SHELL=$HOME/.config/base16-shell/
   [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 fi
+
+if [ -d "$HOME/scripts" ]; then
+  PATH="$HOME/scripts:$PATH"
+fi
+
+if [ -d "$HOME/.node_modules/bin" ]; then
+  PATH="$HOME/.node_modules/bin:$PATH"
+fi
+
+if type ruby 2>/dev/null; then
+  PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+fi
+
+export PATH
+
+echo $PATH
 
 PS1='\u@\h \W\$ '
 
