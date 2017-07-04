@@ -88,16 +88,26 @@ Plug 'chriskempson/base16-vim'
 " let jshint2_save = 1
 
 " vim-autoread
+" - this periodically reads file from system to check for changes
 Plug 'christopherfujino/vim-autoread'
 
-" Pug syntax highlighting
-Plug 'digitaltoad/vim-pug'
-
 " typescript syntax theme
-Plug 'leafgarland/typescript-vim'
+Plug 'leafgarland/typescript-vim', { 'for': 'ts' }
 
 " Vue syntax theme
-Plug 'posva/vim-vue'
+Plug 'posva/vim-vue', { 'for': 'vue' }
+
+" HTML Plugins
+
+" Emmet for vim
+Plug 'mattn/emmet-vim', { 'for': [ 'html', 'htm', 'css', 'sass', 'scss' ] }
+let g:user_emmet_mode='n'
+
+" MatchTag - highlights matching HTML tag
+Plug 'gregsexton/MatchTag'
+
+" Pug syntax highlighting
+Plug 'digitaltoad/vim-pug', { 'for': [ 'pug', 'jade' ] }
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
