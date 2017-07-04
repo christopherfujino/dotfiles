@@ -60,7 +60,12 @@ if type ruby 2>/dev/null; then
   PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 fi
 
-export PATH
-
 PS1='\u@\h \W\$ '
 
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+if [ -d "$HOME/.rvm/bin" ]; then
+  PATH="$HOME/.rvm/bin:$PATH"
+fi
+
+export PATH
+[ -s "$HOME/.rvm/scripts/rvm" ] && source "$HOME/.rvm/scripts/rvm"
