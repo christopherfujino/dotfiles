@@ -75,6 +75,11 @@
       "name" : "scripts",
       "target" : "~/scripts",
       "platform" : "any"
+    },
+    {
+      "name" : "nvim.init.vim",
+      "target" : "~/.config/nvim/init.vim",
+      "platform" : "any"
     }
   ]
 }
