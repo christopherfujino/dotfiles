@@ -101,7 +101,6 @@ Plug 'posva/vim-vue', { 'for': 'vue' }
 
 " Emmet for vim
 Plug 'mattn/emmet-vim', { 'for': [ 'html', 'htm', 'css', 'sass', 'scss' ] }
-let g:user_emmet_mode='n'
 
 " MatchTag - highlights matching HTML tag
 Plug 'gregsexton/MatchTag'
