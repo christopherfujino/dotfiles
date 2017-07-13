@@ -10,6 +10,7 @@ PATH=$PATH
 
 export VISUAL="nvim"
 export EDITOR="nvim"
+export NOTES="~/notes"
 
 #alias ls='ls --color=auto' #this is os-dependent
 alias emacs='emacs -nw' # default to console-based emacs
