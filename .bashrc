@@ -6,7 +6,7 @@
 [[ $- != *i* ]] && return
 
 OS=$(uname)
-PATH=$PATH
+#PATH=$PATH
 
 export VISUAL="nvim"
 export EDITOR="nvim"
