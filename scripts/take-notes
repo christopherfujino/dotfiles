@@ -1,3 +1,4 @@
 #!/bin/bash
 
-$EDITOR $(date +%F).md
+# add conditional if $NOTES is defined, make in that directory
+$EDITOR $(date +%F)-$1.md
