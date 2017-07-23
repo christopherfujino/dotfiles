@@ -11,6 +11,9 @@ filetype plugin indent on    " required
 " https://github.com/junegunn/vim-plug must be installed to manage plugins
 call plug#begin()
 
+" for easy profiling vim startuptime
+Plug 'tweekmonster/startuptime.vim', { 'on' : 'StartupTime' }
+
 " Plug 'edkolev/tmuxline.vim'  " only necessary temporarily for sourcing /etc/tmux.conf
 
 " let g:tmuxline_preset = {
@@ -38,10 +41,10 @@ Plug 'tpope/vim-surround'
 " Autocompletion - uses vim's built-in omnicomplete; build using
 " ~/.vim/plugged/youcompleteme/install.py --tern-completer
 Plug 'valloric/youcompleteme'
-if !exists("g:ycm_semantic_triggers")
-  let g:ycm_semantic_triggers = {}
-  let g:ycm_semantic_triggers['typescript'] = ['.']
-endif
+" if !exists("g:ycm_semantic_triggers")
+"   let g:ycm_semantic_triggers = {}
+"   let g:ycm_semantic_triggers['typescript'] = ['.']
+" endif
 
 " Tern Plugin for Vim (`npm install` must be run inside tern_for_vim directory)
 " in Arch Linux, I had to additionally install `sudo pacman -S python2-neovim
