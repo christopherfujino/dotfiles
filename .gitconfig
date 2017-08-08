@@ -11,5 +11,7 @@
   c = commit -m
   cm = !git add -A && git commit -m
   d = diff
+  a = add
+  rv = remote -v
 [core]
 	pager = diff-so-fancy | less --tabs=4 -RFX
