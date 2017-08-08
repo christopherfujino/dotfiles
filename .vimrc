@@ -35,6 +35,13 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'tpope/vim-surround'
 
+" better js syntax
+Plug 'pangloss/vim-javascript'
+
+" JSX syntax
+Plug 'mxw/vim-jsx'
+let g:jsx_ext_required = 0
+
 " Autocompletion - uses vim's built-in omnicomplete; build using
 " ~/.vim/plugged/youcompleteme/install.py --tern-completer
 Plug 'valloric/youcompleteme'
