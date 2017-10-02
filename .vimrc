@@ -41,9 +41,13 @@ Plug 'tpope/vim-surround'
 " better js syntax
 Plug 'pangloss/vim-javascript'
 
+" Slim template lang syntax highlighting
+"Plug 'slim-template/vim-slim', { 'for': 'slim' } " this is slow!
+Plug 'onemanstartup/vim-slim', { 'for': 'slim' }
+
 " JSX syntax
-Plug 'mxw/vim-jsx'
-let g:jsx_ext_required = 0
+"Plug 'mxw/vim-jsx'
+"let g:jsx_ext_required = 0
 
 " Autocompletion - uses vim's built-in omnicomplete; build using
 " ~/.vim/plugged/youcompleteme/install.py --tern-completer
@@ -75,7 +79,10 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTree' }
 
 " distraction free writing
-Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
+"Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
+Plug 'junegunn/fzf.vim'
 
 " Quicktask: a lightweight Vim task management plugin
 "Plug 'aaronbieber/vim-quicktask'
@@ -87,7 +94,7 @@ Plug 'yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
 
 " Control-P fuzzy finder
-"Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
 " Chris Kempson's Base16 colorschemes
 Plug 'chriskempson/base16-vim'
