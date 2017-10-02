@@ -1,3 +1,4 @@
+# cool powerups here: http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired
 [user]
 	name = Christopher Fujino
 	email = christopherfujino@gmail.com
@@ -13,5 +14,10 @@
   d = diff
   a = add
   rv = remote -v
+  assume = update-index --assume-unchanged
+  unassume = update-index --no-assume-unchanged
+  assumed = "!git ls-files -v | grep ^h | cut -c 3-"
 [core]
 	pager = diff-so-fancy | less --tabs=4 -RFX
+[diff]
+	algorithm = patience
