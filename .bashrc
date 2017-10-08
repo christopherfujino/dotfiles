@@ -16,6 +16,7 @@ export NOTES="~/notes"
 alias emacs='emacs -nw' # default to console-based emacs
 alias ..='cd ..'
 alias g='git'
+alias gs='git status'
 
 if [ $HOSTNAME = "ac" ]; then
   # This is specific for my chromebook
