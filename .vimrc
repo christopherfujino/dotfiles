@@ -25,7 +25,13 @@ Plug 'tweekmonster/startuptime.vim', { 'on' : 'StartupTime' }
 "   \'options': { 'status-justify': 'left'}}
 " let g:tmuxline_powerline_separators = 0
 
+"TPOPE!!!
 Plug 'tpope/vim-fugitive'
+
+Plug 'tpope/vim-rails'
+
+" surround.vim
+Plug 'tpope/vim-surround'
 
 "Plug 'scrooloose/syntastic'
 
@@ -33,10 +39,6 @@ Plug 'tpope/vim-fugitive'
 " Plug 'Shutnik/jshint2.vim'
 " let jshint2_read = 1
 " let jshint2_save = 1
-
-" surround.vim
-
-Plug 'tpope/vim-surround'
 
 " better js syntax
 Plug 'pangloss/vim-javascript'
@@ -218,7 +220,7 @@ set background=dark " When set to "dark", Vim will try to use colors that look
  
 set mouse=a         " Enable the use of the mouse.
 
-set relativenumber  " change line numbers to relative
+"set relativenumber  " change line numbers to relative
 
 set t_Co=256        " Enable 256 colors
 
