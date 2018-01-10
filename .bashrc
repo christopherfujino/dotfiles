@@ -58,7 +58,7 @@ if [ -d "$HOME/.node_modules/bin" ]; then
   PATH="$HOME/.node_modules/bin:$PATH"
 fi
 
-if type ruby 2>/dev/null; then
+if type ruby 1>/dev/null; then
   # if `ruby` is installed, add Gem dir to $PATH
   PATH="$HOME/.rbenv/bin:$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 fi
