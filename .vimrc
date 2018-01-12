@@ -97,6 +97,7 @@ Plug 'airblade/vim-gitgutter'
 
 " Control-P fuzzy finder
 Plug 'ctrlpvim/ctrlp.vim'
+set wildignore+=*/node_modules/*,*/cache/*
 
 " Chris Kempson's Base16 colorschemes
 Plug 'chriskempson/base16-vim'
