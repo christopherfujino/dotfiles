@@ -30,7 +30,6 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'tpope/vim-rails'
 
-" surround.vim
 Plug 'tpope/vim-surround'
 
 "Plug 'scrooloose/syntastic'
@@ -48,8 +47,8 @@ Plug 'pangloss/vim-javascript'
 Plug 'onemanstartup/vim-slim', { 'for': 'slim' }
 
 " JSX syntax
-"Plug 'mxw/vim-jsx'
-"let g:jsx_ext_required = 0
+Plug 'mxw/vim-jsx'
+let g:jsx_ext_required = 0
 
 " Autocompletion - uses vim's built-in omnicomplete; build using
 " ~/.vim/plugged/youcompleteme/install.py --tern-completer
