@@ -32,7 +32,17 @@ Plug 'tpope/vim-rails'
 
 Plug 'tpope/vim-surround'
 
-"Plug 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
+"These are from the Syntastic readme
+set statusline+=%#warmingmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_ruby_checkers = ['rubocop']
 
 " https://github.com/Shutnik/jshint2.vim
 " Plug 'Shutnik/jshint2.vim'
@@ -48,7 +58,7 @@ Plug 'onemanstartup/vim-slim', { 'for': 'slim' }
 
 " JSX syntax
 Plug 'mxw/vim-jsx'
-let g:jsx_ext_required = 0
+"let g:jsx_ext_required = 1
 
 " Autocompletion - uses vim's built-in omnicomplete; build using
 " ~/.vim/plugged/youcompleteme/install.py --tern-completer
@@ -119,26 +129,16 @@ Plug 'posva/vim-vue', { 'for': 'vue' }
 " HTML Plugins
 
 " Emmet for vim
-Plug 'mattn/emmet-vim', { 'for': [ 'html', 'htm', 'css', 'sass', 'scss' ] }
+"Plug 'mattn/emmet-vim', { 'for': [ 'html', 'htm', 'css', 'sass', 'scss' ] }
 
 " MatchTag - highlights matching HTML tag
-Plug 'gregsexton/MatchTag'
+"Plug 'gregsexton/MatchTag'
 
 " Pug syntax highlighting
 Plug 'digitaltoad/vim-pug', { 'for': [ 'pug', 'jade' ] }
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
-
-"These are from the Syntastic readme
-"set statusline+=%#warmingmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-"let g:syntastic_javascript_checkers = ['standard']
 
 set wildmenu " why is this not the default?!
 
