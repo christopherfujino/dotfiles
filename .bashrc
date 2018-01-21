@@ -21,6 +21,7 @@ alias emacs='emacs -nw' # default to console-based emacs
 alias ..='cd ..'
 alias g='git'
 alias gs='git status'
+alias gb='git branch'
 
 if [ -n $BASE16_SHELL ]; then # Base16 Shell
   BASE16_SHELL=$HOME/.config/base16-shell/
@@ -47,7 +48,7 @@ elif [ $OS = "Darwin" ]; then
   alias ls='ls -G' # color
 
   if type brew >/dev/null 2>&1; then
-    PATH="/usr/local/bin:$PATH" # homebrew
+    PATH="/usr/local/bin:/usr/local/sbin:$PATH" # homebrew
   fi
 fi
 
@@ -68,11 +69,18 @@ if type gem >/dev/null 2>&1; then
   # if `gem` is installed, add Gem dir to $PATH
   PATH="$HOME/.rbenv/bin:$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 
+  # rvm
+  [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
   # same for `rbenv`
   if type rbenv >/dev/null 2>&1; then
     # initialize rbenv
     eval "$(rbenv init -)"
   fi
+
+  alias rrg='rake routes | grep -i'
 fi
 
 PS1='\u@\h \W\$ '
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
