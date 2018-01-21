@@ -6,21 +6,30 @@
 [[ $- != *i* ]] && return
 
 OS=$(uname)
-#PATH=$PATH
 
-export VISUAL="nvim"
-export EDITOR="nvim"
+if type nvim >/dev/null 2>&1; then
+  export VISUAL="nvim"
+  export EDITOR="nvim"
+else
+  export VISUAL="vim"
+  export EDITOR="vim"
+fi
+
 export NOTES="~/notes"
 
-#alias ls='ls --color=auto' #this is os-dependent
 alias emacs='emacs -nw' # default to console-based emacs
 alias ..='cd ..'
 alias g='git'
 alias gs='git status'
 
+if [ -n $BASE16_SHELL ]; then # Base16 Shell
+  BASE16_SHELL=$HOME/.config/base16-shell/
+  [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+fi
+
 if [ $HOSTNAME = "ac" ]; then
   # This is specific for my chromebook
-  export PATH="${PATH}:$HOME/scripts:$HOME/.node_modules/bin:$HOME/.gem/ruby/2.3.0/bin"
+  export PATH="${PATH}:$HOME/.gem/ruby/2.3.0/bin"
   alias upd='timedatectl | grep Local; yaourt -Syua'
   alias yaourt-stats='yaourt --stats'
   export STEAM_RUNTIME=0 # for Steam
@@ -32,21 +41,18 @@ fi
 
 if [ $OS = "Linux" ]; then
   alias ls='ls --color=auto'
-  alias ll='ls -Alh --color=auto'
-  alias lsa='ls -A' # -A means ignore '.' & '..'
 
   export TERM="xterm-256color"
-  #Base16 Shell
-  BASE16_SHELL=$HOME/.config/base16-shell/
-  [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 elif [ $OS = "Darwin" ]; then
-  alias ls='ls -G'
-  alias ll='ls -AlhG'
-  alias lsa='ls -A' # -A means ignore '.' & '..'
-  alias dfh='df -h /dev/disk0s2'
-  BASE16_SHELL=$HOME/.config/base16-shell/
-  [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+  alias ls='ls -G' # color
+
+  if type brew >/dev/null 2>&1; then
+    PATH="/usr/local/bin:$PATH" # homebrew
+  fi
 fi
+
+alias ll='ls -Alh'
+alias lsa='ls -A' # -A means ignore '.' & '..'
 
 if [ -d "$HOME/scripts" ]; then
   # if `$HOME/scripts` exists, add it to path
@@ -58,12 +64,15 @@ if [ -d "$HOME/.node_modules/bin" ]; then
   PATH="$HOME/.node_modules/bin:$PATH"
 fi
 
-if type ruby 1>/dev/null; then
-  # if `ruby` is installed, add Gem dir to $PATH
+if type gem >/dev/null 2>&1; then
+  # if `gem` is installed, add Gem dir to $PATH
   PATH="$HOME/.rbenv/bin:$(ruby -e 'print Gem.user_dir')/bin:$PATH"
-fi
 
-# initialize rbenv
-eval "$(rbenv init -)"
+  # same for `rbenv`
+  if type rbenv >/dev/null 2>&1; then
+    # initialize rbenv
+    eval "$(rbenv init -)"
+  fi
+fi
 
 PS1='\u@\h \W\$ '
