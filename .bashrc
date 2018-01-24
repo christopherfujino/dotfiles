@@ -24,7 +24,7 @@ alias ..='cd ..'
 alias ll='ls -Alh'
 alias lsa='ls -A' # -A means ignore '.' & '..'
 
-alias g='git'
+alias g=git
 alias gs='git status'
 alias gb='git branch'
 
@@ -34,21 +34,19 @@ alias grepi='grep -i'
 alias emacs='emacs -nw' # default to console-based emacs
 
 if type nvim >/dev/null 2>&1; then
-  export VISUAL='nvim'
+  export VISUAL=nvim
 elif type vim >/dev/null 2>&1; then
-  export VISUAL='vim'
+  export VISUAL=vim
 else
-  export VISUAL='vi'
+  export VISUAL=vi
 fi
 
-export EDITOR="$VISUAL"
+export EDITOR=$VISUAL
 
 PS1='\u@\h \W\$ '
 
-if [ -d "$HOME/.config/base16-shell" ]; then # Base16 Shell
-  BASE16_SHELL=$HOME/.config/base16-shell/
-  [ -f $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-fi
+# initialize BASE16 w/output in subshell
+[ -f $HOME/.config/base16-shell/profile_helper.sh ] && eval "$($HOME/.config/base16-shell/profile_helper.sh)"
 
 [ -d "$HOME/notes" ] && export NOTES="$HOME/notes"
 
@@ -70,21 +68,18 @@ files=(
   /usr/local/etc/bash_completion
   "$HOME/.rvm/scripts/rvm"
 )
-
 for i in "${files[@]}"; do
   [ -f "$i" ] && source "$i"
 done
 
 # if ruby dev env set...
 if type gem >/dev/null 2>&1; then
-
   if type rbenv >/dev/null 2>&1; then
-    # initialize rbenv
     eval "$(rbenv init -)"
+    PATH="$HOME/.rbenv/bin:$PATH"
   fi
 
-  # if `gem` is installed, add Gem dir to $PATH
-  PATH="$HOME/.rbenv/bin:$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+  PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 
   alias rrg='rake routes | grep -i'
 fi
