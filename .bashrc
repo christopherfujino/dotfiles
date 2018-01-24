@@ -5,82 +5,91 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# OS dependent config
 OS=$(uname)
-
-if type nvim >/dev/null 2>&1; then
-  export VISUAL="nvim"
-  export EDITOR="nvim"
-else
-  export VISUAL="vim"
-  export EDITOR="vim"
-fi
-
-export NOTES="~/notes"
-
-alias emacs='emacs -nw' # default to console-based emacs
-alias ..='cd ..'
-alias g='git'
-alias gs='git status'
-alias gb='git branch'
-
-if [ -n $BASE16_SHELL ]; then # Base16 Shell
-  BASE16_SHELL=$HOME/.config/base16-shell/
-  [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-fi
-
-if [ $HOSTNAME = "ac" ]; then
-  # This is specific for my chromebook
-  export PATH="${PATH}:$HOME/.gem/ruby/2.3.0/bin"
-  alias upd='timedatectl | grep Local; yaourt -Syua'
-  alias yaourt-stats='yaourt --stats'
-  export STEAM_RUNTIME=0 # for Steam
-  export TERM="rxvt-unicode-256color"
-  export LIBVA_DRIVER_NAME="i965" # for arch hardware rendering
-  export TERMINAL="urxvt"
-  alias dfh='df -h /dev/sda1'
-fi
-
-if [ $OS = "Linux" ]; then
+if [ $OS = Linux ]; then
   alias ls='ls --color=auto'
 
   export TERM="xterm-256color"
-elif [ $OS = "Darwin" ]; then
+elif [ $OS = Darwin ]; then
   alias ls='ls -G' # color
 
-  if type brew >/dev/null 2>&1; then
-    PATH="/usr/local/bin:/usr/local/sbin:$PATH" # homebrew
+  if type brew >/dev/null 2>&1; then # homebrew
+    PATH="/usr/local/bin:/usr/local/sbin:$PATH"
   fi
 fi
+
+alias ..='cd ..'
 
 alias ll='ls -Alh'
 alias lsa='ls -A' # -A means ignore '.' & '..'
 
-if [ -d "$HOME/scripts" ]; then
-  # if `$HOME/scripts` exists, add it to path
-  PATH="$HOME/scripts:$PATH"
+alias g='git'
+alias gs='git status'
+alias gb='git branch'
+
+alias grepi='grep -i'
+
+# Text editors
+alias emacs='emacs -nw' # default to console-based emacs
+
+if type nvim >/dev/null 2>&1; then
+  export VISUAL='nvim'
+elif type vim >/dev/null 2>&1; then
+  export VISUAL='vim'
+else
+  export VISUAL='vi'
 fi
 
-if [ -d "$HOME/.node_modules/bin" ]; then
-  # if `.node_modules` exists, add it to path
-  PATH="$HOME/.node_modules/bin:$PATH"
+export EDITOR="$VISUAL"
+
+PS1='\u@\h \W\$ '
+
+if [ -d "$HOME/.config/base16-shell" ]; then # Base16 Shell
+  BASE16_SHELL=$HOME/.config/base16-shell/
+  [ -f $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 fi
 
+[ -d "$HOME/notes" ] && export NOTES="$HOME/notes"
+
+# add dirs to path, if they exist
+dirs=(
+  "$HOME/scripts"
+  "$HOME/.node_modules/bin"
+  "$HOME/.nvm"
+  "$HOME/.rvm/bin"
+)
+for i in "${dirs[@]}"; do
+  [ -d "$i" ] && PATH="$HOME/$i:$PATH"
+done
+
+# source config files, if they exist
+files=(
+  /usr/local/opt/nvm/nvm.sh
+  "$HOME/.fzf.bash"
+  /usr/local/etc/bash_completion
+  "$HOME/.rvm/scripts/rvm"
+)
+
+for i in "${files[@]}"; do
+  [ -f "$i" ] && source "$i"
+done
+
+# if ruby dev env set...
 if type gem >/dev/null 2>&1; then
-  # if `gem` is installed, add Gem dir to $PATH
-  PATH="$HOME/.rbenv/bin:$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 
-  # rvm
-  [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
-  # same for `rbenv`
   if type rbenv >/dev/null 2>&1; then
     # initialize rbenv
     eval "$(rbenv init -)"
   fi
 
+  # if `gem` is installed, add Gem dir to $PATH
+  PATH="$HOME/.rbenv/bin:$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+
   alias rrg='rake routes | grep -i'
 fi
 
-PS1='\u@\h \W\$ '
+# source local-machine specific config if it exists
+[ -f "$HOME/.bashrc.local" ] && source "$HOME/.bashrc.local"
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export PATH
