@@ -14,8 +14,7 @@ if [ $OS = Linux ]; then
 elif [ $OS = Darwin ]; then
   alias ls='ls -G' # color
 
-  # TODO: find a way to detect homebrew without checking `type`
-  PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+  [ -f /usr/local/bin/brew ] && PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 fi
 
 alias ..='cd ..'
