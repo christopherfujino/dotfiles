@@ -27,9 +27,7 @@ Plug 'tweekmonster/startuptime.vim', { 'on' : 'StartupTime' }
 
 "TPOPE!!!
 Plug 'tpope/vim-fugitive'
-
 Plug 'tpope/vim-rails'
-
 Plug 'tpope/vim-surround'
 
 Plug 'scrooloose/syntastic'
@@ -63,6 +61,8 @@ Plug 'mxw/vim-jsx'
 " Autocompletion - uses vim's built-in omnicomplete; build using
 " ~/.vim/plugged/youcompleteme/install.py --tern-completer
 Plug 'valloric/youcompleteme'
+let g:ycm_autoclose_preview_window_after_insertion=1
+
 " if !exists("g:ycm_semantic_triggers")
 "   let g:ycm_semantic_triggers = {}
 "   let g:ycm_semantic_triggers['typescript'] = ['.']
@@ -110,11 +110,6 @@ set wildignore+=*/node_modules/*,*/cache/*
 
 " Chris Kempson's Base16 colorschemes
 Plug 'chriskempson/base16-vim'
-
-" https://github.com/Shutnik/jshint2.vim
-" Plug 'Shutnik/jshint2.vim'
-" let jshint2_read = 1
-" let jshint2_save = 1
 
 " vim-autoread
 " - this periodically reads file from system to check for changes

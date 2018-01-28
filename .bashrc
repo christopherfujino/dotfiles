@@ -14,9 +14,8 @@ if [ $OS = Linux ]; then
 elif [ $OS = Darwin ]; then
   alias ls='ls -G' # color
 
-  if type brew >/dev/null 2>&1; then # homebrew
-    PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-  fi
+  # TODO: find a way to detect homebrew without checking `type`
+  PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 fi
 
 alias ..='cd ..'
@@ -60,7 +59,7 @@ dirs=(
   "$HOME/.rvm/bin"
 )
 for i in "${dirs[@]}"; do
-  [ -d "$i" ] && PATH="$HOME/$i:$PATH"
+  [ -d "$i" ] && PATH="$i:$PATH"
 done
 
 # source config files, if they exist
