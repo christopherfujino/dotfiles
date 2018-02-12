@@ -29,15 +29,17 @@ Plug 'tweekmonster/startuptime.vim', { 'on' : 'StartupTime' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-eunuch'
 
-Plug 'scrooloose/syntastic'
+Plug 'vim-syntastic/syntastic'
 "These are from the Syntastic readme
 set statusline+=%#warmingmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_ruby_checkers = ['rubocop']
@@ -109,7 +111,7 @@ Plug 'airblade/vim-gitgutter'
 
 " Control-P fuzzy finder
 Plug 'ctrlpvim/ctrlp.vim'
-set wildignore+=*/node_modules/*,*/cache/*
+set wildignore+=*/node_modules/*,*/cache/*,*/tmp/*
 
 " Chris Kempson's Base16 colorschemes
 Plug 'chriskempson/base16-vim'
