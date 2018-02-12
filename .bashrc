@@ -67,7 +67,7 @@ files=(
   "$HOME/.rvm/scripts/rvm"
 )
 for i in "${files[@]}"; do
-  [ -f "$i" ] && source "$i"
+  [ -f "$i" ] && . "$i"
 done
 
 # if ruby dev env set...
@@ -82,7 +82,12 @@ if type gem >/dev/null 2>&1; then
   alias rrg='rake routes | grep -i'
 fi
 
+if type lesspipe.sh >/dev/null 2>&1; then
+  export LESS=-r
+  export LESSOPEN="|lesspipe.sh %s"
+fi
+
 # source local-machine specific config if it exists
-[ -f "$HOME/.bashrc.local" ] && source "$HOME/.bashrc.local"
+[ -f "$HOME/.bashrc.local" ] && . "$HOME/.bashrc.local"
 
 export PATH
