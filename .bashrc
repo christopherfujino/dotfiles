@@ -51,6 +51,7 @@ PS1='\u@\h \W\$ '
 # add dirs to path, if they exist
 dirs=(
   "$HOME/scripts"
+  "$HOME/bin"
   "$HOME/.node_modules/bin"
   "$HOME/.nvm"
   "$HOME/.rvm/bin"
