@@ -1,10 +1,10 @@
 #!/bin/bash
 platform=$(uname)
 
-if [ "$platform" == "Darwin" ]; then
-  ip="ifconfig"
-elif [ "$platform" == "Linux" ]; then
-  ip="ip -4 addr"
+if [ "$platform" = Darwin ]; then
+  ip=ifconfig
+elif [ "$platform" = Linux ]; then
+  ip='ip -4 addr'
 else
   echo "Huh?! your platform is $platform. Not known."
   exit 1
