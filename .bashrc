@@ -7,11 +7,11 @@
 
 # OS dependent config
 OS=$(uname)
-if [ $OS = Linux ]; then
+if [ "$OS" = Linux ]; then
   alias ls='ls --color=auto'
 
   export TERM="xterm-256color"
-elif [ $OS = Darwin ]; then
+elif [ "$OS" = Darwin ]; then
   alias ls='ls -G' # color
 
   [ -f /usr/local/bin/brew ] && PATH="/usr/local/bin:/usr/local/sbin:$PATH"
@@ -44,7 +44,8 @@ export EDITOR=$VISUAL
 PS1='\u@\h \W\$ '
 
 # initialize BASE16 w/output in subshell
-[ -f $HOME/.config/base16-shell/profile_helper.sh ] && eval "$($HOME/.config/base16-shell/profile_helper.sh)"
+# shellcheck source=/dev/null
+[ -f "$HOME/.config/base16-shell/profile_helper.sh" ] && eval "$HOME/.config/base16-shell/profile_helper.sh"
 
 [ -d "$HOME/notes" ] && export NOTES="$HOME/notes"
 
@@ -52,6 +53,7 @@ PS1='\u@\h \W\$ '
 dirs=(
   "$HOME/scripts"
   "$HOME/bin"
+  "$HOME/go/bin"
   "$HOME/.node_modules/bin"
   "$HOME/.nvm"
   "$HOME/.rvm/bin"
@@ -68,6 +70,7 @@ files=(
   "$HOME/.rvm/scripts/rvm"
 )
 for i in "${files[@]}"; do
+  # shellcheck source=/dev/null
   [ -f "$i" ] && . "$i"
 done
 
@@ -89,6 +92,7 @@ if type lesspipe.sh >/dev/null 2>&1; then
 fi
 
 # source local-machine specific config if it exists
+# shellcheck source=/dev/null
 [ -f "$HOME/.bashrc.local" ] && . "$HOME/.bashrc.local"
 
 export PATH
