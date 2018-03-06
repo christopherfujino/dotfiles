@@ -1,8 +1,9 @@
 #!/bin/bash
 
-# add conditional if $NOTES is defined, make in that directory
+DIR="$HOME/notes"
 
-if [ -z "$NOTES" ]; then
-  NOTES="."
+if [ ! -d "$DIR" ]; then
+  mkdir "$DIR"
 fi
-$EDITOR "$NOTES/$(date +%F)-$1.md"
+
+$EDITOR "$DIR/$(date +%F)-$1.md"
