@@ -45,7 +45,7 @@ PS1='\u@\h \W\$ '
 
 # initialize BASE16 w/output in subshell
 # shellcheck source=/dev/null
-[ -f "$HOME/.config/base16-shell/profile_helper.sh" ] && eval "$HOME/.config/base16-shell/profile_helper.sh"
+[ -f "$HOME/.config/base16-shell/profile_helper.sh" ] && eval "$("$HOME/.config/base16-shell/profile_helper.sh")"
 
 [ -d "$HOME/notes" ] && export NOTES="$HOME/notes"
 
