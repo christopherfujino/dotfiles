@@ -14,7 +14,7 @@ if [ "$OS" = Linux ]; then
 elif [ "$OS" = Darwin ]; then
   alias ls='ls -G' # color
 
-  [ -f /usr/local/bin/brew ] && PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+  #[ -f /usr/local/bin/brew ] && PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 fi
 
 alias ..='cd ..'
@@ -56,8 +56,9 @@ dirs=(
   "$HOME/go/bin"
   "$HOME/.node_modules/bin"
   "$HOME/.nvm"
-  "$HOME/.rvm/bin"
+  #"$HOME/.rvm/bin"
 )
+
 for i in "${dirs[@]}"; do
   [ -d "$i" ] && PATH="$i:$PATH"
 done
@@ -95,4 +96,13 @@ fi
 # shellcheck source=/dev/null
 [ -f "$HOME/.bashrc.local" ] && . "$HOME/.bashrc.local"
 
+function summarize_path {
+  echo $PATH | tr : '\n'
+  echo $PATH | tr : '\n' | wc -l
+}
+
 export PATH
+
+if command -v detectduplicates.sh >/dev/null 2>&1; then
+  echo $PATH | tr : '\n' | detectduplicates.sh
+fi
