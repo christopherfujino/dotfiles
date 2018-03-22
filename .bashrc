@@ -96,13 +96,14 @@ fi
 # shellcheck source=/dev/null
 [ -f "$HOME/.bashrc.local" ] && . "$HOME/.bashrc.local"
 
-function summarize_path {
-  echo $PATH | tr : '\n'
-  echo $PATH | tr : '\n' | wc -l
+function count_duplicate_path_entries {
+  COUNT=$(echo "$PATH" | tr : '\n' | sort | uniq -d | wc -l)
+  if [ "$COUNT" -gt 0 ]; then
+    echo 'Warning! You have duplicate entries in your PATH:'
+    echo "$PATH" | tr : '\n' | sort | uniq -d
+  fi
 }
 
 export PATH
 
-if command -v detectduplicates.sh >/dev/null 2>&1; then
-  echo $PATH | tr : '\n' | detectduplicates.sh
-fi
+count_duplicate_path_entries
