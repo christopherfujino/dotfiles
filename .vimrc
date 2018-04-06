@@ -32,17 +32,22 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
 
-Plug 'vim-syntastic/syntastic'
-"These are from the Syntastic readme
-set statusline+=%#warmingmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_ruby_checkers = ['rubocop']
+Plug 'neomake/neomake'
+
+" Prefer local eslint over global
+"Plug 'benjie/local-npm-bin.vim'
+
+"Plug 'vim-syntastic/syntastic'
+""These are from the Syntastic readme
+"set statusline+=%#warmingmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 0
+"let g:syntastic_check_on_open = 0
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_javascript_checkers = ['eslint']
+"let g:syntastic_ruby_checkers = ['rubocop']
 
 " Intelligently deal with swap files
 Plug 'zirrostig/vim-smart-swap'
@@ -142,6 +147,11 @@ Plug 'digitaltoad/vim-pug', { 'for': [ 'pug', 'jade' ] }
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
+
+" Neomake config
+call neomake#configure#automake('w')
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_ruby_enabled_makers = ['rubocop']
 
 set wildmenu " why is this not the default?!
 
