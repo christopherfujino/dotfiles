@@ -44,6 +44,9 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_ruby_checkers = ['rubocop']
 
+" Intelligently deal with swap files
+Plug 'zirrostig/vim-smart-swap'
+
 " https://github.com/Shutnik/jshint2.vim
 " Plug 'Shutnik/jshint2.vim'
 " let jshint2_read = 1
