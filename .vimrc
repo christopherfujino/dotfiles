@@ -155,6 +155,9 @@ let g:neomake_ruby_enabled_makers = ['rubocop']
 
 set wildmenu " why is this not the default?!
 
+set splitbelow
+set splitright " better defaults for opening new splits!
+
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-monokai
 
