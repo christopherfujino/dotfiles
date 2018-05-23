@@ -56,6 +56,7 @@ dirs=(
   "$HOME/go/bin"
   "$HOME/.node_modules/bin"
   "$HOME/.nvm"
+  "$HOME/anaconda3/bin"
   #"$HOME/.rvm/bin"
 )
 
