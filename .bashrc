@@ -28,6 +28,8 @@ alias gb='git branch'
 
 alias grepi='grep -i'
 
+alias dudot='du -chd 1 .'
+
 # Text editors
 alias emacs='emacs -nw' # default to console-based emacs
 
