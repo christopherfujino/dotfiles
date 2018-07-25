@@ -28,6 +28,7 @@ Plug 'tweekmonster/startuptime.vim', { 'on' : 'StartupTime' }
 "TPOPE!!!
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
+Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
