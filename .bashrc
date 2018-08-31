@@ -58,7 +58,7 @@ dirs=(
   "$HOME/go/bin"
   "$HOME/.node_modules/bin"
   "$HOME/.nvm"
-  "$HOME/anaconda3/bin"
+  #"$HOME/anaconda3/bin"
   #"$HOME/.rvm/bin"
 )
 
@@ -110,3 +110,6 @@ function count_duplicate_path_entries {
 export PATH
 
 count_duplicate_path_entries
+# Anything after here was auto-generated
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

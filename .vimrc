@@ -35,28 +35,8 @@ Plug 'tpope/vim-eunuch'
 
 Plug 'neomake/neomake'
 
-" Prefer local eslint over global
-"Plug 'benjie/local-npm-bin.vim'
-
-"Plug 'vim-syntastic/syntastic'
-""These are from the Syntastic readme
-"set statusline+=%#warmingmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 0
-"let g:syntastic_check_on_open = 0
-"let g:syntastic_check_on_wq = 0
-"let g:syntastic_javascript_checkers = ['eslint']
-"let g:syntastic_ruby_checkers = ['rubocop']
-
 " Intelligently deal with swap files
 Plug 'zirrostig/vim-smart-swap'
-
-" https://github.com/Shutnik/jshint2.vim
-" Plug 'Shutnik/jshint2.vim'
-" let jshint2_read = 1
-" let jshint2_save = 1
 
 " better js syntax
 Plug 'pangloss/vim-javascript'
@@ -77,21 +57,15 @@ Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 Plug 'valloric/youcompleteme'
 let g:ycm_autoclose_preview_window_after_insertion=1
 
-" if !exists("g:ycm_semantic_triggers")
-"   let g:ycm_semantic_triggers = {}
-"   let g:ycm_semantic_triggers['typescript'] = ['.']
-" endif
-
 " Tern Plugin for Vim (`npm install` must be run inside tern_for_vim directory)
 " in Arch Linux, I had to additionally install `sudo pacman -S python2-neovim
 " python-neovim` found from github installation guide to neovim
 "Plug 'ternjs/tern_for_vim'
 
-" Plug 'bling/vim-airline' vim status-line
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 let g:airline_theme='base16_monokai'
-let g:airline_powerline_fonts=0
+let g:airline_powerline_fonts=1
 set laststatus=2
 
 " Plug 'jiangmiao/auto-pairs' auto bracket pairing plugin
@@ -144,7 +118,7 @@ Plug 'posva/vim-vue', { 'for': 'vue' }
 "Plug 'gregsexton/MatchTag'
 
 " Pug syntax highlighting
-Plug 'digitaltoad/vim-pug', { 'for': [ 'pug', 'jade' ] }
+" Plug 'digitaltoad/vim-pug', { 'for': [ 'pug', 'jade' ] }
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
@@ -169,14 +143,11 @@ colorscheme base16-monokai
 "set fileencodings=ucs-bom,utf-8,cp936,big5,euc-jp,euc-kr,gb18030,latin1
        
 set tabstop=2       " Number of spaces that a <Tab> in the file counts for.
- 
 set shiftwidth=2    " Number of spaces to use for each step of (auto)indent.
- 
 set expandtab       " Use the appropriate number of spaces to insert a <Tab>.
                     " Spaces are used in indents with the '>' and '<' commands
                     " and when 'autoindent' is on. To insert a real tab when
                     " 'expandtab' is on, use CTRL-V <Tab>.
- 
 set smarttab        " When on, a <Tab> in front of a line inserts blanks
                     " according to 'shiftwidth'. 'tabstop' is used in other
                     " places. A <BS> will delete a 'shiftwidth' worth of space
@@ -185,6 +156,7 @@ set smarttab        " When on, a <Tab> in front of a line inserts blanks
 set showcmd         " Show (partial) command in status line.
 
 set number          " Show line numbers.
+"set relativenumber  " change line numbers to relative
 
 set showmatch       " When a bracket is inserted, briefly jump to the matching
                     " one. The jump is only done if the match can be seen on the
@@ -193,12 +165,9 @@ set showmatch       " When a bracket is inserted, briefly jump to the matching
  
 set hlsearch        " When there is a previous search pattern, highlight all
                     " its matches.
- 
 set incsearch       " While typing a search command, show immediately where the
                     " so far typed pattern matches.
- 
 set ignorecase      " Ignore case in search patterns.
- 
 set smartcase       " Override the 'ignorecase' option if the search pattern
                     " contains upper case characters.
  
@@ -236,8 +205,6 @@ set background=dark " When set to "dark", Vim will try to use colors that look
                     " Any other value is illegal.
  
 set mouse=a         " Enable the use of the mouse.
-
-"set relativenumber  " change line numbers to relative
 
 set t_Co=256        " Enable 256 colors
 
