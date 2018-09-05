@@ -25,10 +25,11 @@ alias lsa='ls -A' # -A means ignore '.' & '..'
 alias g=git
 alias gs='git status'
 alias gb='git branch'
+alias gupdate='git add . && git commit --amend'
 
 alias grepi='grep -i'
 
-alias dudot='du -chd 1 .'
+alias dudot='du -hd 1'
 
 # Text editors
 alias emacs='emacs -nw' # default to console-based emacs
