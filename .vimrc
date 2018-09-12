@@ -15,7 +15,7 @@ call plug#begin()
 Plug 'tweekmonster/startuptime.vim', { 'on' : 'StartupTime' }
 
 " Plug 'edkolev/tmuxline.vim'  " only necessary temporarily for sourcing /etc/tmux.conf
-
+"
 " let g:tmuxline_preset = {
 "   \'a'    : "#(ip addr | grep inet | grep -v inet6 | grep -v 127.0.0.1 | awk '{print $2}' | cut -d '/' -f 1)",
 "   \'win'  : ['#I', '#W'],
@@ -23,7 +23,7 @@ Plug 'tweekmonster/startuptime.vim', { 'on' : 'StartupTime' }
 "   \'y'    : ['%a %b %d'],
 "   \'z'    : '%r',
 "   \'options': { 'status-justify': 'left'}}
-" let g:tmuxline_powerline_separators = 0
+" let g:tmuxline_powerline_separators = 1
 
 "TPOPE!!!
 Plug 'tpope/vim-fugitive'
