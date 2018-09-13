@@ -54,8 +54,17 @@ Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 
 " Autocompletion - uses vim's built-in omnicomplete; build using
 " ~/.vim/plugged/youcompleteme/install.py --tern-completer
-Plug 'valloric/youcompleteme'
-let g:ycm_autoclose_preview_window_after_insertion=1
+"Plug 'valloric/youcompleteme'
+"let g:ycm_autoclose_preview_window_after_insertion=1
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
 
 " Tern Plugin for Vim (`npm install` must be run inside tern_for_vim directory)
 " in Arch Linux, I had to additionally install `sudo pacman -S python2-neovim
