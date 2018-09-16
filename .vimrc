@@ -17,20 +17,21 @@ Plug 'tweekmonster/startuptime.vim', { 'on' : 'StartupTime' }
 " Plug 'edkolev/tmuxline.vim'  " only necessary temporarily for sourcing /etc/tmux.conf
 "
 " let g:tmuxline_preset = {
-"   \'a'    : "#(ip addr | grep inet | grep -v inet6 | grep -v 127.0.0.1 | awk '{print $2}' | cut -d '/' -f 1)",
+"   \'a'    : "#(get-ip)",
 "   \'win'  : ['#I', '#W'],
-"   \'cwin' : ['#I', '#F#W'],
+"   \'cwin' : ['#I', '#W'],
 "   \'y'    : ['%a %b %d'],
 "   \'z'    : '%r',
 "   \'options': { 'status-justify': 'left'}}
 " let g:tmuxline_powerline_separators = 1
 
 "TPOPE!!!
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-dispatch'
+" Adds :Rename, :Delete, :Move, et al
 Plug 'tpope/vim-eunuch'
 
 Plug 'neomake/neomake'
@@ -77,11 +78,12 @@ let g:airline_theme='base16_monokai'
 let g:airline_powerline_fonts=1
 set laststatus=2
 
-" Plug 'jiangmiao/auto-pairs' auto bracket pairing plugin
+" auto bracket pairing plugin
 Plug 'jiangmiao/auto-pairs'
 
 " The Nerd Tree: A tree explorer plugin for vim
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
+" Deprecating cos I got better with netrw (hit `i` to toggle modes)
+"Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
 
 " nerdtree-git-plugin
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTree' }
@@ -102,7 +104,7 @@ Plug 'yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
 
 " Control-P fuzzy finder
-Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
 set wildignore+=*/node_modules/*,*/cache/*,*/tmp/*,*/test/reports/*
 
 " Chris Kempson's Base16 colorschemes
@@ -136,6 +138,12 @@ call plug#end()            " required
 call neomake#configure#automake('w')
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_ruby_enabled_makers = ['rubocop']
+
+" custom keybindings
+
+nnoremap <c-p> :FZF<cr>
+
+" Vim settings
 
 set wildmenu " why is this not the default?!
 
