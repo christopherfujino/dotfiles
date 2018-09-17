@@ -6,8 +6,8 @@
 syntax on
 set number          " Show line numbers.
 set wildmenu        " why is this not the default?!
-set mouse=a         " enable mouse
 set laststatus=2    " statusline always on
+set mouse=a         " enable mouse
 
 " Indentation
 set tabstop=2       " Number of spaces that a <Tab> in the file counts for.
@@ -40,48 +40,51 @@ call plug#begin()
   " Syntax
   Plug 'tpope/vim-surround'
 
-  " vim-autoread: this periodically reads file from system to check for changes
-  Plug 'christopherfujino/vim-autoread'
-
-  Plug 'tpope/vim-rails'
-  Plug 'tpope/vim-bundler'
-  " Add :Rename, :Move, :Delete, et al
-  Plug 'tpope/vim-eunuch'
-  
-  " Chris Kempson's Base16 colorschemes
-  Plug 'chriskempson/base16-vim'
-
-  " Asynchronously run linters
-  Plug 'neomake/neomake'
-
-  " Intelligently deal with swap files
-  Plug 'zirrostig/vim-smart-swap'
-
-  "" better js syntax
-  Plug 'pangloss/vim-javascript'
-
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  let g:airline_theme='base16_monokai'
-  let g:airline_powerline_fonts=1
-
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
-  Plug 'junegunn/fzf.vim'
-
-  " Git
-  Plug 'tpope/vim-fugitive'
-  " show git diff in gutter before line number
-  Plug 'airblade/vim-gitgutter'
-
-  Plug 'valloric/youcompleteme'
-  let g:ycm_autoclose_preview_window_after_insertion=1
-
   " Slim template lang syntax highlighting
   Plug 'onemanstartup/vim-slim', { 'for': 'slim' }
 
   "" JSX syntax
   Plug 'mxw/vim-jsx'
   "let g:jsx_ext_required = 1
+
+  "" better js syntax
+  Plug 'pangloss/vim-javascript'
+
+  " Vim Maintenance
+  " vim-autoread: this periodically reads file from system to check for changes
+  Plug 'christopherfujino/vim-autoread'
+
+  " Intelligently deal with swap files
+  Plug 'zirrostig/vim-smart-swap'
+
+  Plug 'tpope/vim-rails'
+  Plug 'tpope/vim-bundler'
+  " Add :Rename, :Move, :Delete, et al
+  Plug 'tpope/vim-eunuch'
+  
+  " Tooling
+  Plug 'valloric/youcompleteme'
+  let g:ycm_autoclose_preview_window_after_insertion=1
+
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
+  Plug 'junegunn/fzf.vim'
+
+  " Asynchronously run linters
+  Plug 'neomake/neomake'
+
+  " Git
+  Plug 'tpope/vim-fugitive'
+  " show git diff in gutter before line number
+  Plug 'airblade/vim-gitgutter'
+
+  " UI
+  " Chris Kempson's Base16 colorschemes
+  Plug 'chriskempson/base16-vim'
+
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  let g:airline_theme='base16_monokai'
+  let g:airline_powerline_fonts=1
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
