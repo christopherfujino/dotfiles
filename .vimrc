@@ -66,10 +66,10 @@ call plug#begin()
   Plug 'valloric/youcompleteme'
   let g:ycm_autoclose_preview_window_after_insertion=1
 
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 
-  " Asynchronously run linters
+  " Asynchronously run linters, see `call neomake...`
   Plug 'neomake/neomake'
 
   " Git
@@ -78,7 +78,7 @@ call plug#begin()
   Plug 'airblade/vim-gitgutter'
 
   " UI
-  " Chris Kempson's Base16 colorschemes
+  " Chris Kempson's Base16 colorschemes, see `colorscheme...`
   Plug 'chriskempson/base16-vim'
 
   Plug 'vim-airline/vim-airline'
@@ -89,9 +89,12 @@ call plug#begin()
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
-" Plugin variables
+" PLUGIN VARIABLES
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-monokai
 
-" custom keybindings
+" auto-make on save
+call neomake#configure#automake('w')
+
+" KEY MAPPINGS
 nnoremap <c-p> :FZF<cr>
