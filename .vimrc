@@ -41,41 +41,45 @@ set hlsearch        " When there is a previous search pattern, highlight all
 set splitbelow
 set splitright      " better defaults for opening new splits!
 
- 
+" Plugins
 
+" https://github.com/junegunn/vim-plug must be installed to manage plugins
+call plug#begin()
 
+" Chris Kempson's Base16 colorschemes
+Plug 'chriskempson/base16-vim'
 
+" auto bracket pairing plugin
+Plug 'jiangmiao/auto-pairs'
 
+" show indentation markers
+Plug 'yggdroot/indentLine'
 
-
-
-
-
-"set nocompatible
-"filetype off
-"
-"filetype plugin indent on    " required
-"
-"" https://github.com/junegunn/vim-plug must be installed to manage plugins
-"call plug#begin()
-"
-"" for easy profiling vim startuptime
-"Plug 'tweekmonster/startuptime.vim', { 'on' : 'StartupTime' }
-"
 ""TPOPE!!!
-"Plug 'tpope/vim-surround'
-"Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
 "Plug 'tpope/vim-rails'
 "Plug 'tpope/vim-bundler'
 "Plug 'tpope/vim-dispatch'
 "Plug 'neomake/neomake'
-"
-"" Intelligently deal with swap files
-"Plug 'zirrostig/vim-smart-swap'
-"
+
+" Intelligently deal with swap files
+Plug 'zirrostig/vim-smart-swap'
+
 "" better js syntax
-"Plug 'pangloss/vim-javascript'
-"
+Plug 'pangloss/vim-javascript'
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+let g:airline_theme='base16_monokai'
+let g:airline_powerline_fonts=1
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
+Plug 'junegunn/fzf.vim'
+
+"" for easy profiling vim startuptime
+"Plug 'tweekmonster/startuptime.vim', { 'on' : 'StartupTime' }
+
 "" Slim template lang syntax highlighting
 "Plug 'onemanstartup/vim-slim', { 'for': 'slim' }
 "
@@ -95,46 +99,38 @@ set splitright      " better defaults for opening new splits!
 "endif
 "let g:deoplete#enable_at_startup = 1
 "
-"" Tern Plugin for Vim (`npm install` must be run inside tern_for_vim directory)
-"" in Arch Linux, I had to additionally install `sudo pacman -S python2-neovim
-"" python-neovim` found from github installation guide to neovim
-""Plug 'ternjs/tern_for_vim'
-"
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
-"let g:airline_theme='base16_monokai'
-"let g:airline_powerline_fonts=1
-"
-"" auto bracket pairing plugin
-"Plug 'jiangmiao/auto-pairs'
-"
 "" nerdtree-git-plugin
 "Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTree' }
-"
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
-"Plug 'junegunn/fzf.vim'
-"
-"" show indentation markers
-"Plug 'yggdroot/indentLine'
 "
 "" Vim-gitgutter: show git diff in gutter before line number
 "Plug 'airblade/vim-gitgutter'
 "
 "set wildignore+=*/node_modules/*,*/cache/*,*/tmp/*,*/test/reports/*
-"
-"" Chris Kempson's Base16 colorschemes
-"Plug 'chriskempson/base16-vim'
-"
+
 "" vim-autoread
 "" - this periodically reads file from system to check for changes
 "Plug 'christopherfujino/vim-autoread'
 "
-"" All of your Plugins must be added before the following line
-"call plug#end()            " required
+" All of your Plugins must be added before the following line
+call plug#end()            " required
+
+let base16colorspace=256  " Access colors present in 256 colorspace
+colorscheme base16-monokai
+
+
+
+
+
+
+
+
+
+"set nocompatible
+"filetype off
 "
-"let base16colorspace=256  " Access colors present in 256 colorspace
-"colorscheme base16-monokai
+"filetype plugin indent on    " required
 "
+
 "" Neomake config
 "call neomake#configure#automake('w')
 "let g:neomake_javascript_enabled_makers = ['eslint']
