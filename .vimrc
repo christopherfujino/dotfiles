@@ -3,8 +3,6 @@
 
 " VARIABLES
 
-"filetype off
-"filetype plugin indent on    " required
 syntax on
 set number          " Show line numbers.
 set wildmenu        " why is this not the default?!
@@ -47,6 +45,8 @@ call plug#begin()
 
   Plug 'tpope/vim-rails'
   Plug 'tpope/vim-bundler'
+  " Add :Rename, :Move, :Delete, et al
+  Plug 'tpope/vim-eunuch'
   
   " Chris Kempson's Base16 colorschemes
   Plug 'chriskempson/base16-vim'
@@ -70,20 +70,11 @@ call plug#begin()
 
   " Git
   Plug 'tpope/vim-fugitive'
-  " Vim-gitgutter: show git diff in gutter before line number
+  " show git diff in gutter before line number
   Plug 'airblade/vim-gitgutter'
 
-  " Autocomplete
-  if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-  endif
-  let g:deoplete#enable_at_startup = 1
-
-  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+  Plug 'valloric/youcompleteme'
+  let g:ycm_autoclose_preview_window_after_insertion=1
 
   " Slim template lang syntax highlighting
   Plug 'onemanstartup/vim-slim', { 'for': 'slim' }
