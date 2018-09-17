@@ -3,6 +3,8 @@
 
 " VARIABLES
 
+"filetype off
+"filetype plugin indent on    " required
 syntax on
 set number          " Show line numbers.
 set wildmenu        " why is this not the default?!
@@ -81,17 +83,14 @@ call plug#begin()
   endif
   let g:deoplete#enable_at_startup = 1
 
-  "" for easy profiling vim startuptime
-  "Plug 'tweekmonster/startuptime.vim', { 'on' : 'StartupTime' }
+  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 
-  "" Slim template lang syntax highlighting
-  "Plug 'onemanstartup/vim-slim', { 'for': 'slim' }
+  " Slim template lang syntax highlighting
+  Plug 'onemanstartup/vim-slim', { 'for': 'slim' }
 
   "" JSX syntax
-  "Plug 'mxw/vim-jsx'
-  ""let g:jsx_ext_required = 1
-
-  "set wildignore+=*/node_modules/*,*/cache/*,*/tmp/*,*/test/reports/*
+  Plug 'mxw/vim-jsx'
+  "let g:jsx_ext_required = 1
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
@@ -102,50 +101,3 @@ colorscheme base16-monokai
 
 " custom keybindings
 nnoremap <c-p> :FZF<cr>
-
-
-
-
-
-
-
-
-"set nocompatible
-"filetype off
-"
-"filetype plugin indent on    " required
-"
-
-"" Neomake config
-"call neomake#configure#automake('w')
-"let g:neomake_javascript_enabled_makers = ['eslint']
-"let g:neomake_ruby_enabled_makers = ['rubocop']
-"
-"" Vim settings
-"
-"" .vimrc
-"" See: http://vimdoc.sourceforge.net/htmldoc/options.html for details
-"
-"" For multi-byte character support (CJK support, for example):
-""set fileencodings=ucs-bom,utf-8,cp936,big5,euc-jp,euc-kr,gb18030,latin1
-
-""set relativenumber  " change line numbers to relative
-"
-"set showmatch       " When a bracket is inserted, briefly jump to the matching
-"                    " one. The jump is only done if the match can be seen on the
-"                    " screen. The time to show the match can be set with
-"                    " 'matchtime'.
-" 
-" 
-"set formatoptions=c,q,r,t " This is a sequence of letters which describes how
-"                    " automatic formatting is to be done.
-"                    "
-"                    " letter    meaning when present in 'formatoptions'
-"                    " ------    ---------------------------------------
-"                    " c         Auto-wrap comments using textwidth, inserting
-"                    "           the current comment leader automatically.
-"                    " q         Allow formatting of comments with "gq".
-"                    " r         Automatically insert the current comment leader
-"                    "           after hitting <Enter> in Insert mode. 
-"                    " t         Auto-wrap text using textwidth (does not apply
-"                    "           to comments)
