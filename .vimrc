@@ -47,6 +47,8 @@ call plug#begin()
   Plug 'mxw/vim-jsx'
   "let g:jsx_ext_required = 1
 
+  Plug 'mattn/emmet-vim', { 'for': 'html' }
+
   "" better js syntax
   Plug 'pangloss/vim-javascript'
 
@@ -65,6 +67,7 @@ call plug#begin()
   " Tooling
   Plug 'valloric/youcompleteme'
   let g:ycm_autoclose_preview_window_after_insertion=1
+  let g:ycm_filepath_blacklist={}
 
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
