@@ -8,6 +8,7 @@
   default = simple
 [alias]
   a = add
+  aa = !git add -A && git commit --amend
   b = branch
   c = commit -m
   cm = !git add -A && git commit -m
