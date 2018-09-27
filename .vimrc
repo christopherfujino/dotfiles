@@ -68,6 +68,7 @@ call plug#begin()
   Plug 'valloric/youcompleteme'
   let g:ycm_autoclose_preview_window_after_insertion=1
   let g:ycm_filepath_blacklist={}
+  let g:ycm_collect_identifiers_from_tags_files=1
 
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
