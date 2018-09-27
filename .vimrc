@@ -34,33 +34,25 @@ call plug#begin()
   " auto bracket pairing plugin
   Plug 'jiangmiao/auto-pairs'
 
-  " show indentation markers
-  Plug 'yggdroot/indentLine'
-
   " Syntax
   Plug 'tpope/vim-surround'
+
+  " Ruby/Rails
+  Plug 'tpope/vim-rails'
+  Plug 'tpope/vim-bundler'
 
   " Slim template lang syntax highlighting
   Plug 'onemanstartup/vim-slim', { 'for': 'slim' }
 
-  "" JSX syntax
+  " JSX syntax
   Plug 'mxw/vim-jsx'
   "let g:jsx_ext_required = 1
 
   Plug 'mattn/emmet-vim', { 'for': 'html' }
 
-  "" better js syntax
+  " better js syntax
   Plug 'pangloss/vim-javascript'
 
-  " Vim Maintenance
-  " vim-autoread: this periodically reads file from system to check for changes
-  Plug 'christopherfujino/vim-autoread'
-
-  " Intelligently deal with swap files
-  Plug 'zirrostig/vim-smart-swap'
-
-  Plug 'tpope/vim-rails'
-  Plug 'tpope/vim-bundler'
   " Add :Rename, :Move, :Delete, et al
   Plug 'tpope/vim-eunuch'
   
@@ -76,12 +68,22 @@ call plug#begin()
   " Asynchronously run linters, see `call neomake...`
   Plug 'neomake/neomake'
 
+  " Vim Maintenance
+  " vim-autoread: this periodically reads file from system to check for changes
+  Plug 'christopherfujino/vim-autoread'
+
+  " Intelligently deal with swap files
+  Plug 'zirrostig/vim-smart-swap'
+
+  " UI
+  " show indentation markers
+  Plug 'yggdroot/indentLine'
+
   " Git
   Plug 'tpope/vim-fugitive'
   " show git diff in gutter before line number
   Plug 'airblade/vim-gitgutter'
 
-  " UI
   " Chris Kempson's Base16 colorschemes, see `colorscheme...`
   Plug 'chriskempson/base16-vim'
 
