@@ -24,4 +24,4 @@
 [core]
 	pager = diff-so-fancy | less --tabs=4 -RFX
 [diff]
-	algorithm = patience
+  algorithm = patience
