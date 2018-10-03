@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -e
+
+if [ -z "$1" ]; then
+  echo 'Usage: git-diff-commit <starting-commit-index> [<ending-commit-index>]'
+  echo '  e.g. $ git-diff-commit 0'
+  echo '            # show what was changed on the last commit'
+  echo '  e.g. $ git-diff-commit 1 3'
+  echo '            # show what was changed between the 3rd to last commit and the last'
+  exit 1
+fi
+
+if [ -n "$2" ]; then
+  START_INDEX="$1"
+  END_INDEX="$2"
+else
+  START_INDEX=0
+  END_INDEX="$1"
+fi
+
+git diff "HEAD~$END_INDEX" "HEAD~$START_INDEX"
