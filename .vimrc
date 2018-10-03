@@ -27,6 +27,9 @@ set incsearch       " Highlight search matches while typing
 set splitbelow
 set splitright      " better defaults for opening new splits!
 
+" Never show netrw banner
+let g:netrw_banner = 0
+
 " PLUGINS
 
 " https://github.com/junegunn/vim-plug must be installed to manage plugins
