@@ -1,0 +1,7 @@
+#!/bin/bash
+
+TAIL_COMMAND='tail'
+if [ -n "$1" ]; then
+  TAIL_COMMAND+=" -n $1"
+fi
+du -hd 1 | sort -h | $TAIL_COMMAND
