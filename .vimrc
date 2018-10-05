@@ -106,4 +106,4 @@ colorscheme base16-monokai
 call neomake#configure#automake('w')
 
 " KEY MAPPINGS
-nnoremap <c-p> :FZF<cr>
+noremap <c-p> <esc>:FZF<cr>
