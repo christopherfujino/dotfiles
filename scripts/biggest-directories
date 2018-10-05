@@ -4,4 +4,5 @@ TAIL_COMMAND='tail'
 if [ -n "$1" ]; then
   TAIL_COMMAND+=" -n $1"
 fi
-du -hd 1 | sort -h | $TAIL_COMMAND
+# mute error    human-readable, depth 1     sort human-readable   tail only the last $1 lines
+2>/dev/null du -hd 1 | sort -h | $TAIL_COMMAND
