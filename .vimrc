@@ -65,8 +65,14 @@ call plug#begin()
   let g:ycm_filepath_blacklist={}
   let g:ycm_collect_identifiers_from_tags_files=1
 
+  " Search
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
+
+  let $FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+  command! -bang -nargs=? -complete=dir Files
+        \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+  noremap <c-p> <esc>:Files<cr>
 
   " Asynchronously run linters, see `call neomake...`
   Plug 'neomake/neomake'
@@ -103,7 +109,5 @@ let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-monokai
 
 " auto-make on save
-call neomake#configure#automake('w')
-
-" KEY MAPPINGS
-noremap <c-p> <esc>:FZF<cr>
+let g:neomake_javascript_jsx_enabled_makers = ['eslint']
+call neomake#configure#automake('nw')
