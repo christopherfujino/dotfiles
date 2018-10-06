@@ -4,10 +4,10 @@
 " VARIABLES
 
 syntax on
-set number          " Show line numbers.
 set wildmenu        " why is this not the default?!
-set laststatus=2    " statusline always on
+set number          " Show line numbers.
 set mouse=a         " enable mouse
+set laststatus=2    " statusline always on
 
 " Indentation
 set tabstop=2       " Number of spaces that a <Tab> in the file counts for.
@@ -40,25 +40,51 @@ call plug#begin()
   " Syntax
   Plug 'tpope/vim-surround'
 
+  " Add :Rename, :Move, :Delete, et al
+  Plug 'tpope/vim-eunuch'
+  
+  " vim-autoread: this periodically reads file from system to check for changes
+  Plug 'christopherfujino/vim-autoread'
+
+  " Intelligently deal with swap files
+  Plug 'zirrostig/vim-smart-swap'
+
+  " show indentation markers
+  Plug 'yggdroot/indentLine'
+
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-rhubarb'
+  " show git diff in gutter before line number
+  Plug 'airblade/vim-gitgutter'
+
+  " Asynchronously run linters, see `call neomake...`
+  Plug 'neomake/neomake'
+
+  " JS
+  " better js syntax
+  Plug 'pangloss/vim-javascript'
+
+  " Add JSX Syntax
+  Plug 'mxw/vim-jsx'
+
   " Ruby/Rails
   Plug 'tpope/vim-rails'
   Plug 'tpope/vim-bundler'
+  Plug 'tpope/vim-endwise'
 
   " Slim template lang syntax highlighting
   Plug 'onemanstartup/vim-slim', { 'for': 'slim' }
 
-  " JSX syntax
-  Plug 'mxw/vim-jsx'
-  "let g:jsx_ext_required = 1
-
   Plug 'mattn/emmet-vim', { 'for': 'html' }
 
-  " better js syntax
-  Plug 'pangloss/vim-javascript'
+  " Chris Kempson's Base16 colorschemes, see `colorscheme...`
+  Plug 'chriskempson/base16-vim'
 
-  " Add :Rename, :Move, :Delete, et al
-  Plug 'tpope/vim-eunuch'
-  
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  let g:airline_theme='base16_monokai'
+  let g:airline_powerline_fonts=1
+
   " Tooling
   Plug 'valloric/youcompleteme'
   let g:ycm_autoclose_preview_window_after_insertion=1
@@ -74,33 +100,6 @@ call plug#begin()
         \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
   noremap <c-p> <esc>:Files<cr>
 
-  " Asynchronously run linters, see `call neomake...`
-  Plug 'neomake/neomake'
-
-  " Vim Maintenance
-  " vim-autoread: this periodically reads file from system to check for changes
-  Plug 'christopherfujino/vim-autoread'
-
-  " Intelligently deal with swap files
-  Plug 'zirrostig/vim-smart-swap'
-
-  " UI
-  " show indentation markers
-  Plug 'yggdroot/indentLine'
-
-  " Git
-  Plug 'tpope/vim-fugitive'
-  " show git diff in gutter before line number
-  Plug 'airblade/vim-gitgutter'
-
-  " Chris Kempson's Base16 colorschemes, see `colorscheme...`
-  Plug 'chriskempson/base16-vim'
-
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  let g:airline_theme='base16_monokai'
-  let g:airline_powerline_fonts=1
-
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
@@ -108,6 +107,6 @@ call plug#end()            " required
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-monokai
 
-" auto-make on save
 let g:neomake_javascript_jsx_enabled_makers = ['eslint']
-call neomake#configure#automake('nw')
+" auto-make on file read, switch to normal mode, and save
+call neomake#configure#automake('rnw', 375)
