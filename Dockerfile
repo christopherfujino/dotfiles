@@ -23,14 +23,12 @@ RUN apt-get update \
 
 RUN useradd -ms /bin/bash chris
 
-USER chris
 WORKDIR /home/chris
 
 RUN mkdir dotfiles
 
 COPY . /home/chris/dotfiles
 
-USER root
 RUN chown -R chris:chris /home/chris/dotfiles
 
 USER chris
