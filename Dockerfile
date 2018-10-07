@@ -30,12 +30,22 @@ RUN mkdir dotfiles
 
 COPY . /home/chris/dotfiles
 
+USER root
+RUN chown -R chris:chris /home/chris/dotfiles
+
+USER chris
 RUN curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+RUN ln -sf /home/chris/dotfiles/.vimrc /home/chris/.vimrc
+
 RUN mkdir -p /home/chris/.config/nvim
 
-RUN ln -sf /home/chris/dotfiles/.vimrc /home/chris/.vimrc
+RUN ln -sf /home/chris/dotfiles/nvim.init.vim /home/chris/.config/nvim/init.vim
+
+RUN mkdir -p /home/chris/.local/share/nvim/site/autoload
+
+RUN ln -sf /home/chris/.vim/autoload/plug.vim /home/chris/.local/share/nvim/site/autoload/plug.vim
 
 USER root
 
