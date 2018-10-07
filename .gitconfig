@@ -7,19 +7,21 @@
 [push]
   default = simple
 [alias]
-  h = !git log --graph --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
-  s = status
-  c = commit -m
-  co = checkout
-  b = branch
-  cm = !git add -A && git commit -m
-  d = diff
   a = add
+  aa = !git add -A && git commit --amend
+  b = branch
+  c = commit -m
+  cm = !git add -A && git commit -m
+  co = checkout
+  d = diff
+  h = !git log --graph --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
   rv = remote -v
+  s = status
+  t = tag
   assume = update-index --assume-unchanged
   unassume = update-index --no-assume-unchanged
   assumed = "!git ls-files -v | grep ^h | cut -c 3-"
 [core]
 	pager = diff-so-fancy | less --tabs=4 -RFX
 [diff]
-	algorithm = patience
+  algorithm = patience
