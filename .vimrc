@@ -4,6 +4,8 @@
 " VARIABLES
 
 syntax on
+filetype plugin indent on
+
 set wildmenu        " why is this not the default?!
 set number          " Show line numbers.
 set mouse=a         " enable mouse
@@ -110,3 +112,5 @@ colorscheme base16-monokai
 let g:neomake_javascript_jsx_enabled_makers = ['eslint']
 " auto-make on file read, switch to normal mode, and save
 call neomake#configure#automake('rnw', 375)
+
+command! Ctags !ctags -R .
