@@ -2,6 +2,7 @@
 # ~/.bash_profile
 #
 
+# Note: on MacOS, Homebrew path should be set first in /etc/paths
 if [ -n "$TMUX" ] && [ -f /etc/profile ]; then
   export PATH=''
   . /etc/profile
