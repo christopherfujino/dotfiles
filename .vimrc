@@ -5,6 +5,7 @@
 
 syntax on
 filetype plugin indent on
+set encoding=utf-8
 
 set wildmenu        " why is this not the default?!
 set number          " Show line numbers.
