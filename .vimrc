@@ -114,4 +114,4 @@ let g:neomake_javascript_jsx_enabled_makers = ['eslint']
 " auto-make on file read, switch to normal mode, and save
 call neomake#configure#automake('rnw', 375)
 
-command! Ctags !ctags -R .
+command! Ctags !ctags -R --fields=+l .
