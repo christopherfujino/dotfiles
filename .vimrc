@@ -104,7 +104,7 @@ call plug#begin()
   noremap <c-p> <esc>:Files<cr>
 
 " All of your Plugins must be added before the following line
-call plug#end()            " required
+call plug#end()
 
 " PLUGIN VARIABLES
 let base16colorspace=256  " Access colors present in 256 colorspace
