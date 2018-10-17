@@ -112,6 +112,10 @@ colorscheme base16-monokai
 
 let g:neomake_javascript_jsx_enabled_makers = ['eslint']
 " auto-make on file read, switch to normal mode, and save
-call neomake#configure#automake('rnw', 375)
+call neomake#configure#automake('nw', 375)
 
 command! Ctags !ctags -R --fields=+l .
+
+" overrides indent 1 to right in insert, jump to [count] older entry in tag
+" stack in normal mode
+noremap <c-t> <esc>:tabe<cr>
