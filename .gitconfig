@@ -4,8 +4,6 @@
 	email = christopherfujino@gmail.com
 [push]
 	default = simple
-[push]
-  default = simple
 [alias]
   a = add
   aa = !git add -A && git commit --amend
