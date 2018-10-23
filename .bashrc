@@ -19,6 +19,10 @@ fi
 
 alias ..='cd ..'
 
+alias dotfiles='cd $DOTFILES'
+
+alias dudot='du -hd 1'
+
 alias ll='ls -Alh'
 alias lsa='ls -A' # -A means ignore '.' & '..'
 
@@ -29,8 +33,6 @@ alias gb='git branch'
 alias gupdate='git add . && git commit --amend'
 
 alias grepi='grep -i'
-
-alias dudot='du -hd 1'
 
 # Aliases to clean up docker containers/images
 # You can also do: `docker image prune`
