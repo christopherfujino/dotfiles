@@ -60,8 +60,15 @@ call plug#begin()
   " show git diff in gutter before line number
   Plug 'airblade/vim-gitgutter'
 
-  " Asynchronously run linters, see `call neomake...`
-  Plug 'neomake/neomake'
+  " Asynchronously run linters
+  Plug 'w0rp/ale'
+  let g:ale_linters = {
+        \'javascript': ['eslint'],
+        \'ruby': ['rubocop'],
+        \'sh': ['shellcheck']
+        \}
+  " Wait a second before linting
+  let g:ale_lint_delay = 1000
 
   " JS
   " better js syntax
@@ -110,12 +117,7 @@ call plug#end()
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-monokai
 
-let g:neomake_javascript_jsx_enabled_makers = ['eslint']
-" auto-make on file read, switch to normal mode, and save
-call neomake#configure#automake('nw', 375)
-
 command! Ctags !ctags -R --fields=+l .
 
-" overrides indent 1 to right in insert, jump to [count] older entry in tag
-" stack in normal mode
 noremap <c-t> <esc>:tabe<cr>
+noremap <c-l> <esc>:ALELint<cr>
