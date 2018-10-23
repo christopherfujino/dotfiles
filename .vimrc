@@ -110,6 +110,16 @@ call plug#begin()
         \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
   noremap <c-p> <esc>:Files<cr>
 
+  function! s:checkout_clean(branch)
+    execute '!git checkout ' . substitute(a:branch, ' ', '', 'g')
+  endfunction
+
+  command! -bang -nargs=* Checkout
+        \ call fzf#run({
+        \   'source': 'git branch',
+        \   'sink': function('s:checkout_clean')
+        \ })
+
 " All of your Plugins must be added before the following line
 call plug#end()
 

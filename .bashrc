@@ -23,7 +23,7 @@ alias ll='ls -Alh'
 alias lsa='ls -A' # -A means ignore '.' & '..'
 
 alias g=git
-alias go='git checkout'
+alias checkout='git checkout $(git branch | fzf)'
 alias gs='git status'
 alias gb='git branch'
 alias gupdate='git add . && git commit --amend'
