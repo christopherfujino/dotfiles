@@ -69,6 +69,7 @@ call plug#begin()
         \}
   " Wait a second before linting
   let g:ale_lint_delay = 1000
+  let g:ale_set_highlights = 0
 
   " JS
   " better js syntax
@@ -114,11 +115,17 @@ call plug#begin()
     execute '!git checkout ' . substitute(a:branch, ' ', '', 'g')
   endfunction
 
-  command! -bang -nargs=* Checkout
+  command! Checkout
         \ call fzf#run({
         \   'source': 'git branch',
         \   'sink': function('s:checkout_clean')
         \ })
+
+  command! Diffs
+        \ call fzf#run({
+        \   'source': "git diff --stat | awk '{print $1}' | sed '$ d'",
+        \   'sink': 'edit'
+        \})
 
 " All of your Plugins must be added before the following line
 call plug#end()
