@@ -70,6 +70,9 @@ call plug#begin()
   " Wait a second before linting
   let g:ale_lint_delay = 1000
   let g:ale_set_highlights = 0
+  let g:ale_echo_msg_format = '[%linter%] %s'
+  let g:ale_sign_error = '✗'
+  let g:ale_sign_warning = '?'
 
   " JS
   " better js syntax
@@ -93,6 +96,9 @@ call plug#begin()
 
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
+  let g:airline#extensions#ale#error_symbol = '✗'
+  let g:airline#extensions#ale#warning_symbol = '?'
+  let g:airline#extensions#ale#enabled=1
   let g:airline_theme='base16_monokai'
   let g:airline_powerline_fonts=1
 
@@ -102,11 +108,13 @@ call plug#begin()
   let g:ycm_filepath_blacklist={}
   let g:ycm_collect_identifiers_from_tags_files=1
 
+  Plug 'majutsushi/tagbar'
+
   " Search
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 
-  let $FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+  let $FZF_DEFAULT_COMMAND='rg --hidden --files'
   command! -bang -nargs=? -complete=dir Files
         \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
   noremap <c-p> <esc>:Files<cr>
@@ -134,7 +142,7 @@ call plug#end()
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-monokai
 
-command! Ctags !ctags -R --fields=+l .
+command! Vtags !ctags -R --fields=+l .
 
 noremap <c-t> <esc>:tabe<cr>
 noremap <c-l> <esc>:ALELint<cr>
