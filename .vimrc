@@ -67,12 +67,16 @@ call plug#begin()
         \'ruby': ['rubocop'],
         \'sh': ['shellcheck']
         \}
-  " Wait a second before linting
-  let g:ale_lint_delay = 1000
-  let g:ale_set_highlights = 0
-  let g:ale_echo_msg_format = '[%linter%] %s'
-  let g:ale_sign_error = '✗'
-  let g:ale_sign_warning = '?'
+  let g:ale_lint_delay=750
+  let g:ale_echo_delay=125
+  let g:ale_set_highlights=0
+  let g:ale_echo_msg_format='[%linter%] %severity%: %s'
+  let g:ale_sign_error = '✘'
+  let g:ale_sign_warning = '⚠'
+  let g:ale_history_enabled=0
+  let g:ale_lint_on_text_changed='normal'
+  let g:ale_lint_on_insert_leave=1
+  let g:ale_maximum_file_size=250000
 
   " JS
   " better js syntax
@@ -96,9 +100,6 @@ call plug#begin()
 
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-  let g:airline#extensions#ale#error_symbol = '✗'
-  let g:airline#extensions#ale#warning_symbol = '?'
-  let g:airline#extensions#ale#enabled=1
   let g:airline_theme='base16_monokai'
   let g:airline_powerline_fonts=1
 
@@ -141,6 +142,8 @@ call plug#end()
 " PLUGIN VARIABLES
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-monokai
+
+highlight ALEErrorSign ctermfg=1 ctermbg=18
 
 command! Vtags !ctags -R --fields=+l .
 

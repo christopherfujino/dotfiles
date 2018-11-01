@@ -16,4 +16,4 @@ var x = yolo(3);
 
 var y = new Yolo;
 
-y.get
+y.get()
