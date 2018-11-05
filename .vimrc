@@ -62,6 +62,7 @@ call plug#begin()
 
   " Asynchronously run linters
   Plug 'w0rp/ale'
+  noremap <c-l> <esc>:ALELint<cr>
   let g:ale_linters = {
         \'javascript': ['eslint'],
         \'ruby': ['rubocop'],
@@ -115,6 +116,7 @@ call plug#begin()
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 
+  let g:fzf_commits_log_options = '--graph --color=always --all --format="%C(auto)%h %C(black)%C(bold)%cr%C(auto)%d %C(reset)%s"'
   let $FZF_DEFAULT_COMMAND='rg --hidden --files'
   command! -bang -nargs=? -complete=dir Files
         \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
@@ -148,4 +150,3 @@ highlight ALEErrorSign ctermfg=1 ctermbg=18
 command! Vtags !ctags -R --fields=+l .
 
 noremap <c-t> <esc>:tabe<cr>
-noremap <c-l> <esc>:ALELint<cr>
