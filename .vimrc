@@ -128,7 +128,7 @@ call plug#begin()
 
   command! Checkout
         \ call fzf#run({
-        \   'source': 'git branch',
+        \   'source': "git branch | sed 's/*/ /'",
         \   'sink': function('s:checkout_clean')
         \ })
 
