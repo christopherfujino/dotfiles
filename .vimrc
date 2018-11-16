@@ -1,7 +1,7 @@
 " Christopher Fujino's .vimrc
 "   For use in Vim (v >= 8.1) & NeoVim
 
-" VARIABLES
+" System Setup
 syntax on
 filetype plugin indent on
 set encoding=utf-8
@@ -62,22 +62,6 @@ call plug#begin()
 
   " Asynchronously run linters
   Plug 'w0rp/ale'
-  noremap <c-l> <esc>:ALELint<cr>
-  let g:ale_linters = {
-        \'javascript': ['eslint'],
-        \'ruby': ['rubocop'],
-        \'sh': ['shellcheck']
-        \}
-  let g:ale_lint_delay=750
-  let g:ale_echo_delay=125
-  let g:ale_set_highlights=0
-  let g:ale_echo_msg_format='[%linter%: %code%] %s (%severity%)'
-  let g:ale_sign_error = '✘'
-  let g:ale_sign_warning = '⚠'
-  let g:ale_history_enabled=0
-  let g:ale_lint_on_text_changed='normal'
-  let g:ale_lint_on_insert_leave=1
-  let g:ale_maximum_file_size=250000
 
   " JS
   " better js syntax
@@ -101,42 +85,15 @@ call plug#begin()
 
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-  let g:airline_theme='base16_monokai'
-  let g:airline_powerline_fonts=1
 
   " Tooling
   Plug 'valloric/youcompleteme'
-  let g:ycm_autoclose_preview_window_after_insertion=1
-  let g:ycm_filepath_blacklist={}
-  let g:ycm_collect_identifiers_from_tags_files=1
 
   Plug 'majutsushi/tagbar'
 
   " Search
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
-
-  let g:fzf_commits_log_options = '--graph --color=always --all --format="%C(auto)%h %C(black)%C(bold)%cr%C(auto)%d %C(reset)%s"'
-  let $FZF_DEFAULT_COMMAND='rg --hidden --files'
-  command! -bang -nargs=? -complete=dir Files
-        \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-  noremap <c-p> <esc>:Files<cr>
-
-  function! s:checkout_clean(branch)
-    execute '!git checkout ' . substitute(a:branch, ' ', '', 'g')
-  endfunction
-
-  command! Checkout
-        \ call fzf#run({
-        \   'source': "git branch | sed 's/*/ /'",
-        \   'sink': function('s:checkout_clean')
-        \ })
-
-  command! Diffs
-        \ call fzf#run({
-        \   'source': "git diff --stat | awk '{print $1}' | sed '$ d'",
-        \   'sink': 'edit'
-        \})
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -145,8 +102,58 @@ call plug#end()
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-monokai
 
+" ALE
+noremap <c-l> <esc>:ALELint<cr>
+let g:ale_linters = {
+      \'javascript': ['eslint'],
+      \'ruby': ['rubocop'],
+      \'sh': ['shellcheck']
+      \}
+let g:ale_lint_delay=750
+let g:ale_echo_delay=125
+let g:ale_set_highlights=0
+let g:ale_echo_msg_format='[%linter%: %code%] %s (%severity%)'
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
+let g:ale_history_enabled=0
+let g:ale_lint_on_text_changed='normal'
+let g:ale_lint_on_insert_leave=1
+let g:ale_maximum_file_size=250000
 highlight ALEErrorSign ctermfg=1 ctermbg=18
 
+" Generate Vimtags
 command! Vtags !ctags -R --fields=+l .
+
+" YouCompleteMe
+let g:ycm_autoclose_preview_window_after_insertion=1
+let g:ycm_filepath_blacklist={}
+let g:ycm_collect_identifiers_from_tags_files=1
+
+" FZF Magic
+let g:fzf_commits_log_options = '--graph --color=always --all --format="%C(auto)%h %C(black)%C(bold)%cr%C(auto)%d %C(reset)%s"'
+let $FZF_DEFAULT_COMMAND='rg --hidden --files'
+command! -bang -nargs=? -complete=dir Files
+      \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+noremap <c-p> <esc>:Files<cr>
+
+function! s:checkout_clean(branch)
+  execute '!git checkout ' . substitute(a:branch, ' ', '', 'g')
+endfunction
+
+command! Checkout
+      \ call fzf#run({
+      \   'source': "git branch | sed 's/*/ /'",
+      \   'sink': function('s:checkout_clean')
+      \ })
+
+command! Diffs
+      \ call fzf#run({
+      \   'source': "git diff --stat | awk '{print $1}' | sed '$ d'",
+      \   'sink': 'edit'
+      \})
+
+" Vim-Airline Theming
+let g:airline_theme='base16_monokai'
+let g:airline_powerline_fonts=1
 
 noremap <c-t> <esc>:tabe<cr>
