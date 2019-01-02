@@ -3,7 +3,7 @@
 
 " System Setup
 syntax on
-filetype plugin indent on
+filetype plugin indent off
 set encoding=utf-8
 scriptencoding utf-8
 
@@ -98,6 +98,7 @@ call plug#begin()
 " All of your Plugins must be added before the following line
 call plug#end()
 
+filetype plugin indent on
 " PLUGIN VARIABLES
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-monokai
@@ -156,4 +157,5 @@ command! Diffs
 let g:airline_theme='base16_monokai'
 let g:airline_powerline_fonts=1
 
-noremap <c-t> <esc>:tabe<cr>
+nnoremap <c-t> :tabe<cr>
+nnoremap <c-n> :tabn<cr>
