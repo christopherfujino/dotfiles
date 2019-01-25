@@ -52,6 +52,9 @@ call plug#begin()
   " Intelligently deal with swap files
   Plug 'zirrostig/vim-smart-swap'
 
+  " Asynchronously invoke external tools in new Tmux pane
+  Plug 'tpope/vim-dispatch'
+
   " show indentation markers
   Plug 'yggdroot/indentLine'
 
@@ -123,7 +126,7 @@ let g:ale_maximum_file_size=250000
 highlight ALEErrorSign ctermfg=1 ctermbg=18
 
 " Generate Vimtags
-command! Vtags !ctags -R --fields=+l .
+command! Vtags Dispatch ctags -R --fields=+l --exclude=.git --exclude=node_modules .
 
 " YouCompleteMe
 let g:ycm_autoclose_preview_window_after_insertion=1
