@@ -11,6 +11,7 @@ set wildmenu        " why is this not the default?!
 set number          " Show line numbers.
 set mouse=a         " enable mouse
 set laststatus=2    " statusline always on
+set autoread
 
 " Indentation
 set tabstop=2       " Number of spaces that a <Tab> in the file counts for.
@@ -46,9 +47,6 @@ call plug#begin()
   " Add :Rename, :Move, :Delete, et al
   Plug 'tpope/vim-eunuch'
   
-  " vim-autoread: this periodically reads file from system to check for changes
-  Plug 'christopherfujino/vim-autoread'
-
   " Intelligently deal with swap files
   Plug 'zirrostig/vim-smart-swap'
 
@@ -132,7 +130,7 @@ let g:ycm_collect_identifiers_from_tags_files=1
 
 " FZF Magic
 let g:fzf_commits_log_options = '--graph --color=always --all --format="%C(auto)%h %C(black)%C(bold)%cr%C(auto)%d %C(reset)%s"'
-let $FZF_DEFAULT_COMMAND='rg --hidden --files'
+let $FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 command! -bang -nargs=? -complete=dir Files
       \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 noremap <c-p> <esc>:Files<cr>
