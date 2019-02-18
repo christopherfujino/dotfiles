@@ -3,7 +3,7 @@
 #
 
 # If not running interactively, don't do anything
-[[ $- != *i* ]] && return
+#[[ $- != *i* ]] && return
 
 # OS dependent config
 OS=$(uname)
@@ -33,6 +33,7 @@ alias gb='git branch'
 alias gupdate='git add . && git commit --amend'
 
 alias grepi='grep -i'
+alias raketest="rake test \$(find test -name '*_test.rb' | fzf)"
 
 # Aliases to clean up docker containers/images
 # You can also do: `docker image prune`

@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+
+let zip = String(Math.ceil(Math.random() * 8));
+
+for (let i = 0; i < 4; i++) {
+  zip += Math.floor(Math.random() * 9);
+}
+
+console.log(zip);
