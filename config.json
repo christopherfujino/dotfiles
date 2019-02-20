@@ -80,6 +80,11 @@
       "name" : "nvim.init.vim",
       "target" : "~/.config/nvim/init.vim",
       "platform" : "any"
+    },
+    {
+      "name": ".eslintrc.yml",
+      "target": "~/.eslintrc.yml",
+      "platform": "any"
     }
   ]
 }
