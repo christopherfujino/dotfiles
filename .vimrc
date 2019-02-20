@@ -103,6 +103,7 @@ call plug#begin()
 call plug#end()
 
 filetype plugin indent on
+
 " PLUGIN VARIABLES
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-monokai
