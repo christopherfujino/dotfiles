@@ -96,6 +96,9 @@ call plug#begin()
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 
+  " distraction free writing
+  Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
+
 " All of your Plugins must be added before the following line
 call plug#end()
 
