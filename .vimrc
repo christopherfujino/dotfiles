@@ -6,6 +6,8 @@ syntax on
 filetype plugin indent off
 set encoding=utf-8
 scriptencoding utf-8
+" for coc.nvim
+set hidden
 
 set wildmenu        " why is this not the default?!
 set number          " Show line numbers.
@@ -43,6 +45,17 @@ call plug#begin()
   " Syntax
   Plug 'tpope/vim-surround'
 
+  Plug 'dart-lang/dart-vim-plugin'
+
+  " Typescript Support
+  Plug 'leafgarland/typescript-vim'
+
+  " better js syntax
+  Plug 'pangloss/vim-javascript'
+
+  " Add JSX Syntax
+  Plug 'mxw/vim-jsx'
+
   " Add :Rename, :Move, :Delete, et al
   Plug 'tpope/vim-eunuch'
   
@@ -66,20 +79,13 @@ call plug#begin()
   " Asynchronously run linters
   Plug 'w0rp/ale'
 
-  " JS
-  " better js syntax
-  Plug 'pangloss/vim-javascript'
-
-  " Add JSX Syntax
-  Plug 'mxw/vim-jsx'
-
   " Ruby/Rails
-  Plug 'tpope/vim-rails'
-  Plug 'tpope/vim-bundler'
-  Plug 'tpope/vim-endwise'
+  "Plug 'tpope/vim-rails'
+  "Plug 'tpope/vim-bundler'
+  "Plug 'tpope/vim-endwise'
 
   " Slim template lang syntax highlighting
-  Plug 'onemanstartup/vim-slim', { 'for': 'slim' }
+  "Plug 'onemanstartup/vim-slim', { 'for': 'slim' }
 
   Plug 'mattn/emmet-vim', { 'for': 'html' }
 
@@ -90,9 +96,10 @@ call plug#begin()
   Plug 'vim-airline/vim-airline-themes'
 
   " Tooling
-  Plug 'valloric/youcompleteme'
-
-  Plug 'majutsushi/tagbar'
+  if has('nvim')
+    " NOTE: if on vim, must include 'neoclide/coc.nvim'
+    Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install() }}
+  endif
 
   " Search
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -111,7 +118,7 @@ noremap <c-l> <esc>:ALELint<cr>
 let g:ale_linters = {
       \'javascript': ['eslint'],
       \'ruby': ['rubocop'],
-      \'sh': ['shellcheck']
+      \'sh': ['shellcheck'],
       \}
 let g:ale_lint_delay=750
 let g:ale_echo_delay=125
@@ -125,17 +132,12 @@ let g:ale_lint_on_insert_leave=1
 let g:ale_maximum_file_size=250000
 highlight ALEErrorSign ctermfg=1 ctermbg=18
 
-" Generate Vimtags
-command! Vtags Dispatch ctags -R --fields=+l --exclude=.git --exclude=node_modules .
-
-" YouCompleteMe
-let g:ycm_autoclose_preview_window_after_insertion=1
-let g:ycm_filepath_blacklist={}
-let g:ycm_collect_identifiers_from_tags_files=1
+" Dart Style Guide - for vim-dart
+let dart_style_guide = 2
 
 " FZF Magic
 let g:fzf_commits_log_options = '--graph --color=always --all --format="%C(auto)%h %C(black)%C(bold)%cr%C(auto)%d %C(reset)%s"'
-let $FZF_DEFAULT_COMMAND='rg --hidden --files'
+let $FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 command! -bang -nargs=? -complete=dir Files
       \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 noremap <c-p> <esc>:Files<cr>
@@ -150,6 +152,8 @@ command! Checkout
       \   'sink': function('s:checkout_clean')
       \ })
 
+command! EVimrc edit ~/.vimrc
+
 command! Diffs
       \ call fzf#run({
       \   'source': "git diff --stat | awk '{print $1}' | sed '$ d'",
@@ -159,6 +163,44 @@ command! Diffs
 " Vim-Airline Theming
 let g:airline_theme='base16_monokai'
 let g:airline_powerline_fonts=1
+" show coc diagnostics in airline
+let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
 nnoremap <c-t> :tabe<cr>
 nnoremap <c-n> :tabn<cr>
+nnoremap <c-left> :tabprevious<cr>
+nnoremap <c-right> :tabnext<cr>
+
+" If starting vim with a directory as first (and only) arg, cd into dir
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) | execute 'cd' argv()[0] | endif
+
+" COC
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-references)
+" <TAB> maps to next completion
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ coc#refresh()
+" <S-TAB> maps to previous completion
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+"let g:ale_sign_error = '✘'
+"let g:ale_sign_warning = '⚠'
+highlight link CocErrorSign ALEErrorSign
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1] =~# '\s'
+endfunction
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction

@@ -35,14 +35,6 @@ alias gupdate='git add . && git commit --amend'
 alias grepi='grep -i'
 alias raketest="rake test \$(find test -name '*_test.rb' | fzf)"
 
-# Aliases to clean up docker containers/images
-# You can also do: `docker image prune`
-# shellcheck disable=2142
-alias dockerimageclean="docker rmi \$(docker images | awk '\$1 == \"<none>\" && \$2 == \"<none>\" {print \$3}')"
-# You can also do: `docker container prune`
-# shellcheck disable=2142
-alias dockercontainerclean="docker rm \$(docker ps -a | awk '\$1 != \"CONTAINER\" {print \$1}')"
-
 # Text editors
 alias emacs='emacs -nw' # default to console-based emacs
 
@@ -74,6 +66,7 @@ dirs=(
   "$HOME/go/bin"
   "$HOME/.node_modules/bin"
   "$HOME/.nvm"
+  "$HOME/.pub-cache/bin"
   #"$HOME/anaconda3/bin"
   #"$HOME/.rvm/bin"
 )

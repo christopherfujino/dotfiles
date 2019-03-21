@@ -6,4 +6,12 @@ for (let i = 0; i < 4; i++) {
   zip += Math.floor(Math.random() * 9);
 }
 
+var x = {
+  yolo: 'dawg',
+  dawg: 'yolo',
+  toYolo: () => 'hi',
+};
+
+3 = 4;
+
 console.log(zip);
