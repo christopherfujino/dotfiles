@@ -119,6 +119,7 @@ let g:ale_linters = {
       \'javascript': ['eslint'],
       \'ruby': ['rubocop'],
       \'sh': ['shellcheck'],
+      \'dart': ['dartanalyzer'],
       \}
 let g:ale_lint_delay=750
 let g:ale_echo_delay=125
@@ -130,6 +131,25 @@ let g:ale_history_enabled=0
 let g:ale_lint_on_text_changed='normal'
 let g:ale_lint_on_insert_leave=1
 let g:ale_maximum_file_size=250000
+let g:ale_completion_enabled = 1
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+""
+""highlight link CocErrorSign ALEErrorSign
+""
+""function! s:check_back_space() abort
+""  let col = col('.') - 1
+""  return !col || getline('.')[col - 1] =~# '\s'
+""endfunction
+""
+""function! s:show_documentation()
+""  if &filetype == 'vim'
+""    execute 'h '.expand('<cword>')
+""  else
+""    call CocAction('doHover')
+""  endif
+""endfunction
+
 highlight ALEErrorSign ctermfg=1 ctermbg=18
 
 " Dart Style Guide - for vim-dart
@@ -164,11 +184,10 @@ command! Diffs
 let g:airline_theme='base16_monokai'
 let g:airline_powerline_fonts=1
 " show coc diagnostics in airline
-let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+""let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+""let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
 nnoremap <c-t> :tabe<cr>
-nnoremap <c-n> :tabn<cr>
 nnoremap <c-left> :tabprevious<cr>
 nnoremap <c-right> :tabnext<cr>
 
@@ -177,30 +196,28 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) | execute 'cd' argv(
 
 " COC
 
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gr <Plug>(coc-references)
-" <TAB> maps to next completion
-inoremap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ coc#refresh()
-" <S-TAB> maps to previous completion
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-"let g:ale_sign_error = '✘'
-"let g:ale_sign_warning = '⚠'
-highlight link CocErrorSign ALEErrorSign
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1] =~# '\s'
-endfunction
-
-function! s:show_documentation()
-  if &filetype == 'vim'
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+""nmap <silent> gd <Plug>(coc-definition)
+""nmap <silent> gr <Plug>(coc-references)
+""" <TAB> maps to next completion
+""inoremap <silent><expr> <TAB>
+""  \ pumvisible() ? "\<C-n>" :
+""  \ <SID>check_back_space() ? "\<TAB>" :
+""  \ coc#refresh()
+""" <S-TAB> maps to previous completion
+""inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+""nnoremap <silent> K :call <SID>show_documentation()<CR>
+""
+""highlight link CocErrorSign ALEErrorSign
+""
+""function! s:check_back_space() abort
+""  let col = col('.') - 1
+""  return !col || getline('.')[col - 1] =~# '\s'
+""endfunction
+""
+""function! s:show_documentation()
+""  if &filetype == 'vim'
+""    execute 'h '.expand('<cword>')
+""  else
+""    call CocAction('doHover')
+""  endif
+""endfunction
