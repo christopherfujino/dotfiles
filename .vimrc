@@ -6,8 +6,12 @@ syntax on
 filetype plugin indent off
 set encoding=utf-8
 scriptencoding utf-8
-" for coc.nvim
+" for lang client
 set hidden
+
+set autoread
+set signcolumn=yes  " Always draw sign column
+set noshowmode      " Unneccessary since we use airline
 
 set wildmenu        " why is this not the default?!
 set number          " Show line numbers.
@@ -45,6 +49,11 @@ call plug#begin()
   " Syntax
   Plug 'tpope/vim-surround'
 
+  " LSP
+  if has('nvim')
+    Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install() }}
+  endif
+
   Plug 'dart-lang/dart-vim-plugin'
 
   " Typescript Support
@@ -58,15 +67,12 @@ call plug#begin()
 
   " Add :Rename, :Move, :Delete, et al
   Plug 'tpope/vim-eunuch'
-  
-  " vim-autoread: this periodically reads file from system to check for changes
-  Plug 'christopherfujino/vim-autoread'
 
   " Intelligently deal with swap files
   Plug 'zirrostig/vim-smart-swap'
 
   " Asynchronously invoke external tools in new Tmux pane
-  Plug 'tpope/vim-dispatch'
+  "Plug 'tpope/vim-dispatch'
 
   " show indentation markers
   Plug 'yggdroot/indentLine'
@@ -87,7 +93,7 @@ call plug#begin()
   " Slim template lang syntax highlighting
   "Plug 'onemanstartup/vim-slim', { 'for': 'slim' }
 
-  Plug 'mattn/emmet-vim', { 'for': 'html' }
+  "Plug 'mattn/emmet-vim', { 'for': 'html' }
 
   " Chris Kempson's Base16 colorschemes, see `colorscheme...`
   Plug 'chriskempson/base16-vim'
@@ -96,10 +102,6 @@ call plug#begin()
   Plug 'vim-airline/vim-airline-themes'
 
   " Tooling
-  if has('nvim')
-    " NOTE: if on vim, must include 'neoclide/coc.nvim'
-    Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install() }}
-  endif
 
   " Search
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -109,51 +111,33 @@ call plug#begin()
 call plug#end()
 
 filetype plugin indent on
+
 " PLUGIN VARIABLES
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-monokai
 
 " ALE
-noremap <c-l> <esc>:ALELint<cr>
+nnoremap <c-l> :ALELint<cr>
 let g:ale_linters = {
       \'javascript': ['eslint'],
       \'ruby': ['rubocop'],
       \'sh': ['shellcheck'],
-      \'dart': ['dartanalyzer'],
+      \'dart': ['dartanalyzer', 'language_server'],
       \}
-let g:ale_lint_delay=750
-let g:ale_echo_delay=125
 let g:ale_set_highlights=0
 let g:ale_echo_msg_format='[%linter%: %code%] %s (%severity%)'
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
 let g:ale_history_enabled=0
+highlight ALEErrorSign ctermfg=1 ctermbg=18
+let g:ale_lint_delay=750
+let g:ale_echo_delay=125
 let g:ale_lint_on_text_changed='normal'
 let g:ale_lint_on_insert_leave=1
 let g:ale_maximum_file_size=250000
-let g:ale_completion_enabled = 1
-
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-""
-""highlight link CocErrorSign ALEErrorSign
-""
-""function! s:check_back_space() abort
-""  let col = col('.') - 1
-""  return !col || getline('.')[col - 1] =~# '\s'
-""endfunction
-""
-""function! s:show_documentation()
-""  if &filetype == 'vim'
-""    execute 'h '.expand('<cword>')
-""  else
-""    call CocAction('doHover')
-""  endif
-""endfunction
-
-highlight ALEErrorSign ctermfg=1 ctermbg=18
 
 " Dart Style Guide - for vim-dart
-let dart_style_guide = 2
+let g:dart_style_guide = 2
 
 " FZF Magic
 let g:fzf_commits_log_options = '--graph --color=always --all --format="%C(auto)%h %C(black)%C(bold)%cr%C(auto)%d %C(reset)%s"'
@@ -183,9 +167,6 @@ command! Diffs
 " Vim-Airline Theming
 let g:airline_theme='base16_monokai'
 let g:airline_powerline_fonts=1
-" show coc diagnostics in airline
-""let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-""let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
 nnoremap <c-t> :tabe<cr>
 nnoremap <c-left> :tabprevious<cr>
@@ -196,28 +177,33 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) | execute 'cd' argv(
 
 " COC
 
-""nmap <silent> gd <Plug>(coc-definition)
-""nmap <silent> gr <Plug>(coc-references)
-""" <TAB> maps to next completion
-""inoremap <silent><expr> <TAB>
-""  \ pumvisible() ? "\<C-n>" :
-""  \ <SID>check_back_space() ? "\<TAB>" :
-""  \ coc#refresh()
-""" <S-TAB> maps to previous completion
-""inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-""nnoremap <silent> K :call <SID>show_documentation()<CR>
-""
-""highlight link CocErrorSign ALEErrorSign
-""
-""function! s:check_back_space() abort
-""  let col = col('.') - 1
-""  return !col || getline('.')[col - 1] =~# '\s'
-""endfunction
-""
-""function! s:show_documentation()
-""  if &filetype == 'vim'
-""    execute 'h '.expand('<cword>')
-""  else
-""    call CocAction('doHover')
-""  endif
-""endfunction
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-references)
+" <TAB> maps to next completion
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ coc#refresh()
+" <S-TAB> maps to previous completion
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+highlight link CocErrorSign ALEErrorSign
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1] =~# '\s'
+endfunction
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" show coc diagnostics in airline
+let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+
