@@ -1,10 +1,11 @@
 #!/bin/bash
 
 PLATFORM=$(uname)
+CURRENT_BRANCH=$(git symbolic-ref --short HEAD)
 
-if [ "$PLATFORM" == 'darwin' ]; then
+if [ "$PLATFORM" == 'Darwin' ]; then
   OPEN='open'
-elif [ "$PLATFORM" == 'linux' ]; then
+elif [ "$PLATFORM" == 'Linux' ]; then
   OPEN='xdg-open'
 else
   echo "Oops! You're on $PLATFORM. I don't know what that is..."
@@ -20,6 +21,11 @@ REGEX='up to date'
 if [[ $OUTPUT =~ $REGEX ]]; then
   echo "Your branch is already up to date with $REMOTE. Exiting..."
   exit 1
+fi
+
+if [[ $CURRENT_BRANCH == 'master' ]]; then
+  # No need to open a PR
+  exit 0
 fi
 
 REGEX='To github\.com:(.*)\.git'
