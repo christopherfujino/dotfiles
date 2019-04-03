@@ -67,6 +67,7 @@ dirs=(
   "$HOME/.node_modules/bin"
   "$HOME/.nvm"
   "$HOME/.pub-cache/bin"
+  "$HOME/git/depot_tools"
   #"$HOME/anaconda3/bin"
   #"$HOME/.rvm/bin"
 )
