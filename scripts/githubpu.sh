@@ -15,6 +15,13 @@ fi
 REMOTE='origin'
 OUTPUT=$(git push --porcelain -u "$REMOTE" HEAD)
 
+# e.g.
+#
+# To github.com:christopherfujino/dotfiles.git
+# *       HEAD:refs/heads/feature-branch  [new branch]
+# Branch 'feature-branch' set up to track remote branch 'feature-branch' from 'origin'.
+# Done
+
 echo "$OUTPUT"
 
 REGEX='up to date'
