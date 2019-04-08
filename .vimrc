@@ -178,6 +178,8 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) | execute 'cd' argv(
 " COC
 
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 " <TAB> maps to next completion
 inoremap <silent><expr> <TAB>
