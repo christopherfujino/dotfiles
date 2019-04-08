@@ -144,7 +144,7 @@ function table_flip {
   )
   for FRAME in "${FRAMES[@]}"; do
     printf '%b' "$FRAME"
-    sleep 0.1375
+    sleep 0.1
   done
 }
 
