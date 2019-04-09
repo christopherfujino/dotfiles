@@ -10,7 +10,7 @@ OS=$(uname)
 if [ "$OS" = Linux ]; then
   alias ls='ls --color=auto'
 
-  export TERM="xterm-256color"
+  #export TERM="screen-256color"
 elif [ "$OS" = Darwin ]; then
   alias ls='ls -G' # color
 
