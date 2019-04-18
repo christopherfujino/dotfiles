@@ -82,6 +82,7 @@ files=(
   "$HOME/.fzf.bash"
   /usr/local/etc/bash_completion
   "$HOME/.rvm/scripts/rvm"
+  "$HOME/.flutter-completion"
 )
 for i in "${files[@]}"; do
   # shellcheck source=/dev/null
