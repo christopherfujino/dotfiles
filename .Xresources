@@ -1,10 +1,10 @@
 URxvt*scrollBar: false
 
 ! These are powerline fonts
-URxvt*font: xft:monoki Regular:size=12
-URxvt*boldFont: xft:monoki Bold:size=12
-URxvt*italicFont: xft:monoki Italic:italic:autohint=true:size=12
-URxvt*boldItalicFont: xft:monoki BoldItalic:bold:italic:autohint=true:size=12
+URxvt*font: xft:mononoki Regular:size=12
+URxvt*boldFont: xft:mononoki Bold:size=12
+URxvt*italicFont: xft:mononoki Italic:italic:autohint=true:size=12
+URxvt*boldItalicFont: xft:mononoki BoldItalic:bold:italic:autohint=true:size=12
 
 !URxvt*termName: rxvt-unicode-256color
 
