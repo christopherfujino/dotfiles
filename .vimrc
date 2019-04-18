@@ -37,7 +37,8 @@ set splitbelow
 set splitright      " better defaults for opening new splits!
 
 " Never show netrw banner
-let g:netrw_banner = 0
+let g:netrw_banner        = 0
+let g:netrw_liststyle     = 3
 
 " PLUGINS
 
