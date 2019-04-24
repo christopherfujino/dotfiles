@@ -82,7 +82,6 @@ call plug#begin()
   Plug 'tpope/vim-rhubarb'
   " show git diff in gutter before line number
   Plug 'airblade/vim-gitgutter'
-
   " Asynchronously run linters
   Plug 'w0rp/ale'
 
@@ -179,11 +178,6 @@ nnoremap <c-right> :tabnext<cr>
 
 " If starting vim with a directory as first (and only) arg, cd into dir
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) | execute 'cd' argv()[0] | endif
-
-" Exit terminal mode
-if has('nvim')
-  tnoremap <Esc> <C-\><C-n>
-endif
 
 " COC
 
