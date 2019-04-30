@@ -68,6 +68,7 @@ dirs=(
   "$HOME/.nvm"
   "$HOME/.pub-cache/bin"
   "$HOME/git/depot_tools"
+  "$HOME/.cargo/bin"
   #"$HOME/anaconda3/bin"
   #"$HOME/.rvm/bin"
 )
