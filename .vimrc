@@ -209,7 +209,9 @@ function! s:show_documentation()
 endfunction
 
 " show coc diagnostics in airline
-let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+if has('nvim')
+  let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+  let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+endif
 
 autocmd BufWritePost .vimrc :so %
