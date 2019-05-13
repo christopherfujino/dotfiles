@@ -68,6 +68,9 @@ call plug#begin()
   " Add :Rename, :Move, :Delete, et al
   Plug 'tpope/vim-eunuch'
 
+  " vim-autoread: this periodically reads file from system to check for changes
+  Plug 'christopherfujino/vim-autoread'
+
   " Intelligently deal with swap files
   Plug 'zirrostig/vim-smart-swap'
 
