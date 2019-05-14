@@ -19,8 +19,6 @@ fi
 
 alias ..='cd ..'
 
-alias dotfiles='cd $DOTFILES'
-
 alias dudot='du -hd 1'
 
 alias ll='ls -Alh'
@@ -58,6 +56,10 @@ PS1='\w\$ '
 [ -f "$HOME/.config/base16-shell/profile_helper.sh" ] && eval "$("$HOME/.config/base16-shell/profile_helper.sh")"
 
 [ -d "$HOME/notes" ] && export NOTES="$HOME/notes"
+if [ -d "$HOME/git" ]; then
+  export GIT="$HOME/git"
+  [ -d "$GIT/dotfiles" ] && export DOTFILES="$GIT/dotfiles"
+fi
 
 # add dirs to path, if they exist
 dirs=(
