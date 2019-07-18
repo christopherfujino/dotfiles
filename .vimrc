@@ -51,7 +51,7 @@ call plug#begin()
 
   " LSP
   if has('nvim')
-    Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install() }}
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
   endif
 
   Plug 'dart-lang/dart-vim-plugin'
@@ -128,7 +128,7 @@ let g:ale_linters = {
       \'javascript': ['eslint'],
       \'ruby': ['rubocop'],
       \'sh': ['shellcheck'],
-      \'dart': ['dartanalyzer', 'language_server'],
+      \'dart': [],
       \}
 let g:ale_set_highlights=0
 let g:ale_echo_msg_format='[%linter%: %code%] %s (%severity%)'
