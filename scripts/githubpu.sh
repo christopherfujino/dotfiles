@@ -24,11 +24,11 @@ OUTPUT=$(git push --porcelain -u "$REMOTE" HEAD)
 
 echo "$OUTPUT"
 
-REGEX='up to date'
-if [[ $OUTPUT =~ $REGEX ]]; then
-  echo "Your branch is already up to date with $REMOTE. Exiting..."
-  exit 1
-fi
+#REGEX='up to date'
+#if [[ $OUTPUT =~ $REGEX ]]; then
+#  echo "Your branch is already up to date with $REMOTE. Exiting..."
+#  exit 1
+#fi
 
 if [[ $CURRENT_BRANCH == 'master' ]]; then
   # No need to open a PR
