@@ -79,6 +79,11 @@ for i in "${dirs[@]}"; do
   [ -d "$i" ] && PATH="$i:$PATH"
 done
 
+if [ -d "$HOME/scripts" ]; then
+  export SCRIPTS="$HOME/scripts"
+  alias goscripts="cd $SCRIPTS"
+fi
+
 # source config files, if they exist
 files=(
   /usr/local/opt/nvm/nvm.sh
@@ -144,11 +149,12 @@ function table_flip {
     "\b\b\b\b ┯━┯"
     "\b\b\b ┻━"
     "\b\b ┯"
-    "\b \n"
+    "\b "
+    " \n"
   )
   for FRAME in "${FRAMES[@]}"; do
     printf '%b' "$FRAME"
-    sleep 0.1
+    sleep 0.09
   done
 }
 
