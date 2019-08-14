@@ -5,15 +5,29 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
+TARGET_PATH="$1"
+
 if [ -z "$APP_SPECIFIC_PASSWORD" ]; then
   echo "Please specify env variable \$APP_SPECIFIC_PASSWORD for authorization."
   exit 1
 fi
 
+if [ -z "$CODESIGN_USERNAME" ]; then
+  echo "Please provide env variable \$CODESIGN_USERNAME. This should be the Apple Dev user who owns your certificate."
+  exit 1
+fi
+
+if [ -z "$CODESIGN_CERT_NAME" ]; then
+  echo "Please provide env variable \$CODESIGN_CERT_NAME. This only needs to be long enough to uniquely identify a single certificate among those in your keychain."
+  exit 1
+fi
+
+CODESIGN_PRIMARY_BUNDLE_ID='com.flutter.experimental' # Arbitrary, for personal identification
+
 set -euo pipefail
 
 function verifyStatus {
-  OUTPUT=$(xcrun altool --notarization-info "$REQUEST_UUID" -u "$USERNAME" --password "$APP_SPECIFIC_PASSWORD")
+  OUTPUT=$(xcrun altool --notarization-info "$REQUEST_UUID" -u "$CODESIGN_USERNAME" --password "$APP_SPECIFIC_PASSWORD")
   # With ERE could be /[ ]*Status: ([a-z ]+).*/
   STATUS=$(echo "$OUTPUT" | sed -n 's/[ ]*Status: \([a-z][a-z ]*\).*/\1/p')
 
@@ -59,7 +73,7 @@ Status Message: Package Approved"
 
 function sign {
   # force sign, add secure timestamp and hardened runtime
-  codesign -f -s "$CERT_NAME" "$1" --timestamp --options=runtime
+  codesign -f -s "$CODESIGN_CERT_NAME" "$1" --timestamp --options=runtime
   echo "Successfully signed $1"
   echo
 }
@@ -78,7 +92,7 @@ function notarize {
   echo 'Initiating notarization process...'
   echo
 
-  saveUuid "$(xcrun altool --notarize-app --primary-bundle-id "$PRIMARY_BUNDLE_ID" --username "$USERNAME" --password "$APP_SPECIFIC_PASSWORD" --file "$1")"
+  saveUuid "$(xcrun altool --notarize-app --primary-bundle-id "$CODESIGN_PRIMARY_BUNDLE_ID" --username "$CODESIGN_USERNAME" --password "$APP_SPECIFIC_PASSWORD" --file "$1")"
 
   time pollForStatus
   if [ $EXIT_CODE == 1 ]; then
@@ -99,11 +113,6 @@ function pollForStatus {
 function staple {
   xcrun stapler staple -v "$1"
 }
-
-TARGET_PATH="$1"
-USERNAME='stores@flutter.io' # TODO
-PRIMARY_BUNDLE_ID='com.example.arbitrary' # TODO
-CERT_NAME='FLUTTER' # TODO
 
 sign "$TARGET_PATH"
 verifySignature "$TARGET_PATH"
