@@ -26,32 +26,34 @@ fi
 
 CODESIGN_PRIMARY_BUNDLE_ID='com.flutter.experimental' # Arbitrary, for personal identification
 
-set -euo pipefail
+set -eo pipefail
 
 function verifyStatus {
-  OUTPUT=$(xcrun altool --notarization-info "$REQUEST_UUID" -u "$CODESIGN_USERNAME" --password "$APP_SPECIFIC_PASSWORD")
+  OUTPUT=$(xcrun \
+    altool \
+    --notarization-info "$REQUEST_UUID" \
+    -u "$CODESIGN_USERNAME" \
+    --password "$APP_SPECIFIC_PASSWORD" \
+    2>&1 )
   # With ERE could be /[ ]*Status: ([a-z ]+).*/
   STATUS=$(echo "$OUTPUT" | sed -n 's/[ ]*Status: \([a-z][a-z ]*\).*/\1/p')
 
   if [ "$STATUS" == 'success' ]; then
     echo "The notarization request for $REQUEST_UUID succeeded!"
-    echo
-    echo "$OUTPUT"
     EXIT_CODE=0
   elif [ "$STATUS" == 'in progress' ]; then
     echo "The notarization request for $REQUEST_UUID is still pending..."
   else
     echo 'Uh oh, there was a problem!'
-    echo
-    echo "$OUTPUT"
     EXIT_CODE=1
   fi
+  echo
+  echo "$OUTPUT"
+  echo
 }
 
 function saveUuid {
-  REQUEST_UUID=$(echo "$1" | sed -n 's/^RequestUUID = \([a-z0-9-]*\)/\1/p')
-  echo "Your RequestUUID is \"$REQUEST_UUID\""
-  echo
+  REQUEST_UUID=$(echo "$1" | sed -n 's/.*RequestUUID = \([a-z0-9-]*\).*/\1/p')
 }
 
 STRING0="2019-08-13 12:56:18.932 altool[62341:349762] No errors uploading 'dart.zip'.
@@ -94,9 +96,22 @@ function notarize {
   echo 'Initiating notarization process...'
   echo
 
-  saveUuid "$(xcrun altool --notarize-app --primary-bundle-id "$CODESIGN_PRIMARY_BUNDLE_ID" --username "$CODESIGN_USERNAME" --password "$APP_SPECIFIC_PASSWORD" --file "$1")"
+  local OUTPUT
+  OUTPUT="$(xcrun altool \
+    --notarize-app \
+    --primary-bundle-id "$CODESIGN_PRIMARY_BUNDLE_ID" \
+    --username "$CODESIGN_USERNAME" \
+    --password "$APP_SPECIFIC_PASSWORD" \
+    --file "$1" \
+    2>&1 )"
+
+  echo "$OUTPUT"
+  echo
+
+  saveUuid "$OUTPUT"
 
   time pollForStatus
+
   if [ $EXIT_CODE == 1 ]; then
     exit 1
   fi
@@ -117,7 +132,7 @@ function staple {
 }
 
 sign "$TARGET_PATH"
-verifySignature "$TARGET_PATH"
+#verifySignature "$TARGET_PATH"
 zipTarget "$TARGET_PATH"
 notarize "$TARGET_ZIP"
 #staple "$TARGET_PATH"
