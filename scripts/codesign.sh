@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo 'NOTE: This script is a work in progress!'
+
 if [ -z "$1" ]; then
   echo 'Please provide path to binary to sign as an argument.'
   exit 1
