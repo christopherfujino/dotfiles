@@ -303,12 +303,12 @@ for key in [
         print 'Please provide the env variable %s' % key
         exit(1)
 
-APP_SPECIFIC_PASSWORD = os.environ.get('APP_SPECIFIC_PASSWORD', None)
+APP_SPECIFIC_PASSWORD = os.environ['APP_SPECIFIC_PASSWORD']
 CODESIGN_PRIMARY_BUNDLE_ID = os.environ.get(
     'CODESIGN_PRIMARY_BUNDLE_ID',
     'com.example.arbitrary')
-CODESIGN_USERNAME = os.environ.get('CODESIGN_USERNAME', None)
-CODESIGN_CERT_NAME = os.environ.get('CODESIGN_CERT_NAME', None)
+CODESIGN_USERNAME = os.environ['CODESIGN_USERNAME']
+CODESIGN_CERT_NAME = os.environ['CODESIGN_CERT_NAME']
 TARGET_ARCHIVE, CONFIG_PATH = validate(sys.argv)
 
 main(TARGET_ARCHIVE, CONFIG_PATH)
