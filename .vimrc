@@ -81,11 +81,10 @@ call plug#begin()
   Plug 'yggdroot/indentLine'
 
   Plug 'tpope/vim-fugitive'
-  Plug 'tpope/vim-rhubarb'
+  Plug 'tpope/vim-rhubarb' " github plugin for vim-fugitive
   " show git diff in gutter before line number
   Plug 'airblade/vim-gitgutter'
-  " Asynchronously run linters
-  Plug 'w0rp/ale'
+  Plug 'w0rp/ale' " Asynchronously run linters
 
   " Ruby/Rails
   "Plug 'tpope/vim-rails'
