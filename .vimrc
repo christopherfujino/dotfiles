@@ -118,7 +118,7 @@ let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-monokai
 
 " Indentline
-let g:indentLine_char = '▏'
+let g:indentLine_char = '⎸'
 let g:indentLine_bufNameExclude = ["term:.*"] " Don't show in terminal!
 
 " ALE
@@ -180,40 +180,40 @@ nnoremap <c-right> :tabnext<cr>
 " If starting vim with a directory as first (and only) arg, cd into dir
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) | execute 'cd' argv()[0] | endif
 
+" Auto-source vimrc if editing it
+autocmd BufWritePost .vimrc :so %
+
 " COC
-
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-" <TAB> maps to next completion
-inoremap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ coc#refresh()
-" <S-TAB> maps to previous completion
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-highlight link CocErrorSign ALEErrorSign
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1] =~# '\s'
-endfunction
-
-function! s:show_documentation()
-  if &filetype == 'vim'
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" show coc diagnostics in airline
 if has('nvim')
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+  nmap <silent> gr <Plug>(coc-references)
+  " <TAB> maps to next completion
+  inoremap <silent><expr> <TAB>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ coc#refresh()
+  " <S-TAB> maps to previous completion
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+  nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+  highlight link CocErrorSign ALEErrorSign
+
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1] =~# '\s'
+  endfunction
+
+  function! s:show_documentation()
+    if &filetype == 'vim'
+      execute 'h '.expand('<cword>')
+    else
+      call CocAction('doHover')
+    endif
+  endfunction
+
+  " show coc diagnostics in airline
   let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
   let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 endif
-
-autocmd BufWritePost .vimrc :so %
