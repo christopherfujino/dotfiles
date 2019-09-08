@@ -57,13 +57,13 @@ call plug#begin()
   Plug 'dart-lang/dart-vim-plugin'
 
   " Typescript Support
-  Plug 'leafgarland/typescript-vim'
+  "Plug 'leafgarland/typescript-vim'
 
   " better js syntax
   Plug 'pangloss/vim-javascript'
 
   " Add JSX Syntax
-  Plug 'mxw/vim-jsx'
+  "Plug 'mxw/vim-jsx'
 
   " Add :Rename, :Move, :Delete, et al
   Plug 'tpope/vim-eunuch'
