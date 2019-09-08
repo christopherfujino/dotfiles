@@ -31,7 +31,6 @@ alias gb='git branch'
 alias gupdate='git add . && git commit --amend'
 
 alias grepi='grep -i'
-alias raketest="rake test \$(find test -name '*_test.rb' | fzf)"
 
 # Text editors
 alias emacs='emacs -nw' # default to console-based emacs
@@ -79,11 +78,6 @@ dirs=(
 for i in "${dirs[@]}"; do
   [ -d "$i" ] && PATH="$i:$PATH"
 done
-
-if [ -d "$HOME/scripts" ]; then
-  export SCRIPTS="$HOME/scripts"
-  alias goscripts="cd $SCRIPTS"
-fi
 
 # source config files, if they exist
 files=(

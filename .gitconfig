@@ -17,7 +17,7 @@
   hub = !git push -u origin $(git symbolic-ref --short HEAD)
   pl = pull --prune
   rv = remote -v
-  s = status -sb
+  s = status
   t = tag
   assume = update-index --assume-unchanged
   unassume = update-index --no-assume-unchanged
