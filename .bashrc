@@ -58,7 +58,13 @@ PS1='\w\$ '
 if [ -d "$HOME/git" ]; then
   export GIT="$HOME/git"
   [ -d "$GIT/dotfiles" ] && export DOTFILES="$GIT/dotfiles"
+  if [ -d "$GIT/flutter" ]; then
+    export FLUTTER="$GIT/flutter"
+    export DART_SDK="$FLUTTER/bin/cache/dart-sdk"
+    alias dart-analysis-server="$DART_SDK/bin/dart $DART_SDK/bin/snapshots/analysis_server.dart.snapshot --lsp"
+  fi
 fi
+
 
 # add dirs to path, if they exist
 dirs=(
