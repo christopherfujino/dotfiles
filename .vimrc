@@ -49,7 +49,7 @@ call plug#begin()
   " Syntax
   Plug 'tpope/vim-surround'
 
-  " LSP
+  " Autocomplete for LSP
   if has('nvim')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
   endif
@@ -84,7 +84,7 @@ call plug#begin()
   Plug 'tpope/vim-rhubarb' " github plugin for vim-fugitive
   " show git diff in gutter before line number
   Plug 'airblade/vim-gitgutter'
-  Plug 'w0rp/ale' " Asynchronously run linters
+  "Plug 'w0rp/ale' " Asynchronously run linters
 
   " Ruby/Rails
   "Plug 'tpope/vim-rails'
@@ -115,32 +115,33 @@ filetype plugin indent on
 
 " PLUGIN VARIABLES
 let base16colorspace=256  " Access colors present in 256 colorspace
-colorscheme base16-monokai
+colorscheme base16-eighties
 
 " Indentline
 let g:indentLine_char = '⎸'
 let g:indentLine_bufNameExclude = ["term:.*"] " Don't show in terminal!
 
 " ALE
-nnoremap <c-l> :ALELint<cr>
-let g:ale_linters = {
-      \'javascript': ['eslint'],
-      \'ruby': ['rubocop'],
-      \'sh': ['shellcheck'],
-      \'dart': [],
-      \'python': [],
-      \}
-let g:ale_set_highlights=0
-let g:ale_echo_msg_format='[%linter%: %code%] %s (%severity%)'
-let g:ale_sign_error = '✘'
-let g:ale_sign_warning = '⚠'
-let g:ale_history_enabled=0
-highlight ALEErrorSign ctermfg=1 ctermbg=18
-let g:ale_lint_delay=750
-let g:ale_echo_delay=125
-let g:ale_lint_on_text_changed='normal'
-let g:ale_lint_on_insert_leave=1
-let g:ale_maximum_file_size=250000
+"nnoremap <c-l> :ALELint<cr>
+"let g:ale_linters = {
+"      \'javascript': ['eslint'],
+"      \'ruby': ['rubocop'],
+"      \'sh': ['shellcheck'],
+"      \'dart': [],
+"      \'python': [],
+"      \}
+"let g:ale_set_highlights=0
+"let g:ale_echo_msg_format='[%linter%: %code%] %s (%severity%)'
+"let g:ale_sign_error = '✘'
+"let g:ale_sign_warning = '⚠'
+"let g:ale_history_enabled=0
+"highlight ALEErrorSign ctermfg=1 ctermbg=18
+"let g:ale_lint_delay=750
+"let g:ale_echo_delay=125
+"let g:ale_lint_on_text_changed='normal'
+"let g:ale_lint_on_insert_leave=1
+"let g:ale_maximum_file_size=250000
+"let g:ale_set_balloons=0
 
 " Dart Style Guide - for vim-dart
 let g:dart_style_guide = 2
@@ -181,23 +182,20 @@ nnoremap <c-right> :tabnext<cr>
 " If starting vim with a directory as first (and only) arg, cd into dir
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) | execute 'cd' argv()[0] | endif
 
-" Auto-source vimrc if editing it
-autocmd BufWritePost .vimrc :so %
-
 " COC
 if has('nvim')
   nmap <silent> gd <Plug>(coc-definition)
   nmap <silent> gy <Plug>(coc-type-definition)
   nmap <silent> gi <Plug>(coc-implementation)
   nmap <silent> gr <Plug>(coc-references)
+  nnoremap <silent> K :call <SID>show_documentation()<CR>
   " <TAB> maps to next completion
   inoremap <silent><expr> <TAB>
-        \ pumvisible() ? "\<C-n>" :
-        \ <SID>check_back_space() ? "\<TAB>" :
-        \ coc#refresh()
+    \ pumvisible() ? "\<C-n>" :
+    \ <SID>check_back_space() ? "\<TAB>" :
+    \ coc#refresh()
   " <S-TAB> maps to previous completion
   inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-  nnoremap <silent> K :call <SID>show_documentation()<CR>
 
   highlight link CocErrorSign ALEErrorSign
 
@@ -218,3 +216,5 @@ if has('nvim')
   let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
   let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 endif
+
+autocmd BufWritePost .vimrc :so %
