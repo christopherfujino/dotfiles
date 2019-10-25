@@ -1,0 +1,33 @@
+#!/usr/bin/env dart
+
+import 'dart:io';
+
+const String cookie_env_name = 'FLUTTER_DASHBOARD_COOKIE';
+
+void main(List<String> arguments) {
+  if (arguments[0] == null) {
+    stderr.writeln('Please supply the log URL as the first argument');
+    exit(1);
+  }
+  final String url = arguments[0];
+
+  String dashboard_cookie = Platform.environment[cookie_env_name];
+  if (dashboard_cookie == null) {
+    // set cookie
+    print(
+        'In order to curl the logs, you need to provide your build dashboard'
+        'auth cookie, named "X-Flutter_IdToken". This can be found in Chrome'
+        'dev tools, under Application -> Cookies -> '
+        'https://flutter-dashboard.appspot.com.'
+        );
+    dashboard_cookie = stdin.readLineSync();
+  }
+  List<String> args = <String>[
+    url,
+    '-b',
+    'X-Flutter-IdToken=$dashboard_cookie',
+  ];
+  print('curl ${args.join(' ')}');
+  ProcessResult result = Process.runSync('curl', args);
+  print(result.stdout);
+}

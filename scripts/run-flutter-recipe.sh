@@ -17,8 +17,10 @@ if [ -z $1 ]; then
   exit 1
 fi
 
-led get-builder 'luci.flutter.prod:ios-deploy' |\
-  led edit -p 'revision="123abc"' |\
+COMMIT_HASH='8fb14f99a8854d4e2b16559c0eb48e7c297065ce'
+
+led get-builder 'luci.flutter.prod:libimobiledevice' |\
+  led edit -p "commit_hash=\"$COMMIT_HASH\"" |\
   led edit -p "package_name=\"$1\"" |\
   led edit-recipe-bundle |\
   led launch |\
