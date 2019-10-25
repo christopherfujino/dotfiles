@@ -27,7 +27,8 @@ void main(List<String> arguments) {
     '-b',
     'X-Flutter-IdToken=$dashboard_cookie',
   ];
-  print('curl ${args.join(' ')}');
+  print('executing "curl ${args.join(' ')}"');
   ProcessResult result = Process.runSync('curl', args);
   print(result.stdout);
+  exit(result.exitCode);
 }
