@@ -19,7 +19,7 @@
       "ignoredRootPaths": ["~"]
     },
     "python": {
-      "command": "python",
+      "command": "python3",
       "args": [
         "-mpyls",
         "-vv",
@@ -38,7 +38,6 @@
           },
           "commandPath": "",
           "configurationSources": [
-            "pycodestyle"
           ],
           "plugins": {
             "jedi_completion": {
@@ -62,10 +61,10 @@
               "threshold": 15
             },
             "preload": {
-              "enabled": true
+              "enabled": false
             },
             "pycodestyle": {
-              "enabled": true
+              "enabled": false
             },
             "pydocstyle": {
               "enabled": false,
@@ -73,13 +72,13 @@
               "matchDir": "[^\\.].*"
             },
             "pyflakes": {
-              "enabled": true
+              "enabled": false
             },
             "rope_completion": {
-              "enabled": true
+              "enabled": false
             },
             "yapf": {
-              "enabled": true
+              "enabled": false
             }
           }
         }
