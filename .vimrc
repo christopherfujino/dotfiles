@@ -218,3 +218,7 @@ if has('nvim')
 endif
 
 autocmd BufWritePost .vimrc :so %
+
+" Syntaxes
+autocmd FileType python set sw=4 tw=4
+autocmd FileType cs set sw=4 tw=4
