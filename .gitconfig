@@ -28,4 +28,6 @@
 [diff]
   algorithm = patience
 [http]
-	cookiefile = /Users/fujino/.gitcookies
+	cookiefile = "$HOME/.gitcookies"
+[color]
+	ui = auto
