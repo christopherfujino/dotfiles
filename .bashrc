@@ -5,6 +5,8 @@
 # If not running interactively, don't do anything
 #[[ $- != *i* ]] && return
 
+shopt -s direxpand
+
 # OS dependent config
 OS=$(uname)
 if [ "$OS" = Linux ]; then
@@ -77,6 +79,7 @@ dirs=(
   "$HOME/git/depot_tools"
   "$HOME/.cargo/bin"
   "$HOME/Library/Python/2.7/bin"
+  "$HOME/.local/bin" # pip3?
   #"$HOME/anaconda3/bin"
   #"$HOME/.rvm/bin"
 )
