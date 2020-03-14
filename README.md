@@ -34,3 +34,8 @@
   * run cdri: `$ ./install`
 * Configure ownCloud
 * Symlink user directories
+
+## Golang Setup
+
+* Install go language
+* Install [golint](https://github.com/golang/lint)
