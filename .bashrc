@@ -5,12 +5,12 @@
 # If not running interactively, don't do anything
 #[[ $- != *i* ]] && return
 
-shopt -s direxpand
-
 # OS dependent config
 OS=$(uname)
 if [ "$OS" = Linux ]; then
   alias ls='ls --color=auto'
+
+  shopt -s direxpand
 
   #export TERM="screen-256color"
 elif [ "$OS" = Darwin ]; then
