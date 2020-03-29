@@ -94,6 +94,11 @@
       "command": "gopls",
       "disableWorkspaceFolders": true,
       "filetypes": ["go"]
+    },
+    "tsserver": {
+      "enable": false,
+      "filetypes": ["js", "jsx", "ts"],
+      "module": "coc-tsserver"
     }
   }
 }
