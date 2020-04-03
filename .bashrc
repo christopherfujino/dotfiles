@@ -101,6 +101,10 @@ for i in "${files[@]}"; do
   [ -f "$i" ] && . "$i"
 done
 
+# golang dev
+
+[ -d "$HOME/go" ] && export GOPATH="$HOME/go"
+
 # if ruby dev env set...
 if type gem >/dev/null 2>&1; then
   if type rbenv >/dev/null 2>&1; then
