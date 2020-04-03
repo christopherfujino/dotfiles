@@ -60,10 +60,15 @@ call plug#begin()
   "Plug 'leafgarland/typescript-vim'
 
   " better js syntax
-  Plug 'pangloss/vim-javascript'
+  "Plug 'pangloss/vim-javascript'
+  Plug 'yuezk/vim-js'
 
   " Add JSX Syntax
-  "Plug 'mxw/vim-jsx'
+  " Plug 'mxw/vim-jsx' " Deprecated
+  Plug 'MaxMEllon/vim-jsx-pretty'
+
+  " Typescript
+  Plug 'HerringtonDarkholme/yats.vim'
 
   " Add :Rename, :Move, :Delete, et al
   Plug 'tpope/vim-eunuch'
