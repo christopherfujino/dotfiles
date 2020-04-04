@@ -44,7 +44,7 @@ elif type vim >/dev/null 2>&1; then
 elif type vi >/dev/null 2>&1; then
   export VISUAL=vi
 else
-  echo "Uh oh, you're in trouble..."
+  echo "You don't have a vi-compliant editor!"
   exit 1
 fi
 
