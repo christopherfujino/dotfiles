@@ -8,17 +8,25 @@ task: # pinned debian version
       - image: debian:latest
   setup_script:
     - apt-get update && apt-get upgrade --yes
-    - apt-get install --yes vim git
+    - apt-get install --yes vim git shellcheck
   matrix:
     - name: "Execute .bashrc"
       script:
         - bash ./.bashrc
+    - name: "Lint bash scripts"
+      script:
+        - shellcheck ./scripts/*.sh
 
 task:
   name: macOS
   osx_instance:
     image: catalina-base # see https://cirrus-ci.org/guide/macOS/
+  setup_script:
+    - brew install shellcheck
   matrix:
     - name: "Execute .bashrc"
       script:
         - bash ./.bashrc
+    - name: "Lint bash scripts"
+      script:
+        - shellcheck ./scripts/*.sh
