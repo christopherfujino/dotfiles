@@ -20,7 +20,6 @@ task: # pinned debian version
         - shellcheck ./scripts/*.sh
 
 task:
-  name: macOS
   osx_instance:
     image: catalina-base # see https://cirrus-ci.org/guide/macOS/
   setup_script:
