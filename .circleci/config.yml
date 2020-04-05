@@ -8,7 +8,7 @@ commands:
           name: "execute .bashrc"
           command: bash ./.bashrc
 jobs:
-  build:
+  test:
     docker:
       - image: "debian:bullseye-20200327-slim"
     steps:
@@ -19,6 +19,12 @@ jobs:
             apt-get install --yes vim git
       - checkout # Check out repo
       - bash_rc
+
+workflows:
+  version: 2
+  debian_pinned:
+    jobs:
+      - test
           #debianLatest:
           #  docker:
           #    - image: "debian:latest"
