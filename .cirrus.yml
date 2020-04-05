@@ -8,7 +8,7 @@ task: # pinned debian version
       - image: debian:latest
   setup_script:
     - apt-get update && apt-get upgrade --yes
-    - apt-get install --yes vim git shellcheck
+    - apt-get install --yes vim shellcheck
   matrix:
     - name: "Execute .bashrc"
       script:
