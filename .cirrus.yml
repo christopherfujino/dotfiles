@@ -9,7 +9,8 @@ task: # pinned debian version
       - image: debian:bullseye
   setup_script:
     - apt-get update && apt-get upgrade --yes
-    - apt-get install --yes vim shellcheck
+    - apt-get install --yes vim shellcheck python3-pip
+    - pip3 install --user yamllint
     - uname -a
     - cat /etc/issue
   matrix:
@@ -18,6 +19,7 @@ task: # pinned debian version
         - bash ./.bashrc
         - shellcheck --version
         - shellcheck ./scripts/*.sh
+        - pip3 show yamllint | grep ^Location | python3 "$(awk '{print $2}')/yamllint/__main__.py" .
 
 task:
   osx_instance:
