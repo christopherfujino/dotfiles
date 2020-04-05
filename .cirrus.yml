@@ -4,6 +4,9 @@
 linux_task:
   container:
     image: debian:bullseye-20200327-slim
+  setup_script:
+    - apt-get update && apt-get upgrade --yes
+    - apt-get install --yes vim git
   matrix:
     - name: "Execute .bashrc"
       script:
