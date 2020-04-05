@@ -10,6 +10,10 @@ task: # pinned debian version
     - apt-get update && apt-get upgrade --yes
     - apt-get install --yes vim shellcheck
   matrix:
+    - name: "uname"
+      script:
+        - uname -a
+        - cat /etc/issue
     - name: "Execute .bashrc"
       script:
         - bash ./.bashrc
@@ -25,6 +29,9 @@ task:
   setup_script:
     - brew install shellcheck
   matrix:
+    - name: "uname"
+      script:
+        - uname -a
     - name: "Execute .bashrc"
       script:
         - bash ./.bashrc
