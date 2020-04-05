@@ -10,11 +10,9 @@ task: # pinned debian version
   setup_script:
     - apt-get update && apt-get upgrade --yes
     - apt-get install --yes vim shellcheck
+    - uname -a
+    - cat /etc/issue
   matrix:
-    - name: "uname"
-      script:
-        - uname -a
-        - cat /etc/issue
     - name: "Execute .bashrc"
       script:
         - bash ./.bashrc
@@ -29,10 +27,8 @@ task:
     image: catalina-base # see https://cirrus-ci.org/guide/macOS/
   setup_script:
     - brew install shellcheck
+    - uname -a
   matrix:
-    - name: "uname"
-      script:
-        - uname -a
     - name: "Execute .bashrc"
       script:
         - bash ./.bashrc
