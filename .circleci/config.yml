@@ -31,10 +31,17 @@ jobs:
       - install_deps
       - checkout # CirlcCI command, check out source repo
       - bash_rc
+  mac:
+    macos:
+      xcode: 11.4.0	# Irrelevant, not used
+    steps:
+      - checkout # CirlcCI command, check out source repo
+      - bash_rc
 
 workflows:
   version: 2
   run_all:
     jobs:
-      - build
+      - build # debian pinned
       - debian_latest
+      - mac
