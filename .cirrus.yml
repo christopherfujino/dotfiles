@@ -1,0 +1,10 @@
+# CIRRUS CONFIGURATION FILE
+# https://cirrus-ci.org/guide/writing-tasks/
+
+linux_task:
+  container:
+    image: debian:bullseye-20200327-slim
+  matrix:
+    - name: "Execute .bashrc"
+      script:
+        - bash ./.bashrc
