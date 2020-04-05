@@ -1,7 +1,7 @@
 # CIRRUS CONFIGURATION FILE
 # https://cirrus-ci.org/guide/writing-tasks/
 
-task: # pinned debian version
+linux_task: # pinned debian version
   container:
     matrix:
       - image: debian:bullseye-20200327-slim
@@ -10,7 +10,7 @@ task: # pinned debian version
   setup_script:
     - apt-get update && apt-get upgrade --yes
     - apt-get install --yes vim shellcheck python3-pip
-    - pip3 install --user yamllint
+    #- pip3 install --user yamllint
     - uname -a
     - cat /etc/issue
   matrix:
@@ -19,11 +19,14 @@ task: # pinned debian version
         - bash ./.bashrc
         - shellcheck --version
         - shellcheck ./scripts/*.sh
-        - pip3 show yamllint | grep ^Location | python3 "$(awk '{print $2}')/yamllint/__main__.py" .
+        #- >
+        #  pip3 show yamllint |
+        #  grep ^Location |
+        #  python3 "$(awk '{print $2}')/yamllint/__main__.py" .
 
-task:
+mac_task:
   osx_instance:
-    image: catalina-base # see https://cirrus-ci.org/guide/macOS/
+    image: catalina-base  # see https://cirrus-ci.org/guide/macOS/
   setup_script:
     - brew install shellcheck
     - uname -a
