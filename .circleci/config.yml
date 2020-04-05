@@ -7,24 +7,36 @@ commands:
       - run:
           name: "execute .bashrc"
           command: bash ./.bashrc
+  install_deps:
+    description: "Install dependencies"
+    steps:
+      - run:
+          name: "Update repos"
+          command: apt-get update && apt-get upgrade --yes
+      - run:
+          name: "Install deps"
+          command: apt-get install --yes vim git
 jobs:
-  test:
+  debian_pinned:
     docker:
       - image: "debian:bullseye-20200327-slim"
     steps:
-      - run:
-          name: "install vim"
-          command: |
-            apt-get update && apt-get upgrade --yes
-            apt-get install --yes vim git
-      - checkout # Check out repo
+      - install_deps
+      - checkout # CirlcCI command, check out source repo
+      - bash_rc
+  debian_latest:
+    docker:
+      - image: "debian:latest"
+    steps:
+      - install_deps
+      - checkout # CirlcCI command, check out source repo
       - bash_rc
 
-workflows:
-  version: 2
-  debian_pinned:
-    jobs:
-      - test
+        #workflows:
+        #  version: 2
+        #  debian_pinned:
+        #    jobs:
+        #      - test
           #debianLatest:
           #  docker:
           #    - image: "debian:latest"
