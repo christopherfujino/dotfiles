@@ -17,7 +17,7 @@ commands:
           name: "Install deps"
           command: apt-get install --yes vim git
 jobs:
-  debian_pinned:
+  build: # with pinned container
     docker:
       - image: "debian:bullseye-20200327-slim"
     steps:
@@ -32,19 +32,9 @@ jobs:
       - checkout # CirlcCI command, check out source repo
       - bash_rc
 
-        #workflows:
-        #  version: 2
-        #  debian_pinned:
-        #    jobs:
-        #      - test
-          #debianLatest:
-          #  docker:
-          #    - image: "debian:latest"
-          #  steps:
-          #    - checkout # Check out repo
-          #    - run:
-          #        name: install
-          #        command: bash ./.bashrc
-        #      mac:
-        #        macos:
-        #
+workflows:
+  version: 2
+  run_all:
+    jobs:
+      - build
+      - debian_latest
