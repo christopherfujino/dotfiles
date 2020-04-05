@@ -1,5 +1,7 @@
 # Christopher Fujino's Dotfiles
 
+[![Build Status](https://api.cirrus-ci.com/github/christopherfujino/dotfiles.svg)](https://cirrus-ci.com/github/christopherfujino/dotfiles)
+
 ## Instructions
 
 ### MacOS
