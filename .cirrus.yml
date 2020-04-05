@@ -11,3 +11,11 @@ linux_task:
     - name: "Execute .bashrc"
       script:
         - bash ./.bashrc
+
+mac_task:
+  osx_instance:
+    image: catalina-base # see https://cirrus-ci.org/guide/macOS/
+  matrix:
+    - name: "Execute .bashrc"
+      script:
+        - bash ./.bashrc
