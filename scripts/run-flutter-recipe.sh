@@ -1,18 +1,20 @@
 #!/bin/bash
 
+set -euo pipefail
+
 cd "$HOME/git/chrome_infra/build/scripts/slave/recipes/flutter"
 
 UNAME=$(uname)
 
-if [ $UNAME == 'darwin' ]; then
+if [ "$UNAME" == 'darwin' ]; then
   OPEN='open'
-elif [ $UNAME == 'linux' ]; then
+elif [ "$UNAME" == 'linux' ]; then
   OPEN='xdg-open'
 else
   OPEN='echo'
 fi
 
-if [ -z $1 ]; then
+if [ -z "$1" ]; then
   echo Please specify package name
   exit 1
 fi
