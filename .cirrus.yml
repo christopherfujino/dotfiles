@@ -15,6 +15,7 @@ task: # pinned debian version
         - bash ./.bashrc
     - name: "Lint bash scripts"
       script:
+        - shellcheck --version
         - shellcheck ./scripts/*.sh
 
 task:
@@ -29,4 +30,5 @@ task:
         - bash ./.bashrc
     - name: "Lint bash scripts"
       script:
+        - shellcheck --version
         - shellcheck ./scripts/*.sh
