@@ -13,11 +13,9 @@ task: # pinned debian version
     - uname -a
     - cat /etc/issue
   matrix:
-    - name: "Execute .bashrc"
+    - name: "Integrate"
       script:
         - bash ./.bashrc
-    - name: "Lint bash scripts"
-      script:
         - shellcheck --version
         - shellcheck ./scripts/*.sh
 
@@ -29,10 +27,8 @@ task:
     - brew install shellcheck
     - uname -a
   matrix:
-    - name: "Execute .bashrc"
+    - name: "Integrate"
       script:
         - bash ./.bashrc
-    - name: "Lint bash scripts"
-      script:
         - shellcheck --version
         - shellcheck ./scripts/*.sh
