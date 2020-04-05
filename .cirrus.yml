@@ -1,9 +1,20 @@
 # CIRRUS CONFIGURATION FILE
 # https://cirrus-ci.org/guide/writing-tasks/
 
-linux_task:
+linux_pinned_task: # pinned debian version
   container:
     image: debian:bullseye-20200327-slim
+  setup_script:
+    - apt-get update && apt-get upgrade --yes
+    - apt-get install --yes vim git
+  matrix:
+    - name: "Execute .bashrc"
+      script:
+        - bash ./.bashrc
+
+linux_rolling_task: # latest debian version
+  container:
+    image: debian:latest
   setup_script:
     - apt-get update && apt-get upgrade --yes
     - apt-get install --yes vim git
