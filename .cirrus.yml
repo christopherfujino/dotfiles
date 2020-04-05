@@ -1,7 +1,8 @@
 # CIRRUS CONFIGURATION FILE
 # https://cirrus-ci.org/guide/writing-tasks/
 
-linux_pinned_task: # pinned debian version
+task: # pinned debian version
+  name: Linux pinned version
   container:
     image: debian:bullseye-20200327-slim
   setup_script:
@@ -12,7 +13,8 @@ linux_pinned_task: # pinned debian version
       script:
         - bash ./.bashrc
 
-linux_rolling_task: # latest debian version
+task: # latest debian version
+  name: Linux latest version
   container:
     image: debian:latest
   setup_script:
@@ -23,7 +25,8 @@ linux_rolling_task: # latest debian version
       script:
         - bash ./.bashrc
 
-mac_task:
+task:
+  name: macOS
   osx_instance:
     image: catalina-base # see https://cirrus-ci.org/guide/macOS/
   matrix:
