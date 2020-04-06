@@ -2,8 +2,16 @@
 # ~/.bashrc
 #
 
-# If not running interactively, don't do anything
-#[[ $- != *i* ]] && return
+# Checksum this config file
+CHECKSUM=$(sha256sum "${BASH_SOURCE[0]}" | awk '{print $1}')
+
+# If our checksum env is already up to date, we already sourced this file
+if [ "$CHRIS_DOTFILES_CHECKSUM" == "$CHECKSUM" ]; then
+  # don't exit as you want to use this terminal, but stop sourcing this file
+  return
+fi
+
+export CHRIS_DOTFILES_CHECKSUM="$CHECKSUM"
 
 # OS dependent config
 OS=$(uname)
