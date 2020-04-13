@@ -3,7 +3,7 @@
 #
 
 # Checksum this config file (don't use awk, cut is POSIX)
-CHECKSUM=$(sha256sum "${BASH_SOURCE[0]}" | cut -d ' ' -f 1)
+CHECKSUM=$(shasum -a 256 "${BASH_SOURCE[0]}" | cut -d ' ' -f 1)
 
 # If our checksum env is already up to date, we already sourced this file
 if [ "$CHRIS_DOTFILES_CHECKSUM" == "$CHECKSUM" ] && [ -z "$TMUX" ]; then
