@@ -12,6 +12,7 @@ set hidden
 set autoread
 set signcolumn=yes  " Always draw sign column
 set noshowmode      " Unneccessary since we use airline
+set list            " Highlight trailing whitespace
 
 set wildmenu        " why is this not the default?!
 set number          " Show line numbers.
@@ -179,6 +180,7 @@ command! Diffs
 " Vim-Airline Theming
 let g:airline_theme='base16_monokai'
 let g:airline_powerline_fonts=1
+let g:airline_section_b='' " don't show git branch
 
 nnoremap <c-t> :tabe<cr>
 nnoremap <c-left> :tabprevious<cr>
