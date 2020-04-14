@@ -1,13 +1,12 @@
 # cool powerups here: http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired
 [user]
-	name = Christopher Fujino
+  name = Christopher Fujino
   email = christopherfujino@gmail.com
-  #email = fujino@google.com
 [push]
-	default = simple
+  default = simple
 [alias]
   a = add
-  aa = !git add -A && git commit --amend
+  amend = !git add -A && git commit --amend --reuse-message=HEAD
   b = branch
   c = commit -m
   cm = !git add -A && git commit -m
@@ -29,6 +28,6 @@
 [diff]
   algorithm = patience
 [http]
-	cookiefile = "$HOME/.gitcookies"
+  cookiefile = "$HOME/.gitcookies"
 [color]
-	ui = auto
+  ui = auto
