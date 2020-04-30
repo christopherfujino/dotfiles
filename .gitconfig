@@ -13,7 +13,7 @@
   co = checkout
   co-pr = !sh -c 'git fetch upstream pull/$1/head:pr/$1 && git checkout pr/$1' -
   d = diff
-  h = !git log --graph --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+  h = !git log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
   hub = !git push -u origin $(git symbolic-ref --short HEAD)
   pl = pull --prune
   prune-all = "!git remote | xargs git remote prune"
@@ -31,3 +31,5 @@
   cookiefile = "$HOME/.gitcookies"
 [color]
   ui = auto
+[pull]
+  ff = only
