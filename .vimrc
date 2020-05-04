@@ -185,8 +185,6 @@ let g:airline_powerline_fonts=1
 let g:airline_section_b='' " don't show git branch
 
 nnoremap <c-t> :tabe<cr>
-nnoremap <c-left> :tabprevious<cr>
-nnoremap <c-right> :tabnext<cr>
 
 " If starting vim with a directory as first (and only) arg, cd into dir
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) | execute 'cd' argv()[0] | endif
