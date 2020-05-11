@@ -42,13 +42,6 @@ alias gupdate='git add . && git commit --amend'
 
 alias grepi='grep -i'
 
-# fzf
-if type fzf >/dev/null 2>&1; then
-  alias checkout="git checkout \$(git branch | sed 's/*/ /' | fzf)"
-  alias branchd="git branch --list | sed -E 's/^[ *]+//' | fzf | xargs git branch -d --force"
-else
-  echo "Warning! fzf not installed, and it's awesome!"
-fi
 # Text editors
 alias emacs='emacs -nw' # default to console-based emacs
 
@@ -160,6 +153,14 @@ fi
 if type lesspipe.sh >/dev/null 2>&1; then
   export LESS=-r
   export LESSOPEN="|lesspipe.sh %s"
+fi
+
+# fzf
+if type fzf >/dev/null 2>&1; then
+  alias checkout="git checkout \$(git branch | sed 's/*/ /' | fzf)"
+  alias branchd="git branch --list | sed -E 's/^[ *]+//' | fzf | xargs git branch -d --force"
+else
+  echo "Warning! fzf not installed, and it's awesome!"
 fi
 
 # source local-machine specific config if it exists
