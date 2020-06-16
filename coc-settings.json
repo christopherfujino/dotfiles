@@ -1,17 +1,5 @@
 {
   "languageserver": {
-    "dart": {
-      "command": "dart_language_server",
-      "args": [],
-      "filetypes": ["dart"],
-      "initializationOptions": {},
-      "settings": {
-        "dart": {
-          "validation": {},
-          "completion": {}
-        }
-      }
-    },
     "bash": {
       "command": "bash-language-server",
       "args": ["start"],
@@ -92,12 +80,14 @@
     },
     "golang": {
       "command": "gopls",
+      "args": ["serve", "-debug", "0.0.0.0:8484", "-rpc.trace"],
       "disableWorkspaceFolders": true,
-      "filetypes": ["go"]
+      "filetypes": ["go"],
+      "rootPatterns": ["go.mod"]
     },
     "tsserver": {
       "enable": false,
-      "filetypes": ["js", "jsx", "ts"],
+      "filetypes": ["js", "jsx", "ts", "tsx"],
       "module": "coc-tsserver"
     }
   }
