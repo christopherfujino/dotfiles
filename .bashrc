@@ -2,18 +2,6 @@
 # ~/.bashrc
 #
 
-# Checksum this config file (don't use awk, cut is POSIX)
-CHECKSUM=$(shasum -a 256 "${BASH_SOURCE[0]}" | cut -d ' ' -f 1)
-
-# If our checksum env is already up to date, we already sourced this file
-if [ "$CHRIS_DOTFILES_CHECKSUM" == "$CHECKSUM" ] && [ -z "$TMUX" ]; then
-  # don't exit as you want to use this terminal, but stop sourcing this file
-  echo 'Your .bashrc was already sourced.'
-  return
-fi
-
-export CHRIS_DOTFILES_CHECKSUM="$CHECKSUM"
-
 # OS dependent config
 OS=$(uname)
 if [ "$OS" = Linux ]; then
@@ -68,10 +56,6 @@ function table_flip {
 
 PROMPT_COMMAND='[ $? -eq 0 ] || table_flip'
 
-# If in tmux, don't process further
-
-[ -n "$TMUX" ] && return
-
 if type nvim >/dev/null 2>&1; then
   export VISUAL=nvim
 elif type vim >/dev/null 2>&1; then
@@ -100,26 +84,38 @@ if [ -d "$HOME/git" ]; then
   fi
 fi
 
+# golang dev
 
-# add dirs to path, if they exist
-dirs=(
-  "$HOME/scripts"
-  "$HOME/bin"
-  "$HOME/go/bin"
-  "$HOME/.node_modules/bin"
-  "$HOME/.nvm"
-  "$HOME/.pub-cache/bin"
-  "$HOME/git/depot_tools"
-  "$HOME/.cargo/bin"
-  "$HOME/Library/Python/2.7/bin"
-  "$HOME/.local/bin" # pip3?
-  #"$HOME/anaconda3/bin"
-  #"$HOME/.rvm/bin"
-)
+[ -d "$HOME/go" ] && export GOPATH="$HOME/go"
 
-for i in "${dirs[@]}"; do
-  [ -d "$i" ] && PATH="$i:$PATH"
-done
+# Checksum this config file (don't use awk, cut is POSIX)
+CHECKSUM=$(shasum -a 256 "${BASH_SOURCE[0]}" | cut -d ' ' -f 1)
+
+# If our checksum env is already up to date, we already sourced this file
+if [[ "$CHRIS_DOTFILES_CHECKSUM" != "$CHECKSUM" ]]; then
+  # add dirs to path, if they exist
+  dirs=(
+    "$HOME/scripts"
+    "$HOME/bin"
+    "$HOME/go/bin"
+    "$HOME/.node_modules/bin"
+    "$HOME/.nvm"
+    "$HOME/.pub-cache/bin"
+    "$HOME/git/depot_tools"
+    "$HOME/.cargo/bin"
+    "$HOME/Library/Python/2.7/bin"
+    "$HOME/.local/bin" # pip3?
+    #"$HOME/anaconda3/bin"
+    #"$HOME/.rvm/bin"
+  )
+
+  # TODO remove checksum and only add paths that aren't already on path
+  for i in "${dirs[@]}"; do
+    [ -d "$i" ] && PATH="$i:$PATH"
+  done
+fi
+
+export CHRIS_DOTFILES_CHECKSUM="$CHECKSUM"
 
 # source config files, if they exist
 files=(
@@ -133,10 +129,6 @@ for i in "${files[@]}"; do
   # shellcheck source=/dev/null
   [ -f "$i" ] && . "$i"
 done
-
-# golang dev
-
-[ -d "$HOME/go" ] && export GOPATH="$HOME/go"
 
 # if ruby dev env set...
 if type gem >/dev/null 2>&1; then
