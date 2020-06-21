@@ -54,6 +54,16 @@ function table_flip {
   done
 }
 
+function add_to_path_if_not_present {
+  local path="$1"
+  [ ! -d "$path" ] && return
+  # The second argument is optional, but will speed up this function
+  local paths="${2:-$(echo "$PATH" | tr : '\n')}"
+  echo "$paths" | grep --fixed-string --line-regexp "$dir" >/dev/null
+  # Add $dir to $PATH if it does not yet appear
+  [ "$?" -ne 0 ] && PATH="$dir:$PATH"
+}
+
 PROMPT_COMMAND='[ $? -eq 0 ] || table_flip'
 
 if type nvim >/dev/null 2>&1; then
@@ -88,34 +98,25 @@ fi
 
 [ -d "$HOME/go" ] && export GOPATH="$HOME/go"
 
-# Checksum this config file (don't use awk, cut is POSIX)
-CHECKSUM=$(shasum -a 256 "${BASH_SOURCE[0]}" | cut -d ' ' -f 1)
+# add dirs to path, if they exist
+dirs=(
+  "$HOME/scripts"
+  "$HOME/bin"
+  "$HOME/go/bin"
+  "$HOME/.node_modules/bin"
+  "$HOME/.nvm"
+  "$HOME/.pub-cache/bin"
+  "$HOME/git/depot_tools"
+  "$HOME/.cargo/bin"
+  "$HOME/Library/Python/2.7/bin"
+  "$HOME/.local/bin" # pip3?
+  #"$HOME/.rvm/bin"
+)
 
-# If our checksum env is already up to date, we already sourced this file
-if [[ "$CHRIS_DOTFILES_CHECKSUM" != "$CHECKSUM" ]]; then
-  # add dirs to path, if they exist
-  dirs=(
-    "$HOME/scripts"
-    "$HOME/bin"
-    "$HOME/go/bin"
-    "$HOME/.node_modules/bin"
-    "$HOME/.nvm"
-    "$HOME/.pub-cache/bin"
-    "$HOME/git/depot_tools"
-    "$HOME/.cargo/bin"
-    "$HOME/Library/Python/2.7/bin"
-    "$HOME/.local/bin" # pip3?
-    #"$HOME/anaconda3/bin"
-    #"$HOME/.rvm/bin"
-  )
-
-  # TODO remove checksum and only add paths that aren't already on path
-  for i in "${dirs[@]}"; do
-    [ -d "$i" ] && PATH="$i:$PATH"
-  done
-fi
-
-export CHRIS_DOTFILES_CHECKSUM="$CHECKSUM"
+paths=$(echo "$PATH" | tr : '\n')
+for dir in "${dirs[@]}"; do
+  add_to_path_if_not_present "$dir" "$paths"
+done
 
 # source config files, if they exist
 files=(
@@ -125,19 +126,20 @@ files=(
   "$HOME/.rvm/scripts/rvm"
   "$HOME/.flutter-completion"
 )
+
 for i in "${files[@]}"; do
   # shellcheck source=/dev/null
-  [ -f "$i" ] && . "$i"
+  [ -f "$i" ] && source "$i"
 done
 
 # if ruby dev env set...
 if type gem >/dev/null 2>&1; then
   if type rbenv >/dev/null 2>&1; then
     eval "$(rbenv init -)"
-    PATH="$HOME/.rbenv/bin:$PATH"
+    add_to_path_if_not_present "$HOME/.rbenv/bin"
   fi
 
-  PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+  add_to_path_if_not_present "$(ruby -e 'print Gem.user_dir')/bin"
 
   alias rrg='rake routes | grep -i'
 fi
@@ -157,7 +159,7 @@ fi
 
 # source local-machine specific config if it exists
 # shellcheck source=/dev/null
-[ -f "$HOME/.bashrc.local" ] && . "$HOME/.bashrc.local"
+[ -f "$HOME/.bashrc.local" ] && source "$HOME/.bashrc.local"
 
 function count_duplicate_path_entries {
   COUNT=$(echo "$PATH" | tr : '\n' | sort | uniq -d | wc -l)
