@@ -39,6 +39,17 @@ set incsearch       " Highlight search matches while typing
 set splitbelow
 set splitright      " better defaults for opening new splits!
 
+" Mouse
+noremap <MiddleMouse> <Nop>
+noremap <2-MiddleMouse> <Nop>
+noremap <3-MiddleMouse> <Nop>
+noremap <4-MiddleMouse> <Nop>
+
+nnoremap <MiddleMouse> <Nop>
+nnoremap <2-MiddleMouse> <Nop>
+nnoremap <3-MiddleMouse> <Nop>
+nnoremap <4-MiddleMouse> <Nop>
+
 " Never show netrw banner
 let g:netrw_banner        = 0
 
@@ -69,6 +80,8 @@ call plug#begin()
   " Add JSX Syntax
   " Plug 'mxw/vim-jsx' " Deprecated
   Plug 'MaxMEllon/vim-jsx-pretty'
+
+  Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 
   " Typescript
   Plug 'HerringtonDarkholme/yats.vim'
@@ -159,7 +172,7 @@ let g:fzf_commits_log_options = '--graph --color=always --all --format="%C(auto)
 let $FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 command! -bang -nargs=? -complete=dir Files
       \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-noremap <c-p> <esc>:Files<cr>
+noremap <c-p> :Files<cr>
 
 function! s:checkout_clean(branch)
   execute '!git checkout ' . substitute(a:branch, ' ', '', 'g')
