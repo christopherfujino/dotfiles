@@ -35,25 +35,6 @@ alias emacs='emacs -nw' # default to console-based emacs
 
 PS1='\w\$ '
 
-function table_flip {
-  FRAMES=(
-    "( °□°）   ┯━┯  "
-    "\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b ( °□°）  ┯━┯  "
-    "\b\b\b\b\b\b\b\b\b\b\b\b\b\b ( °□°） ┯━┯  "
-    "\b\b\b\b\b\b\b\b\b\b\b\b\b ( °□°）┯━┯  "
-    "\b\b\b\b\b\b\b\b\b\b\b\b(╯°□°）╯┻━┻ "
-    "\b\b\b\b ┯━┯"
-    "\b\b\b ┻━"
-    "\b\b ┯"
-    "\b "
-    " \n"
-  )
-  for FRAME in "${FRAMES[@]}"; do
-    printf '%b' "$FRAME"
-    sleep 0.09
-  done
-}
-
 function add_to_path_if_not_present {
   local path="$1"
   [ ! -d "$path" ] && return
@@ -63,8 +44,6 @@ function add_to_path_if_not_present {
   # Add $dir to $PATH if it does not yet appear
   [ "$?" -ne 0 ] && PATH="$dir:$PATH"
 }
-
-PROMPT_COMMAND='[ $? -eq 0 ] || table_flip'
 
 if type nvim >/dev/null 2>&1; then
   export VISUAL=nvim
@@ -152,7 +131,7 @@ fi
 # fzf
 if type fzf >/dev/null 2>&1; then
   alias checkout="git checkout \$(git branch | sed 's/*/ /' | fzf)"
-  alias branchd="git branch --list | sed -E 's/^[ *]+//' | fzf | xargs git branch -d --force"
+  alias branchd="git branch --list | sed -E 's/^[ *]+//' | fzf --multi | xargs git branch -d --force"
 else
   echo "Warning! fzf not installed, and it's awesome!"
 fi
