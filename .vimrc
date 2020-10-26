@@ -99,7 +99,7 @@ call plug#begin()
   "Plug 'tpope/vim-dispatch'
 
   " show indentation markers
-  Plug 'yggdroot/indentLine'
+  Plug 'yggdroot/indentLine' " Note: sets conceallevel=2
 
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rhubarb' " github plugin for vim-fugitive
@@ -123,7 +123,8 @@ call plug#begin()
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
 
-  " Tooling
+  " Distraction free mode
+  Plug 'junegunn/goyo.vim'
 
   " Search
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -138,11 +139,13 @@ filetype plugin indent on
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-eighties
 
+let g:goyo_width=81
+
 " Indentline
 let g:indentLine_char = '⎸'
 let g:indentLine_bufNameExclude = ["term:.*"] " Don't show in terminal!
-
-" ALE
+let g:indentLine_setConceal = 0 " This was hiding quotes in JSON files
+"ALE
 "nnoremap <c-l> :ALELint<cr>
 "let g:ale_linters = {
 "      \'javascript': ['eslint'],
@@ -186,6 +189,9 @@ command! Checkout
 
 command! EVimrc edit ~/.vimrc
 
+" Execute (!) current file (%) with full path (:p)
+command! Execute :! %:p
+
 command! Diffs
       \ call fzf#run({
       \   'source': "git diff --stat | awk '{print $1}' | sed '$ d'",
@@ -216,6 +222,13 @@ if has('nvim')
     \ coc#refresh()
   " <S-TAB> maps to previous completion
   inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+  " Symbol renaming.
+  nmap <leader>rn <Plug>(coc-rename)
+
+  " Formatting selected code.
+  xmap <leader>f  <Plug>(coc-format-selected)
+  nmap <leader>f  <Plug>(coc-format-selected)
 
   highlight link CocErrorSign ALEErrorSign
 
