@@ -13,7 +13,9 @@ else
 fi
 
 REMOTE='origin'
-OUTPUT=$(git push --porcelain -u "$REMOTE" HEAD)
+# For every branch that is up to date or successfully pushed, add upstream
+# (tracking) reference, used by argument-less git-pull(1) and other commands.
+OUTPUT=$(git push --porcelain --set-upstream "$REMOTE" HEAD)
 
 # e.g.
 #
@@ -52,6 +54,6 @@ fi
 BRANCH=${BASH_REMATCH[1]}
 URL="$REPO/compare/$BRANCH?expand=1"
 
-echo "Opening $URL..."
+echo "Opening $URL with $OPEN..."
 
 $OPEN "$URL" &>/dev/null &
