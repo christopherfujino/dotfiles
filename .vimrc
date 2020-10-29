@@ -95,9 +95,6 @@ call plug#begin()
   " Intelligently deal with swap files
   Plug 'zirrostig/vim-smart-swap'
 
-  " Asynchronously invoke external tools in new Tmux pane
-  "Plug 'tpope/vim-dispatch'
-
   " show indentation markers
   Plug 'yggdroot/indentLine' " Note: sets conceallevel=2
 
@@ -105,15 +102,6 @@ call plug#begin()
   Plug 'tpope/vim-rhubarb' " github plugin for vim-fugitive
   " show git diff in gutter before line number
   Plug 'airblade/vim-gitgutter'
-  "Plug 'w0rp/ale' " Asynchronously run linters
-
-  " Ruby/Rails
-  "Plug 'tpope/vim-rails'
-  "Plug 'tpope/vim-bundler'
-  "Plug 'tpope/vim-endwise'
-
-  " Slim template lang syntax highlighting
-  "Plug 'onemanstartup/vim-slim', { 'for': 'slim' }
 
   "Plug 'mattn/emmet-vim', { 'for': 'html' }
 
@@ -145,27 +133,6 @@ let g:goyo_width=81
 let g:indentLine_char = '⎸'
 let g:indentLine_bufNameExclude = ["term:.*"] " Don't show in terminal!
 let g:indentLine_setConceal = 0 " This was hiding quotes in JSON files
-"ALE
-"nnoremap <c-l> :ALELint<cr>
-"let g:ale_linters = {
-"      \'javascript': ['eslint'],
-"      \'ruby': ['rubocop'],
-"      \'sh': ['shellcheck'],
-"      \'dart': [],
-"      \'python': [],
-"      \}
-"let g:ale_set_highlights=0
-"let g:ale_echo_msg_format='[%linter%: %code%] %s (%severity%)'
-"let g:ale_sign_error = '✘'
-"let g:ale_sign_warning = '⚠'
-"let g:ale_history_enabled=0
-"highlight ALEErrorSign ctermfg=1 ctermbg=18
-"let g:ale_lint_delay=750
-"let g:ale_echo_delay=125
-"let g:ale_lint_on_text_changed='normal'
-"let g:ale_lint_on_insert_leave=1
-"let g:ale_maximum_file_size=250000
-"let g:ale_set_balloons=0
 
 " Dart Style Guide - for vim-dart
 let g:dart_style_guide = 2
