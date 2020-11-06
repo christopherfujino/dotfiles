@@ -74,11 +74,9 @@ call plug#begin()
   Plug 'leafgarland/typescript-vim'
 
   " better js syntax
-  "Plug 'pangloss/vim-javascript'
   Plug 'yuezk/vim-js'
 
   " Add JSX Syntax
-  " Plug 'mxw/vim-jsx' " Deprecated
   Plug 'MaxMEllon/vim-jsx-pretty'
 
   Plug 'chrisbra/csv.vim', { 'for': 'csv' }
