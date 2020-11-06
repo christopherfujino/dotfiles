@@ -3,6 +3,10 @@
 PLATFORM=$(uname)
 CURRENT_BRANCH=$(git symbolic-ref --short HEAD)
 
+if [ -z "$SSH_CLIENT" ] && [ -z "$SSH_TTY" ]; then
+  SHOULD_OPEN_CHROME='TRUE'
+fi
+
 if [ "$PLATFORM" == 'Darwin' ]; then
   OPEN='open'
 elif [ "$PLATFORM" == 'Linux' ]; then
@@ -43,7 +47,7 @@ if [[ ! $OUTPUT =~ $REGEX ]]; then
   exit 1
 fi
 
-REPO="https://github.com/${BASH_REMATCH[1]}"
+REPO="github.com/${BASH_REMATCH[1]}"
 
 REGEX="Branch '(.*)' set up to track remote branch .* from .*\."
 if [[ ! $OUTPUT =~ $REGEX ]]; then
@@ -54,6 +58,12 @@ fi
 BRANCH=${BASH_REMATCH[1]}
 URL="$REPO/compare/$BRANCH?expand=1"
 
-echo "Opening $URL with $OPEN..."
 
+if [ "$SHOULD_OPEN_CHROME" != 'TRUE' ]; then
+  echo "To open a PR:\n"
+  echo $URL
+  exit 0
+fi
+
+echo "Opening $URL with $OPEN..."
 $OPEN "$URL" &>/dev/null &
