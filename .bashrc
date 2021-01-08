@@ -89,6 +89,7 @@ dirs=(
   "$HOME/.cargo/bin"
   "$HOME/Library/Python/2.7/bin"
   "$HOME/.local/bin" # pip3?
+  "$HOME/flutter_goma"
   #"$HOME/.rvm/bin"
 )
 
