@@ -92,6 +92,12 @@
       "enable": false,
       "filetypes": ["js", "jsx", "ts", "tsx"],
       "module": "coc-tsserver"
+    },
+    "haskell": {
+      "command": "haskell-language-server-8.10.3",
+      "args": ["--lsp"],
+      "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
+      "filetypes": ["haskell", "lhaskell"]
     }
   }
 }
