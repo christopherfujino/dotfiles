@@ -195,6 +195,10 @@ if has('nvim')
   xmap <leader>f  <Plug>(coc-format-selected)
   nmap <leader>f  <Plug>(coc-format-selected)
 
+  " Navigate coc diagnostics
+  nmap <silent> [g <Plug>(coc-diagnostic-prev)
+  nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
   highlight link CocErrorSign ALEErrorSign
 
   function! s:check_back_space() abort
