@@ -16,7 +16,7 @@ else
   exit 1
 fi
 
-REMOTE='origin'
+REMOTE="$1"
 # For every branch that is up to date or successfully pushed, add upstream
 # (tracking) reference, used by argument-less git-pull(1) and other commands.
 OUTPUT=$(git push --porcelain --set-upstream "$REMOTE" HEAD)
