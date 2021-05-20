@@ -29,7 +29,7 @@
 [diff]
   algorithm = patience
 [http]
-  cookiefile = "$HOME/.gitcookies"
+  cookiefile = "~/.gitcookies"
 [color]
   ui = auto
 [pull]
