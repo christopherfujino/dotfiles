@@ -58,6 +58,24 @@ function add_to_path_if_not_present {
   [ "$?" -ne 0 ] && PATH="$dir:$PATH"
 }
 
+function monorepo {
+  local path="$1"
+  MONOREPO="$HOME/git/chris-monorepo"
+
+  if [[ ! -d "$MONOREPO" ]]; then
+    1>&2 echo "Directory not found: $MONOREPO"
+    exit 1
+  fi
+
+  if [ -n "$path" ]; then
+    echo "cd $MONOREPO/$path"
+    cd "$MONOREPO/$path"
+  else
+    echo "cd $MONOREPO"
+    cd "$MONOREPO"
+  fi
+}
+
 if type nvim >/dev/null 2>&1; then
   export VISUAL=nvim
 elif type vim >/dev/null 2>&1; then
@@ -82,7 +100,6 @@ if [ -d "$HOME/git" ]; then
   if [ -d "$GIT/flutter" ]; then
     export FLUTTER="$GIT/flutter"
     export DART_SDK="$FLUTTER/bin/cache/dart-sdk"
-    alias dart-analysis-server="$DART_SDK/bin/dart $DART_SDK/bin/snapshots/analysis_server.dart.snapshot --lsp"
   fi
 fi
 
@@ -104,6 +121,7 @@ dirs=(
   "$HOME/.local/bin" # pip3?
   "$HOME/flutter_goma"
   #"$HOME/.rvm/bin"
+  "$HOME/.deno/bin"
 )
 
 paths=$(echo "$PATH" | tr : '\n')
