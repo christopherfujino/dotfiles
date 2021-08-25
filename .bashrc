@@ -27,16 +27,19 @@ alias g=git
 alias gs='git status'
 alias gb='git branch'
 alias gupdate='git add . && git commit --amend'
+# -x means include processes without an attached tty
+alias psx='ps x | less'
 
 function gcheckoutremote {
   # Validate argument
   [ -z "$1" ] && 2>&1 echo 'Usage: gcheckoutremote $REMOTE_NAME' && return
+  git fetch "$1"
   # git ls-remote... list all branches on a remote
   # sed ... capture just the branch name
   # fzf ... allow user to select a branch
   # xargs ... checkout selected branch
   git ls-remote --heads "$1" | \
-    sed 's/.*refs\/heads\/\([a-zA-Z0-9./_-]\+\)/\1/' | \
+    sed 's/.*refs\/heads\/\([a-zA-Z0-9./_-]*\)/\1/' | \
     fzf --no-multi | \
     xargs git checkout
 }
