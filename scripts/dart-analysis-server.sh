@@ -5,4 +5,5 @@ if [ -z "$DART_SDK" ]; then
   exit 1
 fi
 
+#"$DART_SDK/bin/dart" "$DART_SDK/bin/snapshots/analysis_server.dart.snapshot" --lsp --instrumentation-log-file=/tmp/dart-lsp.log
 "$DART_SDK/bin/dart" "$DART_SDK/bin/snapshots/analysis_server.dart.snapshot" --lsp

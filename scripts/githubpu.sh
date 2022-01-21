@@ -56,6 +56,8 @@ if [[ ! $OUTPUT =~ $REGEX ]]; then
 fi
 
 BRANCH=${BASH_REMATCH[1]}
+
+# TODO "$REPO/compare/$UPSTREAM_BRANCH...$USERNAME:$LOCAL_BRANCH?expand=1"
 URL="$REPO/compare/$BRANCH?expand=1"
 
 
