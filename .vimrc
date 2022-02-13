@@ -122,7 +122,6 @@ call plug#end()
 filetype plugin indent on
 
 " PLUGIN VARIABLES
-let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-eighties
 
 let g:goyo_width=81
@@ -217,6 +216,10 @@ if has('nvim')
   " show coc diagnostics in airline
   let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
   let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+endif
+
+if has('win32')
+  command! Powershell edit term://powershell
 endif
 
 autocmd BufWritePost .vimrc :so %

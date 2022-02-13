@@ -81,6 +81,11 @@
       "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
       "filetypes": ["c", "cpp", "objc", "objcpp"]
     },
+    "dart": {
+      "command": "dart.bat",
+      "args": ["D:\\git\\flutter\\bin\\cache\\dart-sdk\\bin\\snapshots\\analysis_server.dart.snapshot", "--lsp"],
+      "filetypes": ["dart"]
+    },
     "golang": {
       "command": "gopls",
       "args": ["serve", "-debug", "0.0.0.0:8484", "-rpc.trace"],
