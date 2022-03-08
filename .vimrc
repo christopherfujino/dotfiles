@@ -53,6 +53,8 @@ nnoremap <4-MiddleMouse> <Nop>
 " Never show netrw banner
 let g:netrw_banner        = 0
 
+let mapleader = '\\'
+
 " PLUGINS
 
 " https://github.com/junegunn/vim-plug must be installed to manage plugins
@@ -66,12 +68,17 @@ call plug#begin()
   " Autocomplete for LSP
   if has('nvim')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+    Plug 'mfussenegger/nvim-dap'
   endif
 
   Plug 'dart-lang/dart-vim-plugin'
 
   " Typescript Support
   Plug 'leafgarland/typescript-vim'
+
+  " Zig support
+  Plug 'ziglang/zig.vim'
 
   " better js syntax
   Plug 'yuezk/vim-js'
@@ -83,6 +90,8 @@ call plug#begin()
 
   " Typescript
   Plug 'HerringtonDarkholme/yats.vim'
+
+  Plug 'keith/swift.vim'
 
   " Add :Rename, :Move, :Delete, et al
   Plug 'tpope/vim-eunuch'
@@ -219,8 +228,30 @@ if has('nvim')
   let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 endif
 
-autocmd BufWritePost .vimrc :so %
+" nvim-dap
+lua << EOF
+  local dap = require('dap')
 
-" Syntaxes
-"autocmd FileType python set sw=4 tw=4 # this was causing weird newlines
-"autocmd FileType cs set sw=4 tw=4
+  dap.adapters.dart = {
+    type = "executable",
+    --command = "flutter",
+    command = "dart",
+    args = {"debug_adapter"}
+  }
+  dap.configurations.dart = {
+    {
+      type = "dart",
+      request = "launch",
+      name = "Launch Dart Program",
+      --program = "${workspaceFolder}/main.dart",
+      program = "${file}",
+      cwd = "${workspaceFolder}",
+      --cwd = "/home/fujino/git/pea-budget/flutter",
+      -- args to the program
+      --args = {"run", "-d", "chrome"}
+
+      -- args to the runner (dart/flutter)
+      --toolArgs = {}
+    }
+  }
+EOF
