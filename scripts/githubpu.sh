@@ -16,6 +16,12 @@ else
   exit 1
 fi
 
+if [[ "$CURRENT_BRANCH" == 'master' ]] || [[ "$CURRENT_BRANCH" == 'main' ]]; then
+  echo "Error! You are on $CURRENT_BRANCH!"
+  # No need to open a PR
+  exit 1
+fi
+
 REMOTE="$1"
 # For every branch that is up to date or successfully pushed, add upstream
 # (tracking) reference, used by argument-less git-pull(1) and other commands.
@@ -35,11 +41,6 @@ echo "$OUTPUT"
 #  echo "Your branch is already up to date with $REMOTE. Exiting..."
 #  exit 1
 #fi
-
-if [[ $CURRENT_BRANCH == 'master' ]]; then
-  # No need to open a PR
-  exit 0
-fi
 
 REGEX='To github\.com:(.*)\.git'
 if [[ ! $OUTPUT =~ $REGEX ]]; then
