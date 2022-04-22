@@ -243,11 +243,13 @@ lua << EOF
       type = "dart",
       request = "launch",
       name = "Launch Dart Program",
+      program = "${workspaceFolder}/lib/executable.dart",
       --program = "${workspaceFolder}/main.dart",
-      program = "${file}",
+      --program = "${file}",
       cwd = "${workspaceFolder}",
       --cwd = "/home/fujino/git/pea-budget/flutter",
       -- args to the program
+      args = {"doctor", "--verbose"}
       --args = {"run", "-d", "chrome"}
 
       -- args to the runner (dart/flutter)
