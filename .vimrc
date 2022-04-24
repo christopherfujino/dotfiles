@@ -101,6 +101,7 @@ call plug#begin()
 
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rhubarb' " github plugin for vim-fugitive
+
   " show git diff in gutter before line number
   Plug 'airblade/vim-gitgutter'
 
@@ -129,7 +130,7 @@ colorscheme base16-eighties
 
 let g:goyo_width=81
 
-" Indentline
+" yggdroot/indentLine
 let g:indentLine_char = '⎸'
 let g:indentLine_bufNameExclude = ["term:.*"] " Don't show in terminal!
 let g:indentLine_setConceal = 0 " This was hiding quotes in JSON files
@@ -166,7 +167,7 @@ command! Diffs
       \})
 
 " Vim-Airline Theming
-let g:airline_theme='base16_monokai'
+let g:airline_theme='base16_eighties'
 let g:airline_powerline_fonts=1
 let g:airline_section_b='' " don't show git branch
 
@@ -188,7 +189,6 @@ lua <<EOF
   -- Use an on_attach function to only map the following keys
   -- after the language server attaches to the current buffer
   local on_attach = function(client, bufnr)
-    print("Attached!")
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -209,43 +209,12 @@ lua <<EOF
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
   end
 
-  local util = require 'lspconfig.util'
-
-  local bin_name = 'dart'
-
-  local find_dart_sdk_root_path = function()
-    if os.getenv 'FLUTTER_SDK' then
-      local flutter_path = os.getenv 'FLUTTER_SDK'
-      return util.path.join(flutter_path, 'cache', 'dart-sdk', 'bin', 'dart')
-    elseif vim.fn['executable'] 'flutter' == 1 then
-      local flutter_path = vim.fn['resolve'](vim.fn['exepath'] 'flutter')
-      local flutter_bin = vim.fn['fnamemodify'](flutter_path, ':h')
-      return util.path.join(flutter_bin, 'cache', 'dart-sdk', 'bin', 'dart')
-    elseif vim.fn['executable'] 'dart' == 1 then
-      return vim.fn['resolve'](vim.fn['exepath'] 'dart')
-    else
-      return ''
-    end
-  end
-
-  local analysis_server_snapshot_path = function()
-    local dart_sdk_root_path = vim.fn['fnamemodify'](find_dart_sdk_root_path(), ':h')
-    local snapshot = util.path.join(dart_sdk_root_path, 'snapshots', 'analysis_server.dart.snapshot')
-
-    if vim.fn['has'] 'win32' == 1 or vim.fn['has'] 'win64' == 1 then
-      snapshot = snapshot:gsub('/', '\\')
-    end
-
-    return snapshot
-  end
-
   require('lspconfig').dartls.setup {
     on_attach = on_attach,
     flags = {
       -- This will be the default in neovim 0.7+
       debounce_text_changes = 150,
     },
-    cmd = { 'dart', analysis_server_snapshot_path(), '--protocol=lsp' },
   }
 
 EOF
