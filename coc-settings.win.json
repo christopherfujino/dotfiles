@@ -96,7 +96,8 @@
     "tsserver": {
       "enable": false,
       "filetypes": ["js", "jsx", "ts", "tsx"],
-      "module": "coc-tsserver"
+      "module": "coc-tsserver",
+      "suggestionActions.enabled": false
     },
     "haskell": {
       "command": "haskell-language-server-8.10.3",
