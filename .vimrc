@@ -9,6 +9,9 @@ scriptencoding utf-8
 " for lang client
 set hidden
 
+" Without this, colors are wack in WSL
+set termguicolors
+
 set autoread
 set signcolumn=yes  " Always draw sign column
 set noshowmode      " Unneccessary since we use airline
@@ -65,7 +68,7 @@ call plug#begin()
 
   " Autocomplete for LSP
   if has('nvim')
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'neovim/nvim-lspconfig'
   endif
 
   Plug 'dart-lang/dart-vim-plugin'
@@ -77,7 +80,7 @@ call plug#begin()
   Plug 'yuezk/vim-js'
 
   " Add JSX Syntax
-  Plug 'MaxMEllon/vim-jsx-pretty'
+  "Plug 'MaxMEllon/vim-jsx-pretty'
 
   Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 
@@ -172,51 +175,80 @@ nnoremap <c-t> :tabe<cr>
 " If starting vim with a directory as first (and only) arg, cd into dir
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) | execute 'cd' argv()[0] | endif
 
-" COC
-if has('nvim')
-  nmap <silent> gd <Plug>(coc-definition)
-  nmap <silent> gy <Plug>(coc-type-definition)
-  nmap <silent> gi <Plug>(coc-implementation)
-  nmap <silent> gr <Plug>(coc-references)
-  nnoremap <silent> K :call <SID>show_documentation()<CR>
-  " <TAB> maps to next completion
-  inoremap <silent><expr> <TAB>
-    \ pumvisible() ? "\<C-n>" :
-    \ <SID>check_back_space() ? "\<TAB>" :
-    \ coc#refresh()
-  " <S-TAB> maps to previous completion
-  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" nvim-lspconfig
+lua <<EOF
+  -- Mappings.
+  -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+  local opts = { noremap=true, silent=true }
+  vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+  vim.api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 
-  " Symbol renaming.
-  nmap <leader>rn <Plug>(coc-rename)
+  -- Use an on_attach function to only map the following keys
+  -- after the language server attaches to the current buffer
+  local on_attach = function(client, bufnr)
+    print("Attached!")
+    -- Enable completion triggered by <c-x><c-o>
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  " Formatting selected code.
-  xmap <leader>f  <Plug>(coc-format-selected)
-  nmap <leader>f  <Plug>(coc-format-selected)
+    -- Mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  end
 
-  " Navigate coc diagnostics
-  nmap <silent> [g <Plug>(coc-diagnostic-prev)
-  nmap <silent> ]g <Plug>(coc-diagnostic-next)
+  local util = require 'lspconfig.util'
 
-  highlight link CocErrorSign ALEErrorSign
+  local bin_name = 'dart'
 
-  function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1] =~# '\s'
-  endfunction
-
-  function! s:show_documentation()
-    if &filetype == 'vim'
-      execute 'h '.expand('<cword>')
+  local find_dart_sdk_root_path = function()
+    if os.getenv 'FLUTTER_SDK' then
+      local flutter_path = os.getenv 'FLUTTER_SDK'
+      return util.path.join(flutter_path, 'cache', 'dart-sdk', 'bin', 'dart')
+    elseif vim.fn['executable'] 'flutter' == 1 then
+      local flutter_path = vim.fn['resolve'](vim.fn['exepath'] 'flutter')
+      local flutter_bin = vim.fn['fnamemodify'](flutter_path, ':h')
+      return util.path.join(flutter_bin, 'cache', 'dart-sdk', 'bin', 'dart')
+    elseif vim.fn['executable'] 'dart' == 1 then
+      return vim.fn['resolve'](vim.fn['exepath'] 'dart')
     else
-      call CocAction('doHover')
-    endif
-  endfunction
+      return ''
+    end
+  end
 
-  " show coc diagnostics in airline
-  let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-  let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
-endif
+  local analysis_server_snapshot_path = function()
+    local dart_sdk_root_path = vim.fn['fnamemodify'](find_dart_sdk_root_path(), ':h')
+    local snapshot = util.path.join(dart_sdk_root_path, 'snapshots', 'analysis_server.dart.snapshot')
+
+    if vim.fn['has'] 'win32' == 1 or vim.fn['has'] 'win64' == 1 then
+      snapshot = snapshot:gsub('/', '\\')
+    end
+
+    return snapshot
+  end
+
+  require('lspconfig').dartls.setup {
+    on_attach = on_attach,
+    flags = {
+      -- This will be the default in neovim 0.7+
+      debounce_text_changes = 150,
+    },
+    cmd = { 'dart', analysis_server_snapshot_path(), '--protocol=lsp' },
+  }
+
+EOF
 
 if has('win32')
   command! Powershell edit term://powershell
