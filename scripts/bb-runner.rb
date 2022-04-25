@@ -1,22 +1,22 @@
 #!/usr/bin/env ruby
 
 # oneof 'flutter' or 'engine'
-REPO='flutter'
-COMMIT='f4abaa0735eba4dfd8f33f73363911d63931fe03'
-#FORCE_UPLOAD_FLAG='-p force_upload=true'
-FORCE_UPLOAD_FLAG=''
+REPO='engine'
+COMMIT='b3af521a050e6ef076778bcaf16e27b2521df8f8'
+FORCE_UPLOAD_FLAG='-p force_upload=true'
+XCODE='12a7209'
 builders = [
-  #'Mac beta Host Engine',
-  #'Mac beta Unopt',
-  #'Mac beta iOS Engine',
-  #'Mac beta iOS Engine Profile',
-  'Linux stable docs_publish',
+  'Mac stable iOS Engine Profile',
+  'Mac stable iOS Engine Release',
 ]
+
+#bb add -p force_upload=true -commit "https://chromium.googlesource.com/external/github.com/flutter/engine/+/9c6837c2b68d7a0413511ad87fc34f1f45b84cd7" "flutter/prod/Linux Host Engine"
 
 successes = []
 failures = []
 builders.each do |builder|
   out = `bb add \
+    -p '$flutter/osx_sdk={"sdk_version": "#{XCODE}"}' \
     #{FORCE_UPLOAD_FLAG} \
     -commit \
     "https://chromium.googlesource.com/external/github.com/flutter/#{REPO}/+/#{COMMIT}" \
