@@ -69,6 +69,8 @@ call plug#begin()
   " Autocomplete for LSP
   if has('nvim')
     Plug 'neovim/nvim-lspconfig'
+    "Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'mfussenegger/nvim-dap'
   endif
 
   Plug 'dart-lang/dart-vim-plugin'
@@ -217,6 +219,26 @@ lua <<EOF
     },
   }
 
+  -- Debug Adapter
+  -- https://github.com/mfussenegger/nvim-dap/blob/master/doc/dap.txt
+
+  local dap = require('dap')
+
+  dap.adapters.dart = {
+    type = "executable",
+    command = "flutter",
+    args = {"debug_adapter"}
+  }
+  dap.configurations.dart = {
+    {
+      type = "dart",
+      request = "launch",
+      name = "Launch Dart Program",
+      program = "${workspaceFolder}/lib/main.dart",
+      cwd = "${workspaceFolder}",
+      toolArgs = {"-d", "macos"},
+    }
+  }
 EOF
 
 if has('win32')
