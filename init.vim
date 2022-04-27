@@ -142,7 +142,8 @@ let g:dart_style_guide = 2
 
 " FZF Magic
 let g:fzf_commits_log_options = '--graph --color=always --all --format="%C(auto)%h %C(black)%C(bold)%cr%C(auto)%d %C(reset)%s"'
-let $FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+" default engine is rust (fast, uses SIMD), not pcre2
+let $FZF_DEFAULT_COMMAND='rg --files --engine default'
 command! -bang -nargs=? -complete=dir Files
       \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 noremap <c-p> :Files<cr>
@@ -158,6 +159,7 @@ command! Checkout
       \ })
 
 command! EVimrc edit ~/.vimrc
+command! ENvimrc edit ~/.config/nvim/init.vim
 
 " Execute (!) current file (%) with full path (:p)
 command! Execute :! %:p
