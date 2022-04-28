@@ -15,6 +15,12 @@ URxvt.letterSpace: -1
 !URxvt.url-launcher: /usr/bin/xdg-open
 !URxvt.matcher.button: 1
 
+! https://www.tomica.net/blog/2019/01/fixing-urxvt-copy-paste/
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
 ! changing font size on the fly, from aur package urxvt-resize-font-git
 !URxvt.perl-ext-common: resize-font
 
