@@ -66,10 +66,11 @@ call plug#begin()
   " Syntax
   Plug 'tpope/vim-surround'
 
-  " Autocomplete for LSP
+  " NeoVim!
   if has('nvim')
     Plug 'neovim/nvim-lspconfig'
-    "Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'hrsh7th/nvim-cmp'
+    Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'mfussenegger/nvim-dap'
   endif
 
@@ -159,7 +160,7 @@ command! Checkout
       \ })
 
 command! EVimrc edit ~/.vimrc
-command! ENvimrc edit ~/.config/nvim/init.vim
+command! NVimrc edit ~/.config/nvim/init.vim
 
 " Execute (!) current file (%) with full path (:p)
 command! Execute :! %:p
@@ -213,11 +214,57 @@ lua <<EOF
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
   end
 
+  -- Add additional capabilities supported by nvim-cmp
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
   require('lspconfig').dartls.setup {
     on_attach = on_attach,
+    capabilities = capabilities,
     flags = {
       -- This will be the default in neovim 0.7+
       debounce_text_changes = 150,
+    },
+  }
+
+  -- nvim-cmp setup
+  local cmp = require 'cmp'
+  cmp.setup {
+    --snippet = {
+    --  expand = function(args)
+    --    luasnip.lsp_expand(args.body)
+    --  end,
+    --},
+    mapping = cmp.mapping.preset.insert({
+      ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<CR>'] = cmp.mapping.confirm {
+        behavior = cmp.ConfirmBehavior.Replace,
+        select = true,
+      },
+      ['<Tab>'] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
+        --elseif luasnip.expand_or_jumpable() then
+        --  luasnip.expand_or_jump()
+        else
+          fallback()
+        end
+      end, { 'i', 's' }),
+      ['<S-Tab>'] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        --elseif luasnip.jumpable(-1) then
+        --  luasnip.jump(-1)
+        else
+          fallback()
+        end
+      end, { 'i', 's' }),
+    }),
+    sources = {
+      { name = 'nvim_lsp' },
+      --{ name = 'luasnip' },
     },
   }
 
@@ -247,7 +294,7 @@ if has('win32')
   command! Powershell edit term://powershell
 endif
 
-autocmd BufWritePost .vimrc :so %
+autocmd BufWritePost init.vim :so %
 
 " Syntaxes
 "autocmd FileType python set sw=4 tw=4 # this was causing weird newlines
