@@ -24,11 +24,8 @@ URxvt.iso14755_52: false
 ! changing font size on the fly, from aur package urxvt-resize-font-git
 !URxvt.perl-ext-common: resize-font
 
-URxvt.resize-font.smaller: C-Down
-URxvt.resize-font.bigger: C-Up
-
-URxvt.iso14755: false
-URxvt.iso14755_52: false
+!URxvt.resize-font.smaller: C-Down
+!URxvt.resize-font.bigger: C-Up
 
 ! Base16 Monokai
 ! Scheme: Wimer Hazenberg (http://www.monokai.nl)
