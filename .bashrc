@@ -139,6 +139,7 @@ files=(
   /usr/local/etc/bash_completion
   "$HOME/.rvm/scripts/rvm"
   "$HOME/.flutter-completion"
+  "$HOME/.cargo/env"
 )
 
 for i in "${files[@]}"; do
