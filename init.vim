@@ -71,6 +71,7 @@ call plug#begin()
     Plug 'neovim/nvim-lspconfig'
     Plug 'hrsh7th/nvim-cmp'
     Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/cmp-path'
     Plug 'mfussenegger/nvim-dap'
   endif
 
@@ -116,6 +117,8 @@ call plug#begin()
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
 
+  Plug 'edkolev/tmuxline.vim'
+
   " Distraction free mode
   Plug 'junegunn/goyo.vim'
 
@@ -129,7 +132,12 @@ call plug#end()
 filetype plugin indent on
 
 " PLUGIN VARIABLES
-colorscheme base16-eighties
+colorscheme base16-monokai
+
+" Vim-Airline Theming
+let g:airline_theme='base16_monokai'
+let g:airline_powerline_fonts=1
+let g:airline_section_b='' " don't show git branch
 
 let g:goyo_width=81
 
@@ -170,11 +178,6 @@ command! Diffs
       \   'source': "git diff --stat | awk '{print $1}' | sed '$ d'",
       \   'sink': 'edit'
       \})
-
-" Vim-Airline Theming
-let g:airline_theme='base16_eighties'
-let g:airline_powerline_fonts=1
-let g:airline_section_b='' " don't show git branch
 
 nnoremap <c-t> :tabe<cr>
 
@@ -262,10 +265,12 @@ lua <<EOF
         end
       end, { 'i', 's' }),
     }),
-    sources = {
+    sources = cmp.config.sources({
       { name = 'nvim_lsp' },
+    },{
+      { name = 'path' },
       --{ name = 'luasnip' },
-    },
+    }),
   }
 
   -- Debug Adapter
