@@ -49,7 +49,7 @@ fi
 
 REPO="github.com/${BASH_REMATCH[1]}"
 
-REGEX="[Bb]ranch '(.*)' set up to track remote branch .* from .*\."
+REGEX="[Bb]ranch '(.*)' set up to track (remote branch )?.* from .*\."
 if [[ ! $OUTPUT =~ $REGEX ]]; then
   echo "Error! Pattern \"$REGEX\" not found in output."
   exit 1
