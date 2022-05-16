@@ -42,7 +42,7 @@ set incsearch       " Highlight search matches while typing
 set splitbelow
 set splitright      " better defaults for opening new splits!
 
-" Mouse
+" Mouse - don't paste on middle mouse
 noremap <MiddleMouse> <Nop>
 noremap <2-MiddleMouse> <Nop>
 noremap <3-MiddleMouse> <Nop>
@@ -117,7 +117,7 @@ call plug#begin()
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
 
-  Plug 'edkolev/tmuxline.vim'
+  "Plug 'edkolev/tmuxline.vim'
 
   " Distraction free mode
   Plug 'junegunn/goyo.vim'
@@ -137,7 +137,16 @@ colorscheme base16-monokai
 " Vim-Airline Theming
 let g:airline_theme='base16_monokai'
 let g:airline_powerline_fonts=1
+"let g:airline#extensions#tabline#enabled = 1
 let g:airline_section_b='' " don't show git branch
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+" the default was not implemented by mononoki
+" See :help airline-customization for all mappings
+let g:airline_symbols.colnr = ' #'
 
 let g:goyo_width=81
 
@@ -222,6 +231,15 @@ lua <<EOF
   capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
   require('lspconfig').dartls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = {
+      -- This will be the default in neovim 0.7+
+      debounce_text_changes = 150,
+    },
+  }
+
+  require('lspconfig').gopls.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     flags = {
