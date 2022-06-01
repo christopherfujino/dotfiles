@@ -75,7 +75,7 @@ call plug#begin()
     Plug 'mfussenegger/nvim-dap'
   endif
 
-  Plug 'dart-lang/dart-vim-plugin'
+  "Plug 'dart-lang/dart-vim-plugin'
 
   " Typescript Support
   Plug 'leafgarland/typescript-vim'
