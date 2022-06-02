@@ -228,13 +228,25 @@ lua <<EOF
   -- Add additional capabilities supported by nvim-cmp
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-
+  vim.lsp.set_log_level('debug')
   require('lspconfig').dartls.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     flags = {
       -- This will be the default in neovim 0.7+
       debounce_text_changes = 150,
+    },
+    cmd = {
+      'dart', '/home/fujino/git/flutter/bin/cache/dart-sdk/bin/snapshots/analysis_server.dart.snapshot', '--lsp',
+    },
+    init_options = {
+      -- When set to true, workspace folders will be ignored and analysis will be performed based on the open files, as if no workspace was open at all. This allows opening large folders without causing them to be completely analyzed. Defaults to false.
+      onlyAnalyzeProjectsWithOpenFiles = true,
+      -- When set to false, completion will not include synbols that are not already imported into the current file. Defaults to true, though the client must additionally support workspace/applyEdit for these completions to be included.
+      suggestFromUnimportedLibraries = true,
+      closingLabels = true,
+      outline = true,
+      flutterOutline = true,
     },
   }
 
