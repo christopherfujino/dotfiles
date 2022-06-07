@@ -168,6 +168,7 @@ fi
 if type fzf >/dev/null 2>&1; then
   alias checkout="git branch --list | sed 's/^\*/ /' | fzf | xargs git checkout"
   alias branchd="git branch --list | sed -E 's/^[ *]+//' | fzf --multi | xargs git branch -d --force"
+  alias darttest="find test/ -name '*_test.dart' | fzf | xargs dart test"
 else
   echo "Warning! fzf not installed, and it's awesome!"
 fi
