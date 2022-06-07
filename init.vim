@@ -225,10 +225,10 @@ lua <<EOF
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
   end
 
+  --vim.lsp.set_log_level("ERROR")
   -- Add additional capabilities supported by nvim-cmp
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-  vim.lsp.set_log_level('debug')
   require('lspconfig').dartls.setup {
     on_attach = on_attach,
     capabilities = capabilities,
@@ -236,9 +236,8 @@ lua <<EOF
       -- This will be the default in neovim 0.7+
       debounce_text_changes = 150,
     },
-    cmd = {
-      'dart', '/home/fujino/git/flutter/bin/cache/dart-sdk/bin/snapshots/analysis_server.dart.snapshot', '--lsp',
-    },
+    -- for context https://github.com/dart-lang/sdk/issues/49157
+    cmd = {'dart', 'language-server', '--protocol=lsp'},
     init_options = {
       -- When set to true, workspace folders will be ignored and analysis will be performed based on the open files, as if no workspace was open at all. This allows opening large folders without causing them to be completely analyzed. Defaults to false.
       onlyAnalyzeProjectsWithOpenFiles = true,
