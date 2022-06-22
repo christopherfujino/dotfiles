@@ -229,6 +229,8 @@ lua <<EOF
   -- Add additional capabilities supported by nvim-cmp
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+  -- Lua ternary hack: http://lua-users.org/wiki/TernaryOperator
+  local dartBinary = vim.fn.has('Windows') and 'dart.bat' or 'dart'
   require('lspconfig').dartls.setup {
     on_attach = on_attach,
     capabilities = capabilities,
@@ -237,7 +239,8 @@ lua <<EOF
       debounce_text_changes = 150,
     },
     -- for context https://github.com/dart-lang/sdk/issues/49157
-    cmd = {'dart', 'language-server', '--protocol=lsp'},
+    cmd = {dartBinary, 'language-server', '--protocol=lsp'},
+    root_dir = require('lspconfig.util').root_pattern('pubspec.yaml', 'dartdoc_options.yaml'),
     init_options = {
       -- When set to true, workspace folders will be ignored and analysis will be performed based on the open files, as if no workspace was open at all. This allows opening large folders without causing them to be completely analyzed. Defaults to false.
       onlyAnalyzeProjectsWithOpenFiles = true,
