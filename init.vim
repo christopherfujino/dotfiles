@@ -1,5 +1,5 @@
-" Christopher Fujino's .vimrc
-"   For use in Vim (v >= 8.1) & NeoVim
+" Christopher Fujino's init.vim
+"   For use in NeoVim > 0.7.0
 
 " System Setup
 syntax on
