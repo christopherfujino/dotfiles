@@ -230,7 +230,7 @@ lua <<EOF
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
   -- Lua ternary hack: http://lua-users.org/wiki/TernaryOperator
-  local dartBinary = vim.fn.has('Windows') and 'dart.bat' or 'dart'
+  local dartBinary = (vim.fn.has('win32') == 1) and 'dart.bat' or 'dart'
   require('lspconfig').dartls.setup {
     on_attach = on_attach,
     capabilities = capabilities,
