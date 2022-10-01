@@ -350,8 +350,7 @@ function Debug(subcommand)
   echom a:subcommand
 endfunction
 
-command! -nargs=1 Debug call s:Debug(<q-args>)
-command! -nargs=1 Debug call s:Debug()
+command! -nargs=0 Debug call s:Debug()
 
 if has('win32')
   command! Powershell edit term://powershell
