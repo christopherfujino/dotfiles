@@ -280,6 +280,19 @@ lua <<EOF
     capabilities = capabilities,
   }
 
+  -- local root_files = {
+  --   '.clangd',
+  --   '.clang-tidy',
+  --   '.clang-format',
+  --   'compile_commands.json',
+  --   'compile_flags.txt',
+  --   'configure.ac', -- AutoTools
+  -- }
+  require('lspconfig').clangd.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
+
   -- nvim-cmp setup
   local cmp = require 'cmp'
   cmp.setup {
