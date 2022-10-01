@@ -16,8 +16,8 @@ set autoread
 set signcolumn=yes  " Always draw sign column
 set noshowmode      " Unneccessary since we use airline
 set list            " Highlight trailing whitespace
-set textwidth=80    " Maximum width of insert text
-set colorcolumn=+1  " Highlight column 1 after textwidth
+"set textwidth=80    " Maximum width of insert text
+"set colorcolumn=+1  " Highlight column 1 after textwidth
 
 set wildmenu        " why is this not the default?!
 set number          " Show line numbers.
@@ -75,7 +75,7 @@ call plug#begin()
     Plug 'mfussenegger/nvim-dap'
   endif
 
-  "Plug 'dart-lang/dart-vim-plugin'
+  Plug 'dart-lang/dart-vim-plugin'
 
   " Typescript Support
   Plug 'leafgarland/typescript-vim'
@@ -134,6 +134,8 @@ filetype plugin indent on
 " PLUGIN VARIABLES
 colorscheme base16-monokai
 
+
+
 " Vim-Airline Theming
 let g:airline_theme='base16_monokai'
 let g:airline_powerline_fonts=1
@@ -174,6 +176,18 @@ command! Checkout
       \   'source': "git branch | sed 's/*/ /'",
       \   'sink': function('s:checkout_clean')
       \ })
+
+function! s:format()
+  let ft = &filetype
+  " Ampersand captures setting value
+  if ft == 'python'
+    :% ! yapf --style=chromium
+  else
+    echoerr 'Unimplemented s:format() func for &ft == ' . ft
+  endif
+endfunction
+
+command Format call s:format()
 
 command! EVimrc edit ~/.vimrc
 command! NVimrc edit ~/.config/nvim/init.vim
@@ -261,6 +275,11 @@ lua <<EOF
     },
   }
 
+  require('lspconfig').tsserver.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
+
   -- nvim-cmp setup
   local cmp = require 'cmp'
   cmp.setup {
@@ -311,7 +330,7 @@ lua <<EOF
 
   dap.adapters.dart = {
     type = "executable",
-    command = "flutter",
+    command = "dart",
     args = {"debug_adapter"}
   }
   dap.configurations.dart = {
@@ -319,12 +338,20 @@ lua <<EOF
       type = "dart",
       request = "launch",
       name = "Launch Dart Program",
-      program = "${workspaceFolder}/lib/main.dart",
+      program = "${workspaceFolder}/bin/flutter_tools.dart",
       cwd = "${workspaceFolder}",
-      toolArgs = {"-d", "macos"},
+      args = {"doctor", "-v"},
     }
   }
 EOF
+
+function Debug(subcommand)
+  echom "TODO: execute:"
+  echom a:subcommand
+endfunction
+
+command! -nargs=1 Debug call s:Debug(<q-args>)
+command! -nargs=1 Debug call s:Debug()
 
 if has('win32')
   command! Powershell edit term://powershell
