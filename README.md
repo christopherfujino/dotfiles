@@ -29,6 +29,21 @@
 * Symlink user directories
 * Spotify
 
+### Linux
+
+If you want to use a newer version of a package than what is the default on
+Ubuntu/Debian, use `update-alternatives`. For example, on Ubuntu 20.04 LTS,
+`clangd` resolves to version 10.0, whereas to configure the location of
+your compilation database in a `.clangd` config file requires at least version
+12.
+
+```shell
+sudo apt-get remove clangd
+sudo apt-get install clangd-12
+# Here 100 is a priority
+sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-12 100
+```
+
 ## Golang Setup
 
 * Install go language

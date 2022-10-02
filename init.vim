@@ -293,6 +293,13 @@ lua <<EOF
     capabilities = capabilities,
   }
 
+  -- https://github.com/regen100/cmake-language-server
+  -- local root_files = { 'CMakePresets.json', 'CTestConfig.cmake', '.git', 'build', 'cmake' }
+  require('lspconfig').cmake.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
+
   -- nvim-cmp setup
   local cmp = require 'cmp'
   cmp.setup {
