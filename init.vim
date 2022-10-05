@@ -363,14 +363,26 @@ lua <<EOF
       args = {"doctor", "-v"},
     }
   }
+
+  -- See :help dap-widgets
+  local cmd = vim.api.nvim_create_user_command
+  local widgets = require('dap.ui.widgets')
+  -- widgets.sidebar could be widgets.centered_float
+  cmd(
+    'DapShowScopes',
+    function()
+      widgets.sidebar(widgets.scopes).open()
+    end,
+    {}
+  )
+  cmd(
+    'DapShowFrames',
+    function()
+      widgets.sidebar(widgets.frames).open()
+    end,
+    {}
+  )
 EOF
-
-function Debug(subcommand)
-  echom "TODO: execute:"
-  echom a:subcommand
-endfunction
-
-command! -nargs=0 Debug call s:Debug()
 
 if has('win32')
   command! Powershell edit term://powershell
