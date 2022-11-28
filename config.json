@@ -37,11 +37,6 @@
       "platform" : "any"
     },
     {
-      "name" : ".vimrc",
-      "target" : "~/.vimrc",
-      "platform" : "any"
-    },
-    {
       "name" : ".Xresources",
       "target" : "~/.Xresources",
       "platform" : "linux"
@@ -77,7 +72,7 @@
       "platform" : "any"
     },
     {
-      "name" : "nvim.init.vim",
+      "name" : "init.vim",
       "target" : "~/.config/nvim/init.vim",
       "platform" : "any"
     },
