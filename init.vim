@@ -405,5 +405,7 @@ endif
 autocmd BufWritePost init.vim :so %
 
 " Syntaxes
-"autocmd FileType python set sw=4 tw=4 # this was causing weird newlines
-"autocmd FileType cs set sw=4 tw=4
+autocmd FileType python set shiftwidth=4
+"autocmd FileType python set sw=4 tw=4 " this was causing weird newlines
+"autocmd FileType cs set shiftwidth=4 tw=4
+autocmd FileType go set noexpandtab nosmarttab
