@@ -119,6 +119,7 @@ dirs=(
   "$HOME/.nvm"
   "$HOME/.pub-cache/bin"
   "$HOME/git/depot_tools"
+  "$HOME/git/chris-monorepo/bin"
   "$HOME/.cargo/bin"
   "$HOME/Library/Python/2.7/bin"
   "$HOME/.local/bin" # pip3
