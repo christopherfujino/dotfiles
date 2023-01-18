@@ -17,5 +17,5 @@ echo 'fuchsia/third_party/goma/client/${platform}  release'
 echo 'fuchsia/third_party/goma/client/${platform}  release' | cipd ensure -ensure-file - -root $GOMA_DIR
 
 # Authenticate
-$GOMA_DIR/goma_auth login
+"$GOMA_DIR/goma_auth" login
 GOMA_LOCAL_OUTPUT_CACHE_DIR="$GOMA_CACHE_DIR" "$GOMA_CTL" ensure_start
