@@ -19,7 +19,7 @@
   hub = !git push -u origin $(git symbolic-ref --short HEAD)
   pl = pull --prune
   prune-all = "!git remote | xargs git remote prune"
-  rv = remote -v
+  r = remote -v
   s = status
   t = tag
   assume = update-index --assume-unchanged
