@@ -61,7 +61,7 @@ let g:netrw_banner        = 0
 " https://github.com/junegunn/vim-plug must be installed to manage plugins
 call plug#begin()
   " auto bracket pairing plugin
-  Plug 'jiangmiao/auto-pairs'
+  Plug 'windwp/nvim-autopairs'
 
   " Syntax
   Plug 'tpope/vim-surround'
@@ -75,7 +75,7 @@ call plug#begin()
     Plug 'mfussenegger/nvim-dap'
   endif
 
-  Plug 'dart-lang/dart-vim-plugin'
+  "Plug 'dart-lang/dart-vim-plugin'
 
   " Typescript Support
   Plug 'leafgarland/typescript-vim'
@@ -129,12 +129,12 @@ call plug#begin()
 " All of your Plugins must be added before the following line
 call plug#end()
 
+lua require('nvim-autopairs').setup {}
+
 filetype plugin indent on
 
 " PLUGIN VARIABLES
-colorscheme base16-monokai
-
-
+colorscheme base16-eighties
 
 " Vim-Airline Theming
 let g:airline_theme='base16_monokai'
