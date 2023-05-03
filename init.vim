@@ -131,6 +131,9 @@ call plug#end()
 
 lua require('nvim-autopairs').setup {}
 
+" Disable diff checking, as it invokes `vim`.
+let g:SmartSwap_CheckDiff=0
+
 filetype plugin indent on
 
 " PLUGIN VARIABLES
