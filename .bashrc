@@ -113,13 +113,14 @@ fi
 # add dirs to path, if they exist
 dirs=(
   "$HOME/scripts"
-  "$HOME/bin"
   "$HOME/go/bin"
   "$HOME/.node_modules/bin"
   "$HOME/.nvm"
   "$HOME/.pub-cache/bin"
   "$HOME/git/depot_tools"
   "$HOME/git/chris-monorepo/bin"
+  # local home bin takes precedence over monorepo bin
+  "$HOME/bin"
   "$HOME/.cargo/bin"
   "$HOME/Library/Python/2.7/bin"
   "$HOME/.local/bin" # pip3
