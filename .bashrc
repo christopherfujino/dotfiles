@@ -14,6 +14,8 @@ elif [ "$OS" = Darwin ]; then
   alias ls='ls -G' # color
 
   #[ -f /usr/local/bin/brew ] && PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+  # we can't use zsh yet, macOS
+  export BASH_SILENCE_DEPRECATION_WARNING=1
 fi
 
 alias ..='cd ..'
@@ -94,7 +96,7 @@ export EDITOR=$VISUAL
 
 # initialize BASE16 w/output in subshell
 # shellcheck source=/dev/null
-[ -f "$HOME/.config/base16-shell/profile_helper.sh" ] && eval "$("$HOME/.config/base16-shell/profile_helper.sh")"
+[ -f "$HOME/.config/base16-shell/profile_helper.sh" ] && source "$HOME/.config/base16-shell/profile_helper.sh"
 
 [ -d "$HOME/notes" ] && export NOTES="$HOME/notes"
 if [ -d "$HOME/git" ]; then
@@ -121,12 +123,17 @@ dirs=(
   "$HOME/git/chris-monorepo/bin"
   # local home bin takes precedence over monorepo bin
   "$HOME/bin"
+  # this should probably only be on the PATH if we're running with dev-chroot
+  #"$HOME/git/chris-monorepo/bin"
   "$HOME/.cargo/bin"
   "$HOME/Library/Python/2.7/bin"
   "$HOME/.local/bin" # pip3
   "$HOME/flutter_goma"
   #"$HOME/.rvm/bin"
   "$HOME/.deno/bin"
+  # mac ports
+  '/opt/local/bin'
+  '/opt/local/sbin'
 )
 
 paths=$(echo "$PATH" | tr : '\n')
