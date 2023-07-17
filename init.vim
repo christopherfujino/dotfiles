@@ -283,6 +283,13 @@ lua <<EOF
     capabilities = capabilities,
   }
 
+  require('lspconfig').ocamllsp.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    filetypes = { 'ocaml' },
+    root_dir = require('lspconfig.util').root_pattern('*.opam'),
+  }
+
   -- local root_files = {
   --   '.clangd',
   --   '.clang-tidy',

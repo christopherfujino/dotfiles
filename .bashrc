@@ -182,6 +182,9 @@ else
   echo "Warning! fzf not installed, and it's awesome!"
 fi
 
+# opam configuration
+test -r /usr/local/google/home/fujino/.opam/opam-init/init.sh && . /usr/local/google/home/fujino/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
+
 # source local-machine specific config if it exists
 # shellcheck source=/dev/null
 [ -f "$HOME/.bashrc.local" ] && source "$HOME/.bashrc.local"
