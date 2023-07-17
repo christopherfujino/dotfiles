@@ -17,7 +17,7 @@ set signcolumn=yes  " Always draw sign column
 set noshowmode      " Unneccessary since we use airline
 set list            " Highlight trailing whitespace
 "set textwidth=80    " Maximum width of insert text
-"set colorcolumn=+1  " Highlight column 1 after textwidth
+set colorcolumn=+1  " Highlight column 1 after textwidth
 
 set wildmenu        " why is this not the default?!
 set number          " Show line numbers.
