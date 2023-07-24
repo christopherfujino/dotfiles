@@ -183,7 +183,7 @@ else
 fi
 
 # opam configuration
-test -r /usr/local/google/home/fujino/.opam/opam-init/init.sh && . /usr/local/google/home/fujino/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
+test -r "$HOME/.opam/opam-init/init.sh" && . "$HOME/.opam/opam-init/init.sh" > /dev/null 2> /dev/null || true
 
 # source local-machine specific config if it exists
 # shellcheck source=/dev/null
