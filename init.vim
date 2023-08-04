@@ -72,7 +72,8 @@ call plug#begin()
     Plug 'hrsh7th/nvim-cmp'
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/cmp-path'
-    Plug 'mfussenegger/nvim-dap'
+    "Plug 'mfussenegger/nvim-dap'
+    Plug 'christopherfujino/nvim-dap', { 'branch': 'dev'} " TODO upstream
   endif
 
   "Plug 'dart-lang/dart-vim-plugin'
@@ -383,7 +384,8 @@ lua <<EOF
       type = "dart",
       request = "launch",
       name = "Launch Dart Program",
-      program = "${workspaceFolder}/bin/flutter_tools.dart",
+      --program = "${workspaceFolder}/bin/flutter_tools.dart",
+      program = "${workspaceFolder}/main.dart",
       cwd = "${workspaceFolder}",
       args = {"update-packages", "--cherry-pick-package=leak_tracker", "--cherry-pick-version=9.0.2"},
     }
