@@ -385,7 +385,7 @@ lua <<EOF
       name = "Launch Dart Program",
       program = "${workspaceFolder}/bin/flutter_tools.dart",
       cwd = "${workspaceFolder}",
-      args = {"doctor", "-v"},
+      args = {"update-packages", "--cherry-pick-package=leak_tracker", "--cherry-pick-version=9.0.2"},
     }
   }
 
@@ -407,6 +407,8 @@ lua <<EOF
     end,
     {}
   )
+
+  -- TODO: call vim.fn.input("CLI args: ") to override args
 EOF
 
 if has('win32')
