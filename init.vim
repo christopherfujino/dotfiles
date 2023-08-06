@@ -191,7 +191,7 @@ function! s:format()
   endif
 endfunction
 
-command Format call s:format()
+command! Format call s:format()
 
 command! EVimrc edit ~/.vimrc
 command! NVimrc edit ~/.config/nvim/init.vim
@@ -246,9 +246,13 @@ lua <<EOF
 
   --vim.lsp.set_log_level("ERROR")
   -- Add additional capabilities supported by nvim-cmp
-  capabilities = require('cmp_nvim_lsp').default_capabilities()
-  -- Lua ternary hack: http://lua-users.org/wiki/TernaryOperator
-  local dartBinary = (vim.fn.has('win32') == 1) and 'dart.bat' or 'dart'
+  --capabilities = require('cmp_nvim_lsp').default_capabilities()
+  local dartBinary
+  if vim.fn.has('win32') == 1 then
+    dartBinary = 'dart.bat'
+  else
+    dartBinary = 'dart'
+  end
   require('lspconfig').dartls.setup {
     on_attach = on_attach,
     capabilities = capabilities,
