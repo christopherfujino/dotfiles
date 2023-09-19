@@ -194,7 +194,16 @@ endfunction
 command! Format call s:format()
 
 command! EVimrc edit ~/.vimrc
-command! NVimrc edit ~/.config/nvim/init.vim
+
+function! s:nvimrc()
+  if has('win32') == 1
+    edit ~\AppData\Local\nvim\init.vim
+  else
+    edit ~/.config/nvim/init.vim
+  endif
+endfunction
+
+command! NVimrc call s:nvimrc()
 
 " Execute (!) current file (%) with full path (:p)
 command! Execute :! %:p
@@ -424,7 +433,7 @@ endif
 autocmd BufWritePost init.vim :so %
 
 " Syntaxes
-autocmd FileType python set shiftwidth=4
-"autocmd FileType python set sw=4 tw=4 " this was causing weird newlines
+autocmd FileType python set shiftwidth=4 tabstop=4
+"autocmd FileType python set sw=4 tw=4 " this was causing weird newlines "because tw = textwidth, should have been ts == tabstop
 "autocmd FileType cs set shiftwidth=4 tw=4
 autocmd FileType go set noexpandtab nosmarttab
