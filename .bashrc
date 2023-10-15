@@ -63,24 +63,6 @@ function add_to_path_if_not_present {
   [ "$?" -ne 0 ] && PATH="$dir:$PATH"
 }
 
-function monorepo {
-  local path="$1"
-  MONOREPO="$HOME/git/chris-monorepo"
-
-  if [[ ! -d "$MONOREPO" ]]; then
-    1>&2 echo "Directory not found: $MONOREPO"
-    exit 1
-  fi
-
-  if [ -n "$path" ]; then
-    echo "cd $MONOREPO/$path"
-    cd "$MONOREPO/$path"
-  else
-    echo "cd $MONOREPO"
-    cd "$MONOREPO"
-  fi
-}
-
 if type nvim >/dev/null 2>&1; then
   export VISUAL=nvim
 elif type vim >/dev/null 2>&1; then
