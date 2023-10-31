@@ -302,6 +302,11 @@ lua <<EOF
     capabilities = capabilities,
   }
 
+  require('lspconfig').ruby_ls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
+
   require('lspconfig').ocamllsp.setup {
     on_attach = on_attach,
     capabilities = capabilities,
