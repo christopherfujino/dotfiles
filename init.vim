@@ -310,6 +310,19 @@ lua <<EOF
     capabilities = capabilities,
   }
 
+  require('lspconfig').java_language_server.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    root_dir = require('lspconfig.util').root_pattern('build.gradle'),
+    cmd = {"/Users/fujino/git/chris-monorepo/third_party/java/java-language-server/dist/lang_server_mac.sh"},
+  }
+
+  require('lspconfig').zls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
+
+
   require('lspconfig').ocamllsp.setup {
     on_attach = on_attach,
     capabilities = capabilities,
