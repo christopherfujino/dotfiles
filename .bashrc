@@ -99,6 +99,7 @@ dirs=(
   "$HOME/scripts"
   "$HOME/go/bin"
   "$HOME/.node_modules/bin"
+  "$HOME/node_modules/bin"
   "$HOME/.nvm"
   "$HOME/.pub-cache/bin"
   "$HOME/git/depot_tools"
