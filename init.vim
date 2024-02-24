@@ -56,6 +56,9 @@ nnoremap <4-MiddleMouse> <Nop>
 " Never show netrw banner
 let g:netrw_banner        = 0
 
+" TODO figure out how to include opam switch
+" //share/ocp-indent/vim/indent/ocaml.vim in rtp
+
 " PLUGINS
 
 " https://github.com/junegunn/vim-plug must be installed to manage plugins
@@ -444,6 +447,5 @@ autocmd BufWritePost init.vim :so %
 
 " Syntaxes
 autocmd FileType python set shiftwidth=4 tabstop=4
-"autocmd FileType python set sw=4 tw=4 " this was causing weird newlines "because tw = textwidth, should have been ts == tabstop
-"autocmd FileType cs set shiftwidth=4 tw=4
+autocmd FileType cs set shiftwidth=4 tabstop=4
 autocmd FileType go set noexpandtab nosmarttab
