@@ -20,6 +20,14 @@ Future<void> main(List<String> args) async {
       exists = false;
     }
     if (exists) {
+      final result = await io.Process.run(
+        'git',
+        const <String>['fetch'],
+        workingDirectory: dir.path,
+      );
+      if (result.exitCode != 0) {
+        throw 'oops ${dir.path}';
+      }
       if (await _hasUncommittedChanges(dir)) {
         dirtyRepos.add(dir);
       }
