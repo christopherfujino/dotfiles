@@ -1,0 +1,6 @@
+# This is an example only--copy paste and customize for your machine
+
+# output is the device name
+# mode is the resolution
+# get both from `xrandr`
+xrandr --output eDP-1 --mode 1920x1200
