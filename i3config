@@ -272,4 +272,10 @@ for_window [class="[Cc]hrome"] floating disable, move window to workspace curren
 
 # autostart this:
 exec --no-startup-id alacritty
-exec --no-startup-id xdg-open https://www.google.com
+exec --no-startup-id xdg-open https://www.github.com
+
+# you must install numlockx
+exec_always --no-startup-id numlockx on
+
+# disable speaker beep
+exec_always --no-startup-id xset -b
