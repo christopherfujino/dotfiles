@@ -42,19 +42,9 @@
       "platform" : "linux"
     },
     {
-      "name" : "termite_config",
-      "target" : "~/.config/termite/config",
-      "platform": "linux"
-    },
-    {
       "name": "mpd.linux.conf",
       "target": "~/.config/mpd/mpd.conf",
       "platform": "linux"
-    },
-    {
-      "name": "mpd.mac.conf",
-      "target": "~/.mpdconf",
-      "platform": "darwin"
     },
     {
       "name" : "ncmpcpp.config",
