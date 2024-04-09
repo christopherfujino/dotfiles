@@ -84,6 +84,7 @@ font pango:mononoki 14
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# pixel means no title
 default_border pixel 3
 
 # hide vertical borders adjacent to screen edges
@@ -259,6 +260,15 @@ exec_always --no-startup-id xmodmap -e "keysym Caps_Lock = Escape"
 
 # from $base00 above
 exec --no-startup-id xsetroot -solid "#2d2d2d"
+
+# https://i3wm.org/docs/userguide.html#_focus_follows_mouse
+focus_follows_mouse no
+
+# don't warp mouse when switching focus to a different monitor
+mouse_warping none
+
+# This appears not to work: https://www.reddit.com/r/i3wm/comments/7zxxax/chromium_not_opening_in_current_workspace/
+for_window [class="[Cc]hrome"] floating disable, move window to workspace current
 
 # autostart this:
 exec --no-startup-id alacritty
