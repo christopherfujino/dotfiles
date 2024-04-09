@@ -275,6 +275,7 @@ lua <<EOF
     -- for context https://github.com/dart-lang/sdk/issues/49157
     cmd = {dartBinary, 'language-server', '--protocol=lsp'},
     root_dir = require('lspconfig.util').root_pattern('pubspec.yaml', 'dartdoc_options.yaml'),
+    -- https://github.com/dart-lang/sdk/blob/main/pkg/analysis_server/tool/lsp_spec/README.md
     init_options = {
       -- When set to true, workspace folders will be ignored and analysis will be performed based on the open files, as if no workspace was open at all. This allows opening large folders without causing them to be completely analyzed. Defaults to false.
       onlyAnalyzeProjectsWithOpenFiles = true,
@@ -283,6 +284,7 @@ lua <<EOF
       closingLabels = true,
       outline = true,
       flutterOutline = true,
+      showTodos = false,
     },
   }
 
@@ -423,8 +425,8 @@ lua <<EOF
       type = "dart",
       request = "launch",
       name = "Launch Dart Program",
-      --program = "${workspaceFolder}/bin/flutter_tools.dart",
-      program = "${workspaceFolder}/main.dart",
+      program = "${workspaceFolder}/bin/flutter_tools.dart",
+      --program = "${workspaceFolder}/main.dart",
       cwd = "${workspaceFolder}",
       args = {"update-packages", "--cherry-pick-package=leak_tracker", "--cherry-pick-version=9.0.2"},
     }
