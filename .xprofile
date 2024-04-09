@@ -4,3 +4,6 @@
 # mode is the resolution
 # get both from `xrandr`
 xrandr --output eDP-1 --mode 1920x1200
+
+# disable speaker beep
+xset -b
