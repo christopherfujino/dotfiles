@@ -56,6 +56,8 @@ nnoremap <4-MiddleMouse> <Nop>
 " Never show netrw banner
 let g:netrw_banner        = 0
 
+let mapleader = ','
+
 " TODO figure out how to include opam switch
 " //share/ocp-indent/vim/indent/ocaml.vim in rtp
 
@@ -427,8 +429,9 @@ lua <<EOF
       name = "Launch Dart Program",
       program = "${workspaceFolder}/bin/flutter_tools.dart",
       --program = "${workspaceFolder}/main.dart",
-      cwd = "${workspaceFolder}",
-      args = {"update-packages", "--cherry-pick-package=leak_tracker", "--cherry-pick-version=9.0.2"},
+      --cwd = "${workspaceFolder}",
+      cwd = "/home/fujino/git/tmp/delete_me_flutter",
+      args = {"run", "-d", "web-server"},
     }
   }
 
@@ -450,6 +453,13 @@ lua <<EOF
     end,
     {}
   )
+
+  -- DapStepoVer
+  vim.keymap.set('n', '<Leader>dsv', function() dap.step_over() end)
+  -- DapStepOut
+  vim.keymap.set('n', '<Leader>dso', function() dap.step_out() end)
+  -- DapStepInto
+  vim.keymap.set('n', '<Leader>dsi', function() dap.step_into() end)
 
   -- TODO: call vim.fn.input("CLI args: ") to override args
 EOF
