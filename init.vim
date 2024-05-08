@@ -146,7 +146,7 @@ filetype plugin indent on
 colorscheme base16-eighties
 
 " Vim-Airline Theming
-let g:airline_theme='base16_monokai'
+let g:airline_theme='base16_eighties'
 let g:airline_powerline_fonts=1
 "let g:airline#extensions#tabline#enabled = 1
 let g:airline_section_b='' " don't show git branch
