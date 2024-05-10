@@ -42,4 +42,6 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
-	required = true
+  required = true
+[mergetool "nvimdiff"]
+  layout = LOCAL,MERGED,REMOTE
