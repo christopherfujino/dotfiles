@@ -42,8 +42,8 @@
       "platform" : "any"
     },
     {
-      "name" : "init.vim",
-      "target" : "~/.config/nvim/init.vim",
+      "name" : "init.lua",
+      "target" : "~/.config/nvim/init.lua",
       "platform" : "any"
     },
     {
