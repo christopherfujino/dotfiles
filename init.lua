@@ -35,7 +35,7 @@ vim.keymap.set({"n", "v", "i"}, "<3-MiddleMouse>", "<Nop>", {noremap=true})
 vim.keymap.set({"n", "v", "i"}, "<4-MiddleMouse>", "<Nop>", {noremap=true})
 
 vim.keymap.set("n", "<c-p>", ":Files<cr>", {noremap=true})
-vim.keymap.set("n", "<c-t>", ":tabe", {noremap=true})
+vim.keymap.set("n", "<c-t>", ":tabe<cr>", {noremap=true})
 
 ---- PLUGINS
 
@@ -124,9 +124,10 @@ else
 end
 
 require('lspconfig').dartls.setup {
+  --cmd = { "dart", "language-server", "--protocol=lsp", "--instrumentation-log-file=/usr/local/google/home/fujino/dart-lsp.log" },
+  cmd = {"dart", "language-server", "--protocol=lsp"},
   on_attach = on_attach,
   capabilities = capabilities,
-  root_dir = require('lspconfig.util').root_pattern('pubspec.yaml', 'dartdoc_options.yaml'),
   -- https://github.com/dart-lang/sdk/blob/main/pkg/analysis_server/tool/lsp_spec/README.md
   init_options = {
     -- When set to true, workspace folders will be ignored and analysis will be performed based on the open files, as if no workspace was open at all. This allows opening large folders without causing them to be completely analyzed. Defaults to false.
@@ -136,9 +137,13 @@ require('lspconfig').dartls.setup {
     closingLabels = true,
     outline = true,
     flutterOutline = true,
-    showTodos = false,
-    -- Whether to include code snippets (such as class, stful, switch) in code completion. When unspecified, snippets will be included.
-    enableSnippets = false,
+  },
+  settings = {
+    dart = {
+      showTodos = false,
+      -- Whether to include code snippets (such as class, stful, switch) in code completion. When unspecified, snippets will be included.
+      enableSnippets = false,
+    },
   },
 }
 
