@@ -1,4 +1,4 @@
----- Experimental
+---- EXPERIMENTAL
 
 -- options
 vim.opt.number = true
@@ -13,7 +13,20 @@ vim.opt.termguicolors = true -- without this, WSL and ssh colors are wack
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
----- mappings
+---- COMMANDS
+vim.api.nvim_create_user_command(
+  'NVimrc',
+  function(opts)
+    if vim.fn.has("win32") == 1 then
+      vim.cmd("edit ~\\AppData\\Local\\nvim\\init.lua")
+    else
+      vim.cmd("edit ~/.config/nvim/init.lua")
+    end
+  end,
+  {}
+)
+
+---- MAPPINGS
 
 -- disable middle mouse paste
 vim.keymap.set({"n", "v", "i"}, "<MiddleMouse>", "<Nop>", {noremap=true})
@@ -22,10 +35,11 @@ vim.keymap.set({"n", "v", "i"}, "<3-MiddleMouse>", "<Nop>", {noremap=true})
 vim.keymap.set({"n", "v", "i"}, "<4-MiddleMouse>", "<Nop>", {noremap=true})
 
 vim.keymap.set("n", "<c-p>", ":Files<cr>", {noremap=true})
+vim.keymap.set("n", "<c-t>", ":tabe", {noremap=true})
 
----- plugins
+---- PLUGINS
 
---bootstrap lazy.nvim
+-- Bootstrap plugin manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   vim.fn.system({
