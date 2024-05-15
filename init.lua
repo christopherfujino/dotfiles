@@ -16,19 +16,20 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup(
   -- plugins
-  {"neovim/nvim-lspconfig"},
+  {
+    "neovim/nvim-lspconfig",
+    "mfussenegger/nvim-dap",
+  },
   -- options
   {}
 )
-
-local lspconfig = require("lspconfig")
---lspconfig.lua.setup
 
 -- options
 vim.opt.number = true
 vim.opt.tabstop = 2       -- Width of a <tab>
 vim.opt.shiftwidth = 2    -- Number of spaces to use for each step of auto-indent
 vim.opt.expandtab = true  -- Use the appropriate number of spaces to insert a tab
+vim.opt.signcolumn = "yes" -- always draw sign column
 vim.cmd.colorscheme("retrobox")
 
 -- better splits
@@ -66,6 +67,7 @@ if vim.fn.has('win32') == 1 then
 else
   dartBinary = 'dart'
 end
+
 require('lspconfig').dartls.setup {
   on_attach = on_attach,
   root_dir = require('lspconfig.util').root_pattern('pubspec.yaml', 'dartdoc_options.yaml'),
@@ -83,3 +85,43 @@ require('lspconfig').dartls.setup {
     enableSnippets = false,
   },
 }
+
+-- Debug Adapter
+-- https://github.com/mfussenegger/nvim-dap/blob/master/doc/dap.txt
+
+local dap = require('dap')
+
+dap.adapters.dart = {
+  type = "executable",
+  command = "dart",
+  args = {"debug_adapter"}
+}
+dap.configurations.dart = {
+  {
+    type = "dart",
+    request = "launch",
+    name = "Launch Dart Program",
+    program = "${workspaceFolder}/main.dart",
+    cwd = "${workspaceFolder}",
+    --args = {"run", "-d", "web-server"},
+  }
+}
+
+-- See :help dap-widgets
+local cmd = vim.api.nvim_create_user_command
+local widgets = require('dap.ui.widgets')
+-- widgets.sidebar could be widgets.centered_float
+cmd(
+  'DapShowScopes',
+  function()
+    widgets.sidebar(widgets.scopes).open()
+  end,
+  {}
+)
+cmd(
+  'DapShowFrames',
+  function()
+    widgets.sidebar(widgets.frames).open()
+  end,
+  {}
+)
