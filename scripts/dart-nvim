@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 RC="$HOME/git/dotfiles/init.lua"
 
-nvim -u "$RC" "$@"
+exec nvim -u "$RC" "$@"
