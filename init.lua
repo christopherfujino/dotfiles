@@ -127,6 +127,48 @@ require('lspconfig').dartls.setup {
   },
 }
 
+require('lspconfig').bashls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+require('lspconfig').gopls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+require('lspconfig').tsserver.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+require('lspconfig').ruby_lsp.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+require('lspconfig').zls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+require('lspconfig').ocamllsp.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = { 'ocaml' },
+  root_dir = require('lspconfig.util').root_pattern('*.opam'),
+}
+
+require('lspconfig').clangd.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+require('lspconfig').cmake.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
 -- Auto-complete
 local cmp = require 'cmp'
 cmp.setup {
