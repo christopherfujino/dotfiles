@@ -7,6 +7,7 @@ vim.opt.shiftwidth = 2     -- Number of spaces to use for each step of auto-inde
 vim.opt.expandtab = true   -- Use the appropriate number of spaces to insert a tab
 vim.opt.signcolumn = "yes" -- always draw sign column
 vim.opt.list = true        -- show "-" for trailing whitespace, ">" for tab
+vim.opt.termguicolors = true -- without this, WSL and ssh colors are wack
 
 -- better splits
 vim.opt.splitbelow = true
