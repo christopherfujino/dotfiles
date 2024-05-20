@@ -56,7 +56,7 @@ require("lazy").setup(
   -- plugins
   {
     -- Chris Kempson's Base16 colorschemes, see `colorscheme...`
-    "chriskempson/base16-vim",
+    "RRethy/base16-nvim",
 
     "neovim/nvim-lspconfig",
     "mfussenegger/nvim-dap",
@@ -257,3 +257,10 @@ cmd(
   end,
   {}
 )
+
+-- Syntaxes
+vim.cmd([[
+autocmd FileType python set shiftwidth=4 tabstop=4
+autocmd FileType cs set shiftwidth=4 tabstop=4
+autocmd FileType go set noexpandtab nosmarttab
+]])
