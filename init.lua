@@ -79,6 +79,8 @@ require("lazy").setup(
 
     'junegunn/fzf',
     'junegunn/fzf.vim',
+
+    'junegunn/goyo.vim',
   },
   -- options
   {}
@@ -259,6 +261,14 @@ cmd(
 )
 
 -- Syntaxes
+-- autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) | execute 'cd' argv()[0] | endif
+vim.api.nvim_create_autocmd(
+  "VimEnter",
+  {
+    pattern = "*",
+    command = "if argc() == 1 && isdirectory(argv()[0]) | execute 'cd' argv()[0] | endif",
+  }
+)
 vim.cmd([[
 autocmd FileType python set shiftwidth=4 tabstop=4
 autocmd FileType cs set shiftwidth=4 tabstop=4
