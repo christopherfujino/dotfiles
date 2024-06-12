@@ -49,7 +49,12 @@
     {
       "name": "polybar.config.ini",
       "target": "~/.config/polybar/config.ini",
-      "platform": "any"
+      "platform": "linux"
+    },
+    {
+      "name": "fbtermrc",
+      "target": "~/.config/fbterm/fbtermrc",
+      "platform": "linux"
     }
   ]
 }
