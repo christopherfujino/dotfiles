@@ -1,6 +1,4 @@
-enable_experimental_conpty_backend = false
 live_config_reload = true
-"window.opacity" = 1.0
 
 [bell]
 animation = "EaseOutExpo"
@@ -39,7 +37,6 @@ style = "Block"
 unfocused_hollow = true
 
 [font]
-AppleFontSmoothing = true
 size = 14.0
 
 [font.bold]
@@ -584,12 +581,6 @@ hide_when_typing = false
 [[mouse.bindings]]
 action = "PasteSelection"
 mouse = "Middle"
-
-[mouse.double_click]
-threshold = 300
-
-[mouse.triple_click]
-threshold = 300
 
 [scrolling]
 history = 10000
