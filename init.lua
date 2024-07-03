@@ -28,6 +28,27 @@ vim.api.nvim_create_user_command(
   {}
 )
 
+vim.api.nvim_create_user_command(
+  'Gl',
+  function(opts)
+    -- note vim buffers don't support terminal escapes, thus no color
+    vim.cmd([[
+      :Git log --format=format:'%h - %cs%d%n          %s - %aN'
+    ]])
+  end,
+  {}
+)
+
+vim.api.nvim_create_user_command(
+  'Gh',
+  function(opts)
+    vim.cmd([[
+      :Git log --graph --all --format=format:'%h - %cs%d%n          %s - %aN'
+    ]])
+  end,
+  {}
+)
+
 ---- MAPPINGS
 
 -- disable middle mouse paste
