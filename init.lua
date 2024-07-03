@@ -8,6 +8,8 @@ vim.opt.expandtab = true   -- Use the appropriate number of spaces to insert a t
 vim.opt.signcolumn = "yes" -- always draw sign column
 vim.opt.list = true        -- show "-" for trailing whitespace, ">" for tab
 vim.opt.termguicolors = true -- without this, WSL and ssh colors are wack
+vim.opt.ignorecase = true    -- by default, case insensitive search
+vim.opt.smartcase = true     -- if there exist any upper case, search case sensitive
 
 -- better splits
 vim.opt.splitbelow = true
