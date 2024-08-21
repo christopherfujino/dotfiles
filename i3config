@@ -222,42 +222,6 @@ mode "resize" {
 
 exec_always --no-startup-id $HOME/git/dotfiles/launch_polybar.sh
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-#bar {
-#  status_command i3status --config ~/git/dotfiles/.i3status.conf
-## position top|bottom
-#  position top
-## mode dock|hide|invisible
-#  mode dock
-## hidden_state hide|show
-## modifier <Modifier>|none
-#  colors {
-#    background $base0D
-#
-#    # text color
-#    statusline $base06
-#    separator $base06
-#
-#    #                  border  backgr. text
-#    focused_workspace  $base0D $base05 $base0D
-#    # visible on another display but not focused
-#    active_workspace   $base0D $base0D $base05
-#    inactive_workspace $base0D $base0D $base05
-#    urgent_workspace   $base0F $base0F $base00
-#  }
-#
-#  padding 3px 10px
-#
-## tray_output none|primary|<output>
-#  tray_output none
-#
-#  separator_symbol " → "
-#
-#  # add padding until workspace buttons reach this width in pixels
-#  workspace_min_width 50
-#}
-
 gaps inner 6px
 gaps outer 0px
 
