@@ -42,8 +42,6 @@ if [[ -z "$REMOTE" ]]; then
     sed -n 's/^\([a-zA-Z_-]\+\).*/\1/p' \
   )
   set +eo pipefail
-  echo "Got \"$REMOTE\"" >&2
-  exit 42
 fi
 
 # For every branch that is up to date or successfully pushed, add upstream
