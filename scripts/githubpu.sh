@@ -17,6 +17,35 @@ else
 fi
 
 REMOTE="$1"
+
+if [[ -z "$REMOTE" ]]; then
+  # Set exit so that user can abort with SIGINT to fzf
+  set -eo pipefail
+  # Parses output that looks like:
+  #
+  # a-siva  git@github.com:a-siva/flutter.git
+  # a-siva  git@github.com:a-siva/flutter.git
+  # eliasyishak     git@github.com:eliasyishak/flutter.git
+  # eliasyishak     git@github.com:eliasyishak/flutter.git
+  # itsjustkevin    git@github.com:itsjustkevin/flutter.git
+  # itsjustkevin    git@github.com:itsjustkevin/flutter.git
+  # origin  git@github.com:christopherfujino/flutter.git
+  # origin  git@github.com:christopherfujino/flutter.git
+  # upstream        git@github.com:flutter/flutter.git
+  # upstream        git@github.com:flutter/flutter.git
+  REMOTE=$( \
+    git remote -v | \
+    sed -n 's/^\([a-zA-Z_-]\+\)\t\+\([^ ]\+\).*$/\1\t\2/p' | \
+    uniq | \
+    tac | \
+    fzf | \
+    sed -n 's/^\([a-zA-Z_-]\+\).*/\1/p' \
+  )
+  set +eo pipefail
+  echo "Got \"$REMOTE\"" >&2
+  exit 42
+fi
+
 # For every branch that is up to date or successfully pushed, add upstream
 # (tracking) reference, used by argument-less git-pull(1) and other commands.
 OUTPUT=$(git push --porcelain --set-upstream "$REMOTE" HEAD)
