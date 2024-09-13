@@ -44,55 +44,56 @@ if [[ -z "$REMOTE" ]]; then
   set +eo pipefail
 fi
 
+# clone STDOUT as 3 as a write FD
+exec 3>&1
+
 # For every branch that is up to date or successfully pushed, add upstream
 # (tracking) reference, used by argument-less git-pull(1) and other commands.
-OUTPUT=$(git push --porcelain --set-upstream "$REMOTE" HEAD)
-
-# e.g.
 #
-# To github.com:christopherfujino/dotfiles.git
-# *       HEAD:refs/heads/feature-branch  [new branch]
-# Branch 'feature-branch' set up to track remote branch 'feature-branch' from 'origin'.
-# Done
+# `tee` to 3 (stdout) but also capture in the $OUTPUT var.
+OUTPUT=$(git push --porcelain --set-upstream "$REMOTE" HEAD | tee >(cat >&3))
+
+# close 3
+exec 3>&-
 
 echo "$OUTPUT"
 
-#REGEX='up to date'
-#if [[ $OUTPUT =~ $REGEX ]]; then
-#  echo "Your branch is already up to date with $REMOTE. Exiting..."
-#  exit 1
-#fi
-
-if [[ $CURRENT_BRANCH == 'master' ]]; then
+if [[ "$CURRENT_BRANCH" == 'master' || "$CURRENT_BRANCH" == 'main' ]]; then
   # No need to open a PR
   exit 0
 fi
 
-REGEX='To github\.com:(.*)\.git'
-if [[ ! $OUTPUT =~ $REGEX ]]; then
-  echo "Error! Pattern \"$REGEX\" not found in output."
+# With output like:
+#
+# Enumerating objects: 7, done.
+# Counting objects: 100% (7/7), done.
+# Delta compression using up to 72 threads
+# Compressing objects: 100% (4/4), done.
+# Writing objects: 100% (4/4), 371 bytes | 371.00 KiB/s, done.
+# Total 4 (delta 3), reused 0 (delta 0), pack-reused 0 (from 0)
+# remote: Resolving deltas: 100% (3/3), completed with 3 local objects.
+# remote:
+# remote: Create a pull request for 'foo-bar' on GitHub by visiting:
+# remote:      https://github.com/christopherfujino/dotfiles/pull/new/foo-bar
+# remote:
+# To github.com:christopherfujino/dotfiles
+# *       HEAD:refs/heads/foo-bar [new branch]
+# branch 'foo-bar' set up to track 'origin/foo-bar'.
+LINK=$( \
+  echo "$OUTPUT" | \
+  sed -n '/Create a pull request for/{n;p;}' | \
+  sed -n 's/remote:[ ]\+\(.*\)$/\1/p' \
+)
+
+if [[ -z "$LINK" ]]; then
+  echo 'Failed to parse the output from git push!' >&2
   exit 1
 fi
 
-REPO="github.com/${BASH_REMATCH[1]}"
-
-REGEX="[Bb]ranch '(.*)' set up to track (remote branch )?"
-if [[ ! $OUTPUT =~ $REGEX ]]; then
-  echo "Error! Pattern \"$REGEX\" not found in output."
-  exit 1
-fi
-
-BRANCH=${BASH_REMATCH[1]}
-
-# TODO "$REPO/compare/$UPSTREAM_BRANCH...$USERNAME:$LOCAL_BRANCH?expand=1"
-URL="$REPO/compare/$BRANCH?expand=1"
-
-
-if [ "$SHOULD_OPEN_CHROME" != 'TRUE' ]; then
-  echo "To open a PR:\n"
-  echo $URL
+if [[ "$SHOULD_OPEN_CHROME" != 'TRUE' ]]; then
+  printf "To open a PR:\n$LINK"
   exit 0
 fi
 
-echo "Opening $URL with $OPEN..."
-$OPEN "$URL" &>/dev/null &
+echo "Opening $LINK with $OPEN..."
+$OPEN "$LINK" &>/dev/null &
