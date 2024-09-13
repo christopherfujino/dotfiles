@@ -91,7 +91,7 @@ if [[ -z "$LINK" ]]; then
 fi
 
 if [[ "$SHOULD_OPEN_CHROME" != 'TRUE' ]]; then
-  printf "To open a PR:\n$LINK"
+  printf 'To open a PR:\n%s' "$LINK"
   exit 0
 fi
 
