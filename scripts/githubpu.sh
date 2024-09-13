@@ -51,12 +51,12 @@ exec 3>&1
 # (tracking) reference, used by argument-less git-pull(1) and other commands.
 #
 # `tee` to 3 (stdout) but also capture in the $OUTPUT var.
-OUTPUT=$(git push --porcelain --set-upstream "$REMOTE" HEAD | tee >(cat >&3))
+#
+# Logs from the remote go to STDERR, so redirect it
+OUTPUT=$(git push --porcelain --set-upstream "$REMOTE" HEAD 2>&1 | tee >(cat >&3))
 
 # close 3
 exec 3>&-
-
-echo "$OUTPUT"
 
 if [[ "$CURRENT_BRANCH" == 'master' || "$CURRENT_BRANCH" == 'main' ]]; then
   # No need to open a PR
