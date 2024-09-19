@@ -15,6 +15,11 @@ vim.opt.smartcase = true     -- if there exist any upper case, search case sensi
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
+-- Disable netrw banner
+vim.g.netrw_banner = false
+-- tree style
+vim.g.netrw_liststyle = 3
+
 ---- COMMANDS
 vim.api.nvim_create_user_command(
   'NVimrc',
@@ -108,6 +113,10 @@ require("lazy").setup(
   -- options
   {}
 )
+
+-- For fzf.vim
+-- Use rip grep for finding files, respect .gitignore
+vim.fn.setenv("FZF_DEFAULT_COMMAND", "rg --files")
 
 vim.cmd.colorscheme("base16-eighties")
 
