@@ -194,10 +194,11 @@ require('lspconfig').gopls.setup {
   capabilities = capabilities,
 }
 
-require('lspconfig').tsserver.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
+-- deprecated
+--require('lspconfig').tsserver.setup {
+--  on_attach = on_attach,
+--  capabilities = capabilities,
+--}
 
 require('lspconfig').ruby_lsp.setup {
   on_attach = on_attach,
