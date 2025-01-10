@@ -116,7 +116,8 @@ require("lazy").setup(
 
 -- For fzf.vim
 -- Use rip grep for finding files, respect .gitignore
-vim.fn.setenv("FZF_DEFAULT_COMMAND", "rg --files")
+-- but also search "hidden" files, starting with dot
+vim.fn.setenv("FZF_DEFAULT_COMMAND", "rg --files --hidden")
 
 vim.cmd.colorscheme("base16-eighties")
 
