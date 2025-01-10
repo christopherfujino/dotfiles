@@ -17,8 +17,6 @@ vim.opt.splitright = true
 
 -- Disable netrw banner
 vim.g.netrw_banner = false
--- tree style
-vim.g.netrw_liststyle = 3
 
 ---- COMMANDS
 vim.api.nvim_create_user_command(
