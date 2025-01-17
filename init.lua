@@ -95,10 +95,6 @@ require("lazy").setup(
     -- auto-bracket pairing
     "windwp/nvim-autopairs",
 
-    -- auto-complete
-    "hrsh7th/nvim-cmp",
-    "hrsh7th/cmp-nvim-lsp",
-
     -- git
     'tpope/vim-fugitive',
     'tpope/vim-rhubarb',
@@ -150,7 +146,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format {async = true } end, bufopts)
 end
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local dartBinary
 if vim.fn.has('win32') == 1 then
@@ -163,7 +158,6 @@ require('lspconfig').dartls.setup {
   --cmd = { "dart", "language-server", "--protocol=lsp", "--instrumentation-log-file=/usr/local/google/home/fujino/dart-lsp.log" },
   cmd = {"dart", "language-server", "--protocol=lsp"},
   on_attach = on_attach,
-  capabilities = capabilities,
   -- https://github.com/dart-lang/sdk/blob/main/pkg/analysis_server/tool/lsp_spec/README.md
   init_options = {
     -- When set to true, workspace folders will be ignored and analysis will be performed based on the open files, as if no workspace was open at all. This allows opening large folders without causing them to be completely analyzed. Defaults to false.
@@ -185,74 +179,37 @@ require('lspconfig').dartls.setup {
 
 require('lspconfig').bashls.setup {
   on_attach = on_attach,
-  capabilities = capabilities,
 }
 
 require('lspconfig').gopls.setup {
   on_attach = on_attach,
-  capabilities = capabilities,
 }
 
 -- deprecated
 --require('lspconfig').tsserver.setup {
 --  on_attach = on_attach,
---  capabilities = capabilities,
 --}
 
 require('lspconfig').ruby_lsp.setup {
   on_attach = on_attach,
-  capabilities = capabilities,
 }
 
 require('lspconfig').zls.setup {
   on_attach = on_attach,
-  capabilities = capabilities,
 }
 
 require('lspconfig').ocamllsp.setup {
   on_attach = on_attach,
-  capabilities = capabilities,
   filetypes = { 'ocaml' },
   root_dir = require('lspconfig.util').root_pattern('*.opam'),
 }
 
 require('lspconfig').clangd.setup {
   on_attach = on_attach,
-  capabilities = capabilities,
 }
 
 require('lspconfig').cmake.setup {
   on_attach = on_attach,
-  capabilities = capabilities,
-}
-
--- Auto-complete
-local cmp = require 'cmp'
-cmp.setup {
-  mapping = cmp.mapping.preset.insert({
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-  }),
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-  })
 }
 
 -- Debug Adapter
