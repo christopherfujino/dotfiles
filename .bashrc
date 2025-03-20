@@ -32,6 +32,11 @@ alias gupdate='git add . && git commit --amend'
 # -x means include processes without an attached tty
 alias psx='ps x | less'
 
+# install paccache via `pacman -S pacman-contrib`
+alias pacclean='\
+  paccache --remove --uninstalled --keep 3 && \
+  paccache --remove --keep 3'
+
 function gcheckoutremote {
   # Validate argument
   [ -z "$1" ] && 2>&1 echo 'Usage: gcheckoutremote $REMOTE_NAME' && return
