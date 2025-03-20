@@ -33,7 +33,8 @@ alias gupdate='git add . && git commit --amend'
 alias psx='ps x | less'
 
 # install paccache via `pacman -S pacman-contrib`
-alias pacclean='\
+alias pacupdateclean='\
+  sudo pacman -Syu && \
   paccache --remove --uninstalled --keep 3 && \
   paccache --remove --keep 3'
 
