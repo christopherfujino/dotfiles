@@ -86,16 +86,6 @@ export EDITOR=$VISUAL
 # shellcheck source=/dev/null
 [ -f "$HOME/.config/base16-shell/profile_helper.sh" ] && source "$HOME/.config/base16-shell/profile_helper.sh"
 
-[ -d "$HOME/notes" ] && export NOTES="$HOME/notes"
-if [ -d "$HOME/git" ]; then
-  export GIT="$HOME/git"
-  [ -d "$GIT/dotfiles" ] && export DOTFILES="$GIT/dotfiles"
-  if [ -d "$GIT/flutter" ]; then
-    export FLUTTER="$GIT/flutter"
-    export DART_SDK="$FLUTTER/bin/cache/dart-sdk"
-  fi
-fi
-
 # golang dev
 
 [ -d "$HOME/go" ] && export GOPATH="$HOME/go"
