@@ -108,6 +108,9 @@ require("lazy").setup(
   {}
 )
 
+-- This includes newline apparently?!
+vim.g.goyo_width = 81
+
 -- For fzf.vim
 -- Use rip grep for finding files, respect .gitignore
 -- but also search "hidden" files, starting with dot
@@ -147,13 +150,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format {async = true } end, bufopts)
 end
 
-local dartBinary
-if vim.fn.has('win32') == 1 then
-  dartBinary = 'dart.bat'
-else
-  dartBinary = 'dart'
-end
-
 require('lspconfig').dartls.setup {
   --cmd = { "dart", "language-server", "--protocol=lsp", "--instrumentation-log-file=/usr/local/google/home/fujino/dart-lsp.log" },
   cmd = {"dart", "language-server", "--protocol=lsp"},
@@ -186,9 +182,9 @@ require('lspconfig').gopls.setup {
 }
 
 -- deprecated
---require('lspconfig').tsserver.setup {
---  on_attach = on_attach,
---}
+require('lspconfig').tsserver.setup {
+  on_attach = on_attach,
+}
 
 require('lspconfig').ruby_lsp.setup {
   on_attach = on_attach,
