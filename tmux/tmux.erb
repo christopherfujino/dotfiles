@@ -2,6 +2,8 @@
   base00 = '#2d2d2d'
   base01 = '#393939'
   base02 = '#515151'
+  # comments
+  base03 = '#747369'
   base06 = '#e8e6df'
   base09 = '#f99157'
   base0B = '#99cc99'
@@ -12,7 +14,7 @@
   "# Generated from ERB"
 %>
 
-set -g status-justify "left"
+set -g status-justify "absolute-centre"
 set -g status "on"
 set -g status-left-style "none"
 set -g message-command-style "fg=<%= base06 %>,bg=<%= base02 %>"
@@ -24,7 +26,7 @@ set -g pane-border-style "fg=<%= base02 %>"
 set -g status-right-length "100"
 set -g status-left-length "100"
 setw -g window-status-activity-style "none"
-setw -g window-status-separator ""
+setw -g window-status-separator "   "
 
 # Does this do anything?
 setw -g window-status-style "none,fg=<%= base09 %>,bg=<%= base06 %>"
@@ -32,12 +34,10 @@ set -g status-left ""
 set -g status-right ""
 
 setw -g window-status-format "\
-#[fg=<%= base0F %>,bg=<%= base00 %>]  #W  "
+#[fg=<%= base03 %>,bg=<%= base00 %>]#W"
 
 setw -g window-status-current-format "\
-#[fg=<%= base00 %>,bg=<%= base01 %>,nobold,nounderscore,noitalics]<%= right_arrow %>\
-#[fg=<%= base06 %>,bg=<%= base01 %>] #W \
-#[fg=<%= base01 %>,bg=<%= base00 %>,nobold,nounderscore,noitalics]<%= right_arrow %>"
+#[fg=<%= base06 %>,bg=<%= base00 %>]#W"
 
 # custom changes
 set-option -g history-limit 20000
