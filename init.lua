@@ -10,6 +10,7 @@ vim.opt.list = true        -- show "-" for trailing whitespace, ">" for tab
 vim.opt.termguicolors = true -- without this, WSL and ssh colors are wack
 vim.opt.ignorecase = true    -- by default, case insensitive search
 vim.opt.smartcase = true     -- if there exist any upper case, search case sensitive
+vim.opt.laststatus = 1     -- show a statusline if there are > 1 windows
 
 -- better splits
 vim.opt.splitbelow = true
