@@ -178,12 +178,12 @@ require('lspconfig').bashls.setup {
   on_attach = on_attach,
 }
 
+-- go install golang.org/x/tools/gopls@latest
 require('lspconfig').gopls.setup {
   on_attach = on_attach,
 }
 
--- deprecated
-require('lspconfig').tsserver.setup {
+require('lspconfig').ts_ls.setup {
   on_attach = on_attach,
 }
 
