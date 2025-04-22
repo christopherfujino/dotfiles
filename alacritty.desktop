@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=/home/chris/git/chris-monorepo/bin/alacritty
+Name=Alacritty
+Icon=alacritty
+Type=Application
+Comment=Terminal Emulator (built from source)
+Terminal=false
