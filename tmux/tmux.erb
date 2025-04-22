@@ -54,3 +54,6 @@ if-shell 'uname | grep --quiet Darwin' 'bind-key -T copy-mode-vi y send-keys -X 
 # -c <start_directory>
 bind % split-window -h -c "#{pane_current_path}"
 bind '"' split-window -c "#{pane_current_path}"
+
+# Allow the passthrough of color escapes to let base16 work
+set -g allow-passthrough "on"
