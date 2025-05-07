@@ -2,6 +2,9 @@
 # ~/.bashrc
 #
 
+# Return early on non-interactive sessions, lest scp not work.
+[[ $- == *i* ]] || return
+
 # OS dependent config
 OS=$(uname)
 if [ "$OS" = Linux ]; then
