@@ -100,6 +100,19 @@ noremap <c-p> :Files<cr>
 
 nnoremap <c-t> :tabe<cr>
 
+" If starting vim with a directory as first (and only) arg, cd into dir
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) | execute 'cd' argv()[0] | endif
+
+if has('win32')
+  " https://superuser.com/questions/1759700/change-default-shell-to-powershell-in-neovim
+  set shell=powershell
+  set shellcmdflag=-command
+  set shellquote=\"
+  set shellxquote=
+  command! Powershell edit term://powershell
+endif
+
+" nvim-lspconfig
 lua <<EOF
   -- nvim-lspconfig
 
@@ -288,8 +301,9 @@ lua <<EOF
   )
 EOF
 
-
 " If starting vim with a directory as first (and only) arg, cd into dir
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) | execute 'cd' argv()[0] | endif
+
+autocmd BufWritePost init.vim :so %
 
 autocmd FileType go set noexpandtab nosmarttab
