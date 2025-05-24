@@ -79,15 +79,17 @@ elif type vim >/dev/null 2>&1; then
 elif type vi >/dev/null 2>&1; then
   export VISUAL=vi
 else
-  echo "You don't have a vi-compliant editor!"
-  exit 1
+  echo "You don't have a vi-compliant editor!" >&2
 fi
 
 export EDITOR=$VISUAL
 
-# initialize BASE16 w/output in subshell
-# shellcheck source=/dev/null
-[ -f "$HOME/.config/base16-shell/profile_helper.sh" ] && source "$HOME/.config/base16-shell/profile_helper.sh"
+# Don't muck with color in tty
+if [[ "$TERM" != 'linux' ]]; then
+  # initialize BASE16 w/output in subshell
+  # shellcheck source=/dev/null
+  [ -f "$HOME/.config/base16-shell/profile_helper.sh" ] && source "$HOME/.config/base16-shell/profile_helper.sh"
+fi
 
 # golang dev
 
