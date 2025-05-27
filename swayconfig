@@ -215,13 +215,28 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
+set $innerGaps 6px
+
 # See man sway-bar(5)
 bar {
+  gaps $innerGaps
+  mode dock
   position top
   status_command while battery_percentage.sh; do sleep 5; done
+  colors {
+    background $base00
+    statusline $base05
+    separator  #ff0000
+    focused_background  $base00
+    focused_statusline  $base05
+    focused_separator   $base06
+    focused_workspace   $base04 $base04 $base05
+    active_workspace  $base02 $base02 $base05
+    inactive_workspace  $base02 $base02 $base05
+  }
 }
 
-gaps inner 6px
+gaps inner $innerGaps
 gaps outer 0px
 
 # https://faq.i3wm.org/question/1496/change-caps-lock-to-esc-in-i3.1.html
