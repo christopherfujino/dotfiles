@@ -12,7 +12,7 @@ BAT_FORMATTED=$(calc -d "$CURRENT_ADJUSTED / $FULL_ADJUSTED * 100" |\
   awk '{print $1}' |\
   xargs printf "%.1f%%")
 
-printf "$(date +'%b %d %H:%M') BAT %s" "$BAT_FORMATTED"
+printf "$(date +'%H:%M') B(%s)" "$BAT_FORMATTED"
 
 # man 7 swaybar-protocol
 #printf '{"version": 1}
