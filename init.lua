@@ -10,7 +10,7 @@ vim.opt.list = true        -- show "-" for trailing whitespace, ">" for tab
 vim.opt.termguicolors = true -- without this, WSL and ssh colors are wack
 vim.opt.ignorecase = true    -- by default, case insensitive search
 vim.opt.smartcase = true     -- if there exist any upper case, search case sensitive
-vim.opt.laststatus = 2
+vim.opt.laststatus = 2     -- always show statusline
 
 -- better splits
 vim.opt.splitbelow = true
@@ -187,6 +187,7 @@ require('lspconfig').ts_ls.setup {
   on_attach = on_attach,
 }
 
+-- gem install --user-install ruby-lsp
 require('lspconfig').ruby_lsp.setup {
   on_attach = on_attach,
 }
