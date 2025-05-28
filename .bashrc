@@ -67,9 +67,11 @@ function add_to_path_if_not_present {
   [ ! -d "$path" ] && return
   # The second argument is optional, but will speed up this function
   local paths="${2:-$(echo "$PATH" | tr : '\n')}"
-  echo "$paths" | grep --fixed-string --line-regexp "$dir" >/dev/null
+  echo "$paths" | grep --fixed-string --line-regexp "$1" >/dev/null
   # Add $dir to $PATH if it does not yet appear
-  [ "$?" -ne 0 ] && PATH="$dir:$PATH"
+  if [ "$?" -ne 0 ]; then
+    PATH="$1:$PATH"
+  fi
 }
 
 if type nvim >/dev/null 2>&1; then
