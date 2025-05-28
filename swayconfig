@@ -100,7 +100,7 @@ bindsym $mod+Shift+q kill
 # start launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | wmenu | xargs swaymsg exec --
+set $menu dmenu_path | wmenu-run -f 'mononoki 14' -l 10 -p '>' | xargs swaymsg exec --
 bindsym $mod+d exec $menu
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
@@ -219,6 +219,8 @@ set $innerGaps 6px
 
 # See man sway-bar(5)
 bar {
+  font Mononoki 14
+  separator_symbol '<-- Separator -->'
   gaps $innerGaps
   mode dock
   position top
@@ -230,9 +232,10 @@ bar {
     focused_background  $base00
     focused_statusline  $base05
     focused_separator   $base06
-    focused_workspace   $base04 $base04 $base05
-    active_workspace  $base02 $base02 $base05
-    inactive_workspace  $base02 $base02 $base05
+    focused_workspace   $base02 $base02 $base05
+    active_workspace  $base00 $base00 $base05
+    urgent_workspace    $base0A $base0A $base00
+    inactive_workspace  $base00 $base00 $base05
   }
 }
 
