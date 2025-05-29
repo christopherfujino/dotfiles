@@ -183,14 +183,6 @@ bindsym $mod+r mode "resize"
 # https://unix.stackexchange.com/questions/439486/how-can-i-make-media-keys-work-with-i3
 # Media Keys
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
-
-# Requires apt-get install brightnessctl
-bindsym XF86MonBrightnessUp exec brightnessctl set +10% # increase screen brightness
-bindsym XF86MonBrightnessDown exec brightnessctl set 10%- # decrease screen brightness
-
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -220,11 +212,11 @@ set $innerGaps 6px
 # See man sway-bar(5)
 bar {
   font Mononoki 14
-  separator_symbol '<-- Separator -->'
+  separator_symbol '  '
   gaps $innerGaps
   mode dock
   position top
-  status_command while battery_percentage.sh; do sleep 5; done
+  status_command swaybar-panel
   colors {
     background $base00
     statusline $base05
@@ -242,8 +234,8 @@ bar {
 gaps inner $innerGaps
 gaps outer 0px
 
-# https://faq.i3wm.org/question/1496/change-caps-lock-to-esc-in-i3.1.html
-exec_always re-bind-keyboard.sh
+# TODO figure out how to do this in wayland
+#exec_always re-bind-keyboard.sh
 
 # from $base00 above
 # see man sway-output(5)
