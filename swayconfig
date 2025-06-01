@@ -13,59 +13,59 @@ include /etc/sway/config-vars.d/*
 # https://github.com/tinted-theming/base16-i3/blob/main/colors/base16-eighties.config
 
 # Default Background
-set $base00 #2d2d2d
+set $base00 2d2d2d
 
 # Lighter Background (Used for status bars, line number and folding marks)
-set $base01 #393939
+set $base01 393939
 
 # Selection Background
-set $base02 #515151
+set $base02 515151
 
 # Comments, Invisibles, Line Highlighting
-set $base03 #747369
+set $base03 747369
 
 # Dark Foreground (Used for status bars)
-set $base04 #a09f93
+set $base04 a09f93
 
 # Default Foreground, Caret, Delimiters, Operators
-set $base05 #d3d0c8
+set $base05 d3d0c8
 
 # Light Foreground (Not often used)
-set $base06 #e8e6df
+set $base06 e8e6df
 
 # Light Background (Not often used)
-set $base07 #f2f0ec
+set $base07 f2f0ec
 
 # Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
-set $base08 #f2777a
+set $base08 f2777a
 
 # Integers, Boolean, Constants, XML Attributes, Markup Link Url
-set $base09 #f99157
+set $base09 f99157
 
 # Classes, Markup Bold, Search Text Background
-set $base0A #ffcc66
+set $base0A ffcc66
 
 # Strings, Inherited Class, Markup Code, Diff Inserted
-set $base0B #99cc99
+set $base0B 99cc99
 
 # Support, Regular Expressions, Escape Characters, Markup Quotes
-set $base0C #66cccc
+set $base0C 66cccc
 
 # Functions, Methods, Attribute IDs, Headings
-set $base0D #6699cc
+set $base0D 6699cc
 
 # Keywords, Storage, Selector, Markup Italic, Diff Changed
-set $base0E #cc99cc
+set $base0E cc99cc
 
 # Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
-set $base0F #d27b53
+set $base0F d27b53
 
 # class                 border  backgr. text    indicat child border
-client.focused          $base05 $base05 $base00 $base05 $base0E
-client.focused_inactive $base03 $base03 $base05 $base03
-client.unfocused        $base03 $base03 $base05 $base00
-client.urgent           $base01 $base01 $base05 $base00
-client.background       $base00
+client.focused          #$base05 #$base05 #$base00 #$base05 #$base0E
+client.focused_inactive #$base03 #$base03 #$base05 #$base03
+client.unfocused        #$base03 #$base03 #$base05 #$base00
+client.urgent           #$base01 #$base01 #$base05 #$base00
+client.background       #$base00
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -100,7 +100,8 @@ bindsym $mod+Shift+q kill
 # start launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | wmenu-run -f 'mononoki 14' -l 10 -p '>' | xargs swaymsg exec --
+# man 1 wmenu
+set $menu dmenu_path | wmenu-run -f 'mononoki 18' -l 20 -p '>' -M $base02 -S $base02 | xargs swaymsg exec --
 bindsym $mod+d exec $menu
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
@@ -218,16 +219,16 @@ bar {
   position top
   status_command swaybar-panel
   colors {
-    background $base00
-    statusline $base05
+    background #$base00
+    statusline #$base05
     separator  #ff0000
-    focused_background  $base00
-    focused_statusline  $base05
-    focused_separator   $base06
-    focused_workspace   $base02 $base02 $base05
-    active_workspace  $base00 $base00 $base05
-    urgent_workspace    $base0A $base0A $base00
-    inactive_workspace  $base00 $base00 $base05
+    focused_background  #$base00
+    focused_statusline  #$base05
+    focused_separator   #$base06
+    focused_workspace   #$base02 #$base02 #$base05
+    active_workspace  #$base00 #$base00 #$base05
+    urgent_workspace    #$base0A #$base0A #$base00
+    inactive_workspace  #$base00 #$base00 #$base05
   }
 }
 
