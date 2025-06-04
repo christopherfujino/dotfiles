@@ -10,53 +10,40 @@ set $mod Mod1
 
 include /etc/sway/config-vars.d/*
 
+set $innerGaps 6px
+
 # https://github.com/tinted-theming/base16-i3/blob/main/colors/base16-eighties.config
 
 # Default Background
 set $base00 2d2d2d
-
 # Lighter Background (Used for status bars, line number and folding marks)
 set $base01 393939
-
 # Selection Background
 set $base02 515151
-
 # Comments, Invisibles, Line Highlighting
 set $base03 747369
-
 # Dark Foreground (Used for status bars)
 set $base04 a09f93
-
 # Default Foreground, Caret, Delimiters, Operators
 set $base05 d3d0c8
-
 # Light Foreground (Not often used)
 set $base06 e8e6df
-
 # Light Background (Not often used)
 set $base07 f2f0ec
-
 # Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
 set $base08 f2777a
-
 # Integers, Boolean, Constants, XML Attributes, Markup Link Url
 set $base09 f99157
-
 # Classes, Markup Bold, Search Text Background
 set $base0A ffcc66
-
 # Strings, Inherited Class, Markup Code, Diff Inserted
 set $base0B 99cc99
-
 # Support, Regular Expressions, Escape Characters, Markup Quotes
 set $base0C 66cccc
-
 # Functions, Methods, Attribute IDs, Headings
 set $base0D 6699cc
-
 # Keywords, Storage, Selector, Markup Italic, Diff Changed
 set $base0E cc99cc
-
 # Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
 set $base0F d27b53
 
@@ -70,13 +57,6 @@ client.background       #$base00
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 font pango:mononoki 14
-
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverset age is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -101,13 +81,8 @@ bindsym $mod+Shift+q kill
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 # man 1 wmenu
-set $menu dmenu_path | wmenu-run -f 'mononoki 18' -l 20 -p '>' -M $base02 -S $base02 | xargs swaymsg exec --
+set $menu dmenu_path | wmenu-run -f 'mononoki 18' -l 20 -p 'wmenu' -M $base02 -S $base02 | xargs swaymsg exec --
 bindsym $mod+d exec $menu
-
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+h focus left
@@ -208,12 +183,10 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-set $innerGaps 6px
-
 # See man sway-bar(5)
 bar {
-  font Mononoki 14
-  separator_symbol '  '
+  font Mononoki 16
+  separator_symbol ' | '
   gaps $innerGaps
   mode dock
   position top
@@ -221,10 +194,10 @@ bar {
   colors {
     background #$base00
     statusline #$base05
-    separator  #ff0000
+    separator  #$base0E
     focused_background  #$base00
     focused_statusline  #$base05
-    focused_separator   #$base06
+    focused_separator   #$base0E
     focused_workspace   #$base02 #$base02 #$base05
     active_workspace  #$base00 #$base00 #$base05
     urgent_workspace    #$base0A #$base0A #$base00
