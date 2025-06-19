@@ -68,9 +68,12 @@ func main() {
 		setOption(c, "tabstop", 2)
 		setOption(c, "shiftwidth", 2)
 		setOption(c, "expandtab", true)
-		setOption(c, "list", true)
-		setOption(c, "termguicolors", true)
-		setOption(c, "laststatus", 2)
+		setOption(c, "signcolumn", "yes") // Always show sign column, for gitdiff
+		setOption(c, "list", true) // Show trailing whitespace
+		setOption(c, "termguicolors", true) // Otherwise WSL gets messed up
+		setOption(c, "ignorecase", true) // case insensitive search...
+		setOption(c, "smartcase", true) // ...unless you use a capital letter
+		setOption(c, "laststatus", 2) // Always show status bar
 
 		// Better splits
 		setOption(c, "splitbelow", true)

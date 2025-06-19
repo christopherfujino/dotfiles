@@ -1,24 +1,5 @@
 ---- EXPERIMENTAL
 
----- options
---vim.opt.number = true
---vim.opt.tabstop = 2        -- Width of a <tab>
---vim.opt.shiftwidth = 2     -- Number of spaces to use for each step of auto-indent
---vim.opt.expandtab = true   -- Use the appropriate number of spaces to insert a tab
---vim.opt.signcolumn = "yes" -- always draw sign column
---vim.opt.list = true        -- show "-" for trailing whitespace, ">" for tab
---vim.opt.termguicolors = true -- without this, WSL and ssh colors are wack
---vim.opt.ignorecase = true    -- by default, case insensitive search
---vim.opt.smartcase = true     -- if there exist any upper case, search case sensitive
---vim.opt.laststatus = 2     -- always show statusline
---
----- better splits
---vim.opt.splitbelow = true
---vim.opt.splitright = true
---
----- Disable netrw banner
---vim.g.netrw_banner = false
---
 ---- COMMANDS
 vim.api.nvim_create_user_command(
   'NVimrc',
