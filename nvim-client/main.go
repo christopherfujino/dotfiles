@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"runtime"
 	"strings"
 
 	"github.com/neovim/go-client/nvim"
@@ -95,17 +96,11 @@ func main() {
 		check1(c.Command("autocmd FileType go set noexpandtab nosmarttab"))
 		check1(c.Command("autocmd FileType markdown set linebreak"))
 
-		//vim.api.nvim_create_user_command(
-		//	'NVimrc',
-		//	function(opts)
-		//		if vim.fn.has("win32") == 1 then
-		//			vim.cmd("edit ~\\AppData\\Local\\nvim\\init.lua")
-		//		else
-		//			vim.cmd("edit ~/.config/nvim/init.lua")
-		//		end
-		//	end,
-		//	{}
-		//)
+		var cmd nvim.UserVimCommand = "edit ~/.config/nvim/init.lua"
+		if runtime.GOOS == "windows" {
+			cmd = "edit ~\\AppData\\Local\\nvim\\init.lua"
+		}
+		c.CreateUserCommand("NVimrc", cmd, map[string]any{})
 
 		return v, err
 	}))

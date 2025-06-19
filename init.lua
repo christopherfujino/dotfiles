@@ -1,18 +1,5 @@
 ---- EXPERIMENTAL
 
----- COMMANDS
-vim.api.nvim_create_user_command(
-  'NVimrc',
-  function(opts)
-    if vim.fn.has("win32") == 1 then
-      vim.cmd("edit ~\\AppData\\Local\\nvim\\init.lua")
-    else
-      vim.cmd("edit ~/.config/nvim/init.lua")
-    end
-  end,
-  {}
-)
---
 --vim.api.nvim_create_user_command(
 --  'Gl',
 --  function(opts)
@@ -41,9 +28,6 @@ vim.api.nvim_create_user_command(
 --vim.keymap.set({"n", "v", "i"}, "<2-MiddleMouse>", "<Nop>", {noremap=true})
 --vim.keymap.set({"n", "v", "i"}, "<3-MiddleMouse>", "<Nop>", {noremap=true})
 --vim.keymap.set({"n", "v", "i"}, "<4-MiddleMouse>", "<Nop>", {noremap=true})
---
---vim.keymap.set("n", "<c-p>", ":Files<cr>", {noremap=true})
---vim.keymap.set("n", "<c-t>", ":tabe<cr>", {noremap=true})
 --
 ---- PLUGINS
 
@@ -89,7 +73,7 @@ require("lazy").setup(
   -- options
   {}
 )
---
+
 ---- This includes newline apparently?!
 --vim.g.goyo_width = 81
 --
@@ -97,9 +81,7 @@ require("lazy").setup(
 ---- Use rip grep for finding files, respect .gitignore
 ---- but also search "hidden" files, starting with dot
 --vim.fn.setenv("FZF_DEFAULT_COMMAND", "rg --files --hidden")
---
---vim.cmd.colorscheme("base16-eighties")
---
+
 require("nvim-autopairs").setup {
   disable_filetype = {},
 }
