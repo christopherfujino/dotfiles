@@ -268,17 +268,20 @@ require('lspconfig').gopls.setup {
 
 ---- https://devforum.roblox.com/t/unnamed-anonymous-functions-give-ambiguous-syntax-errors-if-previous-line-contains-a-function-call/1450059
 f = (function ()
-  --local client_job = nil
-  local client_job = vim.fn.jobstart(
-    --'/home/chris/git/chris-monorepo/go/nvim-client/run.sh',
-    '/home/chris/git/dotfiles/nvim-client/nvim-client',
-    {rpc = true}
-  )
-  if client_job < 1 then
-	  print("Failed to jobstart run.sh")
+  if vim.fn.executable('chris-nvim-client') == 1 then
+    local client_job = vim.fn.jobstart(
+      --'/home/chris/git/chris-monorepo/go/nvim-client/run.sh',
+      '/home/chris/git/dotfiles/nvim-client/nvim-client',
+      {rpc = true}
+    )
+    if client_job < 1 then
+      print("Failed to jobstart run.sh")
+    else
+      local result = vim.fn.rpcrequest(client_job, 'init', {})
+      print(result)
+    end
   else
-	  local result = vim.fn.rpcrequest(client_job, 'init', {})
-	  print(result)
+    print("[ERROR] You should add `chris-nvim-client` to your path")
   end
 end)
 f()
