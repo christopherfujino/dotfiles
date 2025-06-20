@@ -1,34 +1,5 @@
 ---- EXPERIMENTAL
 
---vim.api.nvim_create_user_command(
---  'Gl',
---  function(opts)
---    -- note vim buffers don't support terminal escapes, thus no color
---    vim.cmd([[
---      :Git log --format=format:'%h - %cs%d%n          %s - %aN'
---    ]])
---  end,
---  {}
---)
---
---vim.api.nvim_create_user_command(
---  'Gh',
---  function(opts)
---    vim.cmd([[
---      :Git log --graph --all --format=format:'%h - %cs%d%n          %s - %aN'
---    ]])
---  end,
---  {}
---)
---
------- MAPPINGS
---
----- disable middle mouse paste
---vim.keymap.set({"n", "v", "i"}, "<MiddleMouse>", "<Nop>", {noremap=true})
---vim.keymap.set({"n", "v", "i"}, "<2-MiddleMouse>", "<Nop>", {noremap=true})
---vim.keymap.set({"n", "v", "i"}, "<3-MiddleMouse>", "<Nop>", {noremap=true})
---vim.keymap.set({"n", "v", "i"}, "<4-MiddleMouse>", "<Nop>", {noremap=true})
---
 ---- PLUGINS
 
 -- Bootstrap plugin manager
@@ -73,18 +44,6 @@ require("lazy").setup(
   -- options
   {}
 )
-
----- This includes newline apparently?!
---vim.g.goyo_width = 81
---
----- For fzf.vim
----- Use rip grep for finding files, respect .gitignore
----- but also search "hidden" files, starting with dot
---vim.fn.setenv("FZF_DEFAULT_COMMAND", "rg --files --hidden")
-
-require("nvim-autopairs").setup {
-  disable_filetype = {},
-}
 
 -- lsp
 local opts = { noremap=true, silent=true }
