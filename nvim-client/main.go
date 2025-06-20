@@ -13,6 +13,10 @@ import (
 var logFile *os.File
 
 func print(v ...any) {
+	if logFile == nil {
+		return
+	}
+
 	var buffer = strings.Builder{}
 	for _, v := range v {
 		buffer.WriteString(fmt.Sprintf("%v", v))
@@ -42,6 +46,7 @@ func setOption(client *nvim.Nvim, name string, value interface{}) {
 
 func main() {
 	// TODO make this a stable path
+	// TODO only create this file if in debug mode
 	logFile = check2(os.Create("/home/chris/git/dotfiles/nvim-client/client.log"))
 	defer logFile.Close()
 
@@ -52,16 +57,16 @@ func main() {
 	var closer = os.Stdout
 	var client = check2(nvim.New(reader, writer, closer, log.Printf))
 	print("Spawned client")
-	check1(client.RegisterHandler("init", func(c *nvim.Nvim, args []string) (v int, err error) {
-		v = 42
+	check1(client.RegisterHandler("init", func(c *nvim.Nvim, args []string) (v string, err error) {
+		v = "Success from Go"
 		defer (func() {
 			maybe_err := recover()
 			if maybe_err != nil {
 				print("recovered from panic")
 				err = maybe_err.(error)
 				print("recovered: ")
-				print(err)
-				v = 0
+				print(err.Error())
+				v = fmt.Sprintf("error from Go: %s", err.Error())
 			}
 		})()
 		print("Handled init RPC call")
@@ -90,7 +95,17 @@ func main() {
 		check1(c.SetKeyMap("n", "<c-p>", ":Files<cr>", noremap))
 		check1(c.SetKeyMap("n", "<c-t>", ":tabe<cr>", noremap))
 
+		// For fzf.vim
+		// Use rip grep for finding files, respect .gitignore
+		// but also search "hidden" files, starting with dot
+		c.Call("setenv", nil, "FZF_DEFAULT_COMMAND", "rg --files --hidden")
+
 		// LSP Key bindings
+		// Diagnostics
+		// TODO need silent=true?
+		var noremapsilent = map[string]bool{"noremap": true, "silent": true}
+		check1(c.SetKeyMap("n", "<space>e", ":lua vim.diagnostic.open_float()<cr>", noremapsilent))
+		check1(c.SetKeyMap("n", "<space>q", ":lua vim.diagnostic.setloclist()<cr>", noremapsilent))
 
 		// Disable middle-mouse paste
 		for _, mode := range [3]string{"n", "v", "i"} {
@@ -114,11 +129,6 @@ func main() {
 
 		// This includes the newline
 		c.SetVar("goyo_width", 81)
-
-		// For fzf.vim
-		// Use rip grep for finding files, respect .gitignore
-		// but also search "hidden" files, starting with dot
-		c.Call("setenv", nil, "FZF_DEFAULT_COMMAND", "rg --file --hidden")
 
 		check1(c.ExecLua("require('nvim-autopairs').setup {disable_filetype = {}}", nil, nil))
 
