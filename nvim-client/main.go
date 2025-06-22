@@ -57,6 +57,8 @@ func main() {
 		// Disable netrw banner
 		check1(c.SetVar("netrw_banner", false))
 
+		bootstrapPlugins(c)
+
 		check1(c.Command("colorscheme base16-eighties"))
 
 		// FZF
