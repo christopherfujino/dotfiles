@@ -86,8 +86,27 @@ fi
 
 export EDITOR=$VISUAL
 
+pgrep fbterm >/dev/null 2>&1
+if [[ "$?" -eq 0 ]]; then
+  echo "SETTING fbterm escapes"
+  printf "\033[3;0;45;45;45}"
+  printf "\033[3;1;242;119;122}"
+  printf "\033[3;2;153;204;153}"
+  printf "\033[3;3;255;204;102}"
+  printf "\033[3;4;102;153;204}"
+  printf "\033[3;5;204;153;204}"
+  printf "\033[3;6;102;204;204}"
+  printf "\033[3;7;211;208;200}"
+  printf "\033[3;8;116;115;105}"
+  printf "\033[3;9;242;119;122}"
+  printf "\033[3;10;153;204;153}"
+  printf "\033[3;11;255;204;102}"
+  printf "\033[3;12;102;153;204}"
+  printf "\033[3;13;204;153;204}"
+  printf "\033[3;14;102;204;204}"
+  printf "\033[3;15;242;240;236}"
 # Don't muck with color in tty
-if [[ "$TERM" != 'linux' ]]; then
+elif [[ "$TERM" != 'linux' ]]; then
   # initialize BASE16 w/output in subshell
   # shellcheck source=/dev/null
   [ -f "$HOME/.config/base16-shell/profile_helper.sh" ] && source "$HOME/.config/base16-shell/profile_helper.sh"
