@@ -8,7 +8,9 @@
 # Use alt
 set $mod Mod1
 
-include /etc/sway/config-vars.d/*
+# Check this path exists in your distro!
+#include /etc/sway/config-vars.d/*
+include /etc/sway/config.d/*
 
 set $innerGaps 6px
 
@@ -229,5 +231,8 @@ for_window [class="[Cc]hrome"] floating disable, move window to workspace curren
 
 # disable speaker beep
 exec_always --no-startup-id xset -b
+
+# https://github.com/swaywm/sway/issues/5732
+#exec systemctl --user import-environment
 
 exec --no-startup-id alacritty
