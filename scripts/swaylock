@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+IMG="$HOME/Pictures/wallpaper.png"
+SWAYLOCK='/usr/bin/swaylock'
+
+if [ ! -f "$SWAYLOCK" ]; then
+  echo 'Cannot find swaylock bin at /usr/bin/swaylock' 2>&1
+  type -a swaylock
+  exit 42
+fi
+
+if [ -f "$IMG" ]; then
+  echo about to exec swaylock
+  exec "$SWAYLOCK" --image "$IMG"
+else
+  echo "Cannot find an image at $IMG, you can generate one with //go/wallpaper-generator"
+fi
