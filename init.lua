@@ -1,6 +1,7 @@
 (function ()
   if vim.fn.executable('chris-nvim-client') == 1 then
     local client_job = vim.fn.jobstart(
+      --'chris-nvim-client -debug',
       'chris-nvim-client',
       {rpc = true}
     )
@@ -8,6 +9,10 @@
       print("Failed to jobstart chris-nvim-client")
     else
       local result = vim.fn.rpcrequest(client_job, 'init', {})
+      print(result)
+      result = vim.fn.rpcrequest(client_job, 'noop', {})
+      print(result)
+      result = vim.fn.rpcrequest(client_job, 'die', {})
       print(result)
     end
   else

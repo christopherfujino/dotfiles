@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"runtime"
+	"time"
 
 	"github.com/neovim/go-client/nvim"
 )
@@ -21,13 +22,13 @@ func setup() {
 	flag.Parse()
 
 	if debug {
-		path := os.Getenv("HOMEZ")
+		path := os.Getenv("HOME")
 		if len(path) == 0 {
 			panic(
 				"Cannot run chris-nvim-client in debug mode without a $HOME env var",
 			)
 		}
-		path = fmt.Sprintf("%s/.chris-nvim-client.log")
+		path = fmt.Sprintf("%s/.chris-nvim-client.log", path)
 		logFile = check2(os.Create(path))
 	}
 }
@@ -41,6 +42,17 @@ func main() {
 	var closer = os.Stdout
 	var client = check2(nvim.New(reader, writer, closer, log.Printf))
 	print("Spawned client")
+	check1(client.RegisterHandler("noop", func(c *nvim.Nvim, args []string) (string, error) {
+		return "noop", nil
+	}))
+	check1(client.RegisterHandler("die", func(c *nvim.Nvim, args []string) {
+		go (func() {
+			print("About to sleep for 1 second")
+			time.Sleep(time.Second)
+			print("Exiting after sleep")
+			os.Exit(0)
+		})()
+	}))
 	check1(client.RegisterHandler("init", func(c *nvim.Nvim, args []string) (v string, err error) {
 		v = "Success from Go"
 		defer (func() {
