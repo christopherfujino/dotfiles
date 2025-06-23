@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -13,12 +14,26 @@ func setOption(client *nvim.Nvim, name string, value interface{}) {
 	check1(client.SetOptionValue(name, value, map[string]nvim.OptionValueScope{}))
 }
 
-func main() {
-	// TODO make this a stable path
-	// TODO only create this file if in debug mode
-	logFile = check2(os.Create("/home/chris/git/dotfiles/nvim-client/client.log"))
-	defer logFile.Close()
+func setup() {
+	var debug bool
+	flag.BoolVar(&debug, "debug", false, "In debug mode, a log file is written to disk.")
 
+	flag.Parse()
+
+	if debug {
+		path := os.Getenv("HOMEZ")
+		if len(path) == 0 {
+			panic(
+				"Cannot run chris-nvim-client in debug mode without a $HOME env var",
+			)
+		}
+		path = fmt.Sprintf("%s/.chris-nvim-client.log")
+		logFile = check2(os.Create(path))
+	}
+}
+
+func main() {
+	setup()
 	print("Go entrypoint")
 
 	var reader = os.Stdin
