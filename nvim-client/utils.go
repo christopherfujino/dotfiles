@@ -11,9 +11,6 @@ import (
 var logFile *os.File
 
 func print(v ...any) {
-	if logFile == nil {
-		return
-	}
 
 	var buffer = strings.Builder{}
 	for _, v := range v {
@@ -21,7 +18,9 @@ func print(v ...any) {
 		buffer.WriteString(", ")
 	}
 	buffer.WriteString("\n")
-	logFile.WriteString(buffer.String())
+	if logFile != nil {
+		logFile.WriteString(buffer.String())
+	}
 	log.Println(v...)
 }
 
