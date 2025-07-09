@@ -1,2 +1,2 @@
-nvim-client: *.go go.*
+nvim-client: *.go go.* api/*.go
 	go build .
