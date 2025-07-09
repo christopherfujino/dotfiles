@@ -105,6 +105,7 @@ if [[ "$?" -eq 0 ]]; then
   printf "\033[3;13;204;153;204}"
   printf "\033[3;14;102;204;204}"
   printf "\033[3;15;242;240;236}"
+  [ -f "$HOME/.config/base16-shell/profile_helper.sh" ] && source "$HOME/.config/base16-shell/profile_helper.sh"
 # Don't muck with color in tty
 elif [[ "$TERM" != 'linux' ]]; then
   # initialize BASE16 w/output in subshell
