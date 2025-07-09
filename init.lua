@@ -10,10 +10,7 @@
     else
       local result = vim.fn.rpcrequest(client_job, 'init', {})
       print(result)
-      result = vim.fn.rpcrequest(client_job, 'noop', {})
-      print(result)
-      result = vim.fn.rpcrequest(client_job, 'die', {})
-      print(result)
+      vim.fn.rpcrequest(client_job, 'die', {})
     end
   else
     print("[ERROR] You should add `chris-nvim-client` to your path")
