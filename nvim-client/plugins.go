@@ -8,7 +8,7 @@ import (
 	"github.com/neovim/go-client/nvim"
 )
 
-func bootstrapPlugins(c *nvim.Nvim) {
+func bootstrapPlugins(c *nvim.Nvim, plugins []string, after func()) {
 	var s string
 	check1(c.ExecLua("return vim.fn.stdpath('data')", &s, nil))
 	if s == "" {
@@ -24,34 +24,13 @@ func bootstrapPlugins(c *nvim.Nvim) {
 	}
 	check1(c.ExecLua(fmt.Sprintf("vim.opt.rtp:prepend('%s')", s), nil, nil))
 
-	check1(c.ExecLua(getPlugins(), nil, nil))
+	check1(c.ExecLua(getPlugins(plugins), nil, nil))
+
+	after()
 }
 
-func getPlugins() string {
+func getPlugins(plugins []string) string {
 	var buffer = strings.Builder{}
-	var plugins = []string{
-		"RRethy/base16-nvim",
-
-		"neovim/nvim-lspconfig",
-		"mfussenegger/nvim-dap",
-		// Shows git diff in gutter
-		"airblade/vim-gitgutter",
-		// :Rename, :Move, :Delete
-		"tpope/vim-eunuch",
-		// cs'"
-		"tpope/vim-surround",
-		// auto-bracket pairing
-		"windwp/nvim-autopairs",
-
-		// git
-		"tpope/vim-fugitive",
-		"tpope/vim-rhubarb",
-
-		"junegunn/fzf",
-		"junegunn/fzf.vim",
-
-		"junegunn/goyo.vim",
-	}
 
 	buffer.WriteString("require('lazy').setup({\n")
 
@@ -65,4 +44,5 @@ func getPlugins() string {
 	buffer.WriteString("}, {})\n")
 
 	return buffer.String()
+
 }
