@@ -12,7 +12,7 @@ set $mod Mod1
 #include /etc/sway/config-vars.d/*
 include /etc/sway/config.d/*
 
-set $innerGaps 6px
+set $innerGaps 0px
 
 # https://github.com/tinted-theming/base16-i3/blob/main/colors/base16-eighties.config
 
@@ -64,7 +64,7 @@ font pango:mononoki 14
 floating_modifier $mod
 
 # pixel means no title
-default_border pixel 3
+default_border pixel 0
 
 # hide vertical borders adjacent to screen edges
 hide_edge_borders none
