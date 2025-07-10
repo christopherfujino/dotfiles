@@ -6,10 +6,12 @@
       {rpc = true}
     )
     if client_job < 1 then
-      print("Failed to jobstart chris-nvim-client")
+      error("Failed to jobstart chris-nvim-client")
     else
       local result = vim.fn.rpcrequest(client_job, 'init', {})
-      print(result)
+      if result ~= "Success from Go" then
+        error("Unexpected output from `chris-nvim-client`: " .. result)
+      end
       vim.fn.rpcrequest(client_job, 'die', {})
     end
   else

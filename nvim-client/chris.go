@@ -45,19 +45,31 @@ var lspServers = []string{
 	"ts_ls",
 }
 
+const clean = true
+
 func main() {
 	api.Setup(
 		func(c *nvim.Nvim) {
-			api.SetOption(c, "number", true)
+			api.SetOption(c, "number", !clean)
 			api.SetOption(c, "tabstop", 2)
 			api.SetOption(c, "shiftwidth", 2)
 			api.SetOption(c, "expandtab", true)
-			api.SetOption(c, "signcolumn", "yes")   // Always show sign column, for gitdiff
 			api.SetOption(c, "list", false)         // Do NOT show trailing whitespace
 			api.SetOption(c, "termguicolors", true) // Otherwise WSL gets messed up
 			api.SetOption(c, "ignorecase", true)    // case insensitive search...
 			api.SetOption(c, "smartcase", true)     // ...unless you use a capital letter
-			api.SetOption(c, "laststatus", 2)       // Always show status bar
+			if clean {
+				api.SetOption(c, "signcolumn", "no") // Always show sign column, for gitdiff
+				api.SetOption(c, "laststatus", 1)    // never show status bar
+				api.SetOption(c, "smd", false)       // No 'showmode'
+				api.SetOption(c, "ru", false)        // No 'ruler'
+
+				//pane := api.CleanPane{}
+				//pane.Init(c)
+			} else {
+				api.SetOption(c, "signcolumn", "yes") // Always show sign column, for gitdiff
+				api.SetOption(c, "laststatus", 2)     // always show status bar
+			}
 
 			// Better splits
 			api.SetOption(c, "splitbelow", true)

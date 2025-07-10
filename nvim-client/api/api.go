@@ -56,9 +56,18 @@ func Setup(user func(*nvim.Nvim)) {
 			maybe_err := recover()
 			if maybe_err != nil {
 				print("recovered from panic")
-				err = maybe_err.(error)
-				print(err.Error())
-				v = fmt.Sprintf("error from Go: %s", err.Error())
+				var msg string
+				msg, ok := maybe_err.(string)
+				if !ok {
+					err, ok := maybe_err.(error)
+					if !ok {
+						msg = fmt.Sprintf("Panic'd unknown type: %v", maybe_err)
+					} else {
+						msg = err.Error()
+					}
+				}
+				print(msg)
+				v = fmt.Sprintf("error from Go: %s", msg)
 			}
 		})()
 		print("Handled init RPC call")
@@ -148,4 +157,44 @@ func Check1(e error) {
 		print(e)
 		panic(e)
 	}
+}
+
+type CleanPane struct {
+	top nvim.Buffer
+	left nvim.Buffer
+	right nvim.Buffer
+	bottom nvim.Buffer
+}
+
+var localScope = map[string]nvim.OptionValueScope{
+	"scope": nvim.LocalScope,
+}
+
+func initPad(c *nvim.Nvim, cmd string) nvim.Buffer {
+	Check1(c.Command(cmd))
+	buf := Check2(c.CurrentBuffer())
+	Check1(c.SetOptionValue("buftype", "nofile", localScope))
+	Check1(c.SetOptionValue("bufhidden", "wipe", localScope))
+	Check1(c.SetOptionValue("modifiable", false, localScope))
+	Check1(c.SetOptionValue("buflisted", false, localScope))
+	Check1(c.SetOptionValue("swapfile", false, localScope))
+	Check1(c.SetOptionValue("cursorline", false, localScope))
+	Check1(c.SetOptionValue("cursorcolumn", false, localScope))
+	Check1(c.SetOptionValue("statusline", "", localScope))
+
+	return buf
+}
+
+func (cp *CleanPane) Init(c *nvim.Nvim) {
+	cp.left = initPad(c, "vertical topleft new")
+	cp.right = initPad(c, "vertical botright new")
+	cp.top = initPad(c, "topleft new")
+	cp.bottom = initPad(c, "botright new")
+
+	cp.Resize(c)
+}
+
+func (cp *CleanPane) Resize(c *nvim.Nvim) {
+	res := Check2(c.Exec(fmt.Sprintf("execute bufwinnr(%d)", cp.top), map[string]any{}))
+	print(len(res))
 }
