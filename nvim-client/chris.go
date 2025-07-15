@@ -90,6 +90,11 @@ func main() {
 			}
 
 			// Auto-commands
+			// CD if argv[1] is a dir
+			api.Check2(c.CreateAutocmd("VimEnter", map[string]any{
+				"pattern": "*",
+				"command": "if argc() == 1 && isdirectory(argv()[0]) | execute 'cd' argv()[0] | endif",
+			}))
 			api.Check1(c.Command("autocmd FileType python set shiftwidth=4 tabstop=4"))
 			api.Check1(c.Command("autocmd FileType cs set shiftwidth=4 tabstop=4"))
 			api.Check1(c.Command("autocmd FileType go set noexpandtab nosmarttab"))
