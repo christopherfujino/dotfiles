@@ -50,6 +50,7 @@ const clean = true
 func main() {
 	api.Setup(
 		func(c *nvim.Nvim) {
+			api.SetOption(c, "rulerformat", "%-10.(%l,%c%V%)")
 			api.SetOption(c, "number", !clean)
 			api.SetOption(c, "tabstop", 2)
 			api.SetOption(c, "shiftwidth", 2)
