@@ -12,7 +12,9 @@ set $mod Mod1
 #include /etc/sway/config-vars.d/*
 include /etc/sway/config.d/*
 
-set $innerGaps 0px
+set $innerGaps 5px
+set $outerGaps 5px
+set $borderWidth 0
 
 # https://github.com/tinted-theming/base16-i3/blob/main/colors/base16-eighties.config
 
@@ -64,7 +66,7 @@ font pango:mononoki 14
 floating_modifier $mod
 
 # pixel means no title
-default_border pixel 0
+default_border pixel $borderWidth
 
 # hide vertical borders adjacent to screen edges
 hide_edge_borders none
@@ -208,7 +210,7 @@ bar {
 }
 
 gaps inner $innerGaps
-gaps outer 0px
+gaps outer $outerGaps
 
 # TODO figure out how to do this in wayland
 #exec_always re-bind-keyboard.sh
