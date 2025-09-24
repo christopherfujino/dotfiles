@@ -43,9 +43,12 @@ var lspServers = []string{
 	// gem install --user-install ruby-lsp
 	"ruby_lsp",
 	"ts_ls",
+
+	// https://zigtools.org/zls/install
+	"zls",
 }
 
-const clean = true
+const clean = false
 
 func main() {
 	api.Setup(
