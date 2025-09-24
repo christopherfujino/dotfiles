@@ -1,0 +1,21 @@
+#!/usr/bin/env sloth
+
+let platform = ('uname'!).stdout()
+let currentBranch = ('git symbolic-ref --short HEAD'!).stdout()
+
+let shouldOpenChrome = true
+let openCommand = 'unreachable'
+
+if $env['SSH_CLIENT'] != null or $env['SSH_TTY'] != null {
+  shouldOpenChrome = false
+}
+
+if platform == 'Darwin' {
+  openCommand = 'open'
+} else if platform == 'Linux' {
+  openCommand = 'xdg-open'
+} else {
+  assert(false, "Oops! You're on ${platform}. I don't know what that is...")
+}
+
+
