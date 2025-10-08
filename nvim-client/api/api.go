@@ -100,6 +100,7 @@ func BootstrapPlugins(c *nvim.Nvim, plugins []string, after func()) {
 	after()
 }
 
+// TODO rewrite this to :help vim.lsp.config()
 func Lsp(c *nvim.Nvim, lsps []string) {
 	// Use an on_attach function to only map the following keys
 	// after the language server attaches to the current buffer
