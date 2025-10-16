@@ -1,21 +1,42 @@
 #!/usr/bin/env sloth
 
-let platform = ('uname'!).stdout()
-let currentBranch = ('git symbolic-ref --short HEAD'!).stdout()
+let platform = ('uname'&!).stdout.trim()
+let currentBranch = ('git symbolic-ref --short HEAD'&!).stdout.trim()
 
-let shouldOpenChrome = true
-let openCommand = 'unreachable'
+let shouldOpenChrome = $env['SSH_CLIENT'] == null and $env['SSH_TTY'] == null
 
-if $env['SSH_CLIENT'] != null or $env['SSH_TTY'] != null {
-  shouldOpenChrome = false
-}
+let openCommand =
+  if platform == 'Darwin' {
+    'open'
+  } else if platform == 'Linux' {
+    'xdg-open'
+  } else {
+    assert(false, "Oops! You're on ${platform}. I don't know what that is...")
+  }
 
-if platform == 'Darwin' {
-  openCommand = 'open'
-} else if platform == 'Linux' {
-  openCommand = 'xdg-open'
+let remote = if $argv.length > 0 {
+  $argv[0]
 } else {
-  assert(false, "Oops! You're on ${platform}. I don't know what that is...")
+  ("git remote -v" |
+  ['sed', '-n', 's/^\([a-zA-Z_-]\+\)\t\+\([^ ]\+\).*$/\1\t\2/p'] |
+  "uniq" |
+  "tac" |
+  "fzf" |
+  "sed -n 's/^\([a-zA-Z_-]\+\).*/\1/p'"&!).
+    stdout.
+    trim()
 }
 
+let pipe = Pipe.new()
+with ($stderr = pipe.write, $stdout = pipe.write) {
+  "git push --porcelain --set-upstream ${remote} HEAD"!
+}
 
+pipe.write.close()
+let out = pipe.read.readAll()
+
+if currentBranch == 'master' or currentBranch == 'main' {
+  exit(0)
+}
+
+print("The output was \"${out}\"")
