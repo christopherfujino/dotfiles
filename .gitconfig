@@ -6,7 +6,7 @@
   default = simple
 [alias]
   a = add
-  amend = !git add -A && git commit --amend --reuse-message=HEAD
+  amend = !git commit --amend --reuse-message=HEAD
   b = branch
   c = commit -m
   cm = !git add -A && git commit -m
