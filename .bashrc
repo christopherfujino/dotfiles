@@ -5,6 +5,76 @@
 # Return early on non-interactive sessions, lest scp not work.
 [[ $- == *i* ]] || return
 
+function __chris_colorscheme() {
+  if [ "${TERM%%-*}" = 'linux' ]; then
+    echo "TTY MODE!"
+    set_color() { printf "\e]P%x%s" $1 $2; }
+    set_var() { true; }
+    finish() { clear; }
+  else
+    set_color() {
+      local COLOR=$(echo $2 | sed 's/^\(.\{2\}\)\(.\{2\}\)\(.\{2\}\)$/\1\/\2\/\3/g')
+      printf "\033]4;%d;rgb:%s\033\\" $1 $COLOR; }
+    set_var() {
+      local COLOR=$(echo $2 | sed 's/^\(.\{2\}\)\(.\{2\}\)\(.\{2\}\)$/\1\/\2\/\3/g')
+      printf '\033]%d;rgb:%s\033\\' $1 $COLOR;
+    }
+    finish() { true; }
+  fi
+
+  local ansi00="2d2d2d" # Base 00 - Black
+  local ansi01="f2777a" # Base 08 - Red
+  local ansi02="99cc99" # Base 0B - Green
+  local ansi03="ffcc66" # Base 0A - Yellow
+  local ansi04="6699cc" # Base 0D - Blue
+  local ansi05="cc99cc" # Base 0E - Magenta
+  local ansi06="66cccc" # Base 0C - Cyan
+  local ansi07="d3d0c8" # Base 05 - White
+  local ansi08="747369" # Base 03 - Bright Black
+  local ansi09=$ansi01 # Base 08 - Bright Red
+  local ansi10=$ansi02 # Base 0B - Bright Green
+  local ansi11=$ansi03 # Base 0A - Bright Yellow
+  local ansi12=$ansi04 # Base 0D - Bright Blue
+  local ansi13=$ansi05 # Base 0E - Bright Magenta
+  local ansi14=$ansi06 # Base 0C - Bright Cyan
+  local ansi15="f2f0ec" # Base 07 - Bright White
+  local foreground=$ansi07
+  local background=$ansi00
+
+  set_color 0 $ansi00;
+  set_color 1 $ansi01;
+  set_color 2 $ansi02;
+  set_color 3 $ansi03;
+  set_color 4 $ansi04;
+  set_color 5 $ansi05;
+  set_color 6 $ansi06;
+  set_color 7 $ansi07;
+  set_color 8 $ansi08;
+  set_color 9 $ansi09;
+  set_color 10 $ansi10;
+  set_color 11 $ansi11;
+  set_color 12 $ansi12;
+  set_color 13 $ansi13;
+  set_color 14 $ansi14;
+  set_color 15 $ansi15;
+
+  # FG 10 color07 (base05)
+  set_var 10 $foreground;
+
+  # BG 11 color00
+  set_var 11 $background;
+
+  finish
+
+  unset set_color
+  unset set_var
+  unset finish
+}
+
+__chris_colorscheme
+
+alias reset='command reset && __chris_colorscheme'
+
 # OS dependent config
 OS=$(uname)
 if [ "$OS" = Linux ]; then
@@ -86,33 +156,6 @@ fi
 
 export EDITOR=$VISUAL
 
-pgrep fbterm >/dev/null 2>&1
-if [[ "$?" -eq 0 ]]; then
-  echo "SETTING fbterm escapes"
-  printf "\033[3;0;45;45;45}"
-  printf "\033[3;1;242;119;122}"
-  printf "\033[3;2;153;204;153}"
-  printf "\033[3;3;255;204;102}"
-  printf "\033[3;4;102;153;204}"
-  printf "\033[3;5;204;153;204}"
-  printf "\033[3;6;102;204;204}"
-  printf "\033[3;7;211;208;200}"
-  printf "\033[3;8;116;115;105}"
-  printf "\033[3;9;242;119;122}"
-  printf "\033[3;10;153;204;153}"
-  printf "\033[3;11;255;204;102}"
-  printf "\033[3;12;102;153;204}"
-  printf "\033[3;13;204;153;204}"
-  printf "\033[3;14;102;204;204}"
-  printf "\033[3;15;242;240;236}"
-  [ -f "$HOME/.config/base16-shell/profile_helper.sh" ] && source "$HOME/.config/base16-shell/profile_helper.sh"
-# Don't muck with color in tty
-elif [[ "$TERM" != 'linux' ]]; then
-  # initialize BASE16 w/output in subshell
-  # shellcheck source=/dev/null
-  [ -f "$HOME/.config/base16-shell/profile_helper.sh" ] && source "$HOME/.config/base16-shell/profile_helper.sh"
-fi
-
 # golang dev
 
 [ -d "$HOME/go" ] && export GOPATH="$HOME/go"
@@ -134,7 +177,6 @@ dirs=(
   "$HOME/.cargo/bin"
   "$HOME/Library/Python/2.7/bin"
   "$HOME/.local/bin" # pip3
-  "$HOME/flutter_goma"
   #"$HOME/.rvm/bin"
   "$HOME/.deno/bin"
   # mac ports
@@ -149,12 +191,12 @@ done
 
 # source config files, if they exist
 files=(
-  /usr/local/opt/nvm/nvm.sh
   "$HOME/.fzf.bash"
   /usr/local/etc/bash_completion
   "$HOME/.rvm/scripts/rvm"
   "$HOME/.flutter-completion"
   "$HOME/.cargo/env"
+  "$HOME/.local/share/gem/ruby/3.3.0/bin"
 )
 
 for i in "${files[@]}"; do
@@ -170,22 +212,14 @@ if type gem >/dev/null 2>&1; then
   fi
 
   add_to_path_if_not_present "$(ruby -e 'print Gem.user_dir')/bin"
-
-  alias rrg='rake routes | grep -i'
-fi
-
-if type lesspipe.sh >/dev/null 2>&1; then
-  export LESS=-r
-  export LESSOPEN="|lesspipe.sh %s"
 fi
 
 # fzf
 if type fzf >/dev/null 2>&1; then
   alias checkout="git branch --list --sort=-committerdate | sed 's/^\*/ /' | fzf | xargs git checkout"
   alias branchd="git branch --list --sort=-committerdate | sed -E 's/^[ *]+//' | fzf --multi | xargs git branch -d --force"
-  alias darttest="find test/ -name '*_test.dart' | fzf | xargs dart test"
 else
-  echo "Warning! fzf not installed, and it's awesome!"
+  echo "Warning! fzf not installed, and it's awesome!" 1>&2
 fi
 
 # opam configuration
