@@ -5,7 +5,8 @@
 
 # font family names/pixelsize used by fbterm, multiple font family names must be seperated by ','
 # and using a fixed width font as the first is strongly recommended
-font-names=mononoki-Regular,xos4 Terminus
+font-names=mononoki-Regular,TerminusTTF
+#font-names=TerminusTTF-4.46.0
 font-size=32
 
 # force font width (and/or height), usually for non-fixed width fonts
@@ -19,9 +20,9 @@ font-size=32
 # 16-231 is 6x6x6 color cube
 # 232-255 is grayscale
 
- default foreground/background colors (chosen from palette)
+# default foreground/background colors (chosen from palette)
 color-foreground=15
-color-background=8
+color-background=0
 
 # max scroll-back history lines of every window, value must be [0 - 65535], 0 means disable it
 history-lines=65535

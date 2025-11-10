@@ -1,13 +1,11 @@
 <%=
-  base00 = '#2d2d2d'
-  base01 = '#393939'
-  base02 = '#515151'
-  # comments
-  base03 = '#747369'
-  base06 = '#e8e6df'
-  base09 = '#f99157'
-  base0B = '#99cc99'
-  base0F = '#d27b53'
+  base00 = '#2d2d2d' # black
+  base03 = '#747369' # bright black
+  base05 = '#d3d0c8' # white
+  base07 = '#f2f0ec' # bright white
+  base0A = '#ffcc66' # yellow
+  base0B = '#99cc99' # green
+  base0C = '#66cccc' # cyan
 
   right_arrow = ''
 
@@ -17,27 +15,28 @@
 set -g status-justify "absolute-centre"
 set -g status "on"
 set -g status-left-style "none"
-set -g message-command-style "fg=<%= base06 %>,bg=<%= base02 %>"
+set -g message-command-style "fg=<%= base05 %>,bg=<%= base00 %>"
 set -g status-right-style "none"
 set -g pane-active-border-style "fg=<%= base0B %>"
 set -g status-style "none,bg=default"
-set -g message-style "fg=<%= base06 %>,bg=<%= base02 %>"
-set -g pane-border-style "fg=<%= base02 %>"
+set -g message-style "fg=<%= base0C %>,bg=<%= base00 %>"
+set -g pane-border-style "fg=<%= base0B %>"
 set -g status-right-length "100"
 set -g status-left-length "100"
 setw -g window-status-activity-style "none"
 setw -g window-status-separator "   "
 
-# Does this do anything?
-setw -g window-status-style "none,fg=<%= base09 %>,bg=<%= base06 %>"
-set -g status-left ""
-set -g status-right ""
+set -g status-left "FOO"
+set -g status-right "BAR"
+
+# Format for a single window
+setw -g window-status-style "none,fg=<%= base0A %>,bg=<%= base00 %>"
 
 setw -g window-status-format "\
-#[fg=<%= base03 %>,bg=<%= base00 %>]#W"
+#[fg=<%= base0B %>,bg=<%= base00 %>]#W"
 
 setw -g window-status-current-format "\
-#[fg=<%= base06 %>,bg=<%= base00 %>]#W"
+#[fg=<%= base07 %>,bg=<%= base00 %>]#W"
 
 # custom changes
 set-option -g history-limit 20000
