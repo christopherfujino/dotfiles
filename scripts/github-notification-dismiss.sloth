@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+#let token = ("gh auth token"&!).stdout().trim()
+#
+#print("token = ${token}")
+
+# "gh api notifications"! # TODO parse this JSON
+# "gh api -X DELETE notifications/threads/${notificationId}"!
+
+
+### BASH
+
+TOKEN=$(gh auth token)
+echo $TOKEN
