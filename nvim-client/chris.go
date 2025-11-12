@@ -48,7 +48,7 @@ var lspServers = []string{
 	"zls",
 }
 
-const clean = false
+const clean = true
 
 func main() {
 	api.Setup(
@@ -58,13 +58,13 @@ func main() {
 			api.SetOption(c, "tabstop", 2)
 			api.SetOption(c, "shiftwidth", 2)
 			api.SetOption(c, "expandtab", true)
-			api.SetOption(c, "list", false)         // Do NOT show trailing whitespace
+			api.SetOption(c, "list", true)          // Show tabs and long lines
 			api.SetOption(c, "termguicolors", true) // Otherwise WSL gets messed up
 			api.SetOption(c, "ignorecase", true)    // case insensitive search...
 			api.SetOption(c, "smartcase", true)     // ...unless you use a capital letter
 			if clean {
-				api.SetOption(c, "signcolumn", "no") // Always show sign column, for gitdiff
-				api.SetOption(c, "laststatus", 1)    // never show status bar
+				api.SetOption(c, "signcolumn", "no")
+				api.SetOption(c, "laststatus", 1)
 				api.SetOption(c, "smd", false)       // No 'showmode'
 				api.SetOption(c, "ru", false)        // No 'ruler'
 

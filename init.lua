@@ -1,186 +1,112 @@
--- Return to previously accessed window.
-function popWindow()
-  local lastWin = vim.fn.winnr("#")
-  vim.api.nvim_command(lastWin .. " wincmd w")
+-- See legacy version with:
+-- git show ee1033606fd2cc9f3c479644135799f4b0fde6ee:init.lua
+
+-- general
+vim.opt.list = true
+vim.opt.laststatus = 2
+vim.g.netrw_banner =  false
+
+-- search
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
+-- tabs
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+
+-- ruler
+vim.opt.rulerformat = "%-10.(%l,%c%V%)"
+
+-- better splits
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+
+-- 24-bit color (inherit term colors)
+vim.opt.termguicolors = false
+
+-- disable middle mouse paste
+for bindingPrefix in ipairs({"", "2-", "3-", "4-"}) do
+  vim.keymap.set({"n", "v", "i"}, "<" .. bindingPrefix .. "MiddleMouse", "<Nop>", {noremap=true})
 end
 
-function pushWindow(win)
-  vim.api.nvim_command(win .. " wincmd w")
+vim.keymap.set("n", "<c-p>", ":Files<cr>", {noremap=true})
+vim.keymap.set("n", "<c-t>", ":tabe<cr>", {noremap=true})
+
+-- Plugins TODO: deprecate
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup(
+  -- plugins
+  {
+    "neovim/nvim-lspconfig",
+    --"mfussenegger/nvim-dap",
+    -- :Rename, :Move, :Delete
+    "tpope/vim-eunuch",
+    -- cs'"
+    "tpope/vim-surround",
+    -- auto-bracket pairing
+    "windwp/nvim-autopairs",
+
+    -- git
+    'tpope/vim-fugitive',
+
+    'junegunn/fzf',
+    'junegunn/fzf.vim',
+  },
+  -- options
+  {}
+)
+
+vim.fn.setenv("FZF_DEFAULT_COMMAND", "rg --files --hidden")
+
+-- LSP
+local opts = { noremap=true, silent=true }
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  -- Will jump to interface files in OCaml
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format {async = true } end, bufopts)
 end
 
-function setColor(group, attr, color)
-  -- See has('termguicolors'), which means 24-bit colors in TUI
-  local cmd = "hi " .. group .. " gui" .. attr .. "=" .. color
-  vim.api.nvim_command(cmd)
-end
+-- go install golang.org/x/tools/gopls@latest
+require('lspconfig').gopls.setup {
+  on_attach = on_attach,
+}
 
-function colorize()
-  for _, group in ipairs({
-    "NonText",
-    "FoldColumn",
-    "ColorColumn",
-    "VertSplit",
-    "StatusLine",
-    "StatusLineNC",
-    "SignColumn",
-  }) do
-    setColor(group, "fg", "black")
-    setColor(group, "bg", "NONE")
-    setColor(group, "", "NONE")
-  end
-end
+require('lspconfig').ocamllsp.setup {
+  on_attach = on_attach,
+  filetypes = { 'ocaml' },
+  root_dir = require('lspconfig.util').root_pattern('*.opam'),
+}
 
--- TODO delete
-function DeepPrint (t)
-  local request_headers_all = ""
-  for k, v in pairs(t) do
-    if type(v) == "table" then
-      request_headers_all = request_headers_all .. "[" .. k .. " " .. DeepPrint(v) .. "] "
-    else
-      local rowtext = ""
-      rowtext = string.format("[%s %s] ", k, v)
-      request_headers_all = request_headers_all .. rowtext
-    end
-  end
-  return request_headers_all
-end
-
-function createMargin(command)
-  vim.api.nvim_command(command)
-
-  vim.opt_local.buftype = "nofile"
-  vim.opt_local.winfixwidth = true
-  vim.opt_local.winfixheight = true
-  vim.opt_local.statusline = ""
-
-  local buf = vim.fn.winbufnr(0)
-  popWindow()
-  return buf
-end
-
-function resize(handles)
-  local totalWidth = vim.opt.columns._value
-  local totalHeight = vim.opt.lines._value
-  local horizontalMargin = (function()
-    local excessWidth = totalWidth - 81
-    if excessWidth < 1 then
-      excessWidth = 1
-    end
-    return math.floor(excessWidth / 2)
-  end)()
-  local verticalMargin = (function()
-    local excessHeight = totalHeight * 0.2
-    if excessHeight < 0 then
-      excessHeight = 0
-    end
-    return math.floor(excessHeight / 2)
-  end)()
-  resizeMargin(handles.left, horizontalMargin)
-  resizeMargin(handles.right, horizontalMargin)
-  resizeMargin(handles.top, verticalMargin)
-  resizeMargin(handles.bottom, verticalMargin)
-end
-
-function resizeMargin(handle, margin)
-  -- Check for error?
-  local win = vim.fn.bufwinnr(handle.buffer)
-
-  pushWindow(win)
-
-  -- TODO: Hide statusline on buffer leave
-
-  --vim.api.nvim_set_current_line("resizing buffer " .. handle.buffer .. " by " .. tostring(margin) .. " pixels.")
-  if handle.vertical then
-    vim.api.nvim_command("vertical resize " .. tostring(margin))
-  else
-    vim.api.nvim_command("resize " .. tostring(margin))
-  end
-  popWindow()
-end
-
-function focus()
-  local handles = {}
-
-  handles.left = {
-    buffer = createMargin("vertical topleft new"),
-    vertical = true,
-  }
-  handles.right = {
-    buffer = createMargin("vertical botright new"),
-    vertical = true,
-  }
-  handles.top = {
-    buffer = createMargin("topleft new"),
-    vertical = false,
-  }
-  handles.bottom = {
-    buffer = createMargin("botright new"),
-    vertical = false,
-  }
-
-  resize(handles)
-  colorize()
-end
-
-(function ()
-  if vim.fn.executable('chris-nvim-client') == 1 then
-    local client_job = vim.fn.jobstart(
-      --'chris-nvim-client -debug',
-      'chris-nvim-client',
-      {rpc = true}
-    )
-    if client_job < 1 then
-      error("Failed to jobstart chris-nvim-client")
-    else
-      local result = vim.fn.rpcrequest(client_job, 'init', {})
-      if result ~= "Success from Go" then
-        error("Unexpected output from `chris-nvim-client`: " .. result)
-      end
-      vim.fn.rpcrequest(client_job, 'die', {})
-    end
-  else
-    print("[ERROR] You should add `chris-nvim-client` to your path")
-  end
-end)()
-
----- Debug Adapter
----- https://github.com/mfussenegger/nvim-dap/blob/master/doc/dap.txt
---
---local dap = require('dap')
---
---dap.adapters.dart = {
---  type = "executable",
---  command = "dart",
---  args = {"debug_adapter"}
---}
---dap.configurations.dart = {
---  {
---    type = "dart",
---    request = "launch",
---    name = "Launch Dart Program",
---    program = "${workspaceFolder}/main.dart",
---    cwd = "${workspaceFolder}",
---    --args = {"run", "-d", "web-server"},
---  }
---}
---
----- See :help dap-widgets
---local cmd = vim.api.nvim_create_user_command
---local widgets = require('dap.ui.widgets')
----- widgets.sidebar could be widgets.centered_float
---cmd(
---  'DapShowScopes',
---  function()
---    widgets.sidebar(widgets.scopes).open()
---  end,
---  {}
---)
---cmd(
---  'DapShowFrames',
---  function()
---    widgets.sidebar(widgets.frames).open()
---  end,
---  {}
---)
-
---focus()
+require('lspconfig').clangd.setup {
+  on_attach = on_attach,
+}

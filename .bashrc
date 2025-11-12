@@ -1,25 +1,39 @@
-#
-# ~/.bashrc
-#
-
 # Return early on non-interactive sessions, lest scp not work.
 [[ $- == *i* ]] || return
 
 function __chris_colorscheme() {
-  if [ "${TERM%%-*}" = 'linux' ]; then
-    echo "TTY MODE!"
+  pgrep fbterm 1>/dev/null 2>&1
+  if [[ "$?" -eq 0 ]]; then
+    echo "FBTERM escapes!"
+    set_color() {
+      printf "\e[3;%d;%d;%d;%d}" $1 $(echo $2 | sed 's/^\(.\{2\}\)\(.\{2\}\)\(.\{2\}\)$/0x\1 0x\2 0x\3/g')
+    }
+
+    set_fg() {
+      # set fg to 7
+      printf '\e[1;7}';
+    }
+    set_bg() {
+      # set bg to 0
+      printf '\e[2;0}';
+    }
+  elif [ "${TERM%%-*}" = 'linux' ]; then
+    echo "TTY escapes! TERM=$TERM"
     set_color() { printf "\e]P%x%s" $1 $2; }
-    set_var() { true; }
-    finish() { clear; }
+    set_fg() { true; }
+    set_bg() { true; }
   else
+    echo "Term emulator escapes!"
     set_color() {
       local COLOR=$(echo $2 | sed 's/^\(.\{2\}\)\(.\{2\}\)\(.\{2\}\)$/\1\/\2\/\3/g')
-      printf "\033]4;%d;rgb:%s\033\\" $1 $COLOR; }
-    set_var() {
-      local COLOR=$(echo $2 | sed 's/^\(.\{2\}\)\(.\{2\}\)\(.\{2\}\)$/\1\/\2\/\3/g')
-      printf '\033]%d;rgb:%s\033\\' $1 $COLOR;
+      printf '\033]4;%d;rgb:%s\033\\' $1 $COLOR;
     }
-    finish() { true; }
+    set_fg() {
+      printf '\033]10;rgb:%s\033\\' $(echo $1 | sed 's/^\(.\{2\}\)\(.\{2\}\)\(.\{2\}\)$/\1\/\2\/\3/g');
+    }
+    set_bg() {
+      printf '\033]11;rgb:%s\033\\' $(echo $1 | sed 's/^\(.\{2\}\)\(.\{2\}\)\(.\{2\}\)$/\1\/\2\/\3/g');
+    }
   fi
 
   local ansi00="2d2d2d" # Base 00 - Black
@@ -59,21 +73,20 @@ function __chris_colorscheme() {
   set_color 15 $ansi15;
 
   # FG 10 color07 (base05)
-  set_var 10 $foreground;
+  set_fg $foreground;
 
   # BG 11 color00
-  set_var 11 $background;
-
-  finish
+  set_bg $background;
 
   unset set_color
   unset set_var
-  unset finish
 }
 
 __chris_colorscheme
 
 alias reset='command reset && __chris_colorscheme'
+
+alias fbterm='TERM=fbterm fbterm'
 
 # OS dependent config
 OS=$(uname)

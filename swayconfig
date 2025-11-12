@@ -21,23 +21,23 @@ set $borderWidth 0
 # Default Background
 set $base00 2d2d2d
 # Lighter Background (Used for status bars, line number and folding marks)
-set $base01 393939
+#set $base01 393939
 # Selection Background
-set $base02 515151
+#set $base02 515151
 # Comments, Invisibles, Line Highlighting
 set $base03 747369
 # Dark Foreground (Used for status bars)
-set $base04 a09f93
+#set $base04 a09f93
 # Default Foreground, Caret, Delimiters, Operators
 set $base05 d3d0c8
 # Light Foreground (Not often used)
-set $base06 e8e6df
+#set $base06 e8e6df
 # Light Background (Not often used)
 set $base07 f2f0ec
 # Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
 set $base08 f2777a
 # Integers, Boolean, Constants, XML Attributes, Markup Link Url
-set $base09 f99157
+#set $base09 f99157
 # Classes, Markup Bold, Search Text Background
 set $base0A ffcc66
 # Strings, Inherited Class, Markup Code, Diff Inserted
@@ -49,13 +49,13 @@ set $base0D 6699cc
 # Keywords, Storage, Selector, Markup Italic, Diff Changed
 set $base0E cc99cc
 # Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
-set $base0F d27b53
+#set $base0F d27b53
 
-# class                 border  backgr. text    indicat child border
+# class                 border   backgr.  text     indicat  child border
 client.focused          #$base05 #$base05 #$base00 #$base05 #$base0E
 client.focused_inactive #$base03 #$base03 #$base05 #$base03
 client.unfocused        #$base03 #$base03 #$base05 #$base00
-client.urgent           #$base01 #$base01 #$base05 #$base00
+client.urgent           #$base03 #$base03 #$base08 #$base00
 client.background       #$base00
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -85,7 +85,7 @@ bindsym $mod+Shift+q kill
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 # man 1 wmenu
-set $menu dmenu_path | wmenu-run -f 'mononoki 18' -l 20 -p 'wmenu' -M $base02 -S $base02 | xargs swaymsg exec --
+set $menu dmenu_path | wmenu-run -f 'mononoki 18' -l 20 -p 'wmenu' -M $base0C -S $base0C | xargs swaymsg exec --
 bindsym $mod+d exec $menu
 
 # change focus
@@ -160,9 +160,6 @@ bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. 
 
 bindsym $mod+r mode "resize"
 
-# https://unix.stackexchange.com/questions/439486/how-can-i-make-media-keys-work-with-i3
-# Media Keys
-
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -202,7 +199,7 @@ bar {
     focused_background  #$base00
     focused_statusline  #$base05
     focused_separator   #$base0E
-    focused_workspace   #$base02 #$base02 #$base05
+    focused_workspace   #$base0D #$base0D #$base05
     active_workspace  #$base00 #$base00 #$base05
     urgent_workspace    #$base0A #$base0A #$base00
     inactive_workspace  #$base00 #$base00 #$base05
@@ -215,9 +212,8 @@ gaps outer $outerGaps
 # TODO figure out how to do this in wayland
 #exec_always re-bind-keyboard.sh
 
-# from $base00 above
 # see man sway-output(5)
-output * background #2d2d2d solid_color
+output * background #$base00 solid_color
 
 # https://i3wm.org/docs/userguide.html#_focus_follows_mouse
 focus_follows_mouse no

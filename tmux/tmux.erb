@@ -18,22 +18,25 @@ set -g status-left-style "none"
 set -g message-command-style "fg=<%= base05 %>,bg=<%= base00 %>"
 set -g status-right-style "none"
 set -g pane-active-border-style "fg=<%= base0B %>"
-set -g status-style "none,bg=default"
 set -g message-style "fg=<%= base0C %>,bg=<%= base00 %>"
 set -g pane-border-style "fg=<%= base0B %>"
+
+# Bottom Status-line
+set -g status-style "none,bg=<%= base00 %>"
 set -g status-right-length "100"
 set -g status-left-length "100"
 setw -g window-status-activity-style "none"
 setw -g window-status-separator "   "
 
-set -g status-left "FOO"
-set -g status-right "BAR"
+# Text for far left and right
+set -g status-left ""
+set -g status-right ""
 
 # Format for a single window
 setw -g window-status-style "none,fg=<%= base0A %>,bg=<%= base00 %>"
 
 setw -g window-status-format "\
-#[fg=<%= base0B %>,bg=<%= base00 %>]#W"
+#[fg=<%= base03 %>,bg=<%= base00 %>]#W"
 
 setw -g window-status-current-format "\
 #[fg=<%= base07 %>,bg=<%= base00 %>]#W"
@@ -42,10 +45,13 @@ setw -g window-status-current-format "\
 set-option -g history-limit 20000
 set -g mouse on
 set-option -sg escape-time 10 # makes vim more responsive
-set -g default-terminal "xterm-256color"
+#set -g default-terminal "xterm-256color"
+# nvim :checkhealth recommends this
+set -g default-terminal "screen-256color"
+set-option -g focus-events on
 # for true colors
-#set-option -sa terminal-overrides ',XXX:RGB'
-#if-shell 'uname | grep --quiet Linux' 'bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "xclip -in -selection clipboard"'
+#set-option -a terminal-features "$TERM:RGB"
+
 if-shell 'uname | grep --quiet Linux' 'bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "wl-copy"'
 if-shell 'uname | grep --quiet Darwin' 'bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"'
 
