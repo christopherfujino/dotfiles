@@ -3,7 +3,7 @@
 i=0
 
 function color_print() {
-	printf "%2d \e[$1m$2 \e[39mdefault\n" $i
+  printf "%d \e[%dm%s \e[39mdefault\n" $i $1 "$2"
   i=$(($i + 1))
 }
 

@@ -23,7 +23,7 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 -- 24-bit color (inherit term colors)
-vim.opt.termguicolors = false
+vim.opt.termguicolors = true --?
 
 -- disable middle mouse paste
 for bindingPrefix in ipairs({"", "2-", "3-", "4-"}) do

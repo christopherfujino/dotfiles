@@ -2,22 +2,23 @@
 [[ $- == *i* ]] || return
 
 function __chris_colorscheme() {
-  pgrep fbterm 1>/dev/null 2>&1
-  if [[ "$?" -eq 0 ]]; then
-    echo "FBTERM escapes!"
-    set_color() {
-      printf "\e[3;%d;%d;%d;%d}" $1 $(echo $2 | sed 's/^\(.\{2\}\)\(.\{2\}\)\(.\{2\}\)$/0x\1 0x\2 0x\3/g')
-    }
+  #pgrep fbterm 1>/dev/null 2>&1
+  #if [[ "$?" -eq 0 ]]; then
+  #  echo "FBTERM escapes!"
+  #  set_color() {
+  #    printf "\e[3;%d;%d;%d;%d}" $1 $(echo $2 | sed 's/^\(.\{2\}\)\(.\{2\}\)\(.\{2\}\)$/0x\1 0x\2 0x\3/g')
+  #  }
 
-    set_fg() {
-      # set fg to 7
-      printf '\e[1;7}';
-    }
-    set_bg() {
-      # set bg to 0
-      printf '\e[2;0}';
-    }
-  elif [ "${TERM%%-*}" = 'linux' ]; then
+  #  set_fg() {
+  #    # set fg to 7
+  #    printf '\e[1;7}';
+  #  }
+  #  set_bg() {
+  #    # set bg to 0
+  #    printf '\e[2;0}';
+  #  }
+  #elif [ "${TERM%%-*}" = 'linux' ]; then
+  if [ "${TERM%%-*}" = 'linux' ]; then
     echo "TTY escapes! TERM=$TERM"
     set_color() { printf "\e]P%x%s" $1 $2; }
     set_fg() { true; }
@@ -86,7 +87,7 @@ __chris_colorscheme
 
 alias reset='command reset && __chris_colorscheme'
 
-alias fbterm='TERM=fbterm fbterm'
+alias fbterm='export TERM=fbterm; fbterm'
 
 # OS dependent config
 OS=$(uname)
