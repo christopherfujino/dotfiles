@@ -46,11 +46,10 @@ set-option -g history-limit 20000
 set -g mouse on
 set-option -sg escape-time 10 # makes vim more responsive
 # nvim :checkhealth recommends this
-#set -g default-terminal "screen-256color"
-set -g default-terminal "linux"
+set -g default-terminal "screen-256color"
 set-option -g focus-events on
 # for true colors
-#set-option -a terminal-features "$TERM:RGB"
+set-option -a terminal-features "$TERM:RGB"
 
 if-shell 'uname | grep --quiet Linux' 'bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "wl-copy"'
 if-shell 'uname | grep --quiet Darwin' 'bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"'

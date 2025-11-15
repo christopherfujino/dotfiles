@@ -23,7 +23,7 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 -- 24-bit color (inherit term colors)
-vim.opt.termguicolors = true --?
+vim.opt.termguicolors = not (os.getenv('TERM') == 'linux')
 
 -- disable middle mouse paste
 for bindingPrefix in ipairs({"", "2-", "3-", "4-"}) do
@@ -49,6 +49,8 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup(
   -- plugins
   {
+    --"RRethy/base16-nvim",
+    "chriskempson/base16-vim",
     "neovim/nvim-lspconfig",
     --"mfussenegger/nvim-dap",
     -- :Rename, :Move, :Delete
@@ -67,6 +69,12 @@ require("lazy").setup(
   -- options
   {}
 )
+
+if (os.getenv('TERM') == 'linux') then
+  vim.cmd('colorscheme unokai')
+else
+  vim.cmd('colorscheme base16-eighties')
+end
 
 vim.fn.setenv("FZF_DEFAULT_COMMAND", "rg --files --hidden")
 
