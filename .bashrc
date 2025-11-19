@@ -2,29 +2,11 @@
 [[ $- == *i* ]] || return
 
 function __chris_colorscheme() {
-  #pgrep fbterm 1>/dev/null 2>&1
-  #if [[ "$?" -eq 0 ]]; then
-  #  echo "FBTERM escapes!"
-  #  set_color() {
-  #    printf "\e[3;%d;%d;%d;%d}" $1 $(echo $2 | sed 's/^\(.\{2\}\)\(.\{2\}\)\(.\{2\}\)$/0x\1 0x\2 0x\3/g')
-  #  }
-
-  #  set_fg() {
-  #    # set fg to 7
-  #    printf '\e[1;7}';
-  #  }
-  #  set_bg() {
-  #    # set bg to 0
-  #    printf '\e[2;0}';
-  #  }
-  #elif [ "${TERM%%-*}" = 'linux' ]; then
   if [ "${TERM%%-*}" = 'linux' ]; then
-    echo "TTY escapes! TERM=$TERM"
     set_color() { printf "\e]P%x%s" $1 $2; }
     set_fg() { true; }
     set_bg() { true; }
   else
-    echo "Term emulator escapes!"
     set_color() {
       local COLOR=$(echo $2 | sed 's/^\(.\{2\}\)\(.\{2\}\)\(.\{2\}\)$/\1\/\2\/\3/g')
       printf '\033]4;%d;rgb:%s\033\\' $1 $COLOR;
@@ -87,16 +69,12 @@ __chris_colorscheme
 
 alias reset='command reset && __chris_colorscheme'
 
-alias fbterm='export TERM=fbterm; fbterm'
-
 # OS dependent config
 OS=$(uname)
 if [ "$OS" = Linux ]; then
   alias ls='ls --color=auto'
 
   shopt -s direxpand
-
-  #export TERM="screen-256color"
 elif [ "$OS" = Darwin ]; then
   alias ls='ls -G' # color
 
@@ -109,13 +87,9 @@ alias ..='cd ..'
 
 alias dudot='du -hd 1'
 
-alias ll='ls -Alh'
-alias lsa='ls -A' # -A means ignore '.' & '..'
+alias ll='ls -Alh --color=auto'
 
 alias g=git
-alias gs='git status'
-alias gb='git branch'
-alias gupdate='git add . && git commit --amend'
 # -x means include processes without an attached tty
 alias psx='ps x | less'
 
