@@ -5,6 +5,7 @@
 vim.opt.list = true
 vim.opt.laststatus = 2
 vim.g.netrw_banner =  false
+vim.opt.number = true
 
 -- search
 vim.opt.ignorecase = true
@@ -105,16 +106,19 @@ local on_attach = function(client, bufnr)
 end
 
 -- go install golang.org/x/tools/gopls@latest
-require('lspconfig').gopls.setup {
+vim.lsp.enable('gopls')
+vim.lsp.config('gopls', {
   on_attach = on_attach,
-}
+})
 
-require('lspconfig').ocamllsp.setup {
+vim.lsp.enable('ocamllsp')
+vim.lsp.config('ocamllsp', {
   on_attach = on_attach,
   filetypes = { 'ocaml' },
   root_dir = require('lspconfig.util').root_pattern('*.opam'),
-}
+})
 
-require('lspconfig').clangd.setup {
+vim.lsp.enable('clangd')
+vim.lsp.config('clangd', {
   on_attach = on_attach,
-}
+})
