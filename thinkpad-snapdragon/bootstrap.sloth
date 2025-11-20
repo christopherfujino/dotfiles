@@ -1,0 +1,25 @@
+#!/usr/bin/env sloth
+
+with($cwd = "${$scriptDir}/ignore") {
+  # topology file
+  'git clone https://github.com/jglathe/audioreach-topology.git'!
+  with($cwd = "${$cwd}/audioreach-topology") {
+    'git checkout jg/t14s-dp-hdmi-audio'!
+    'cmake .'!
+    'cmake --build .'!
+    'sudo cp ./qcom/x1e80100/LENOVO/21N1/X1E80100-LENOVO-Thinkpad-T14s-tplg.bin /usr/lib/firmware/updates/qcom/x1e80100/LENOVO/21N1/'!
+  }
+
+  'git clone https://github.com/jglathe/alsa-ucm-conf.git'!
+  with ($cwd = "${$cwd}/alsa-ucm-conf") {
+    "git checkout jg/lenovo-thinkbook-16"!
+    let systemDir = '/usr/share/alsa/ucm2/Qualcomm/x1e80100'
+    # backup existing files
+    "sudo mv ${systemDir}/HiFi.conf ${systemDir}/HiFi.conf.backup"!
+    "sudo mv ${systemDir}/X1E80100-CRD.conf ${systemDir}/X1E80100-CRD.conf.backup"!
+    "sudo cp ucm2/Qualcomm/x1e80100/* ${systemDir}/"!
+  }
+  with ($cwd = '/usr/share/alsa/ucm2/conf.d/x1e80100/') {
+    "sudo ln -s ../../Qualcomm/x1e80100/x1e80100.conf x1e80100.conf"!
+  }
+}
