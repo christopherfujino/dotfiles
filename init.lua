@@ -114,8 +114,8 @@ vim.lsp.config('gopls', {
 vim.lsp.enable('ocamllsp')
 vim.lsp.config('ocamllsp', {
   on_attach = on_attach,
-  filetypes = { 'ocaml' },
-  root_dir = require('lspconfig.util').root_pattern('*.opam'),
+  --filetypes = { 'ocaml' },
+  root_markers = {'*.opam', 'dune-project', 'dune-workspace'},
 })
 
 vim.lsp.enable('clangd')
