@@ -203,7 +203,7 @@ gaps inner 6px
 gaps outer 0px
 
 # https://faq.i3wm.org/question/1496/change-caps-lock-to-esc-in-i3.1.html
-exec_always re-bind-keyboard.sh
+exec_always --no-startup-id re-bind-keyboard.sh
 
 # from $base00 above
 exec --no-startup-id xsetroot -solid "#2d2d2d"
