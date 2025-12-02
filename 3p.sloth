@@ -1,0 +1,22 @@
+#!/usr/bin/env sloth
+
+func ensureRemote(remote, local) {
+  let localFile = File(local)
+  if localFile.exists() {
+    print("early exit because ${localFile.path} exists")
+    return
+  }
+  throw 'unreachable'
+  ['curl', '-L', remote, '-o', local]!
+}
+
+let registry = {
+  'https://dl.suckless.org/st/st-0.9.3.tar.gz': 'st',
+}
+
+let ignore = './ignore'
+
+with($cwd = $scriptDir) {
+  let stTarball = "${ignore}/st.tar.gz"
+  ensureRemote('https://dl.suckless.org/st/st-0.9.3.tar.gz', stTarball)
+}

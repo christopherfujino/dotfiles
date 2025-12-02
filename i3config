@@ -217,9 +217,6 @@ mouse_warping none
 # This appears not to work: https://www.reddit.com/r/i3wm/comments/7zxxax/chromium_not_opening_in_current_workspace/
 for_window [class="[Cc]hrome"] floating disable, move window to workspace current
 
-# autostart this:
-exec --no-startup-id xdg-open https://www.github.com
-
 # you must install numlockx
 exec_always --no-startup-id numlockx on
 
