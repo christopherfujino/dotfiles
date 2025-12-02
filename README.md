@@ -48,3 +48,17 @@ sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-12 100
 
 * Install go language
 * Install [golint](https://github.com/golang/lint)
+
+## LAN domain name
+
+Requires avahi (prob already installed).
+
+```bash
+systemctl enable avahi-daemon.service
+```
+
+```bash
+pacman -S nss-mdns
+```
+
+Edit `/etc/nsswitch.conf` and change the hosts line to include `mdns_minimal [NOTFOUND=return]` before `resolve`.
