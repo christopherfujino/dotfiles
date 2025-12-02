@@ -1,0 +1,27 @@
+#!/usr/bin/env sloth
+
+if $argv.length != 2 {
+  throw "Usage: download-youtube-audio.sloth REMOTE_PATH LOCAL_PATH"
+}
+let remotePath = $argv[0]
+let localPath = $argv[1]
+let binary = 'yt-dlp'
+
+"which ${binary}"&! # will fail if it's not found
+
+[
+  binary,
+  remotePath,
+  # default is 1024 bytes
+  '--buffer-size', '16K',
+  # TODO: lookup "OUTPUT TEMPLATE"
+  '--output', localPath,
+
+  # ASCII only
+  '--restrict-filenames',
+
+  '--extract-audio',
+  '--audio-format', 'opus',
+
+  '--audio-quality', '128K',
+]!
