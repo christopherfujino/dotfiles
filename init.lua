@@ -26,6 +26,12 @@ vim.opt.splitright = true
 -- 24-bit color (inherit term colors)
 vim.opt.termguicolors = not (os.getenv('TERM') == 'linux')
 
+vim.api.nvim_create_user_command('Clean', function()
+  vim.opt.number = false
+  vim.opt.laststatus = 0 -- never
+  vim.opt.ruler = false
+end, {})
+
 -- disable middle mouse paste
 for bindingPrefix in ipairs({"", "2-", "3-", "4-"}) do
   vim.keymap.set({"n", "v", "i"}, "<" .. bindingPrefix .. "MiddleMouse", "<Nop>", {noremap=true})
