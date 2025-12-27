@@ -1,9 +1,18 @@
 #!/usr/bin/env bash
 
+if (( "$UID" != 0 )); then
+  echo "You must run shutdown as root!" 1>&2
+  exit 1
+fi
+
+if [[ -n "$NO_RECURSION" ]]; then
+  echo "No recursion!" 1>&2
+  exit 1
+fi
+
 if [[ -n "$SSH_CLIENT" ]]; then
   echo "You are in SSH, cancelling shutdown." 1>&2
   exit 1
 else
-  echo "${@:2}"
-  #/usr/bin/shutdown
+  NO_RECURSION=1 shutdown ${@:1}
 fi
