@@ -30,6 +30,7 @@ vim.api.nvim_create_user_command('Clean', function()
   vim.opt.number = false
   vim.opt.laststatus = 0 -- never
   vim.opt.ruler = false
+  vim.opt.linebreak = true -- don't break lines in the middle of a word
 end, {})
 
 -- disable middle mouse paste

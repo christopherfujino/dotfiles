@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [[ -n "$SSH_CLIENT" ]]; then
+  echo "You are in SSH, cancelling shutdown." 1>&2
+  exit 1
+else
+  echo "${@:2}"
+  #/usr/bin/shutdown
+fi
