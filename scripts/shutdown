@@ -10,9 +10,14 @@ if [[ -n "$NO_RECURSION" ]]; then
   exit 1
 fi
 
-if [[ -n "$SSH_CLIENT" ]]; then
+if pgrep -f "sshd-session: $SUDO_USER" >/dev/null; then
   echo "You are in SSH, cancelling shutdown." 1>&2
   exit 1
 else
-  NO_RECURSION=1 shutdown ${@:1}
+  SHUTDOWN=$(which -a shutdown | grep -v '/scripts/shutdown$' | head -n 1)
+  echo "NOT IN SSH"
+  echo "SSH_CLIENT=$SSH_CLIENT"
+  echo "SHUTDOWN=$SHUTDOWN"
+  exit 42
+  NO_RECURSION=1 "$SHUTDOWN" ${@:1}
 fi
