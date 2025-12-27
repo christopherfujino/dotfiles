@@ -199,6 +199,9 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
+# from $base00 above
+exec --no-startup-id xsetroot -solid "#2d2d2d"
+
 exec_always --no-startup-id $HOME/git/dotfiles/launch_polybar.sh
 
 gaps inner 6px
@@ -206,9 +209,6 @@ gaps outer 0px
 
 # https://faq.i3wm.org/question/1496/change-caps-lock-to-esc-in-i3.1.html
 exec_always --no-startup-id re-bind-keyboard.sh
-
-# from $base00 above
-exec --no-startup-id xsetroot -solid "#2d2d2d"
 
 # https://i3wm.org/docs/userguide.html#_focus_follows_mouse
 focus_follows_mouse no
@@ -224,3 +224,5 @@ exec_always --no-startup-id numlockx on
 
 # disable speaker beep
 exec_always --no-startup-id xset -b
+
+exec alacritty

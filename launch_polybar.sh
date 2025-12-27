@@ -3,7 +3,7 @@
 set -euo pipefail
 
 POLYBAR_DEBUGGING='' # false
-# POLYBAR_DEBUGGING='true'
+#POLYBAR_DEBUGGING='true'
 
 BAR_NAME='my_great_bar'
 
