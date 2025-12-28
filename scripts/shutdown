@@ -1,23 +1,21 @@
 #!/usr/bin/env bash
 
+# This will only run as root if env_reset & secure_path not set in sudoers
+
 if (( "$UID" != 0 )); then
-  echo "You must run shutdown as root!" 1>&2
+  echo -e "\033[31;1mYou must run shutdown as root!\033[0m" 1>&2
   exit 1
 fi
 
 if [[ -n "$NO_RECURSION" ]]; then
-  echo "No recursion!" 1>&2
+  echo -e "\033[31;1mNo recursion!\033[0m" 1>&2
   exit 1
 fi
 
 if pgrep -f "sshd-session: $SUDO_USER" >/dev/null; then
-  echo "You are in SSH, cancelling shutdown." 1>&2
+  echo -e "\033[31;1mYou are in SSH, cancelling shutdown.\033[0m" 1>&2
   exit 1
 else
   SHUTDOWN=$(which -a shutdown | grep -v '/scripts/shutdown$' | head -n 1)
-  echo "NOT IN SSH"
-  echo "SSH_CLIENT=$SSH_CLIENT"
-  echo "SHUTDOWN=$SHUTDOWN"
-  exit 42
   NO_RECURSION=1 "$SHUTDOWN" ${@:1}
 fi
