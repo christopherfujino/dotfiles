@@ -187,7 +187,7 @@ mode "resize" {
 # See man sway-bar(5)
 bar {
   font Mononoki 16
-  separator_symbol ' | '
+  separator_symbol ' ⇨ '
   gaps $innerGaps
   mode dock
   position top
@@ -206,11 +206,15 @@ bar {
   }
 }
 
+# Re-map caps lock -> escape
+input "type:keyboard" {
+    xkb_layout us
+    xkb_variant ,nodeadkeys
+    xkb_options caps:escape
+}
+
 gaps inner $innerGaps
 gaps outer $outerGaps
-
-# TODO figure out how to do this in wayland
-#exec_always re-bind-keyboard.sh
 
 # see man sway-output(5)
 output * background #$base00 solid_color
@@ -223,9 +227,6 @@ mouse_warping none
 
 # This appears not to work: https://www.reddit.com/r/i3wm/comments/7zxxax/chromium_not_opening_in_current_workspace/
 for_window [class="[Cc]hrome"] floating disable, move window to workspace current
-
-# you must install numlockx
-#exec_always --no-startup-id numlockx on
 
 # disable speaker beep
 exec_always --no-startup-id xset -b
