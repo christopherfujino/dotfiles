@@ -217,6 +217,9 @@ test -r "$HOME/.opam/opam-init/init.sh" && . "$HOME/.opam/opam-init/init.sh" > /
 # shellcheck source=/dev/null
 [ -f "$HOME/.bashrc.local" ] && source "$HOME/.bashrc.local"
 
+# You must have run `sudo systemctl --user enable ssh-agent.service`
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
 function count_duplicate_path_entries {
   COUNT=$(echo "$PATH" | tr : '\n' | sort | uniq -d | wc -l)
   if [ "$COUNT" -gt 0 ]; then
