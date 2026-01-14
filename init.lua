@@ -118,6 +118,7 @@ vim.lsp.config('gopls', {
   on_attach = on_attach,
 })
 
+-- opam install ocaml-lsp-server
 vim.lsp.enable('ocamllsp')
 vim.lsp.config('ocamllsp', {
   on_attach = on_attach,
