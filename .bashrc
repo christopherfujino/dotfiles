@@ -215,7 +215,10 @@ test -r "$HOME/.opam/opam-init/init.sh" && . "$HOME/.opam/opam-init/init.sh" > /
 
 # source local-machine specific config if it exists
 # shellcheck source=/dev/null
-[ -f "$HOME/.bashrc.local" ] && source "$HOME/.bashrc.local"
+if [[ -f "$HOME/.bashrc.local" && -z "$BASH_RC_LOCAL_SET" ]]; then
+  source "$HOME/.bashrc.local"
+  export BASH_RC_LOCAL_SET=1
+fi
 
 # You must have run `sudo systemctl --user enable ssh-agent.service`
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
