@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"runtime/debug"
 	"time"
 
 	"github.com/neovim/go-client/nvim"
