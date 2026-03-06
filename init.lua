@@ -17,7 +17,7 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 
 -- ruler
-vim.opt.rulerformat = "%-10.(%l,%c%V%)"
+vim.opt.rulerformat = "%-10.(%l,%c%)"
 
 -- better splits
 vim.opt.splitbelow = true
@@ -25,6 +25,12 @@ vim.opt.splitright = true
 
 -- 24-bit color (inherit term colors)
 vim.opt.termguicolors = not (os.getenv('TERM') == 'linux')
+
+vim.api.nvim_create_user_command('Build', function()
+  -- write?
+  vim.api.nvim_command('write')
+  vim.system({'ipc-runner-client'}, {text = true}):wait()
+end, {})
 
 vim.api.nvim_create_user_command('Clean', function()
   vim.opt.number = false
@@ -122,7 +128,6 @@ vim.lsp.config('gopls', {
 vim.lsp.enable('ocamllsp')
 vim.lsp.config('ocamllsp', {
   on_attach = on_attach,
-  --filetypes = { 'ocaml' },
   root_markers = {'*.opam', 'dune-project', 'dune-workspace'},
 })
 
