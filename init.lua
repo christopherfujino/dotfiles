@@ -135,3 +135,8 @@ vim.lsp.enable('clangd')
 vim.lsp.config('clangd', {
   on_attach = on_attach,
 })
+
+vim.lsp.enable('ts_ls')
+vim.lsp.config('ts_ls', {
+  on_attach = on_attach,
+})
