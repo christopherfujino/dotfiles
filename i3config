@@ -77,9 +77,8 @@ hide_edge_borders none
 # See https://i3wm.org/docs/userguide.html#keybindings
 # See xmodmap -pke for keysym
 
-# start a terminal
-bindsym $mod+Return exec alacritty
-#bindsym $mod+Return exec i3-sensible-term
+# start a terminal (depends on $TERMINAL)
+bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -87,10 +86,11 @@ bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 # nb = $base0F
 # nf = $base07
+# p (prompt)
 bindsym $mod+d exec dmenu_run \
   -nb '#d27b53' -nf '#e8e6df' \
   -sb '#e8e6df' -sf '#d27b53' \
-  -fn 'mononoki' -l 10
+  -fn 'mononoki' -l 14
 
 # change focus
 bindsym $mod+h focus left
@@ -175,6 +175,29 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute s
 bindsym XF86MonBrightnessUp exec brightnessctl set +10% # increase screen brightness
 bindsym XF86MonBrightnessDown exec brightnessctl set 10%- # decrease screen brightness
 
+bar {
+  position top
+  status_command swaybar-panel
+  font pango:mononoki 16
+  colors {
+    background $base00
+    statusline $base05
+    separator  $base04
+
+    focused_background  $base00
+    focused_statusline  $base05
+    focused_separator   $base0E
+
+    #                   border, background, text colors
+    focused_workspace   $base0D $base0D $base05
+    active_workspace    $base00 $base00 $base05
+    urgent_workspace    $base0A $base0A $base00
+    inactive_workspace  $base00 $base00 $base05
+  }
+  separator_symbol "·"
+  workspace_min_width 35
+}
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -201,8 +224,6 @@ mode "resize" {
 
 # from $base00 above
 exec --no-startup-id xsetroot -solid "#2d2d2d"
-
-exec_always --no-startup-id $HOME/git/dotfiles/launch_polybar.sh
 
 gaps inner 6px
 gaps outer 0px
