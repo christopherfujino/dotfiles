@@ -65,6 +65,11 @@ function __chris_colorscheme() {
   unset set_var
 }
 
+if [[ -z "$TERMINAL" ]]; then
+  # TODO check if alacritty is available
+  export TERMINAL='alacritty'
+fi
+
 __chris_colorscheme
 
 alias reset='command reset && __chris_colorscheme'
