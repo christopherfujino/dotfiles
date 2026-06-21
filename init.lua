@@ -35,7 +35,7 @@ end, {})
 vim.api.nvim_create_user_command('Clean', function()
   vim.opt.number = false
   vim.opt.laststatus = 0 -- never
-  vim.opt.ruler = false
+  -- vim.opt.ruler = false -- This is useful
   vim.opt.linebreak = true -- don't break lines in the middle of a word
 end, {})
 
@@ -87,7 +87,7 @@ require("lazy").setup(
 if (os.getenv('TERM') == 'linux') then
   vim.cmd('colorscheme unokai')
 else
-  vim.cmd('colorscheme base16-eighties')
+  vim.cmd('colorscheme base16-unikitty-light')
 end
 
 vim.fn.setenv("FZF_DEFAULT_COMMAND", "rg --files --hidden")

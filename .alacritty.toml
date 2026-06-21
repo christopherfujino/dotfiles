@@ -38,7 +38,7 @@ style = "Block"
 unfocused_hollow = true
 
 [font]
-size = 18.0
+size = 14.0
 
 [font.bold]
 family = "mononoki"
@@ -602,5 +602,7 @@ columns = 0
 lines = 0
 
 [window.padding]
-x = 25
-y = 25
+#x = 25
+#y = 25
+x = 10
+y = 10

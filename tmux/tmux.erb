@@ -1,12 +1,21 @@
 <%=
-  base00 = '#2d2d2d' # black
-  base03 = '#747369' # bright black
-  base05 = '#d3d0c8' # white
-  base07 = '#f2f0ec' # bright white
-  base0A = '#ffcc66' # yellow
-  base0B = '#99cc99' # green
-  base0C = '#66cccc' # cyan
+  # eighties
+  #base00 = '#2d2d2d' # black
+  #base03 = '#747369' # bright black
+  #base05 = '#d3d0c8' # white
+  #base07 = '#f2f0ec' # bright white
+  #base0A = '#ffcc66' # yellow
+  #base0B = '#99cc99' # green
+  #base0C = '#66cccc' # cyan
 
+  # unikitty light
+  base00 = "#ffffff" # Base 00 - Black
+  base03 = "#a7a5a8" # Base 03 - Bright Black
+  base05 = "#6c696e" # Base 05 - White
+  base07 = "#322d34" # Base 07 - Bright White
+  base0A = "#dc8a0e" # Base 0A - Bright Yellow
+  base0B = "#17ad98" # Base 0B - Bright Green
+  base0C = "#149bda" # Base 0C - Bright Cyan
   "# Generated from ERB"
 %>
 
@@ -21,14 +30,14 @@ set -g pane-border-style "fg=<%= base0B %>"
 
 # Bottom Status-line
 set -g status-style "none,bg=<%= base00 %>"
-set -g status-right-length "100"
-set -g status-left-length "100"
+set -g status-right-length "15"
+set -g status-left-length "15"
 setw -g window-status-activity-style "none"
 setw -g window-status-separator "   "
 
 # Text for far left and right
 set -g status-left ""
-set -g status-right ""
+set -g status-right "%b %d %H:%M"
 
 # Format for a single window
 setw -g window-status-style "none,fg=<%= base0A %>,bg=<%= base00 %>"

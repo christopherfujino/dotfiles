@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# should be .xprofile
+# lightdm will source this before exec-ing your desktop environment, but not
+# ~/.profile (because that config is for *interactive* sessions)
+
+export TERMINAL=alacritty
+
+if [[ -f "$HOME/.setup-path.bash" ]]; then
+  source "$HOME/.setup-path.bash"
+else
+  echo "oops, didn't find $HOME/.setup-path.bash" >&2
+fi

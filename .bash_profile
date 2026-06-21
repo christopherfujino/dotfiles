@@ -11,7 +11,7 @@ fi
 if [ -f "$HOME/.bashrc" ]; then
   source "$HOME/.bashrc"
 else
-  echo "Warning: you don't have a ~/.bashrc file, and there is no configuration in ~/.bash_profile!"
+  echo "Warning: you don't have a ~/.bashrc file, and there is no configuration in ~/.bash_profile!" >&2
 fi
 
 # Anything after here was auto-generated

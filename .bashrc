@@ -19,24 +19,51 @@ function __chris_colorscheme() {
     }
   fi
 
-  local ansi00="2d2d2d" # Base 00 - Black
-  local ansi01="f2777a" # Base 08 - Red
-  local ansi02="99cc99" # Base 0B - Green
-  local ansi03="ffcc66" # Base 0A - Yellow
-  local ansi04="6699cc" # Base 0D - Blue
-  local ansi05="cc99cc" # Base 0E - Magenta
-  local ansi06="66cccc" # Base 0C - Cyan
-  local ansi07="d3d0c8" # Base 05 - White
-  local ansi08="747369" # Base 03 - Bright Black
+  # base16-unikitty-light
+  local ansi00="ffffff" # Base 00 - Black
+  local ansi01="d8137f" # Base 08 - Red
+  local ansi02="17ad98" # Base 0B - Green
+  local ansi03="dc8a0e" # Base 0A - Yellow
+  local ansi04="775dff" # Base 0D - Blue
+  local ansi05="aa17e6" # Base 0E - Magenta
+  local ansi06="149bda" # Base 0C - Cyan
+  local ansi07="6c696e" # Base 05 - White
+  local ansi08="a7a5a8" # Base 03 - Bright Black
   local ansi09=$ansi01 # Base 08 - Bright Red
   local ansi10=$ansi02 # Base 0B - Bright Green
   local ansi11=$ansi03 # Base 0A - Bright Yellow
   local ansi12=$ansi04 # Base 0D - Bright Blue
   local ansi13=$ansi05 # Base 0E - Bright Magenta
   local ansi14=$ansi06 # Base 0C - Bright Cyan
-  local ansi15="f2f0ec" # Base 07 - Bright White
+  local ansi15="322d34" # Base 07 - Bright White
+  local ansi16="d65407" # Base 09
+  local ansi17="e013d0" # Base 0F
+  local ansi18="e1e1e2" # Base 01
+  local ansi19="c4c3c5" # Base 02
+  local ansi20="89878b" # Base 04
+  local ansi21="4f4b51" # Base 06
   local foreground=$ansi07
   local background=$ansi00
+
+  # base16-eighties
+  #local ansi00="2d2d2d" # Base 00 - Black
+  #local ansi01="f2777a" # Base 08 - Red
+  #local ansi02="99cc99" # Base 0B - Green
+  #local ansi03="ffcc66" # Base 0A - Yellow
+  #local ansi04="6699cc" # Base 0D - Blue
+  #local ansi05="cc99cc" # Base 0E - Magenta
+  #local ansi06="66cccc" # Base 0C - Cyan
+  #local ansi07="d3d0c8" # Base 05 - White
+  #local ansi08="747369" # Base 03 - Bright Black
+  #local ansi09=$ansi01 # Base 08 - Bright Red
+  #local ansi10=$ansi02 # Base 0B - Bright Green
+  #local ansi11=$ansi03 # Base 0A - Bright Yellow
+  #local ansi12=$ansi04 # Base 0D - Bright Blue
+  #local ansi13=$ansi05 # Base 0E - Bright Magenta
+  #local ansi14=$ansi06 # Base 0C - Bright Cyan
+  #local ansi15="f2f0ec" # Base 07 - Bright White
+  #local foreground=$ansi07
+  #local background=$ansi00
 
   set_color 0 $ansi00;
   set_color 1 $ansi01;
@@ -64,11 +91,6 @@ function __chris_colorscheme() {
   unset set_color
   unset set_var
 }
-
-if [[ -z "$TERMINAL" ]]; then
-  # TODO check if alacritty is available
-  export TERMINAL='alacritty'
-fi
 
 __chris_colorscheme
 
@@ -125,18 +147,6 @@ alias emacs='emacs -nw' # default to console-based emacs
 
 PS1='\w\$ '
 
-function add_to_path_if_not_present {
-  local path="$1"
-  [ ! -d "$path" ] && return
-  # The second argument is optional, but will speed up this function
-  local paths="${2:-$(echo "$PATH" | tr : '\n')}"
-  echo "$paths" | grep --fixed-string --line-regexp "$1" >/dev/null
-  # Add $dir to $PATH if it does not yet appear
-  if [ "$?" -ne 0 ]; then
-    PATH="$1:$PATH"
-  fi
-}
-
 if type nvim >/dev/null 2>&1; then
   export VISUAL=nvim
 elif type vim >/dev/null 2>&1; then
@@ -150,37 +160,20 @@ fi
 export EDITOR=$VISUAL
 
 # golang dev
-
 [ -d "$HOME/go" ] && export GOPATH="$HOME/go"
 
-# add dirs to path, if they exist
-dirs=(
-  "$HOME/scripts"
-  "$HOME/go/bin"
-  "$HOME/.node_modules/bin"
-  "$HOME/node_modules/bin"
-  "$HOME/.nvm"
-  "$HOME/.pub-cache/bin"
-  "$HOME/git/depot_tools"
-  "$HOME/git/chris-monorepo/bin"
-  # local home bin takes precedence over monorepo bin
-  "$HOME/bin"
-  # this should probably only be on the PATH if we're running with dev-chroot
-  #"$HOME/git/chris-monorepo/bin"
-  "$HOME/.cargo/bin"
-  "$HOME/Library/Python/2.7/bin"
-  "$HOME/.local/bin" # pip3
-  #"$HOME/.rvm/bin"
-  "$HOME/.deno/bin"
-  # mac ports
-  '/opt/local/bin'
-  '/opt/local/sbin'
-)
 
-paths=$(echo "$PATH" | tr : '\n')
-for dir in "${dirs[@]}"; do
-  add_to_path_if_not_present "$dir" "$paths"
-done
+
+if [[ -z "$TERMINAL" ]]; then
+  # TODO check if alacritty is available
+  export TERMINAL='alacritty'
+fi
+
+if [[ -f "$HOME/.setup-path.bash" ]]; then
+  source "$HOME/.setup-path.bash"
+else
+  echo "oops, didn't find $HOME/.setup-path.bash" >&2
+fi
 
 # source config files, if they exist
 files=(

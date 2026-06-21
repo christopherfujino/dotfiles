@@ -5,53 +5,39 @@
 # Use alt
 set $mod Mod1
 
-# Default Background
-set $base00 #2d2d2d
+# # Eighties
+# set $base00 #2d2d2d
+# set $base01 #393939
+# set $base02 #515151
+# set $base03 #747369
+# set $base04 #a09f93
+# set $base05 #d3d0c8
+# set $base06 #e8e6df
+# set $base07 #f2f0ec
+# set $base08 #f2777a
+# set $base09 #f99157
+# set $base0A #ffcc66
+# set $base0B #99cc99
+# set $base0C #66cccc
+# set $base0D #6699cc
+# set $base0E #cc99cc
+# set $base0F #d27b53
 
-# Lighter Background (Used for status bars, line number and folding marks)
-set $base01 #393939
-
-# Selection Background
-set $base02 #515151
-
-# Comments, Invisibles, Line Highlighting
-set $base03 #747369
-
-# Dark Foreground (Used for status bars)
-set $base04 #a09f93
-
-# Default Foreground, Caret, Delimiters, Operators
-set $base05 #d3d0c8
-
-# Light Foreground (Not often used)
-set $base06 #e8e6df
-
-# Light Background (Not often used)
-set $base07 #f2f0ec
-
-# Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
-set $base08 #f2777a
-
-# Integers, Boolean, Constants, XML Attributes, Markup Link Url
-set $base09 #f99157
-
-# Classes, Markup Bold, Search Text Background
-set $base0A #ffcc66
-
-# Strings, Inherited Class, Markup Code, Diff Inserted
-set $base0B #99cc99
-
-# Support, Regular Expressions, Escape Characters, Markup Quotes
-set $base0C #66cccc
-
-# Functions, Methods, Attribute IDs, Headings
-set $base0D #6699cc
-
-# Keywords, Storage, Selector, Markup Italic, Diff Changed
-set $base0E #cc99cc
-
-# Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
-set $base0F #d27b53
+# Unikitty Light
+set $base00 #ffffff
+set $base01 #e1e1e2
+set $base02 #c4c3c5
+set $base03 #a7a5a8
+set $base04 #89878b
+set $base05 #6c696e
+set $base06 #4f4b51
+set $base07 #322d34
+set $base08 #d8137f
+set $base0A #dc8a0e
+set $base0B #17ad98
+set $base0C #149bda
+set $base0D #775dff
+set $base0E #aa17e6
 
 # class                 border  backgr. text    indicat child border
 client.focused          $base05 $base05 $base00 $base05 $base0E
@@ -68,7 +54,7 @@ font pango:mononoki 14
 floating_modifier $mod
 
 # pixel means no title
-default_border pixel 0
+default_border pixel 2
 
 # hide vertical borders adjacent to screen edges
 hide_edge_borders none
@@ -178,6 +164,7 @@ bindsym XF86MonBrightnessDown exec brightnessctl set 10%- # decrease screen brig
 bar {
   position top
   status_command swaybar-panel
+  tray_output none
   font pango:mononoki 16
   colors {
     background $base00
@@ -189,13 +176,13 @@ bar {
     focused_separator   $base0E
 
     #                   border, background, text colors
-    focused_workspace   $base0D $base0D $base05
+    focused_workspace   $base00 $base0C $base00
     active_workspace    $base00 $base00 $base05
     urgent_workspace    $base0A $base0A $base00
     inactive_workspace  $base00 $base00 $base05
   }
   separator_symbol "·"
-  workspace_min_width 35
+  workspace_min_width 30
 }
 
 # resize window (you can also use the mouse for that)
@@ -223,10 +210,10 @@ mode "resize" {
 }
 
 # from $base00 above
-exec --no-startup-id xsetroot -solid "#2d2d2d"
+exec --no-startup-id xsetroot -solid "#ffffff"
 
 gaps inner 6px
-gaps outer 0px
+gaps outer 6px
 
 # https://faq.i3wm.org/question/1496/change-caps-lock-to-esc-in-i3.1.html
 exec_always --no-startup-id re-bind-keyboard.sh
