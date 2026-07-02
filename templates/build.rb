@@ -39,11 +39,19 @@ def build(deps, vars, out)
 end
 
 deps = [
-  'init.lua.erb',
+  'init.lua.erb', # symlink to $HOME/.config/nvim/init.lua
+  'tmux.conf.erb', # symlink to $HOME/.tmux.conf
 ]
 
 vars = {
   colorscheme_name: 'base16-unikitty-light',
+  base00: "#ffffff", # Base 00 - Black
+  base03: "#a7a5a8", # Base 03 - Bright Black
+  base05: "#6c696e", # Base 05 - White
+  base07: "#322d34", # Base 07 - Bright White
+  base0A: "#dc8a0e", # Base 0A - Bright Yellow
+  base0B: "#17ad98", # Base 0B - Bright Green
+  base0C: "#149bda", # Base 0C - Bright Cyan
 }
 
 build deps, vars, "#{__dir__}/../build"
