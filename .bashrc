@@ -67,7 +67,7 @@ function __chris_colorscheme() {
   fi
 }
 
-__chris_colorscheme
+#__chris_colorscheme
 
 # OS dependent config
 OS=$(uname)

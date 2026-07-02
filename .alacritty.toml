@@ -6,32 +6,41 @@ animation = "EaseOutExpo"
 color = "0xffffff"
 duration = 0
 
+# https://github.com/aarowill/base16-alacritty/blob/c9e824811eed70d7cdb1b31614b81c2f82bf16f8/colors/base16-unikitty-light.toml
 [colors]
-draw_bold_text_with_bright_colors = true
+draw_bold_text_with_bright_colors = false
 
-[colors.bright]
-black = "0x666666"
-blue = "0x7aa6da"
-cyan = "0x54ced6"
-green = "0x9ec400"
-magenta = "0xb77ee0"
-red = "0xff3334"
-white = "0xffffff"
-yellow = "0xe7c547"
-
-[colors.normal]
-black = "0x000000"
-blue = "0x7aa6da"
-cyan = "0x70c0ba"
-green = "0xb9ca4a"
-magenta = "0xc397d8"
-red = "0xd54e53"
-white = "0xeaeaea"
-yellow = "0xe6c547"
-
+# Default colors
 [colors.primary]
-background = "0x000000"
-foreground = "0xeaeaea"
+background = '0xffffff'
+foreground = '0x6c696e'
+
+# Colors the cursor will use if `custom_cursor_colors` is true
+[colors.cursor]
+text = '0xffffff'
+cursor = '0x6c696e'
+
+# Normal colors
+[colors.normal]
+black = '0xffffff'
+red = '0xd8137f'
+green = '0x17ad98'
+yellow = '0xdc8a0e'
+blue = '0x775dff'
+magenta = '0xaa17e6'
+cyan = '0x149bda'
+white = '0x6c696e'
+
+# Bright colors
+[colors.bright]
+black = '0xa7a5a8'
+red = '0xd65407'
+green = '0xe1e1e2'
+yellow = '0xc4c3c5'
+blue = '0x89878b'
+magenta = '0x4f4b51'
+cyan = '0xe013d0'
+white = '0x322d34'
 
 [cursor]
 style = "Block"
