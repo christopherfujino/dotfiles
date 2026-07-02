@@ -87,7 +87,7 @@ require("lazy").setup(
 if (os.getenv('TERM') == 'linux') then
   vim.cmd('colorscheme unokai')
 else
-  vim.cmd('colorscheme base16-unikitty-light')
+  vim.cmd('colorscheme <%= colorscheme_name %>')
 end
 
 vim.fn.setenv("FZF_DEFAULT_COMMAND", "rg --files --hidden")
