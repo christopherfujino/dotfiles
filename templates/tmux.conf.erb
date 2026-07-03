@@ -1,14 +1,14 @@
 set -g status-justify "absolute-centre"
 set -g status "on"
 set -g status-left-style "none"
-set -g message-command-style "fg=<%= base05 %>,bg=<%= base00 %>"
+set -g message-command-style "fg=<%= base05_h %>,bg=<%= base00_h %>"
 set -g status-right-style "none"
-set -g pane-active-border-style "fg=<%= base0B %>"
-set -g message-style "fg=<%= base0C %>,bg=<%= base00 %>"
-set -g pane-border-style "fg=<%= base0B %>"
+set -g pane-active-border-style "fg=<%= base0B_h %>"
+set -g message-style "fg=<%= base0C_h %>,bg=<%= base00_h %>"
+set -g pane-border-style "fg=<%= base0B_h %>"
 
 # Bottom Status-line
-set -g status-style "none,bg=<%= base00 %>"
+set -g status-style "none,bg=<%= base00_h %>"
 set -g status-right-length "15"
 set -g status-left-length "15"
 setw -g window-status-activity-style "none"
@@ -19,13 +19,13 @@ set -g status-left ""
 set -g status-right "%b %d %H:%M"
 
 # Format for a single window
-setw -g window-status-style "none,fg=<%= base0A %>,bg=<%= base00 %>"
+setw -g window-status-style "none,fg=<%= base0A_h %>,bg=<%= base00_h %>"
 
 setw -g window-status-format "\
-#[fg=<%= base03 %>,bg=<%= base00 %>]#W"
+#[fg=<%= base03_h %>,bg=<%= base00_h %>]#W"
 
 setw -g window-status-current-format "\
-#[fg=<%= base07 %>,bg=<%= base00 %>]#W"
+#[fg=<%= base07_h %>,bg=<%= base00_h %>]#W"
 
 # custom changes
 set-option -g history-limit 20000
@@ -46,5 +46,5 @@ if-shell 'uname | grep --quiet Darwin' 'bind-key -T copy-mode-vi y send-keys -X 
 bind % split-window -h -c "#{pane_current_path}"
 bind '"' split-window -c "#{pane_current_path}"
 
-# Allow the passthrough of color escapes to let base16 work
+# Allow the passthrough of color escapes to let base16_h work
 set -g allow-passthrough "on"

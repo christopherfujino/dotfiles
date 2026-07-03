@@ -5,39 +5,21 @@
 # Use alt
 set $mod Mod1
 
-# # Eighties
-# set $base00 #2d2d2d
-# set $base01 #393939
-# set $base02 #515151
-# set $base03 #747369
-# set $base04 #a09f93
-# set $base05 #d3d0c8
-# set $base06 #e8e6df
-# set $base07 #f2f0ec
-# set $base08 #f2777a
-# set $base09 #f99157
-# set $base0A #ffcc66
-# set $base0B #99cc99
-# set $base0C #66cccc
-# set $base0D #6699cc
-# set $base0E #cc99cc
-# set $base0F #d27b53
-
 # Unikitty Light
-set $base00 #ffffff
-set $base01 #e1e1e2
-set $base02 #c4c3c5
-set $base03 #a7a5a8
-set $base04 #89878b
-set $base05 #6c696e
-set $base06 #4f4b51
-set $base07 #322d34
-set $base08 #d8137f
-set $base0A #dc8a0e
-set $base0B #17ad98
-set $base0C #149bda
-set $base0D #775dff
-set $base0E #aa17e6
+set $base00 <%= base00_h %>
+set $base01 <%= base01_h %>
+set $base02 <%= base02_h %>
+set $base03 <%= base03_h %>
+set $base04 <%= base04_h %>
+set $base05 <%= base05_h %>
+set $base06 <%= base06_h %>
+set $base07 <%= base07_h %>
+set $base08 <%= base08_h %>
+set $base0A <%= base0A_h %>
+set $base0B <%= base0B_h %>
+set $base0C <%= base0C_h %>
+set $base0D <%= base0D_h %>
+set $base0E <%= base0E_h %>
 
 # class                 border  backgr. text    indicat child border
 client.focused          $base05 $base05 $base00 $base05 $base0E
@@ -74,9 +56,9 @@ bindsym $mod+Shift+q kill
 # nf = $base07
 # p (prompt)
 bindsym $mod+d exec dmenu_run \
-  -nb '#d27b53' -nf '#e8e6df' \
-  -sb '#e8e6df' -sf '#d27b53' \
-  -fn 'mononoki' -l 14
+  -nb '#<%= base01 %>' -nf '#<%= base06 %>' \
+  -sb '#<%= base00 %>' -sf '#<%= base05 %>' \
+  -fn 'mononoki-16' -l 10
 
 # change focus
 bindsym $mod+h focus left
