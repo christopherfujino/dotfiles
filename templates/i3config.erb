@@ -20,12 +20,12 @@ set $base0C <%= base0C_h %>
 set $base0D <%= base0D_h %>
 set $base0E <%= base0E_h %>
 
-# class                 border  backgr. text    indicat child border
-client.focused          $base05 $base05 $base00 $base05 $base0E
-client.focused_inactive $base03 $base03 $base05 $base03
-client.unfocused        $base03 $base03 $base05 $base00
-client.urgent           $base03 $base03 $base08 $base00
-client.background       $base00
+# colorclass            border  backgr  text    indicat child border
+client.focused          $base03 $base05 $base00 $base05 $base01
+client.focused_inactive $base03 $base03 $base05 $base03 $base00
+client.unfocused        $base03 $base03 $base05 $base00 $base00
+client.urgent           $base03 $base03 $base08 $base00 $base05
+client.background               $base00
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -193,7 +193,6 @@ gaps outer 6px
 # https://faq.i3wm.org/question/1496/change-caps-lock-to-esc-in-i3.1.html
 exec_always --no-startup-id re-bind-keyboard.sh
 
-# https://i3wm.org/docs/userguide.html#_focus_follows_mouse
 focus_follows_mouse no
 
 # don't warp mouse when switching focus to a different monitor
