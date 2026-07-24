@@ -46,4 +46,4 @@ scheme = make_colorscheme(
   ],
 )
 
-build(deps, scheme, "#{__dir__}", "#{__dir__}/../build")
+BuildSystem.build(deps, scheme, "#{__dir__}", "#{__dir__}/../build")

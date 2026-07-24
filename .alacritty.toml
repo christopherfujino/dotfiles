@@ -47,7 +47,7 @@ style = "Block"
 unfocused_hollow = true
 
 [font]
-size = 14.0
+size = 10.0
 
 [font.bold]
 family = "mononoki"

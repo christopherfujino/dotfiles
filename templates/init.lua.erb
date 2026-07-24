@@ -27,9 +27,11 @@ vim.opt.splitright = true
 vim.opt.termguicolors = not (os.getenv('TERM') == 'linux')
 
 vim.api.nvim_create_user_command('Build', function()
-  -- write?
   vim.api.nvim_command('write')
-  vim.system({'ipc-runner-client'}, {text = true}):wait()
+  local on_exit = function(obj)
+    print(obj.stderr)
+  end
+  vim.system({'ipc-runner-client'}, {text = true}, on_exit):wait()
 end, {})
 
 vim.api.nvim_create_user_command('Clean', function()

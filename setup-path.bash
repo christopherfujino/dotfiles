@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# This is not in .bashrc so it can also be sourced by interactive environments
+
 # Must define this, even if we already have the env var set...
 function add_to_path_if_not_present {
   local path="$1"
@@ -13,14 +15,26 @@ function add_to_path_if_not_present {
   fi
 }
 
-if [[ -n "$SETUP_PATH_BASH_EXECUTED" ]]; then
-  return
-fi
+function append_to_path_if_not_present {
+  local path="$1"
+  [ ! -d "$path" ] && return
+  # The second argument is optional, but will speed up this function
+  local paths="${2:-$(echo "$PATH" | tr : '\n')}"
+  echo "$paths" | grep --fixed-string --line-regexp "$1" >/dev/null
+  # Add $dir to $PATH if it does not yet appear
+  if [ "$?" -ne 0 ]; then
+    PATH="$PATH:$1"
+  fi
+}
 
-export SETUP_PATH_BASH_EXECUTED=1
+# Why did I set this up? It makes it difficult to make changes here
+#if [[ -n "$SETUP_PATH_BASH_EXECUTED" ]]; then
+#  return
+#fi
+#export SETUP_PATH_BASH_EXECUTED=1
 
 # add dirs to path, if they exist
-dirs=(
+prepend_dirs=(
   "$HOME/scripts"
   "$HOME/go/bin"
   "$HOME/.node_modules/bin"
@@ -43,6 +57,15 @@ dirs=(
 )
 
 paths=$(echo "$PATH" | tr : '\n')
-for dir in "${dirs[@]}"; do
+for dir in "${prepend_dirs[@]}"; do
   add_to_path_if_not_present "$dir" "$paths"
+done
+
+append_dirs=(
+  '/usr/local/plan9port/bin'
+)
+
+paths=$(echo "$PATH" | tr : '\n')
+for dir in "${append_dirs[@]}"; do
+  append_to_path_if_not_present "$dir" "$paths"
 done

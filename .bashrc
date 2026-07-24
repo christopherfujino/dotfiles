@@ -163,16 +163,6 @@ for i in "${files[@]}"; do
   [ -f "$i" ] && source "$i"
 done
 
-# if ruby dev env set...
-if type gem >/dev/null 2>&1; then
-  if type rbenv >/dev/null 2>&1; then
-    eval "$(rbenv init -)"
-    add_to_path_if_not_present "$HOME/.rbenv/bin"
-  fi
-
-  add_to_path_if_not_present "$(ruby -e 'print Gem.user_dir')/bin"
-fi
-
 # fzf
 if type fzf >/dev/null 2>&1; then
   alias checkout="git branch --list --sort=-committerdate | sed 's/^\*/ /' | fzf | xargs git checkout"

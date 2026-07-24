@@ -1,1 +1,3 @@
-command script import /usr/lib/python3/dist-packages/voltron/entry.py
+#command script import /usr/lib/python3/dist-packages/voltron/entry.py
+
+settings set symbols.enable-external-lookup false
