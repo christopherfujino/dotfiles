@@ -26,6 +26,14 @@ vim.opt.splitright = true
 -- 24-bit color (inherit term colors)
 vim.opt.termguicolors = not (os.getenv('TERM') == 'linux')
 
+vim.api.nvim_create_autocmd(
+  "VimEnter",
+  {
+    pattern = "*",
+    command = "if argc() == 1 && isdirectory(argv()[0]) | execute 'cd' argv()[0] | endif",
+  }
+)
+
 vim.api.nvim_create_user_command('Build', function()
   if vim.bo.modified then
     vim.api.nvim_command('write')
@@ -71,7 +79,6 @@ require("lazy").setup(
     "chriskempson/base16-vim",
     "neovim/nvim-lspconfig",
     --"mfussenegger/nvim-dap",
-    -- :Rename, :Move, :Delete
     "tpope/vim-eunuch",
     -- cs'"
     "tpope/vim-surround",
