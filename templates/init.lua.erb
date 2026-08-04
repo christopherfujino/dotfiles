@@ -2,7 +2,7 @@
 -- git show ee1033606fd2cc9f3c479644135799f4b0fde6ee:init.lua
 
 -- general
-vim.opt.list = true
+vim.opt.list = true -- show whitespace visibly
 vim.opt.laststatus = 2
 vim.g.netrw_banner =  false
 vim.opt.number = true
@@ -17,7 +17,7 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 
 -- ruler
-vim.opt.rulerformat = "%-10.(%l,%c%)"
+vim.opt.rulerformat = "%-10.(%4l,%3c%)"
 
 -- better splits
 vim.opt.splitbelow = true
@@ -75,17 +75,13 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup(
   -- plugins
   {
-    --"RRethy/base16-nvim",
     "chriskempson/base16-vim",
     "neovim/nvim-lspconfig",
     --"mfussenegger/nvim-dap",
     "tpope/vim-eunuch",
-    -- cs'"
     "tpope/vim-surround",
     -- auto-bracket pairing
     "windwp/nvim-autopairs",
-
-    -- git
     'tpope/vim-fugitive',
 
     'junegunn/fzf',
