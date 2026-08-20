@@ -63,6 +63,8 @@ done
 
 append_dirs=(
   '/usr/local/plan9port/bin'
+  # 9base on ubuntu
+  '/usr/lib/plan9/bin'
 )
 
 paths=$(echo "$PATH" | tr : '\n')
