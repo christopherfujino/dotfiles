@@ -44,13 +44,6 @@ vim.api.nvim_create_user_command('Build', function()
   vim.system({'ipc-runner-client'}, {text = true}, on_exit):wait()
 end, {})
 
-vim.api.nvim_create_user_command('Clean', function()
-  vim.opt.number = false
-  vim.opt.laststatus = 0 -- never
-  -- vim.opt.ruler = false -- This is useful
-  vim.opt.linebreak = true -- don't break lines in the middle of a word
-end, {})
-
 -- disable middle mouse paste
 for bindingPrefix in ipairs({"", "2-", "3-", "4-"}) do
   vim.keymap.set({"n", "v", "i"}, "<" .. bindingPrefix .. "MiddleMouse", "<Nop>", {noremap=true})
@@ -58,6 +51,148 @@ end
 
 vim.keymap.set("n", "<c-p>", ":Files<cr>", {noremap=true})
 vim.keymap.set("n", "<c-t>", ":tabe<cr>", {noremap=true})
+
+__clean_module = (function()
+  local self = {}
+  local windows = nil
+  local initialized = false
+
+  local clean_win = function(win)
+    vim.api.nvim_set_current_win(win)
+    vim.cmd("set nonumber")
+    -- listed = false, scratch = true
+    local buf = vim.api.nvim_create_buf(false, true)
+    vim.api.nvim_win_set_buf(0, buf)
+    vim.opt_local.statusline = " "
+  end
+
+  local move = function (dir)
+    local letter
+    if dir == "up" then
+      letter = "k"
+    elseif dir == "right" then
+      letter = "l"
+    elseif dir == "down" then
+      letter = "j"
+    elseif dir == "left" then
+      letter = "h"
+    else
+      error("unreachable: " .. dir)
+    end
+    vim.cmd.wincmd(letter)
+  end
+
+  local setheight = function (win, rows)
+    vim.api.nvim_set_current_win(win)
+    vim.cmd("resize " .. rows)
+  end
+
+  local setwidth = function (win, cols)
+    vim.api.nvim_set_current_win(win)
+    vim.cmd("vertical resize " .. cols)
+  end
+
+  self.resize = function ()
+    if windows == nil then
+      error("Unreachable: " .. debug.getinfo(2).currentline)
+    end
+    local height = vim.o.lines
+    if height < 10 then
+      height = height
+    else
+      height = height * 0.2
+    end
+    local pad_height = height / 2
+
+    local width = vim.o.columns
+    local pad_width = (width - 82) / 2
+    if pad_width < 0 then
+      pad_width = 0
+    end
+
+    setheight(windows.top, math.ceil(pad_height))
+    setwidth(windows.left, math.ceil(pad_width))
+    setwidth(windows.right, math.floor(pad_width))
+    setheight(windows.bottom, math.floor(pad_height))
+
+    vim.api.nvim_set_current_win(windows.target)
+  end
+
+  self.init = function ()
+    if initialized then
+      return
+    end
+
+    local original_splitbelow = vim.opt.splitbelow
+    local original_splitright = vim.opt.splitright
+    vim.opt.number = false
+    -- don't break lines in the middle of a word
+    vim.opt.linebreak = true
+    initialized = true
+
+    -- Thes are temporary
+    vim.opt.splitbelow = false
+    vim.opt.splitright = false
+
+    windows = {}
+
+    windows.bottom = vim.api.nvim_get_current_win()
+
+    vim.cmd.split()
+    windows.right = vim.api.nvim_get_current_win()
+
+    vim.cmd.split()
+    windows.top = vim.api.nvim_get_current_win()
+
+    move("down")
+    vim.cmd.vsplit()
+    windows.target = vim.api.nvim_get_current_win()
+
+    vim.cmd.vsplit()
+    windows.left = vim.api.nvim_get_current_win()
+
+    local pads = {
+      windows.top,
+      windows.bottom,
+      windows.left,
+      windows.right,
+    }
+    for _, win in ipairs(pads) do
+      clean_win(win)
+    end
+
+    -- TODO: set target to be current win
+    vim.opt.splitbelow = original_splitbelow
+    vim.opt.splitright = original_splitright
+    vim.opt.list = false
+    -- blank lines after end of buffer
+    -- vertical split empty
+    vim.opt.fillchars:append({
+      eob = " ",
+      vert = " ",
+      horiz = " ",
+      horizup = " ",
+      horizdown = " ",
+    })
+
+    vim.opt.laststatus = 3
+    vim.api.nvim_set_hl(0 , 'Statusline', {link = 'Normal'})
+    vim.api.nvim_set_hl(0 , 'StatuslineNC', {link = 'Normal'})
+    vim.api.nvim_set_hl(0 , 'WinSeparator', {link = 'Normal'})
+    vim.api.nvim_set_hl(0 , 'VertSplit', {link = 'Normal'})
+
+    self.resize()
+  end
+
+  return self
+end)()
+
+vim.api.nvim_create_user_command('Clean', __clean_module.init, {})
+
+vim.api.nvim_create_autocmd({"VimResized"}, {
+  pattern = "*",
+  callback = __clean_module.resize,
+})
 
 -- Plugins TODO: deprecate
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
