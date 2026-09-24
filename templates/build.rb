@@ -21,10 +21,11 @@ deps = [
   'init.lua.erb', # symlink to $HOME/.config/nvim/init.lua
   'tmux.conf.erb', # symlink to $HOME/.tmux.conf
   'i3config.erb', # symlink to $HOME/.i3/config
+  '.alacritty.toml.erb', # symlink to $HOME/.alacritty.toml
 ]
 
 # https://github.com/joshwlewis/base16-unikitty/blob/82aae2af20668ab56a49434c0db80b88f416c67e/unikitty-light.yaml
-scheme = make_colorscheme(
+light_scheme = make_colorscheme(
   'base16-unikitty-light',
   [
     "ffffff", # base00 - Default Background
@@ -46,4 +47,26 @@ scheme = make_colorscheme(
   ],
 )
 
-BuildSystem.build(deps, scheme, "#{__dir__}", "#{__dir__}/../build")
+dark_scheme = make_colorscheme(
+  'base16-unikitty-dark',
+  [
+    "2e2a31", # base00 - Default Background
+    "d8137f", # base01 - Lighter Background (Used for status bars, line number and folding marks)
+    "17ad98", # base02 - Selection Background
+    "dc8a0e", # base03 - Comments, Invisibles, Line Highlighting
+    "796af5", # base04 - Dark Foreground (Used for status bars)
+    "bb60ea", # base05 - Default Foreground, Caret, Delimiters, Operators
+    "149bda", # base06 - Light Foreground (Not often used)
+    "bcbabe", # base07 - Light Background (Not often used)
+    "838085", # base08 - Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
+    "d8137f", # base09 - Integers, Boolean, Constants, XML Attributes, Markup Link Url
+    "17ad98", # base0A - Classes, Markup Bold, Search Text Background
+    "dc8a0e", # base0B - Strings, Inherited Class, Markup Code, Diff Inserted
+    "796af5", # base0C - Support, Regular Expressions, Escape Characters, Markup Quotes
+    "bb60ea", # base0D - Functions, Methods, Attribute IDs, Headings
+    "149bda", # base0E - Keywords, Storage, Selector, Markup Italic, Diff Changed
+    "f5f4f7", # base0F - Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
+  ],
+)
+
+BuildSystem.build(deps, dark_scheme, "#{__dir__}", "#{__dir__}/../build")
