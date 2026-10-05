@@ -62,3 +62,5 @@ pacman -S nss-mdns
 ```
 
 Edit `/etc/nsswitch.conf` and change the hosts line to include `mdns_minimal [NOTFOUND=return]` before `resolve`.
+
+If avahi-daemon fails with `-- WARNING...you're screwed.
