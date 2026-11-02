@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
-require '../build_system/build_system.rb'
+REPO_ROOT = File.expand_path "#{__dir__}/.."
+require "#{REPO_ROOT}/build_system/build_system.rb"
 
 def make_colorscheme(name, colors)
   unless colors.length == 16
@@ -25,7 +26,7 @@ deps = [
 ]
 
 # https://github.com/joshwlewis/base16-unikitty/blob/82aae2af20668ab56a49434c0db80b88f416c67e/unikitty-light.yaml
-light_scheme = make_colorscheme(
+$light_scheme = make_colorscheme(
   'base16-unikitty-light',
   [
     "ffffff", # base00 - Default Background
@@ -47,7 +48,7 @@ light_scheme = make_colorscheme(
   ],
 )
 
-dark_scheme = make_colorscheme(
+$dark_scheme = make_colorscheme(
   'base16-unikitty-dark',
   [
     "2e2a31", # base00 - Default Background
@@ -69,4 +70,32 @@ dark_scheme = make_colorscheme(
   ],
 )
 
-BuildSystem.build(deps, dark_scheme, "#{__dir__}", "#{__dir__}/../build")
+def read_colorscheme()
+  colorscheme_file = "#{REPO_ROOT}/.colorscheme"
+  begin
+    colorscheme_name = (File.read colorscheme_file).strip
+  rescue Errno::ENOENT => e
+    warn "Could not find a colorscheme file at: #{colorscheme_file}"
+    warn e.to_s
+    exit 1
+  end
+
+  colorschemes = {
+    "base16-unikitty-light" => $light_scheme,
+    "base16-unikitty-dark" => $dark_scheme,
+  }
+
+  colorscheme = colorschemes[colorscheme_name]
+
+  if colorscheme.nil?
+    warn "Invalid colorscheme \"#{colorscheme_name}\" read from `#{colorscheme_file}`\nValid colorscheme names are:"
+    colorschemes.keys.each {|scheme| warn "\t#{scheme}"}
+    exit 1
+  end
+
+  colorscheme
+end
+
+colorscheme = read_colorscheme()
+
+BuildSystem.build(deps, colorscheme, "#{REPO_ROOT}/templates", "#{REPO_ROOT}/build")
