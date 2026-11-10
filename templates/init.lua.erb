@@ -122,6 +122,12 @@ __clean_module = (function()
     if initialized then
       return
     end
+    vim.opt.rulerformat = "%-10.(%lL %3cC %{wordcount().words}W%)"
+
+    vim.api.nvim_create_autocmd({"VimResized"}, {
+      pattern = "*",
+      callback = __clean_module.resize,
+    })
 
     local original_splitbelow = vim.opt.splitbelow
     local original_splitright = vim.opt.splitright
@@ -189,11 +195,6 @@ end)()
 
 vim.api.nvim_create_user_command('Clean', __clean_module.init, {})
 
-vim.api.nvim_create_autocmd({"VimResized"}, {
-  pattern = "*",
-  callback = __clean_module.resize,
-})
-
 -- Plugins TODO: deprecate
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -260,6 +261,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format {async = true } end, bufopts)
 end
 
+-- LSP: https://github.com/neovim/nvim-lspconfig
 -- go install golang.org/x/tools/gopls@latest
 vim.lsp.enable('gopls')
 vim.lsp.config('gopls', {
