@@ -43,6 +43,7 @@ prepend_dirs=(
   "$HOME/.pub-cache/bin"
   "$HOME/git/depot_tools"
   "$HOME/git/chris-monorepo/bin"
+  "$HOME/git/monorepo/bin"
   # local home bin takes precedence over monorepo bin
   "$HOME/bin"
   # this should probably only be on the PATH if we're running with dev-chroot
