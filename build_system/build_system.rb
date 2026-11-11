@@ -17,7 +17,7 @@ module BuildSystem
     return target, input, (input.mtime > target.mtime)
   end
 
-  def self.build(deps, vars, input_root, out)
+  def self.build(dep, vars, out)
     ## Create a small inner function so that the local namespace is clean
     _build = lambda do |vars, template|
       b = Kernel.binding
@@ -34,26 +34,18 @@ module BuildSystem
       Dir.mkdir(out, 0755)
     end
 
-    deps.each do |dep|
-      target_relative_path = @re.match(dep).captures[0]
-      target_path = "#{out}/#{target_relative_path}"
-      input_path = "#{input_root}/#{dep}"
-      target, input, is_outdated = _is_outdated(target_path, input_path)
-      unless is_outdated
-        strftime = target.mtime.strftime '%b %d %H:%M'
-        puts "#{File.basename target_path} is up to date (#{strftime}), skipping build"
-        next
-      end
+    target_relative_path = @re.match(File.basename dep).captures[0]
+    target_path = "#{out}/#{target_relative_path}"
+    input = File.new(dep, mode='r')
 
-      puts "Compiling #{dep}..."
-      target = File.open(target_path, 'w', 0644)
+    puts "Compiling #{dep} -> #{target_path}..."
+    target = File.open(target_path, 'w', 0644)
 
-      template = ERB.new(IO.read(input_path))
+    template = ERB.new(input.read)
 
-      compiled_template = _build.call(vars, template)
+    compiled_template = _build.call(vars, template)
 
-      target.write(compiled_template)
-      target.close()
-    end
+    target.write(compiled_template)
+    target.close()
   end
 end

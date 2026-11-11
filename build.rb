@@ -1,7 +1,8 @@
-#!/usr/bin/env ruby
-
-REPO_ROOT = File.expand_path "#{__dir__}/.."
+REPO_ROOT = File.expand_path __dir__
 require "#{REPO_ROOT}/build_system/build_system.rb"
+
+raise "Usage: build.rb [INPUT]" unless ARGV.length == 1
+input = ARGV[0]
 
 def make_colorscheme(name, colors)
   unless colors.length == 16
@@ -17,13 +18,6 @@ def make_colorscheme(name, colors)
 
   h
 end
-
-deps = [
-  'init.lua.erb', # symlink to $HOME/.config/nvim/init.lua
-  'tmux.conf.erb', # symlink to $HOME/.tmux.conf
-  'i3config.erb', # symlink to $HOME/.i3/config
-  '.alacritty.toml.erb', # symlink to $HOME/.alacritty.toml
-]
 
 # https://github.com/joshwlewis/base16-unikitty/blob/82aae2af20668ab56a49434c0db80b88f416c67e/unikitty-light.yaml
 $light_scheme = make_colorscheme(
@@ -98,4 +92,4 @@ end
 
 colorscheme = read_colorscheme()
 
-BuildSystem.build(deps, colorscheme, "#{REPO_ROOT}/templates", "#{REPO_ROOT}/build")
+BuildSystem.build(input, colorscheme, "#{REPO_ROOT}/build")
