@@ -38,7 +38,9 @@ module BuildSystem
     target_path = "#{out}/#{target_relative_path}"
     input = File.new(dep, mode='r')
 
-    puts "Compiling #{dep} -> #{target_path}..."
+    # TODO do a fancy animation utilizing Fibers
+    # https://docs.ruby-lang.org/en/master/Fiber.html#method-c-new
+    puts "\t#{dep} -> #{target_path}"
     target = File.open(target_path, 'w', 0644)
 
     template = ERB.new(input.read)

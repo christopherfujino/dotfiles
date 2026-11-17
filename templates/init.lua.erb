@@ -6,6 +6,8 @@ vim.opt.list = true -- show whitespace visibly
 vim.opt.laststatus = 2
 vim.g.netrw_banner =  false
 vim.opt.number = true
+-- save current buffer before jumping or executing :make
+vim.opt.autowrite = true
 
 -- search
 vim.opt.ignorecase = true
@@ -33,6 +35,12 @@ vim.api.nvim_create_autocmd(
     command = "if argc() == 1 && isdirectory(argv()[0]) | execute 'cd' argv()[0] | endif",
   }
 )
+
+vim.api.nvim_create_user_command('Mk', function()
+  -- because autowrite=true, we don't need to write file
+  vim.opt.makeprg = 'mk'
+  vim.api.nvim_command('make')
+end, {})
 
 vim.api.nvim_create_user_command('Build', function()
   if vim.bo.modified then
