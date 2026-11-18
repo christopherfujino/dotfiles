@@ -5,7 +5,7 @@ all:V: \
 	build/tmux.conf \
 	build/.alacritty.toml
 
-build/%: templates/%.erb mkfile build.rb
+build/%: templates/%.erb mkfile build.rb .colorscheme
 	ruby ./build.rb templates/$stem.erb
 
 # vim: ft=make
